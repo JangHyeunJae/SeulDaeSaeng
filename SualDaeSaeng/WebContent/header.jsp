@@ -61,72 +61,16 @@
               </a>
               <ul>
                 <li class="dropdown">
-                  <a href="restaurantFindKorean.jsp">
-                    <span>한식</span>
-                    <i class="bi-caret-down-fill"></i>
-                  </a>
-                  <ul>
-                    <li>
-                      <a href="#">Sub Menu 1</a>
-                    </li>
-                    <li>
-                      <a href="#">Sub Menu 2</a>
-                    </li>
-                    <li>
-                      <a href="#">Sub Menu 3</a>
-                    </li>
-                  </ul>
+                  <a href="restaurantFindKorean.jsp">한식</a>
                 </li>
                 <li class="dropdown">
-                  <a href="restaurantFindKorean.jsp">
-                    <span>중식</span>
-                    <i class="bi-caret-down-fill"></i>
-                  </a>
-                  <ul>
-                    <li>
-                      <a href="#">Sub Menu 1</a>
-                    </li>
-                    <li>
-                      <a href="#">Sub Menu 2</a>
-                    </li>
-                    <li>
-                      <a href="#">Sub Menu 3</a>
-                    </li>
-                  </ul>
+                  <a href="restaurantFindKorean.jsp">중식</a>
                 </li>
                 <li class="dropdown">
-                  <a href="restaurantFindKorean.jsp">
-                    <span>일식</span>
-                    <i class="bi-caret-down-fill"></i>
-                  </a>
-                  <ul>
-                    <li>
-                      <a href="#">Sub Menu 1</a>
-                    </li>
-                    <li>
-                      <a href="#">Sub Menu 2</a>
-                    </li>
-                    <li>
-                      <a href="#">Sub Menu 3</a>
-                    </li>
-                  </ul>
+                  <a href="restaurantFindKorean.jsp">일식</a>
                 </li>
                 <li class="dropdown">
-                  <a href="restaurantFindKorean.jsp">
-                    <span>서양식</span>
-                    <i class="bi-caret-down-fill"></i>
-                  </a>
-                  <ul>
-                    <li>
-                      <a href="#">Sub Menu 1</a>
-                    </li>
-                    <li>
-                      <a href="#">Sub Menu 2</a>
-                    </li>
-                    <li>
-                      <a href="#">Sub Menu 3</a>
-                    </li>
-                  </ul>
+                  <a href="restaurantFindKorean.jsp">서양식</a>
                 </li>
               </ul>
             </li>

@@ -20,15 +20,16 @@
     <link href="/vendor/aos/aos.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="/css/main.css" rel="stylesheet">
     <link href="/css/timetable.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <link href="/css/index.css" rel="stylesheet">
     <link href="/css/write.css" rel="stylesheet">
   </head>
   <body>
     <!-- ======= Header ======= -->
     <header id="header" class="header d-flex align-items-center fixed-top">
       <div class="container-fluid d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center  me-auto me-lg-0">
+        <a href="index.jsp" class="logo d-flex align-items-center  me-auto me-lg-0">
           <h1>슬.대.생</h1>
         </a>
         <nav id="navbar" class="navbar">

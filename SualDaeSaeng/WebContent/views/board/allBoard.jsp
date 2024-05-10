@@ -11,7 +11,7 @@
             <div>
               <h2>전체게시판</h2>
               <p>
-                <a class="cta-btn" href="allBoard.jsp">전체게시판</a>
+                <a class="cta-btn" href="allBoard.do">전체게시판</a>
                 <a class="cta-btn gray" href="freeBoard.jsp">자유게시판</a>
                 <a class="cta-btn gray" href="studyBoard.jsp">공부게시판</a>
               </p>

@@ -25,7 +25,20 @@
           <div class="row mb-3 d-flex justify-content-between align-items-center">
             <p class="col-3">총 <b>25</b> 개 </p>
             <div class="input-group input-group-sm col-4">
-              <button class="btn dropdown-toggle" type="button" data-bs-toggle="dr opdown" aria-expanded="false">전체</button>
+              <button class="btn filter" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-funnel-fill"></i> 검색 필터 </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="#">최신순</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">오래된순</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">조회순</a>
+              </li>
+            </ul>
+              <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">전체</button>
               <ul class="dropdown-menu">
                 <li>
                   <a class="dropdown-item" href="#title">제목</a>

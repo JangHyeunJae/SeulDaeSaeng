@@ -43,24 +43,24 @@
               </a>
               <ul>
                 <li>
-                  <a href="freeBoard.html">자유게시판</a>
+                  <a href="freeBoard.jsp">자유게시판</a>
                 </li>
                 <li>
-                  <a href="studyBoard.html">공부게시판</a>
+                  <a href="studyBoard.jsp">공부게시판</a>
                 </li>
                 <li>
-                  <a href="newsBoard.html">공지게시판</a>
+                  <a href="newsBoard.jsp">공지게시판</a>
                 </li>
               </ul>
             </li>
             <li class="dropdown">
-              <a href="restaurantFind.html">
+              <a href="restaurantFind.jsp">
                 <span>식당찾기</span>
                 <i class="bi-caret-down-fill"></i>
               </a>
               <ul>
                 <li class="dropdown">
-                  <a href="restaurantFindKorean.html">
+                  <a href="restaurantFindKorean.jsp">
                     <span>한식</span>
                     <i class="bi-caret-down-fill"></i>
                   </a>
@@ -77,7 +77,7 @@
                   </ul>
                 </li>
                 <li class="dropdown">
-                  <a href="restaurantFindKorean.html">
+                  <a href="restaurantFindKorean.jsp">
                     <span>중식</span>
                     <i class="bi-caret-down-fill"></i>
                   </a>
@@ -94,7 +94,7 @@
                   </ul>
                 </li>
                 <li class="dropdown">
-                  <a href="restaurantFindKorean.html">
+                  <a href="restaurantFindKorean.jsp">
                     <span>일식</span>
                     <i class="bi-caret-down-fill"></i>
                   </a>
@@ -111,7 +111,7 @@
                   </ul>
                 </li>
                 <li class="dropdown">
-                  <a href="restaurantFindKorean.html">
+                  <a href="restaurantFindKorean.jsp">
                     <span>서양식</span>
                     <i class="bi-caret-down-fill"></i>
                   </a>
@@ -130,7 +130,7 @@
               </ul>
             </li>
             <li>
-              <a href="foodLikeList.html">미식인의 추천맛집</a>
+              <a href="foodLikeList.jsp">미식인의 추천맛집</a>
             </li>
           </ul>
         </nav>
@@ -144,10 +144,10 @@
               </button>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="join.html">회원가입</a>
+                  <a class="dropdown-item" href="join.jsp">회원가입</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="login.html">로그인</a>
+                  <a class="dropdown-item" href="login.jsp">로그인</a>
                 </li>
                 <!-- <li><a class="dropdown-item" href="logout.html">로그아웃</a></li><li><a class="dropdown-item" href="myPage.html"><span>정윤지</span>페이지</a></li>-->
               </ul>

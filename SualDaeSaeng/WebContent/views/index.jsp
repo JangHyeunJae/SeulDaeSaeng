@@ -1,0 +1,734 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<%@include file="../header.jsp" %>
+
+    <main data-aos="fade" data-aos-delay="1500">
+      <!-- ======= food Recommendation ======= -->
+      <section id="food">
+        <div id="textAmin"> 오늘은 <div id=flip>
+            <div>
+              <a href="#">한식</a>
+            </div>
+            <div>
+              <a href="#">중식</a>
+            </div>
+            <div>
+              <a href="#">일식</a>
+            </div>
+            <div>
+              <a href="#">서양식</a>
+            </div>
+            <div>
+              <a href="#">동남아식</a>
+            </div>
+            <div>
+              <a href="#">분식</a>
+            </div>
+          </div> 어떠세요? </div>
+        <div class="container">
+          <div class="position-relative h-100">
+            <div class="slides-icon portfolio-details-slider swiper">
+              <div class="swiper-wrapper align-items-center">
+                <a href="#" class="swiper-slide">
+                  <img src="../img/icon/KoreanFood3.png" alt="">
+                  <p>한식</p>
+                </a>
+                <a href="#" class="swiper-slide">
+                  <img src="../img/icon/KoreanFood5.png" alt="">
+                  <p>한식</p>
+                </a>
+                <a href="#" class="swiper-slide">
+                  <img src="../img/icon/KoreanFood4.png" alt="">
+                  <p>한식</p>
+                </a>
+                <a href="#" class="swiper-slide">
+                  <img src="../img/icon/KoreanFood3.png" alt="">
+                  <p>한식</p>
+                </a>
+                <a href="#" class="swiper-slide">
+                  <img src="../img/icon/KoreanFood5.png" alt="">
+                  <p>한식</p>
+                </a>
+                <a href="#" class="swiper-slide">
+                  <img src="../img/icon/KoreanFood4.png" alt="">
+                  <p>한식</p>
+                </a>
+                <a href="#" class="swiper-slide">
+                  <img src="../img/icon/KoreanFood3.png" alt="">
+                  <p>한식</p>
+                </a>
+                <a href="#" class="swiper-slide">
+                  <img src="../img/icon/KoreanFood5.png" alt="">
+                  <p>한식</p>
+                </a>
+                <a href="#" class="swiper-slide">
+                  <img src="../img/icon/KoreanFood4.png" alt="">
+                  <p>한식</p>
+                </a>
+                <a href="#" class="swiper-slide">
+                  <img src="../img/icon/KoreanFood3.png" alt="">
+                  <p>한식</p>
+                </a>
+                <a href="#" class="swiper-slide">
+                  <img src="../img/icon/KoreanFood5.png" alt="">
+                  <p>한식</p>
+                </a>
+                <a href="#" class="swiper-slide">
+                  <img src="../img/icon/KoreanFood4.png" alt="">
+                  <p>한식</p>
+                </a>
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          </div>
+        </div>
+      </section>
+      <!-- End #food -->
+      <!-- ======= story Recommendation ======= -->
+      <section id="story">
+        <div class="container-fluid">
+          <div class="section-header">
+            <h2>story</h2>
+            <p>
+              <span>슬대생,</span> 오늘의 이야기
+            </p>
+          </div>
+          <div class="position-relative ">
+            <div class="slides-story portfolio-details-slider swiper">
+              <div class="swiper-wrapper align-items-center gallery">
+                <div class="swiper-slide gallery-item">
+                  <img src="../img/gallery/gallery-1.jpg" class="img-fluid" alt="">
+                  <p>오늘 날씨 좋은데?</p>
+                  <div class="gallery-links d-flex align-items-center justify-content-center">
+                    <a href="img/gallery/gallery-1.jpg" data-title="오늘 날씨 좋은데?" class="glightbox preview-link">
+                      <i class="bi bi-arrows-angle-expand"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="swiper-slide gallery-item">
+                  <img src="../img/gallery/gallery-2.jpg" class="img-fluid" alt="">
+                  <p>오늘 날씨 좋은데?</p>
+                  <div class="gallery-links d-flex align-items-center justify-content-center">
+                    <a href="img/gallery/gallery-2.jpg" data-title="오늘 날씨 좋은데?" class="glightbox preview-link">
+                      <i class="bi bi-arrows-angle-expand"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="swiper-slide gallery-item">
+                  <img src="../img/gallery/gallery-3.jpg" class="img-fluid" alt="">
+                  <p>오늘 날씨 좋은데?</p>
+                  <div class="gallery-links d-flex align-items-center justify-content-center">
+                    <a href="img/gallery/gallery-3.jpg" data-title="오늘 날씨 좋은데?" class="glightbox preview-link">
+                      <i class="bi bi-arrows-angle-expand"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="swiper-slide gallery-item">
+                  <img src="../img/gallery/gallery-4.jpg" class="img-fluid" alt="">
+                  <p>오늘 날씨 좋은데?</p>
+                  <div class="gallery-links d-flex align-items-center justify-content-center">
+                    <a href="img/gallery/gallery-4.jpg" data-title="오늘 날씨 좋은데?" class="glightbox preview-link">
+                      <i class="bi bi-arrows-angle-expand"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="swiper-slide gallery-item">
+                  <img src="../img/gallery/gallery-5.jpg" class="img-fluid" alt="">
+                  <p>오늘 날씨 좋은데?</p>
+                  <div class="gallery-links d-flex align-items-center justify-content-center">
+                    <a href="img/gallery/gallery-5.jpg" data-title="오늘 날씨 좋은데?" class="glightbox preview-link">
+                      <i class="bi bi-arrows-angle-expand"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="swiper-slide gallery-item">
+                  <img src="../img/gallery/gallery-6.jpg" class="img-fluid" alt="">
+                  <p>오늘 날씨 좋은데?</p>
+                  <div class="gallery-links d-flex align-items-center justify-content-center">
+                    <a href="img/gallery/gallery-6.jpg" data-title="오늘 날씨 좋은데?" class="glightbox preview-link">
+                      <i class="bi bi-arrows-angle-expand"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          </div>
+        </div>
+      </section>
+      <!-- end #story -->
+      <!-- ======= board-type Recommendation ======= -->
+      <section id="board-type" class="services">
+        <div class="container">
+          <div class="row gy-4">
+            <div class="col-xl-3 col-md-6 d-flex">
+              <div class="service-item position-relative">
+                <i class="bi bi-card-list"></i>
+                <h4>
+                  <a href="" class="stretched-link">자유게시판</a>
+                </h4>
+                <p>대덕인재개발원이면 누구나 어떤 주제로도 자유롭게 게시글을 작성할 수 있습니다. 지금 한번 작성해 보세요!</p>
+              </div>
+            </div>
+            <!-- End Service Item -->
+            <div class="col-xl-3 col-md-6 d-flex">
+              <div class="service-item position-relative">
+                <i class="bi bi-highlighter"></i>
+                <h4>
+                  <a href="" class="stretched-link">공부게시판</a>
+                </h4>
+                <p>공부에 도움이되는 자료나 사이트등을 공유해보세요! 혹은 잘 안풀리는 코드나 이해가 안되는 내용을 올려 도움을 받아보세요!</p>
+              </div>
+            </div>
+            <!-- End Service Item -->
+            <div class="col-xl-3 col-md-6 d-flex">
+              <div class="service-item position-relative">
+                <i class="bi bi-collection"></i>
+                <h4>
+                  <a href="" class="stretched-link">학급별 게시판</a>
+                </h4>
+                <p> 학급별 시간표, 채팅방, 게시판을 통해 교류를 해보세요. 과제제출 및 관리 파일공유도 가능합니다.</p>
+              </div>
+            </div>
+            <!-- End Service Item -->
+            <div class="col-xl-3 col-md-6 d-flex">
+              <div class="service-item position-relative">
+                <i class="bi bi-shop"></i>
+                <h4>
+                  <a href="" class="stretched-link">미식인의 맛집 추천</a>
+                </h4>
+                <p>대덕인재개발원 근처의 식당에 좋아요를 누르고 리스트를 공유해보세요! 리스트에 가장 많은 좋아요를 받으면 미식인 칭호를 드립니다!</p>
+              </div>
+            </div>
+            <!-- End Service Item -->
+          </div>
+        </div>
+      </section>
+      <!-- End #board-type -->
+      <!-- ======= all-board Recommendation ======= -->
+      <section id="all-board">
+        <div class="container-lg d-flex justify-content-between">
+          <div>
+            <div class="section-header">
+              <h2>board</h2>
+              <p class="d-flex justify-content-between align-items-center"> 전체 인기글 <button type="button" class="btn btn-outline-warning btn-sm">더보기</button>
+              </p>
+            </div>
+            <div class="list-group">
+              <a href="#" class="list-group-item">
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                  <h5 class="mb-2 text-truncate">
+                    <small class="attach">
+                      <i class="bi bi-paperclip"></i>
+                    </small> List group item heading
+                  </h5>
+                  <small class="badge bg-light">자유게시판</small>
+                </div>
+                <p class="mb-2 text-truncate">Some placeholder content in a paragraph.</p>
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                  <small class="days">2024-05-03</small>
+                  <small class="look">
+                    <i class="bi bi-eye"></i> 24 </small>
+                </div>
+              </a>
+              <a href="#" class="list-group-item">
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                  <h5 class="mb-2 text-truncate">
+                    <small class="attach">
+                      <i class="bi bi-paperclip"></i>
+                    </small> List group item heading
+                  </h5>
+                  <small class="badge bg-light">공부게시판</small>
+                </div>
+                <p class="mb-2 text-truncate">Some placeholder content in a paragraph.</p>
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                  <small class="days">2024-05-03</small>
+                  <small class="look">
+                    <i class="bi bi-eye"></i> 24 </small>
+                </div>
+              </a>
+              <a href="#" class="list-group-item">
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                  <h5 class="mb-2 text-truncate">
+                    <small class="attach">
+                      <i class="bi bi-paperclip"></i>
+                    </small> List group item heading
+                  </h5>
+                  <small class="badge bg-light">자유게시판</small>
+                </div>
+                <p class="mb-2 text-truncate">Some placeholder content in a paragraph.</p>
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                  <small class="days">2024-05-03</small>
+                  <small class="look">
+                    <i class="bi bi-eye"></i> 24 </small>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div>
+            <div class="section-header">
+              <h2>board</h2>
+              <p class="d-flex justify-content-between align-items-center"> 전체 최신글 <button type="button" class="btn btn-outline-warning btn-sm">더보기</button>
+              </p>
+            </div>
+            <div class="list-group">
+              <a href="#" class="list-group-item">
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                  <h5 class="mb-2 text-truncate">
+                    <small class="attach">
+                      <i class="bi bi-paperclip"></i>
+                    </small> List group item heading
+                  </h5>
+                  <small class="badge bg-light">자유게시판</small>
+                </div>
+                <p class="mb-2 text-truncate">Some placeholder content in a paragraph.</p>
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                  <small class="days">2024-05-03</small>
+                  <small class="look">
+                    <i class="bi bi-eye"></i> 24 </small>
+                </div>
+              </a>
+              <a href="#" class="list-group-item">
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                  <h5 class="mb-2 text-truncate">
+                    <small class="attach">
+                      <i class="bi bi-paperclip"></i>
+                    </small> List group item heading
+                  </h5>
+                  <small class="badge bg-light">자유게시판</small>
+                </div>
+                <p class="mb-2 text-truncate">Some placeholder content in a paragraph.</p>
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                  <small class="days">2024-05-03</small>
+                  <small class="look">
+                    <i class="bi bi-eye"></i> 24 </small>
+                </div>
+              </a>
+              <a href="#" class="list-group-item">
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                  <h5 class="mb-2 text-truncate">
+                    <small class="attach">
+                      <i class="bi bi-paperclip"></i>
+                    </small> List group item heading
+                  </h5>
+                  <small class="badge bg-light">자유게시판</small>
+                </div>
+                <p class="mb-2 text-truncate">Some placeholder content in a paragraph.</p>
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                  <small class="days">2024-05-03</small>
+                  <small class="look">
+                    <i class="bi bi-eye"></i> 24 </small>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- end #all-board -->
+      <!-- ======= restaurant Section ======= -->
+      <section id="restaurant">
+        <nav class="container d-flex">
+          <ul class="food-list-board">
+            <li class="section-header">
+              <h2>restaurant</h2>
+              <p class="d-flex justify-content-between align-items-center">
+                <b>TOP3 <span>미식인의 추천맛집</span>
+                </b>
+                <button type="button" class="btn btn-outline-warning btn-sm">더보기</button>
+              </p>
+            </li>
+            <li class="food-list">
+              <h6 class="mb-3 d-flex justify-content-between align-items-center">
+                <span>
+                  <i class="bi bi-person-circle"></i>
+                  <!-- <img src="img/testimonials/testimonials-2.jpg" class="testimonial-img" alt=""> --> 고객 아이디 </span>
+                <button type="button" class="btn btn-secondary btn-sm">
+                  <span>00님 맛집 </span>리스트 더보기 </button>
+              </h6>
+              <ul class="d-flex justify-content-between">
+                <li class="card">
+                  <a href="http://">
+                    <p class="card-like">
+                      <i class="bi bi-heart-fill"></i>
+                      <span>25</span>
+                    </p>
+                    <div class="img-fluid">
+                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                    </div>
+                    <div class="card-body">
+                      <small class="badge bg-body-secondary mb-1">한식</small>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
+                        <span>
+                          <i class="bi bi-star-fill"></i> 4.5 </span>
+                      </div>
+                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
+                    </div>
+                  </a>
+                </li>
+                <li class="card dis-none-550">
+                  <a href="http://">
+                    <p class="card-like">
+                      <i class="bi bi-heart-fill"></i>
+                      <span>25</span>
+                    </p>
+                    <div class="img-fluid">
+                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                    </div>
+                    <div class="card-body">
+                      <small class="badge bg-body-secondary mb-1">한식</small>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
+                        <span>
+                          <i class="bi bi-star-fill"></i> 4.5 </span>
+                      </div>
+                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
+                    </div>
+                  </a>
+                </li>
+                <li class="card dis-none-750">
+                  <a href="http://">
+                    <p class="card-like">
+                      <i class="bi bi-heart-fill"></i>
+                      <span>25</span>
+                    </p>
+                    <div class="img-fluid">
+                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                    </div>
+                    <div class="card-body">
+                      <small class="badge bg-body-secondary mb-1">한식</small>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
+                        <span>
+                          <i class="bi bi-star-fill"></i> 4.5 </span>
+                      </div>
+                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="food-list">
+              <h6 class="mb-3 d-flex justify-content-between align-items-center">
+                <span>
+                  <i class="bi bi-person-circle"></i>
+                  <!-- <img src="img/testimonials/testimonials-2.jpg" class="testimonial-img" alt=""> --> 고객 아이디 </span>
+                <button type="button" class="btn btn-secondary btn-sm">
+                  <span>00님 맛집 </span>리스트 더보기 </button>
+              </h6>
+              <ul class="d-flex justify-content-between">
+                <li class="card">
+                  <a href="http://">
+                    <p class="card-like">
+                      <i class="bi bi-heart-fill"></i>
+                      <span>25</span>
+                    </p>
+                    <div class="img-fluid">
+                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                    </div>
+                    <div class="card-body">
+                      <small class="badge bg-body-secondary mb-1">한식</small>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
+                        <span>
+                          <i class="bi bi-star-fill"></i> 4.5 </span>
+                      </div>
+                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
+                    </div>
+                  </a>
+                </li>
+                <li class="card dis-none-550">
+                  <a href="http://">
+                    <p class="card-like">
+                      <i class="bi bi-heart-fill"></i>
+                      <span>25</span>
+                    </p>
+                    <div class="img-fluid">
+                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                    </div>
+                    <div class="card-body">
+                      <small class="badge bg-body-secondary mb-1">한식</small>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
+                        <span>
+                          <i class="bi bi-star-fill"></i> 4.5 </span>
+                      </div>
+                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
+                    </div>
+                  </a>
+                </li>
+                <li class="card dis-none-750">
+                  <a href="http://">
+                    <p class="card-like">
+                      <i class="bi bi-heart-fill"></i>
+                      <span>25</span>
+                    </p>
+                    <div class="img-fluid">
+                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                    </div>
+                    <div class="card-body">
+                      <small class="badge bg-body-secondary mb-1">한식</small>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
+                        <span>
+                          <i class="bi bi-star-fill"></i> 4.5 </span>
+                      </div>
+                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="food-list">
+              <h6 class="mb-3 d-flex justify-content-between align-items-center">
+                <span>
+                  <i class="bi bi-person-circle"></i>
+                  <!-- <img src="img/testimonials/testimonials-2.jpg" class="testimonial-img" alt=""> --> 고객 아이디 </span>
+                <button type="button" class="btn btn-secondary btn-sm">
+                  <span>00님 맛집 </span>리스트 더보기 </button>
+              </h6>
+              <ul class="d-flex justify-content-between">
+                <li class="card">
+                  <a href="http://">
+                    <p class="card-like">
+                      <i class="bi bi-heart-fill"></i>
+                      <span>25</span>
+                    </p>
+                    <div class="img-fluid">
+                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                    </div>
+                    <div class="card-body">
+                      <small class="badge bg-body-secondary mb-1">한식</small>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
+                        <span>
+                          <i class="bi bi-star-fill"></i> 4.5 </span>
+                      </div>
+                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
+                    </div>
+                  </a>
+                </li>
+                <li class="card dis-none-550">
+                  <a href="http://">
+                    <p class="card-like">
+                      <i class="bi bi-heart-fill"></i>
+                      <span>25</span>
+                    </p>
+                    <div class="img-fluid">
+                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                    </div>
+                    <div class="card-body">
+                      <small class="badge bg-body-secondary mb-1">한식</small>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
+                        <span>
+                          <i class="bi bi-star-fill"></i> 4.5 </span>
+                      </div>
+                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
+                    </div>
+                  </a>
+                </li>
+                <li class="card dis-none-750">
+                  <a href="http://">
+                    <p class="card-like">
+                      <i class="bi bi-heart-fill"></i>
+                      <span>25</span>
+                    </p>
+                    <div class="img-fluid">
+                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                    </div>
+                    <div class="card-body">
+                      <small class="badge bg-body-secondary mb-1">한식</small>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
+                        <span>
+                          <i class="bi bi-star-fill"></i> 4.5 </span>
+                      </div>
+                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="food-like">
+            <div class="section-header">
+              <h2>restaurant</h2>
+              <p class="d-flex justify-content-between align-items-center">
+                <b>좋아요 <span>가 많아요!</span>
+                </b>
+                <button type="button" class="btn btn-outline-warning btn-sm">더보기</button>
+              </p>
+            </div>
+            <ul>
+              <li class="card">
+                <a href="http://">
+                  <div class="card-body">
+                    <small class="badge bg-body-secondary mb-1">한식</small>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <h5 class="card-title text-truncate">식당이름입니다~</h5>
+                      <span>
+                        <i class="bi bi-star-fill"></i> 4.5 (25) </span>
+                    </div>
+                    <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
+                  </div>
+                </a>
+              </li>
+              <li class="card">
+                <a href="http://">
+                  <div class="card-body">
+                    <small class="badge bg-body-secondary mb-1">한식</small>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <h5 class="card-title text-truncate">식당이름입니다~</h5>
+                      <span>
+                        <i class="bi bi-star-fill"></i> 4.5 (25) </span>
+                    </div>
+                    <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
+                  </div>
+                </a>
+              </li>
+              <li class="card">
+                <a href="http://">
+                  <div class="card-body">
+                    <small class="badge bg-body-secondary mb-1">한식</small>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <h5 class="card-title text-truncate">식당이름입니다~</h5>
+                      <span>
+                        <i class="bi bi-star-fill"></i> 4.5 (25) </span>
+                    </div>
+                    <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
+                  </div>
+                </a>
+              </li>
+              <li class="card">
+                <a href="http://">
+                  <div class="card-body">
+                    <small class="badge bg-body-secondary mb-1">한식</small>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <h5 class="card-title text-truncate">식당이름입니다~</h5>
+                      <span>
+                        <i class="bi bi-star-fill"></i> 4.5 (25) </span>
+                    </div>
+                    <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </ul>
+        </nav>
+      </section>
+      <!-- End restaurant Section -->
+      <!-- ======= Testimonials Section ======= -->
+      <section id="testimonials" class="testimonials">
+        <div class="container">
+          <div class="section-header">
+            <h2>restaurant</h2>
+            <p class="d-flex justify-content-between align-items-center"> 최신 리뷰 <button type="button" class="btn btn-outline-warning btn-sm">리뷰많은 식당보기</button>
+            </p>
+          </div>
+          <div class="slides-3 swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="testimonial-item">
+                  <div class="stars">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-half"></i>
+                  </div>
+                  <p> Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam,</p>
+                  <div class="profile mt-auto mb-3">
+                    <h4>2024-05-03</h4>
+                    <h3>고객아이디</h3>
+                  </div>
+                  <a class="cta-btn" href="contact.html">식당 자세히 보기</a>
+                </div>
+              </div>
+              <!-- End testimonial item -->
+              <div class="swiper-slide">
+                <div class="testimonial-item">
+                  <div class="stars">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-half"></i>
+                  </div>
+                  <p> Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam,</p>
+                  <div class="profile mt-auto mb-3">
+                    <h4>2024-05-03</h4>
+                    <h3>고객아이디</h3>
+                  </div>
+                  <a class="cta-btn" href="contact.html">식당 자세히 보기</a>
+                </div>
+              </div>
+              <!-- End testimonial item -->
+              <div class="swiper-slide">
+                <div class="testimonial-item">
+                  <div class="stars">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-half"></i>
+                  </div>
+                  <p> Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam,</p>
+                  <div class="profile mt-auto mb-3">
+                    <h4>2024-05-03</h4>
+                    <h3>고객아이디</h3>
+                  </div>
+                  <a class="cta-btn" href="contact.html">식당 자세히 보기</a>
+                </div>
+              </div>
+              <!-- End testimonial item -->
+              <div class="swiper-slide">
+                <div class="testimonial-item">
+                  <div class="stars">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-half"></i>
+                  </div>
+                  <p> Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam,</p>
+                  <div class="profile mt-auto mb-3">
+                    <h4>2024-05-03</h4>
+                    <h3>고객아이디</h3>
+                  </div>
+                  <a class="cta-btn" href="contact.html">식당 자세히 보기</a>
+                </div>
+              </div>
+              <!-- End testimonial item -->
+              <div class="swiper-slide">
+                <div class="testimonial-item">
+                  <div class="stars">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-half"></i>
+                  </div>
+                  <p> Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam,</p>
+                  <div class="profile mt-auto mb-3">
+                    <h4>2024-05-03</h4>
+                    <h3>고객아이디</h3>
+                  </div>
+                  <a class="cta-btn" href="contact.html">식당 자세히 보기</a>
+                </div>
+              </div>
+              <!-- End testimonial item -->
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+      </section>
+      <!-- End Testimonials Section -->
+    </main>
+
+<%@include file="../footer.jsp" %>

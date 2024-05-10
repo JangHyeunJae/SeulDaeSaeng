@@ -34,10 +34,10 @@
         <nav id="navbar" class="navbar">
           <ul>
             <li>
-              <a href="calssBoard.html">반별게시판</a>
+              <a href="calssBoard.jsp">반별게시판</a>
             </li>
             <li class="dropdown">
-              <a href="allBoard.html">
+              <a href="allBoard.jsp">
                 <span>전체게시판</span>
                 <i class="bi-caret-down-fill"></i>
               </a>
@@ -102,4 +102,3 @@
         </div>
       </div>
     </header>
-

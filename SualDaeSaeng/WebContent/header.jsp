@@ -28,16 +28,16 @@
     <!-- ======= Header ======= -->
     <header id="header" class="header d-flex align-items-center fixed-top">
       <div class="container-fluid d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center  me-auto me-lg-0">
+        <a href="index.jsp" class="logo d-flex align-items-center  me-auto me-lg-0">
           <h1>슬.대.생</h1>
         </a>
         <nav id="navbar" class="navbar">
           <ul>
             <li>
-              <a href="calssBoard.html">반별게시판</a>
+              <a href="calssBoard.jsp">반별게시판</a>
             </li>
             <li class="dropdown">
-              <a href="allBoard.html">
+              <a href="allBoard.jsp">
                 <span>전체게시판</span>
                 <i class="bi-caret-down-fill"></i>
               </a>

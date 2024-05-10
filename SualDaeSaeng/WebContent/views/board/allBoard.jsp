@@ -1,7 +1,16 @@
+<%@page import="java.util.List"%>
+<%@page import="kr.or.ddit.board.vo.BoardVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 <%@include file="/header.jsp" %>
+<%
+	List<BoardVO> memList = (List<BoardVO>) request.getAttribute("memList");
+
+    String msg = session.getAttribute("msg") == null ? "" : (String)session.getAttribute("msg");
+    
+    session.removeAttribute("msg");
+%>
     <!--<main data-aos="fade" data-aos-delay="1500" >-->
     <main>
       <!-- ======= End Page Header ======= -->

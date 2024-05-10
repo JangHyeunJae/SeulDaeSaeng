@@ -17,15 +17,17 @@ import kr.or.ddit.board.vo.BoardVO;
 public class AllBoardListController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("굿굿"); 
-		req.getRequestDispatcher("/views/board/allBoard.jsp").forward(req, resp);
+		 
+		 IBoardService boardService = BoardServiceImpl.getInstance();
+		 List<BoardVO> allBoardList = boardService.allBoardList();
+		 
+		 req.setAttribute("allBoardList", allBoardList);
+		 
+		 req.getRequestDispatcher("/views/board/allBoard.jsp").forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		 IBoardService boardService = BoardServiceImpl.getInstance();
-		 
-		 List<BoardVO> allBoardList = boardService.allBoardList();
+		 doGet(req, resp);
 	}
 }

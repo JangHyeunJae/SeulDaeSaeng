@@ -28,7 +28,7 @@
     <!-- ======= Header ======= -->
     <header id="header" class="header d-flex align-items-center fixed-top">
       <div class="container-fluid d-flex align-items-center justify-content-between">
-        <a href="index.jsp" class="logo d-flex align-items-center  me-auto me-lg-0">
+        <a href="/views/index.jsp" class="logo d-flex align-items-center  me-auto me-lg-0">
           <h1>슬.대.생</h1>
         </a>
         <nav id="navbar" class="navbar">
@@ -43,13 +43,13 @@
               </a>
               <ul>
                 <li>
-                  <a href="freeBoard.jsp">자유게시판</a>
+                  <a href="/views/freeBoard.jsp">자유게시판</a>
                 </li>
                 <li>
-                  <a href="studyBoard.jsp">공부게시판</a>
+                  <a href="/views/studyBoard.jsp">공부게시판</a>
                 </li>
                 <li>
-                  <a href="newsBoard.jsp">공지게시판</a>
+                  <a href="/views/newsBoard.jsp">공지게시판</a>
                 </li>
               </ul>
             </li>
@@ -60,21 +60,21 @@
               </a>
               <ul>
                 <li class="dropdown">
-                  <a href="restaurantFindKorean.jsp">한식</a>
+                  <a href="/views/restaurantFindKorean.jsp">한식</a>
                 </li>
                 <li class="dropdown">
-                  <a href="restaurantFindKorean.jsp">중식</a>
+                  <a href="/views/restaurantFindKorean.jsp">중식</a>
                 </li>
                 <li class="dropdown">
-                  <a href="restaurantFindKorean.jsp">일식</a>
+                  <a href="/views/restaurantFindKorean.jsp">일식</a>
                 </li>
                 <li class="dropdown">
-                  <a href="restaurantFindKorean.jsp">서양식</a>
+                  <a href="/views/restaurantFindKorean.jsp">서양식</a>
                 </li>
               </ul>
             </li>
             <li>
-              <a href="foodLikeList.jsp">미식인의 추천맛집</a>
+              <a href="/views/foodLikeList.jsp">미식인의 추천맛집</a>
             </li>
           </ul>
         </nav>
@@ -88,10 +88,10 @@
               </button>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="join.jsp">회원가입</a>
+                  <a class="dropdown-item" href="/views/join.jsp">회원가입</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="login.jsp">로그인</a>
+                  <a class="dropdown-item" href="/views/login.jsp">로그인</a>
                 </li>
                 <!-- <li><a class="dropdown-item" href="logout.html">로그아웃</a></li><li><a class="dropdown-item" href="myPage.html"><span>정윤지</span>페이지</a></li>-->
               </ul>

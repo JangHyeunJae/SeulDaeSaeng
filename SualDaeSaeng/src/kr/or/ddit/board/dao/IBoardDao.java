@@ -1,5 +1,10 @@
 package kr.or.ddit.board.dao;
 
-public interface IBoardDao {
+import java.util.List;
 
+import kr.or.ddit.board.vo.BoardVO;
+
+public interface IBoardDao {
+	
+	  public List<BoardVO> allBoardList();
 }

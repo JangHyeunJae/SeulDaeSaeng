@@ -34,33 +34,33 @@
         <nav id="navbar" class="navbar">
           <ul>
             <li>
-              <a href="calssBoard.html">반별게시판</a>
+              <a href="calssBoard.jsp">반별게시판</a>
             </li>
             <li class="dropdown">
-              <a href="allBoard.html">
+              <a href="allBoard.jsp">
                 <span>전체게시판</span>
                 <i class="bi-caret-down-fill"></i>
               </a>
               <ul>
                 <li>
-                  <a href="freeBoard.html">자유게시판</a>
+                  <a href="freeBoard.jsp">자유게시판</a>
                 </li>
                 <li>
-                  <a href="studyBoard.html">공부게시판</a>
+                  <a href="studyBoard.jsp">공부게시판</a>
                 </li>
                 <li>
-                  <a href="newsBoard.html">공지게시판</a>
+                  <a href="newsBoard.jsp">공지게시판</a>
                 </li>
               </ul>
             </li>
             <li class="dropdown">
-              <a href="restaurantFind.html">
+              <a href="restaurantFind.jsp">
                 <span>식당찾기</span>
                 <i class="bi-caret-down-fill"></i>
               </a>
               <ul>
                 <li class="dropdown">
-                  <a href="restaurantFindKorean.html">
+                  <a href="restaurantFindKorean.jsp">
                     <span>한식</span>
                     <i class="bi-caret-down-fill"></i>
                   </a>
@@ -158,4 +158,3 @@
         </div>
       </div>
     </header>
-

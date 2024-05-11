@@ -22,9 +22,13 @@ public class NoticeBoardListController extends HttpServlet{
 		 
 		 int level = 3;
 		 IBoardService boardService = BoardServiceImpl.getInstance();
-		 List<BoardVO> noticeBoardList = boardService.selectBoardList(level);
+		 List<BoardVO> boardList = boardService.selectBoardList(level);
 
-		 req.setAttribute("boardList", noticeBoardList);
+
+		 req.setAttribute("boardList", boardList);
+
+		 req.setAttribute("level", level);
+
 		 
 		 req.getRequestDispatcher("/views/board/allBoard.jsp").forward(req, resp);
 	}

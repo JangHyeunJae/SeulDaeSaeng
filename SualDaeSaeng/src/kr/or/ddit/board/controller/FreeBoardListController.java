@@ -24,6 +24,7 @@ public class FreeBoardListController extends HttpServlet{
 		 IBoardService boardService = BoardServiceImpl.getInstance();
 		 List<BoardVO> freeBoardList = boardService.selectBoardList(level);
 
+		 req.setAttribute("level", level);
 		 req.setAttribute("freeBoardList", freeBoardList);
 		 
 		 req.getRequestDispatcher("/views/board/allBoard.jsp").forward(req, resp);

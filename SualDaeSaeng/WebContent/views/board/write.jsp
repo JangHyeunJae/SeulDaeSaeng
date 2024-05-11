@@ -51,7 +51,7 @@
                         [{ 'file': 'file' }] 
                     ]
                 },
-                placeholder: 'Start typing...',
+                placeholder: '내용을 작성하세요...',
             });
 
             var fileInput = document.getElementById('fileInput');
@@ -131,13 +131,13 @@
               </a>
               <ul>
                 <li>
-                  <a href="freeBoard.html">자유게시판</a>
+                  <a href="allBoard.jsp">자유게시판</a>
                 </li>
                 <li>
-                  <a href="studyBoard.html">공부게시판</a>
+                  <a href="allBoard.jsp">공부게시판</a>
                 </li>
                 <li>
-                  <a href="newsBoard.html">공지게시판</a>
+                  <a href="allBoard.jsp">공지게시판</a>
                 </li>
               </ul>
             </li>
@@ -270,20 +270,17 @@
        <div class="contact">
          <div class="container pb-3">
            <!-- {{changeDetected}} -->
-           <form action="forms/contact.php" method="post" role="form" class="php-email-form needs-validation" novalidate>
+           <form action="/board/write.do" method="post" role="form" id="insertForm" class="php-email-form needs-validation" novalidate>
              <div class="form-group">
                <input type="text" class="form-control" name="title" id="title" placeholder="제목" required>
                <div class="invalid-feedback">제목을 작성해주세요.</div>
              </div>
              
-             <div id="editor">
-              <p>Hello World!</p>
-              <p>Some initial <strong>bold</strong> text</p>
-              <p><br></p>
-             </div>
+             	<div id="editor"></div>
+             	
              <input type="file" id="fileInput" style="display: visible;">
              <div class="text-center mt-5 mb-5">
-               <button type="submit">작성하기</button>
+               <button type="submit" id="submitBtn">작성하기</button>
              </div>
            </form>
         
@@ -291,6 +288,22 @@
        </div>
    
      </main>
+     
+<script type="text/javascript">
+$(function(){
+	var submitBtn = $("#submitBtn");
+	var insertForm = $("#insertForm");
+	
+	// 등록 버튼 클릭 시 이벤트
+	submitBtn.on("click", function(){
+		var title = $("#title").val();
+		var content = quill.root.innerHTML;
+		
+		insertForm.submit(); // 서버로 전송
+	});
+});
+
+</script>
      
   <!-- ======= Footer ======= -->
   <%@include file="/footer.jsp" %>

@@ -7,19 +7,7 @@
 
 <%@include file="/header.jsp"%>
 <%
-   String selectedButton = request.getParameter("selectedButtonId");
-   List<BoardVO> boardList = null;
-   if(selectedButton != null) {
-	   if(selectedButton.equals("allBoard")){
-    	  boardList = (List<BoardVO>) request.getAttribute("allBoardList");
-       }else if(selectedButton.equals("freeBoard")){
-		  boardList = (List<BoardVO>) request.getAttribute("freeBoardList");
-       } else if(selectedButton.equals("studyBoard")){
-    	  boardList = (List<BoardVO>) request.getAttribute("studyBoardList");
-       } else if(selectedButton.equals("noticeBoard")){
-    	  boardList = (List<BoardVO>) request.getAttribute("noticeBoardList");
-       }
-   }
+	List<BoardVO> boardList = (List<BoardVO>)request.getAttribute("boardList");
 %>
 <main>
 	<!-- ======= End Page Header ======= -->
@@ -29,10 +17,10 @@
 				<div>
 					<h2>전체게시판</h2>
 					<p>
-						<a class="cta-btn selected" href="#">전체게시판</a> 
-						<a class="cta-btn" href="freeBoard.do">자유게시판</a>
-						<a class="cta-btn" href="studyBoard.do">공부게시판</a> 
-						<a class="cta-btn" href="noticeBoard.do">공지사항</a>
+						<a class="cta-btn" href="/allBoard.do">전체게시판</a> 
+						<a class="cta-btn" href="/freeBoard.do">자유게시판</a>
+						<a class="cta-btn" href="/studyBoard.do">공부게시판</a> 
+						<a class="cta-btn" href="/noticeBoard.do">공지사항</a>
 					</p>
 				</div>
 			</div>
@@ -40,12 +28,14 @@
 	</div>
 	<!-- End Page Header -->
 	<section class="board mb-5">
+		<!-- End Page Header -->
+	<section class="board mb-5">
 		<div class="container" data-aos="fade-up">
 			<div
 				class="row mb-3 d-flex justify-content-between align-items-center">
 				<p class="col-3">
-					총 <b><%=boardList.size() %></b> 개
-				</p>
+                               총 <b><%= (boardList != null) ? boardList.size() : 0 %></b> 개
+                </p>
 				<div class="input-group input-group-sm col-4">
 					<button class="btn dropdown-toggle" type="button"
 						data-bs-toggle="dropdown" aria-expanded="false">전체</button>
@@ -114,50 +104,42 @@
 			</div>
 		</div>
 	</section>
+	</section>
 </main>
 
 <script type="text/javascript">
-    window.onload = function () {
-        var buttons = document.querySelectorAll('.cta-btn');
-        var boardName = document.querySelector('h2');
 
-        buttons.forEach(function (button) {
-            button.addEventListener('click', function (event) {
-                var clickedText = event.target.innerText;
-                boardName.innerText = clickedText;
+    var buttons = document.querySelectorAll('.cta-btn');
+    var boardName = document.querySelector('h2');
 
-                buttons.forEach(function (btn) {
-                    btn.classList.add('gray');
-                    btn.classList.remove('selected');
-                });
-
-                event.target.classList.remove('gray');
-                event.target.classList.add('orange');
-                event.target.classList.add('selected');
-
-                // AJAX Request to Fetch Board Data Based on Selected Button ID
-                var selectedButtonId = event.target.getAttribute('id');
-                sendDataToServer(selectedButtonId);
-
-                event.preventDefault();
-            });
-        });
-
-        function sendDataToServer(clickedId) {
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "<%= request.getContextPath() %>/processButton", true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    // 서버로부터의 응답을 처리
-                    // 페이지 내용 갱신 또는 다른 동작 수행
-                }
-            };
-            var data = JSON.stringify({ "selectedButtonId": clickedId });
-            xhr.send(data);
+    // 페이지 로드될 때 현재 URL을 확인하여 해당 버튼의 스타일을 변경
+    var currentUrl = window.location.href;
+    buttons.forEach(function (button) {
+        if (currentUrl.includes(button.getAttribute('href'))) {
+            button.classList.remove('gray');
+            button.classList.add('orange');
+            boardName.innerText = button.innerText;
+        } else {
+            button.classList.add('gray');
+            button.classList.remove('orange');
         }
-    };
+    });
+
+    buttons.forEach(function (button) {
+        button.addEventListener('click', function (event) {
+            var clickedText = event.target.innerText;
+            boardName.innerText = clickedText;
+
+            buttons.forEach(function (btn) {
+                btn.classList.add('gray');
+                btn.classList.remove('orange');
+            });
+
+            event.target.classList.remove('gray');
+            event.target.classList.add('orange');
+        });
+    });
+
 </script>
 
 <%@include file="/footer.jsp"%>

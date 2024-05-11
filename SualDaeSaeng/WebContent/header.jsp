@@ -1,5 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+
+String currentJSP = request.getServletPath();
+String fileName = currentJSP.substring(currentJSP.lastIndexOf("/") + 1, currentJSP.lastIndexOf("."));
+String fileExtension = currentJSP.substring(currentJSP.lastIndexOf(".") + 1);
+
+%>
+
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -21,8 +28,20 @@
 
     <!-- Template Main CSS File -->
     <link href="/css/main.css" rel="stylesheet">
-    <link href="/css/timetable.css" rel="stylesheet">
-    <link href="/css/write.css" rel="stylesheet">
+    
+    <% if(fileName.equals("index")){ %>
+	
+		<link href="/css/index.css" rel="stylesheet">
+		
+	<% }else if(fileName.equals("timetable")){ %>
+   	
+   		<link href="/css/timetable.css" rel="stylesheet">
+   		
+    <% }else if(fileName.equals("write")){ %>
+    
+    	<link href="/css/write.css" rel="stylesheet">
+    	
+    <% } %>
   </head>
   <body>
     <!-- ======= Header ======= -->

@@ -10,5 +10,5 @@ public interface IBoardDao {
 
 	public BoardVO getBoardDetail(String boardNo);
 
-	public List<BoardVO> selectBoardList(int selectedButtonLevel);
+	public List<BoardVO> selectBoardList(int level);
 }

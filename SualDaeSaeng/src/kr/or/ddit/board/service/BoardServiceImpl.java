@@ -31,7 +31,7 @@ public class BoardServiceImpl implements IBoardService{
 	}
 
 	@Override
-	public List<BoardVO> selectBoardList(int selectedButtonLevel) {
-		return boardDao.selectBoardList(selectedButtonLevel);
+	public List<BoardVO> selectBoardList(int level) {
+		return boardDao.selectBoardList(level);
 	}
 }

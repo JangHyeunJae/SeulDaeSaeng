@@ -20,10 +20,11 @@ public class NoticeBoardListController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		 
+		 int level = 3;
 		 IBoardService boardService = BoardServiceImpl.getInstance();
-		 List<BoardVO> allBoardList = boardService.allBoardList();
-		 
-		 req.setAttribute("allBoardList", allBoardList);
+		 List<BoardVO> noticeBoardList = boardService.selectBoardList(level);
+
+		 req.setAttribute("noticeBoardList", noticeBoardList);
 		 
 		 req.getRequestDispatcher("/views/board/allBoard.jsp").forward(req, resp);
 	}

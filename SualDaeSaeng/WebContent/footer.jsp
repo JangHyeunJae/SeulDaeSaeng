@@ -41,9 +41,9 @@
     
     <!-- Template Main JS File -->
     <script src="/js/main.js"></script>
-    <% if(fileName.equals("timetable")){ %>
+    <% if(uri.contains("timetable")){ %>
    		<script src="/js/timetable.js"></script>
-    <% }else if(fileName.equals("write")){ %>
+    <% }else if( uri.contains("write")){ %>
     	<script src="/js/write.js"></script>
     <% } %>
   </body>

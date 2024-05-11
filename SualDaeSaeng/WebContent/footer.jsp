@@ -41,7 +41,10 @@
     
     <!-- Template Main JS File -->
     <script src="/js/main.js"></script>
-    <script src="/js/write.js"></script>
-    <script src="/js/timetable.js"></script>
+    <% if(fileName.equals("timetable")){ %>
+   		<script src="/js/timetable.js"></script>
+    <% }else if(fileName.equals("write")){ %>
+    	<script src="/js/write.js"></script>
+    <% } %>
   </body>
 </html>

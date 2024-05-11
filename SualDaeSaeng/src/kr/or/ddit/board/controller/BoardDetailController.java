@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.board.vo.BoardVO;
+import kr.or.ddit.board.vo.MemberVO;
 
 @WebServlet("/board/detail.do")
 public class BoardDetailController extends HttpServlet{
@@ -20,10 +21,15 @@ public class BoardDetailController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		 
-		 String boardNo = req.getParameter("boardNo");
 		 IBoardService boardService = BoardServiceImpl.getInstance();
+		
+		 String boardNo = req.getParameter("boardNo");
 		 
 		 BoardVO boardDetail = boardService.getBoardDetail(boardNo);
+		
+		 int userNo = boardDetail.getUserNo();
+		 
+		 MemberVO memDetail = boardService.getwriterDetail(userNo);
 		 
 		 req.setAttribute("boardDetail", boardDetail);
 		 

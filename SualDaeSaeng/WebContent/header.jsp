@@ -1,5 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+//String currentJSP = request.getServletPath();
+//String fileName = currentJSP.substring(currentJSP.lastIndexOf("/") + 1, currentJSP.lastIndexOf("."));
+//String fileExtension = currentJSP.substring(currentJSP.lastIndexOf(".") + 1);
+
+String uri = request.getRequestURI();
+%>
+
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -20,25 +27,40 @@
     <link href="/vendor/aos/aos.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="/css/timetable.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet">
-    <link href="/css/index.css" rel="stylesheet">
-    <link href="/css/write.css" rel="stylesheet">
+    
+    
+   
+    <% if(uri.contains("index")){ %>
+      <link href="/css/index.css" rel="stylesheet">
+      
+   <% }else if(uri.contains("timetable")){ %>
+      
+         <link href="/css/timetable.css" rel="stylesheet">
+         
+    <% }else if(uri.contains("write")){ %>
+    
+       <link href="/css/write.css" rel="stylesheet">
+       
+    <% } %>
+    
+    
+    
   </head>
   <body>
     <!-- ======= Header ======= -->
     <header id="header" class="header d-flex align-items-center fixed-top">
       <div class="container-fluid d-flex align-items-center justify-content-between">
-        <a href="index.jsp" class="logo d-flex align-items-center  me-auto me-lg-0">
+        <a href="/views/index.jsp" class="logo d-flex align-items-center  me-auto me-lg-0">
           <h1>슬.대.생</h1>
         </a>
         <nav id="navbar" class="navbar">
           <ul>
             <li>
-              <a href="calssBoard.jsp">반별게시판</a>
+              <a href="calssBoard.html">반별게시판</a>
             </li>
             <li class="dropdown">
-              <a href="allBoard.jsp">
+              <a href="allBoard.html">
                 <span>전체게시판</span>
                 <i class="bi-caret-down-fill"></i>
               </a>

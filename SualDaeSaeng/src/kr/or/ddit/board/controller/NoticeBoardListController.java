@@ -24,7 +24,7 @@ public class NoticeBoardListController extends HttpServlet{
 		 IBoardService boardService = BoardServiceImpl.getInstance();
 		 List<BoardVO> noticeBoardList = boardService.selectBoardList(level);
 
-		 req.setAttribute("noticeBoardList", noticeBoardList);
+		 req.setAttribute("boardList", noticeBoardList);
 		 
 		 req.getRequestDispatcher("/views/board/allBoard.jsp").forward(req, resp);
 	}

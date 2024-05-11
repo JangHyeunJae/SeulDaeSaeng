@@ -13,8 +13,8 @@ import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.board.vo.BoardVO;
 
-@WebServlet("/allBoard.do")
-public class AllBoardListController extends HttpServlet{
+@WebServlet("/studyBoard.do")
+public class StudyBoardListController extends HttpServlet{
 	
 	private static final long serialVersionUID = 1L;
 	@Override

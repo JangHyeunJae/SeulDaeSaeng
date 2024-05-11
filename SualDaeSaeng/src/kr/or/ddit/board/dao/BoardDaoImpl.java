@@ -25,12 +25,52 @@ public class BoardDaoImpl implements IBoardDao{
 	public List<BoardVO> allBoardList() {
 		
 		List<BoardVO> boardList = new ArrayList<BoardVO>();
+		
 		SqlSession session = null;
 		
 		try {
 			session = MyBatisUtil.getSqlSession(true);
 			
 			boardList = session.selectList("board.allBoardList");
+			
+		}catch(PersistenceException ex) {
+			ex.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return boardList;
+	}
+
+	@Override
+	public BoardVO getBoardDetail(String boardNo) {
+		
+		SqlSession session = MyBatisUtil.getSqlSession(true);
+		
+		BoardVO boardDetail = null;
+		
+		try {
+			boardDetail = session.selectOne("board.getBoardDetail", boardNo);
+		}catch(PersistenceException ex) {
+			ex.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return boardDetail;
+	}
+
+	@Override
+	public List<BoardVO> selectBoardList(int selectedButtonLevel) {
+       List<BoardVO> boardList = new ArrayList<BoardVO>();
+		
+		SqlSession session = null;
+		
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			if(selectedButtonLevel==0) {
+				boardList = session.selectList("board.allBoardList");
+			}else {
+				boardList = session.selectList("board.selectBoardList");	
+			}
 			
 		}catch(PersistenceException ex) {
 			ex.printStackTrace();

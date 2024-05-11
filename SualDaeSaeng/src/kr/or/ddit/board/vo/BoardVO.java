@@ -1,5 +1,6 @@
 package kr.or.ddit.board.vo;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class BoardVO {
@@ -8,12 +9,11 @@ public class BoardVO {
 	private int boardLevel;
 	private String boardTitle;
 	private String boardCon;
-	private String boardAt;
+	private LocalDate boardAt;
 	private String boardYn;
 	private int boardHit;
 	private int fileNo;
 	private int userNo;
-	
 	
 	public int getBoardNo() {
 		return boardNo;
@@ -39,10 +39,10 @@ public class BoardVO {
 	public void setBoardCon(String boardCon) {
 		this.boardCon = boardCon;
 	}
-	public String getBoardAt() {
+	public LocalDate getBoardAt() {
 		return boardAt;
 	}
-	public void setBoardAt(String boardAt) {
+	public void setBoardAt(LocalDate boardAt) {
 		this.boardAt = boardAt;
 	}
 	public String getBoardYn() {
@@ -69,6 +69,7 @@ public class BoardVO {
 	public void setUserNo(int userNo) {
 		this.userNo = userNo;
 	}
+
 	
 	
 }

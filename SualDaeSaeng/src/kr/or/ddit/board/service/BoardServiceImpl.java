@@ -24,4 +24,14 @@ public class BoardServiceImpl implements IBoardService{
 	public List<BoardVO> allBoardList() {
 		return boardDao.allBoardList();
 	}
+
+	@Override
+	public BoardVO getBoardDetail(String boardNo) {
+		return boardDao.getBoardDetail(boardNo);
+	}
+
+	@Override
+	public List<BoardVO> selectBoardList(int selectedButtonLevel) {
+		return boardDao.selectBoardList(selectedButtonLevel);
+	}
 }

@@ -13,19 +13,21 @@ import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.board.vo.BoardVO;
 
-@WebServlet("/allBoard.do")
-public class AllBoardListController extends HttpServlet{
+@WebServlet("/board/detail.do")
+public class BoardDetailController extends HttpServlet{
 	
 	private static final long serialVersionUID = 1L;
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		 
+		 String boardNo = req.getParameter("boardNo");
 		 IBoardService boardService = BoardServiceImpl.getInstance();
-		 List<BoardVO> allBoardList = boardService.allBoardList();
 		 
-		 req.setAttribute("allBoardList", allBoardList);
+		 BoardVO boardDetail = boardService.getBoardDetail(boardNo);
 		 
-		 req.getRequestDispatcher("/views/board/allBoard.jsp").forward(req, resp);
+		 req.setAttribute("boardDetail", boardDetail);
+		 
+		 req.getRequestDispatcher("/views/board/view.jsp").forward(req, resp);
 	}
 	
 	@Override

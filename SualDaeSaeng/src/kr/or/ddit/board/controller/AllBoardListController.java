@@ -22,7 +22,7 @@ public class AllBoardListController extends HttpServlet{
 		 
 		 IBoardService boardService = BoardServiceImpl.getInstance();
 		 List<BoardVO> allBoardList = boardService.allBoardList();
-		 
+
 		 req.setAttribute("allBoardList", allBoardList);
 		 
 		 req.getRequestDispatcher("/views/board/allBoard.jsp").forward(req, resp);

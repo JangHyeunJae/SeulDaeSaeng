@@ -178,19 +178,19 @@
 =======
 <%@include file="/header.jsp"%>
 <%
-   IBoardService boardService = BoardServiceImpl.getInstance();
    String selectedButton = request.getParameter("selectedButtonId");
-   int selectedButtonLevel = 0;
+   List<BoardVO> boardList = null;
    if(selectedButton != null) {
-       if(selectedButton.equals("freeBoard")){
-           selectedButtonLevel = 1;
+	   if(selectedButton.equals("allBoard")){
+    	  boardList = (List<BoardVO>) request.getAttribute("allBoardList");
+       }else if(selectedButton.equals("freeBoard")){
+		  boardList = (List<BoardVO>) request.getAttribute("freeBoardList");
        } else if(selectedButton.equals("studyBoard")){
-           selectedButtonLevel = 2;
+    	  boardList = (List<BoardVO>) request.getAttribute("studyBoardList");
        } else if(selectedButton.equals("noticeBoard")){
-           selectedButtonLevel = 3;
+    	  boardList = (List<BoardVO>) request.getAttribute("noticeBoardList");
        }
    }
-   List<BoardVO> allBoardList = (List<BoardVO>)boardService.selectBoardList(selectedButtonLevel);
 %>
 <main>
 	<!-- ======= End Page Header ======= -->
@@ -215,7 +215,7 @@
 			<div
 				class="row mb-3 d-flex justify-content-between align-items-center">
 				<p class="col-3">
-					총 <b><%=allBoardList.size() %></b> 개
+					총 <b><%=boardList.size() %></b> 개
 				</p>
 				<div class="input-group input-group-sm col-4">
 					<button class="btn dropdown-toggle" type="button"
@@ -231,12 +231,12 @@
 			</div>
 			<div class="list-group">
 				<%
-                   if (allBoardList.isEmpty()) {
+                   if (boardList.isEmpty()) {
                 %>
 				<p>작성된 게시글이 없습니다</p>
 				<%
                    }else{
-                       for (BoardVO bv : allBoardList) {
+                       for (BoardVO bv : boardList) {
                 %>
 				<a
 					href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>"
@@ -326,7 +326,6 @@
                     // 페이지 내용 갱신 또는 다른 동작 수행
                 }
             };
-
             var data = JSON.stringify({ "selectedButtonId": clickedId });
             xhr.send(data);
         }

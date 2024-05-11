@@ -29,7 +29,7 @@
 	    where board_no =#{boardNo}
 </select>
 
-<select id="selectBoardList" resultMap="boardMap">
+<select id="selectBoardList" parameterType="int" resultMap="boardMap">
 		select *
 	    from board
 	    where board_level =#{boardLevel}

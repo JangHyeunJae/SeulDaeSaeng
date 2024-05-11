@@ -66,7 +66,7 @@ public class BoardDaoImpl implements IBoardDao{
 		
 		try {
 			session = MyBatisUtil.getSqlSession(true);
-			boardList = session.selectList("board.selectBoardList");	
+			boardList = session.selectList("board.selectBoardList", level);	
 			
 		}catch(PersistenceException ex) {
 			ex.printStackTrace();

@@ -1,11 +1,17 @@
+<%@page import="java.util.List"%>
+<%@page import="kr.or.ddit.board.vo.FileDetailVO"%>
 <%@page import="kr.or.ddit.board.vo.BoardVO"%>
+<%@page import="kr.or.ddit.board.vo.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 <%@include file="/header.jsp" %>
 <%
+    List<BoardVO> boardList = (List<BoardVO>)request.getAttribute("boardList");
 	BoardVO bv = (BoardVO)request.getAttribute("boardDetail");
-    
+    FileDetailVO fdv = (FileDetailVO)request.getAttribute("fileDetail");
+    MemberVO mv = (MemberVO)request.getAttribute("memDetail");
+    String memNick = ""; 
     int level = bv.getBoardLevel();
     int no = bv.getBoardNo();
 %>
@@ -163,7 +169,7 @@
         </div>
         <div class="btn-box container d-flex align-items-center justify-content-center pb-5 pt-5 gap-2">
           <a href="/allBoard.do" type="button" class="btn btn-secondary">목록으로</a>
-          <a href="#" type="button" class="btn btn-secondary">수정하기</a>
+          <a href="/board/edit.do" type="button" class="btn btn-secondary">수정하기</a>
           <a href="#" type="button" class="btn btn-secondary">삭제하기</a>
         </div>
       </section>

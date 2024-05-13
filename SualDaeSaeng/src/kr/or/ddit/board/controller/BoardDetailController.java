@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.board.vo.BoardVO;
-import kr.or.ddit.board.vo.MemberVO;
+import kr.or.ddit.member.vo.MemberVO;
 
 @WebServlet("/board/detail.do")
 public class BoardDetailController extends HttpServlet{

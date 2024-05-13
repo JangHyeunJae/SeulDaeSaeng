@@ -3,7 +3,7 @@
   <display-name>SeulDaeSaeng</display-name>
   	<filter>
 		<filter-name>MyCharacterEncodingFilter</filter-name>
-		<filter-class>kr.or.ddit.board.filter.MyCharacterEncodingFilter</filter-class>
+		<filter-class>kr.or.ddit.filter.MyCharacterEncodingFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>MyCharacterEncodingFilter</filter-name>

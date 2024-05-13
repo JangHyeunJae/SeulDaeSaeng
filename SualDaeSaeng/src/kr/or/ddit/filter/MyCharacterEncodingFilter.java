@@ -1,4 +1,4 @@
-package kr.or.ddit.board.filter;
+package kr.or.ddit.filter;
 
 import java.io.IOException;
 

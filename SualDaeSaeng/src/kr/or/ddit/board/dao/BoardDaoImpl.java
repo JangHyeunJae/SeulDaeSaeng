@@ -7,7 +7,7 @@ import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.ddit.board.vo.BoardVO;
-import kr.or.ddit.board.vo.MemberVO;
+import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.util.MyBatisUtil;
 
 public class BoardDaoImpl implements IBoardDao{

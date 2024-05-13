@@ -1,4 +1,10 @@
+<%@page import="java.util.List"%>
+<%@page import="kr.or.ddit.admin.vo.memberReqVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%-- 
+// 	memberReqVO memberreqVO = (memberReqVO) request.getAttribute("memberreqVO");
+--%>
 
 <%@include file="/header.jsp" %>
 
@@ -15,15 +21,17 @@
             </p>
           </div>
           <div class="list-group d-flex justify-content-start align-items-center flex-row p-3 gap-3">
+          	<% for(memberReqVO member : (List<memberReqVO>)request.getAttribute("memberRequests"))  { %>
             <a href="#" class="card">
               <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
-                  <h5 class="card-title text-truncate">이름(닉네임)</h5>
-                  <small>304호</small>
+                  <h5 class="card-title text-truncate"><%=member.getMemName() %>이름(닉네임)</h5>
+                  <small><%=member.getMemClass() %>304호</small>
                 </div>
                 <p class="card-text ">2024-02-01 (입학일자)</p>
               </div>
             </a>
+            <% } %>
           </div>
         </div>
           <div class="portfolio-description d-flex justify-content-between gap-5">

@@ -1,3 +1,5 @@
+<%@page import="kr.or.ddit.admin.vo.memberReqVO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@include file="/header.jsp" %>
@@ -16,16 +18,31 @@
           </div>
           <div class="list-group d-flex justify-content-start align-items-center flex-row p-3 gap-3">
           
-     
+     <%
+     	List<memberReqVO> memList = 
+     		(List<memberReqVO>)request.getAttribute("memList");
+     	
+     		if(memList != null && !memList.isEmpty()) {
+     			
+     		for(memberReqVO member : memList) {
+     %>
             <a href="#" class="card">
               <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
-                  <h5 class="card-title text-truncate">이름(닉네임)</h5>
-                  <small>304호</small>
+                  <h5 class="card-title text-truncate"><%=member.getMem_name()%>(<%=member.getMem_nick() %>)</h5>
+                  <small><%=member.getMem_class()%></small>
                 </div>
-                <p class="card-text ">2024-02-01 (입학일자)</p>
+                <p class="card-text "><%=member.getMem_regdt()%></p>
               </div>
             </a>
+   	<%
+     		}
+     	}else{
+   	%> 
+   			<div>회원가입 요청이 없습니다.</div>
+   	<%
+     	}
+   	%>
           </div>
         </div>
           <div class="portfolio-description d-flex justify-content-between gap-5">

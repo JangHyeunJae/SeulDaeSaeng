@@ -41,10 +41,16 @@
     
     <!-- Template Main JS File -->
     <script src="/js/main.js"></script>
-    <% if(uri.contains("timetable")){ %>
+    <% if(request.getRequestURI().contains("timetable")){ %>
          <script src="/js/timetable.js"></script>
-    <% }else if( uri.contains("write")){ %>
+    <% }else if(request.getRequestURI().contains("write")){ %>
        <script src="/js/write.js"></script>
-    <% } %>
+    <% }else if(request.getRequestURI().contains("restaurantUpDate")){%>
+    	<script src="/js/restaurantUpDate.js"></script>
+   	<% } %>
+    
+    
+   
+    
   </body>
 </html>

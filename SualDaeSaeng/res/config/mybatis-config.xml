@@ -17,9 +17,11 @@
   </settings>
   
 
-	<typeAliases>
-		<typeAlias type="" alias=""/>
-	</typeAliases>
+  <typeAliases>
+  	<typeAlias type="kr.or.ddit.board.vo.BoardVO" alias="brdVO"/>
+  	<typeAlias type="kr.or.ddit.member.vo.MemberVO" alias="memVO"/>
+  	<typeAlias type="kr.or.ddit.restaurant.vo.RestaurantVO" alias="restVO"/>
+  </typeAliases>
   
   	<environments default="dev">
   		<environment id="dev">
@@ -35,7 +37,9 @@
   
   	
   	<mappers>
-  		<mapper resource="" />
+  		<mapper resource="mapper/board.xml" />
+  		<mapper resource="mapper/member.xml" />
+  		<mapper resource="mapper/restaurant.xml" />
   	</mappers>
   
   

@@ -3,16 +3,35 @@
 
 
 <mapper namespace="board">
-<select id="allBoardList" resultType="kr.or.ddit.board.vo.BoardVO">
-		select board_no as boardNo,
-			   board_level as boardLevel,
-			   board_title as boardTitle,
-			   board_con as boardCon,
-			   board_at as boardAt,
-			   board_yn as boardYn,
-               board_hit as boardHit,
-               file_no as fileNo,
-               user_no as userNo
-        from board;
+
+<resultMap type="kr.or.ddit.board.vo.BoardVO" id="boardMap"> <!-- 1 -->
+
+<result column="board_no" property="boardNo"/>
+<result column="board_level" property="boardLevel"/>
+<result column="board_title" property="boardTitle"/>
+<result column="board_con" property="boardCon"/>
+<result column="board_at" property="boardAt"/>
+<result column="board_yn" property="boardYn"/>
+<result column="board_hit" property="boardHit"/>
+<result column="file_no" property="fileNo"/>
+<result column="user_no" property="userNo"/>
+
+</resultMap>
+
+<select id="allBoardList" resultMap="boardMap">
+		select *
+        from board
+</select>
+
+<select id="getBoardDetail" resultMap="boardMap">
+		select *
+	    from board
+	    where board_no =#{boardNo}
+</select>
+
+<select id="selectBoardList" parameterType="int" resultMap="boardMap">
+		select *
+	    from board
+	    where board_level =#{boardLevel}
 </select>
 </mapper>

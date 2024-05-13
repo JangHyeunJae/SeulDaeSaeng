@@ -1,7 +1,6 @@
 package kr.or.ddit.board.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,19 +12,21 @@ import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.board.vo.BoardVO;
 
-@WebServlet("/allBoard.do")
-public class AllBoardListController extends HttpServlet{
-	
+@WebServlet("/board/edit.do")
+public class EditBoardController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		 
+		 String boardNo = req.getParameter("boardNo");
 		 IBoardService boardService = BoardServiceImpl.getInstance();
-		 List<BoardVO> allBoardList = boardService.allBoardList();
-
-		 req.setAttribute("boardList", allBoardList);
 		 
-		 req.getRequestDispatcher("/views/board/allBoard.jsp").forward(req, resp);
+		 BoardVO boardDetail = boardService.getBoardDetail(boardNo);
+		 
+		 req.setAttribute("boardDetail", boardDetail);
+		 
+		 req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
+		 //merge후에 write 수정
 	}
 	
 	@Override

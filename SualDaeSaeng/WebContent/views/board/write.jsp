@@ -28,6 +28,7 @@
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
     <!-- Initialize Quill editor -->
+
         <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Quill 초기화
@@ -47,12 +48,54 @@
                         [{ 'size': ['small', false, 'large', 'huge'] }],
                         [{ 'font': [] }],
                         ['clean'],
-                        ['myButton'] // 사용자 정의 버튼 추가
+                        [{ 'file': 'file' }] 
                     ]
                 },
-                placeholder: 'Start typing...',
+                placeholder: '내용을 작성하세요...',
             });
 
+            var fileInput = document.getElementById('fileInput');
+            var toolbar = quill.getModule('toolbar');
+            toolbar.addHandler('file', function () {
+                fileInput.click();
+            });
+
+            // 파일 선택 시
+            fileInput.addEventListener('change', function () {
+                var file = fileInput.files[0];
+                if (file) {
+                    uploadFile(file);
+                }
+            });
+
+            // 파일 업로드 함수
+            function uploadFile(file) {
+                var formData = new FormData();
+                formData.append('file', file);
+
+                // 서버로 파일 업로드
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'upload.jsp', true);
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        if (response.success) {
+                            // 파일 업로드 성공 시, Quill 에디터에 링크 삽입
+                            var range = quill.getSelection(true);
+                            quill.insertText(range.index, response.url, { 'link': response.url });
+                        } else {
+                            console.error('File upload failed:', response.error);
+                        }
+                    } else {
+                        console.error('File upload failed:', xhr.statusText);
+                    }
+                };
+                xhr.onerror = function () {
+                    console.error('File upload failed.');
+                };
+                xhr.send(formData);
+            }
+            
             // 사용자 정의 버튼을 추가합니다.
             var customButton = document.querySelector('.ql-myButton');
             customButton.addEventListener('click', function() {
@@ -88,13 +131,13 @@
               </a>
               <ul>
                 <li>
-                  <a href="freeBoard.html">자유게시판</a>
+                  <a href="allBoard.jsp">자유게시판</a>
                 </li>
                 <li>
-                  <a href="studyBoard.html">공부게시판</a>
+                  <a href="allBoard.jsp">공부게시판</a>
                 </li>
                 <li>
-                  <a href="newsBoard.html">공지게시판</a>
+                  <a href="allBoard.jsp">공지게시판</a>
                 </li>
               </ul>
             </li>
@@ -227,20 +270,17 @@
        <div class="contact">
          <div class="container pb-3">
            <!-- {{changeDetected}} -->
-           <form action="forms/contact.php" method="post" role="form" class="php-email-form needs-validation" novalidate>
+           <form action="/board/write.do" method="post" role="form" id="insertForm" class="php-email-form needs-validation" novalidate>
              <div class="form-group">
                <input type="text" class="form-control" name="title" id="title" placeholder="제목" required>
                <div class="invalid-feedback">제목을 작성해주세요.</div>
              </div>
              
-             <div id="editor">
-              <p>Hello World!</p>
-              <p>Some initial <strong>bold</strong> text</p>
-              <p><br></p>
-             </div>
-       
+             	<div id="editor"></div>
+             	
+             <input type="file" id="fileInput" style="display: visible;">
              <div class="text-center mt-5 mb-5">
-               <button type="submit">작성하기</button>
+               <button type="submit" id="submitBtn">작성하기</button>
              </div>
            </form>
         
@@ -248,6 +288,22 @@
        </div>
    
      </main>
+     
+<script type="text/javascript">
+$(function(){
+	var submitBtn = $("#submitBtn");
+	var insertForm = $("#insertForm");
+	
+	// 등록 버튼 클릭 시 이벤트
+	submitBtn.on("click", function(){
+		var title = $("#title").val();
+		var content = quill.root.innerHTML;
+		
+		insertForm.submit(); // 서버로 전송
+	});
+});
+
+</script>
      
   <!-- ======= Footer ======= -->
   <%@include file="/footer.jsp" %>

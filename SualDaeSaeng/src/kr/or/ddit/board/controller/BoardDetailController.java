@@ -12,20 +12,28 @@ import javax.servlet.http.HttpServletResponse;
 import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.board.vo.BoardVO;
+import kr.or.ddit.board.vo.MemberVO;
 
-@WebServlet("/allBoard.do")
-public class AllBoardListController extends HttpServlet{
+@WebServlet("/board/detail.do")
+public class BoardDetailController extends HttpServlet{
 	
 	private static final long serialVersionUID = 1L;
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		 
 		 IBoardService boardService = BoardServiceImpl.getInstance();
-		 List<BoardVO> allBoardList = boardService.allBoardList();
-
-		 req.setAttribute("boardList", allBoardList);
+		
+		 String boardNo = req.getParameter("boardNo");
 		 
-		 req.getRequestDispatcher("/views/board/allBoard.jsp").forward(req, resp);
+		 BoardVO boardDetail = boardService.getBoardDetail(boardNo);
+		
+		 int userNo = boardDetail.getUserNo();
+		 
+		 MemberVO memDetail = boardService.getwriterDetail(userNo);
+		 
+		 req.setAttribute("boardDetail", boardDetail);
+		 
+		 req.getRequestDispatcher("/views/board/view.jsp").forward(req, resp);
 	}
 	
 	@Override

@@ -19,6 +19,9 @@ String uri = request.getRequestURI();
     <link href="/favicon.ico" rel="icon">
     <!-- Fonts -->
     <link rel="stylesheet" href="/css/font.css">
+    
+    <script defer src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous" ></script>
+    
     <!-- Vendor CSS Files -->
 <!--     footer34line에서 복사 -->
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
@@ -109,22 +112,24 @@ String uri = request.getRequestURI();
         <nav id="navbar" class="navbar">
           <ul>
             <li>
-              <a href="calssBoard.html">반별게시판</a>
+            
+            
+              <a href="calssBoard.jsp">반별게시판</a>
             </li>
             <li class="dropdown">
-              <a href="allBoard.html">
+              <a href="allBoard.jsp">
                 <span>전체게시판</span>
                 <i class="bi-caret-down-fill"></i>
               </a>
               <ul>
                 <li>
-                  <a href="freeBoard.jsp">자유게시판</a>
+                  <a href="/views/freeBoard.jsp">자유게시판</a>
                 </li>
                 <li>
-                  <a href="studyBoard.jsp">공부게시판</a>
+                  <a href="/views/studyBoard.jsp">공부게시판</a>
                 </li>
                 <li>
-                  <a href="newsBoard.jsp">공지게시판</a>
+                  <a href="/views/adminPage.do">공지게시판</a>
                 </li>
               </ul>
             </li>
@@ -135,21 +140,21 @@ String uri = request.getRequestURI();
               </a>
               <ul>
                 <li class="dropdown">
-                  <a href="restaurantFindKorean.jsp">한식</a>
+                  <a href="/views/restaurantFindKorean.jsp">한식</a>
                 </li>
                 <li class="dropdown">
-                  <a href="restaurantFindKorean.jsp">중식</a>
+                  <a href="/views/restaurantFindKorean.jsp">중식</a>
                 </li>
                 <li class="dropdown">
-                  <a href="restaurantFindKorean.jsp">일식</a>
+                  <a href="/views/restaurantFindKorean.jsp">일식</a>
                 </li>
                 <li class="dropdown">
-                  <a href="restaurantFindKorean.jsp">서양식</a>
+                  <a href="/views/restaurantFindKorean.jsp">서양식</a>
                 </li>
               </ul>
             </li>
             <li>
-              <a href="foodLikeList.jsp">미식인의 추천맛집</a>
+              <a href="/views/foodLikeList.jsp">미식인의 추천맛집</a>
             </li>
           </ul>
         </nav>
@@ -163,10 +168,12 @@ String uri = request.getRequestURI();
               </button>
               <ul class="dropdown-menu">
                 <li>
+
                   <a class="dropdown-item" href="<%=request.getContextPath() %>/member/join.do">회원가입</a>
+
                 </li>
                 <li>
-                  <a class="dropdown-item" href="login.jsp">로그인</a>
+                  <a class="dropdown-item" href="/views/login.jsp">로그인</a>
                 </li>
                 <!-- <li><a class="dropdown-item" href="logout.html">로그아웃</a></li><li><a class="dropdown-item" href="myPage.html"><span>정윤지</span>페이지</a></li>-->
               </ul>

@@ -19,9 +19,8 @@ public class InsertBoardController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		req.setAttribute("boardLevel", );
-		
+		int level = Integer.parseInt(req.getParameter("level"));
+		req.setAttribute("level", level);
 		req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
 	}
 	
@@ -31,16 +30,17 @@ public class InsertBoardController extends HttpServlet{
 		
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
-		
+		int level = Integer.parseInt(req.getParameter("level"));
+
 		BoardVO boardVO = new BoardVO();
 		boardVO.setBoardTitle(title);
 		boardVO.setBoardCon(content);
-		boardVO.setUserNo(usersNo);
-		boardVO.setBoardLevel(boardLevel);
+		boardVO.setUsersNo(1); // 세션에서 꺼내와야함
+		boardVO.setBoardLevel(level);
 		
 		int status = service.insertBoard(boardVO);
 		if(status > 0) { 	// 성공
-			resp.sendRedirect("/board/detail.do?no=" + boardVO.getBoardNo());
+			resp.sendRedirect("/board/detail.do?boardNo=" + boardVO.getBoardNo());
 		}else {				// 실패
 			req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
 		}

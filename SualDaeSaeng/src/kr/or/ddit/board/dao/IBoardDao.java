@@ -15,6 +15,9 @@ public interface IBoardDao {
 
 	public List<BoardVO> selectBoardList(int level);
 	
+	public MemberVO getwriterDetail(int userNo);
+
+	public int insertBoard(BoardVO boardVO);
 	public MemberVO getwriterDetail(Map<String,Object> parameter);
 
 	public List<ReplyVO> getReplyList(int boardNo);

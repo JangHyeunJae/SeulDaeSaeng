@@ -10,7 +10,8 @@
 <%@include file="/header.jsp"%>
 <%
 	List<BoardVO> boardList = (List<BoardVO>)request.getAttribute("boardList");
-  
+
+    int level = (int)request.getAttribute("level");
     int itemsPerPage = 5;
     int currentPage = (request.getParameter("page") != null) ? Integer.parseInt(request.getParameter("page")) : 1;
     int totalItems = (boardList != null) ? boardList.size() : 0;
@@ -19,7 +20,7 @@
     // Determine the start and end index of items to display for the current page
     int startIndex = (currentPage - 1) * itemsPerPage;
     int endIndex = Math.min(startIndex + itemsPerPage, totalItems);
-    
+   
 %>
 <main>
 	<!-- ======= End Page Header ======= -->
@@ -105,6 +106,7 @@
                    }
                 %>
 			</div>
+
 
     <!-- Pagination links -->
     <nav aria-label="Page navigation" class = "d-flex justify-content-center align-items-center pt-5 pm-5">

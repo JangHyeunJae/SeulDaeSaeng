@@ -154,6 +154,29 @@ public class BoardDaoImpl implements IBoardDao {
 	}
 
 	@Override
+	public int insertBoard(BoardVO boardVO) {
+		
+		SqlSession session = null;
+		int status = 0;		
+		
+		try {
+			session = MyBatisUtil.getSqlSession();
+			status = session.insert("board.insertBoard", boardVO);
+			
+			if(status > 0) {	// 성공
+				session.commit();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		
+		return status;
+	}
+
 	public int insertReply(ReplyVO replyVO) {
     SqlSession session = null;
 		

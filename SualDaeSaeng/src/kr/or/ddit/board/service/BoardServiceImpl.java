@@ -62,4 +62,9 @@ public class BoardServiceImpl implements IBoardService{
 	public int insertReply(ReplyVO replyVO) {
 		return boardDao.insertReply(replyVO);
 	}
+
+	@Override
+	public int insertBoard(BoardVO boardVO) {
+		return boardDao.insertBoard(boardVO);
+	}
 }

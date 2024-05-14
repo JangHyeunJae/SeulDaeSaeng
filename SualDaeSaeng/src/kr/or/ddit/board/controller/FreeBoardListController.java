@@ -19,7 +19,7 @@ public class FreeBoardListController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		 
+		
 		 int level = 1;
 		 IBoardService boardService = BoardServiceImpl.getInstance();
 		 List<BoardVO> boardList = boardService.selectBoardList(level);

@@ -69,8 +69,4 @@ public class BoardVO {
 	public void setFileNo(int fileNo) {
 		this.fileNo = fileNo;
 	}
-
-
-	
-	
 }

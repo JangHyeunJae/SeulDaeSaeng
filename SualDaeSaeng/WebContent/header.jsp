@@ -19,6 +19,9 @@ String uri = request.getRequestURI();
     <link href="/favicon.ico" rel="icon">
     <!-- Fonts -->
     <link rel="stylesheet" href="/css/font.css">
+    
+    <script defer src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous" ></script>
+    
     <!-- Vendor CSS Files -->
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -57,6 +60,8 @@ String uri = request.getRequestURI();
         <nav id="navbar" class="navbar">
           <ul>
             <li>
+            
+            
               <a href="calssBoard.jsp">반별게시판</a>
             </li>
             <li class="dropdown">
@@ -72,7 +77,7 @@ String uri = request.getRequestURI();
                   <a href="/views/studyBoard.jsp">공부게시판</a>
                 </li>
                 <li>
-                  <a href="/views/newsBoard.jsp">공지게시판</a>
+                  <a href="/views/adminPage.do">공지게시판</a>
                 </li>
               </ul>
             </li>

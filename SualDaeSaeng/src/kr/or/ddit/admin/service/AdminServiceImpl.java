@@ -23,5 +23,9 @@ public class AdminServiceImpl implements IAdminService {
 	public List<memberReqVO> selectmemList() {
 		return dao.selectmemList();
 	}
+	@Override
+	public int AdminAccept(int usersNo) {
+		return dao.AdminAccept(usersNo);
+	}
 
 }

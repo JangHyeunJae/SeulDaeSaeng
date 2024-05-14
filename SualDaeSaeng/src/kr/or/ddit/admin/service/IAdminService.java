@@ -8,4 +8,7 @@ public interface IAdminService {
 
 	public List<memberReqVO> selectmemList();
 
+	public int AdminAccept(int usersNo);
+
+
 }

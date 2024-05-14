@@ -8,4 +8,7 @@ public interface IAdmindao {
 
 	public List<memberReqVO> selectmemList();
 
+	public int AdminAccept(int usersNo);
+
+
 }

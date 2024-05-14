@@ -27,6 +27,9 @@ public class AdminDaoImpl implements IAdmindao {
 		try {
 			session = MyBatisUtil.getSqlSession(true);	
 			memList = session.selectList("admin.selectmemList");   // xml 
+			for(memberReqVO vo : memList) {
+				System.out.println(vo);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -34,7 +37,33 @@ public class AdminDaoImpl implements IAdmindao {
 				session.close();
 			}
 		}
-		return selectmemList();
+		return memList;
 	}
+	@Override
+	public int AdminAccept(int usersNo) {
+		SqlSession session = null;
+		int cnt=-1;
+		
+		try {
+			session = MyBatisUtil.getSqlSession();	
+			 cnt = session.update("admin.adminAccept", usersNo);   // xml 
+			 
+			 if(cnt>0) session.commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return cnt;
+	}
+	
+	
+	
+	
+	
+
 
 }

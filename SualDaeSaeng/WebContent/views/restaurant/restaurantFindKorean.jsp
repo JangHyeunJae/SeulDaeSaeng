@@ -57,7 +57,7 @@
                   <span>25</span>
                 </p>
                 <div class="img-fluid">
-                  <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                  <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
                 </div>
                 <div class="card-body">
                   <small class="badge bg-body-secondary mb-1">한식</small>
@@ -77,7 +77,7 @@
                   <span>25</span>
                 </p>
                 <div class="img-fluid">
-                  <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                  <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
                 </div>
                 <div class="card-body">
                   <small class="badge bg-body-secondary mb-1">한식</small>
@@ -97,7 +97,7 @@
                   <span>25</span>
                 </p>
                 <div class="img-fluid">
-                  <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                  <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
                 </div>
                 <div class="card-body">
                   <small class="badge bg-body-secondary mb-1">한식</small>
@@ -117,7 +117,7 @@
                   <span>25</span>
                 </p>
                 <div class="img-fluid">
-                  <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                  <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
                 </div>
                 <div class="card-body">
                   <small class="badge bg-body-secondary mb-1">한식</small>
@@ -137,7 +137,7 @@
                   <span>25</span>
                 </p>
                 <div class="img-fluid">
-                  <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                  <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
                 </div>
                 <div class="card-body">
                   <small class="badge bg-body-secondary mb-1">한식</small>
@@ -157,7 +157,7 @@
                   <span>25</span>
                 </p>
                 <div class="img-fluid">
-                  <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                  <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
                 </div>
                 <div class="card-body">
                   <small class="badge bg-body-secondary mb-1">한식</small>
@@ -177,7 +177,7 @@
                   <span>25</span>
                 </p>
                 <div class="img-fluid">
-                  <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                  <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
                 </div>
                 <div class="card-body">
                   <small class="badge bg-body-secondary mb-1">한식</small>
@@ -197,7 +197,7 @@
                   <span>25</span>
                 </p>
                 <div class="img-fluid">
-                  <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                  <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
                 </div>
                 <div class="card-body">
                   <small class="badge bg-body-secondary mb-1">한식</small>
@@ -217,7 +217,7 @@
                   <span>25</span>
                 </p>
                 <div class="img-fluid">
-                  <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                  <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
                 </div>
                 <div class="card-body">
                   <small class="badge bg-body-secondary mb-1">한식</small>
@@ -237,7 +237,7 @@
                   <span>25</span>
                 </p>
                 <div class="img-fluid">
-                  <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                  <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
                 </div>
                 <div class="card-body">
                   <small class="badge bg-body-secondary mb-1">한식</small>
@@ -257,7 +257,7 @@
                   <span>25</span>
                 </p>
                 <div class="img-fluid">
-                  <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                  <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
                 </div>
                 <div class="card-body">
                   <small class="badge bg-body-secondary mb-1">한식</small>
@@ -277,7 +277,7 @@
                   <span>25</span>
                 </p>
                 <div class="img-fluid">
-                  <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                  <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
                 </div>
                 <div class="card-body">
                   <small class="badge bg-body-secondary mb-1">한식</small>

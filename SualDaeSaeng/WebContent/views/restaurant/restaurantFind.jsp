@@ -17,11 +17,14 @@
               </nav>
               <h2>식당찾기 </h2>
               <p>
-                <a class="cta-btn" href="restaurantFind.html">ALL</a>
-                <a class="cta-btn gray" href="restaurantFindKorean.html">한식</a>
-                <a class="cta-btn gray" href="restaurantFind.html">중식</a>
-                <a class="cta-btn gray" href="restaurantFind.html">일식</a>
-                <a class="cta-btn gray" href="restaurantFind.html">서양식</a>
+                <a class="cta-btn" href="<%=request.getContextPath() %>/restaurant/find.do?mcls='all'">ALL</a>
+                <a class="cta-btn gray" href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I201'">한식</a>
+                <a class="cta-btn gray" href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I202'">중식</a>
+                <a class="cta-btn gray" href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I203'">일식</a>
+                <a class="cta-btn gray" href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I204'">서양식</a>
+                <a class="cta-btn gray" href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I205'">동남아식</a>
+                <a class="cta-btn gray" href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I210'">간이식</a>
+                <a class="cta-btn gray" href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I212'">카페</a>
               </p>
             </div>
           </div>

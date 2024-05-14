@@ -67,24 +67,32 @@
               </ul>
             </li>
             <li class="dropdown">
-              <a href="restaurantFind.jsp">
+              <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls=all">
                 <span>식당찾기</span>
                 <i class="bi-caret-down-fill"></i>
               </a>
               <ul>
-                <li class="dropdown">
-                  <a href="restaurantFindKorean.jsp">한식</a>
+                <li>
+                  <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I201'">한식</a>
                 </li>
-                <li class="dropdown">
-                  <a href="restaurantFindKorean.jsp">중식</a>
+                <li>
+                  <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I202'">중식</a>
                 </li>
-                <li class="dropdown">
-                  <a href="restaurantFindKorean.jsp">일식</a>
+                <li>
+                  <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I203'">일식</a>
                 </li>
-                <li class="dropdown">
-                  <a href="restaurantFindKorean.jsp">서양식</a>
+                <li>
+                  <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I204'">서양식</a>
                 </li>
-              </ul>
+                <li>
+                  <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I205'">동남아식</a>
+                </li>
+                <li>
+                  <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I210'">간이식</a>
+                </li>
+                <li >
+                  <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I212'">카페</a>
+                </li>
             </li>
             <li>
               <a href="foodLikeList.jsp">미식인의 추천맛집</a>

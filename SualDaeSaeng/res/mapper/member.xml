@@ -2,4 +2,46 @@
 <!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
 
+	<select id="memberIdChk" parameterType="String" resultType="int">
+		
+		select count(*) as cnt from users where USERS_ID = #{usersId}
+		
+	</select>
+
+
+	<insert id="userJoin" parameterType="memVO">
+	
+		INSERT INTO USERS(USERS_NO, USERS_ROLE, USERS_ID, USERS_PASS)
+		VALUES(#{usersNo}, #{usersRole}, #{usersId}, #{usersPass})
+	
+	</insert>
+	
+<!-- 
+<result property="userNo" column="USER_NO"/>
+<result property="userRole" column="USER_ROLE"/>
+<result property="userId" column="USER_ID"/>
+<result property="userPass" column="USER_PASS"/>
+<result property="userYn" column="USER_YN"/>		
+-->
+
+	<insert id="memberJoin" parameterType="memVO">
+		
+		INSERT INTO "USERS"(USERS_NO, USERS_ROLE, USERS_ID, USERS_PASS)
+		VALUES(#{userNo}, #{userRole}, #{userId}, #{userPass})
+	
+	</insert>
+	
+<!-- 	
+<result property="usersNo" column="USERS_NO"/>
+<result property="memName" column="MEM_NAME"/>
+<result property="memNick" column="MEM_NICK"/>
+<result property="memBirth" column="MEM_BIRTH"/>
+<result property="memEmail" column="MEM_EMAIL"/>
+<result property="memTel" column="MEM_TEL"/>
+<result property="memClass" column="MEM_CLASS"/>
+<result property="memRegdt" column="MEM_REGDT"/>
+<result property="addrNo" column="ADDR_NO"/>
+-->
+
+	
 </mapper>

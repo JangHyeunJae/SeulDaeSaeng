@@ -19,13 +19,13 @@ public class FreeBoardListController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		 
+		
 		 int level = 1;
 		 IBoardService boardService = BoardServiceImpl.getInstance();
-		 List<BoardVO> freeBoardList = boardService.selectBoardList(level);
+		 List<BoardVO> boardList = boardService.selectBoardList(level);
 
 		 req.setAttribute("level", level);
-		 req.setAttribute("freeBoardList", freeBoardList);
+		 req.setAttribute("boardList", boardList);
 		 
 		 req.getRequestDispatcher("/views/board/allBoard.jsp").forward(req, resp);
 	}

@@ -13,8 +13,14 @@ public class BoardVO {
 	private String boardYn;
 	private int boardHit;
 	private int fileNo;
-	private int userNo;
+	private int usersNo;
 	
+	public int getUsersNo() {
+		return usersNo;
+	}
+	public void setUsersNo(int usersNo) {
+		this.usersNo = usersNo;
+	}
 	public int getBoardNo() {
 		return boardNo;
 	}
@@ -63,13 +69,4 @@ public class BoardVO {
 	public void setFileNo(int fileNo) {
 		this.fileNo = fileNo;
 	}
-	public int getUserNo() {
-		return userNo;
-	}
-	public void setUserNo(int userNo) {
-		this.userNo = userNo;
-	}
-
-	
-	
 }

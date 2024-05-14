@@ -196,4 +196,5 @@ public class BoardDaoImpl implements IBoardDao {
 		}
 		return status;
 	}
+
 }

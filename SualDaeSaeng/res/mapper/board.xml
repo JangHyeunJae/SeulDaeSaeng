@@ -85,6 +85,7 @@
 	)values(
 		#{boardNo}, #{boardLevel}, #{boardTitle}, #{boardCon}, sysdate, 0, #{usersNo}
 	)
+</insert>
 
 <update id="deleteBoard" parameterType="int">
         update board set board_yn = 'N' where board_no =#{boardNo}

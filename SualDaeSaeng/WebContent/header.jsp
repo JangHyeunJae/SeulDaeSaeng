@@ -111,7 +111,7 @@ String uri = request.getRequestURI();
               </button>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="join.jsp">회원가입</a>
+                  <a class="dropdown-item" href="<%=request.getContextPath() %>/member/join.do">회원가입</a>
                 </li>
                 <li>
                   <a class="dropdown-item" href="login.jsp">로그인</a>

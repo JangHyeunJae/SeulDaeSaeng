@@ -15,6 +15,9 @@ public class MemberVO {
 	private int addrNo;
 	
 	
+	public MemberVO() {
+		
+	}
 	public int getUserNo() {
 		return userNo;
 	}

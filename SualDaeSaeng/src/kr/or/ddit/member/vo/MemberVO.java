@@ -15,6 +15,10 @@ public class MemberVO {
 	private int addrNo;
 	
 	
+
+	public MemberVO() {
+		
+	}
 	public int getUsersNo() {
 		return usersNo;
 	}

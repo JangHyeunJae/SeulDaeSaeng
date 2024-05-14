@@ -12,21 +12,21 @@ import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.board.vo.BoardVO;
 
-@WebServlet("/board/edit.do")
-public class EditBoardController extends HttpServlet{
+@WebServlet("/board/delete.do")
+public class DeleteBoardController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		 
-		 int boardNo = Integer.parseInt(req.getParameter("boardNo"));
 		 IBoardService boardService = BoardServiceImpl.getInstance();
 		 
-		 BoardVO boardDetail = boardService.getBoardDetail(boardNo);
+		 int boardNo = Integer.parseInt(req.getParameter("boardNo"));
 		 
-		 req.setAttribute("boardDetail", boardDetail);
-		 
-		 req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
-		 //merge후에 write 수정
+		 int cnt = boardService.deleteBoard(boardNo);
+	    
+		 if(cnt>0) {
+		 resp.sendRedirect(req.getContextPath() + "/allBoard.do");
+		 }
 	}
 	
 	@Override

@@ -25,8 +25,8 @@ public class StudyBoardListController extends HttpServlet{
 		 List<BoardVO> boardList = boardService.selectBoardList(level);
 
 		 req.setAttribute("boardList", boardList);
-         req.setAttribute("level", level);
-		 
+     req.setAttribute("level", level);
+
 		 req.getRequestDispatcher("/views/board/allBoard.jsp").forward(req, resp);
 	}
 	

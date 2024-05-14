@@ -18,7 +18,7 @@ public class MemberVO {
 	public int getUsersNo() {
 		return usersNo;
 	}
-	public void setUsersNo(int userNo) {
+	public void setUsersNo(int usersNo) {
 		this.usersNo = usersNo;
 	}
 	public String getMemName() {

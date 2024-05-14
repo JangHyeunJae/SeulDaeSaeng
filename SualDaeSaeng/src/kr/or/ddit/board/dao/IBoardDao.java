@@ -14,4 +14,6 @@ public interface IBoardDao {
 	public List<BoardVO> selectBoardList(int level);
 	
 	public MemberVO getwriterDetail(int userNo);
+
+	public int insertBoard(BoardVO boardVO);
 }

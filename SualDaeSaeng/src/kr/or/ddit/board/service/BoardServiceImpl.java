@@ -40,4 +40,9 @@ public class BoardServiceImpl implements IBoardService{
 	public MemberVO getwriterDetail(int userNo) {
 		return boardDao.getwriterDetail(userNo);
 	}
+
+	@Override
+	public int insertBoard(BoardVO boardVO) {
+		return boardDao.insertBoard(boardVO);
+	}
 }

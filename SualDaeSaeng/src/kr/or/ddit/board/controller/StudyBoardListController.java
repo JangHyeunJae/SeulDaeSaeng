@@ -22,9 +22,9 @@ public class StudyBoardListController extends HttpServlet{
 		 
 		 int level = 2;
 		 IBoardService boardService = BoardServiceImpl.getInstance();
-		 List<BoardVO> studyBoardList = boardService.selectBoardList(level);
+		 List<BoardVO> boardList = boardService.selectBoardList(level);
 
-		 req.setAttribute("boardList", studyBoardList);
+		 req.setAttribute("boardList", boardList);
          req.setAttribute("level", level);
 		 
 		 req.getRequestDispatcher("/views/board/allBoard.jsp").forward(req, resp);

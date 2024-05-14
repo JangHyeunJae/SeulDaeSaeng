@@ -27,9 +27,9 @@ public class BoardDetailController extends HttpServlet{
 		 
 		 BoardVO boardDetail = boardService.getBoardDetail(boardNo);
 		
-		 int userNo = boardDetail.getUserNo();
+		 int usersNo = boardDetail.getUsersNo();
 		 
-		 MemberVO memDetail = boardService.getwriterDetail(userNo);
+		 MemberVO memDetail = boardService.getwriterDetail(usersNo);
 		 
 		 req.setAttribute("boardDetail", boardDetail);
 		 

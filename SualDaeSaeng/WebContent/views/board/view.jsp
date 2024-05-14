@@ -33,7 +33,7 @@
                 <small><%=bv.getBoardAt() %></small>
               </p>
               <h3><%=bv.getBoardTitle() %></h3>
-              <small><%=bv.getUserNo() %></small>
+              <small><%=bv.getUsersNo() %></small>
             </div>
           </div>
         </div>

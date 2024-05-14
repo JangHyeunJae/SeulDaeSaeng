@@ -4,7 +4,7 @@
 
 <mapper namespace="board">
 
-<resultMap type="kr.or.ddit.board.vo.BoardVO" id="boardMap"> <!-- 1 -->
+<resultMap type="brdVO" id="boardMap"> <!-- 1 -->
 
 <result column="board_no" property="boardNo"/>
 <result column="board_level" property="boardLevel"/>
@@ -34,4 +34,17 @@
 	    from board
 	    where board_level =#{boardLevel}
 </select>
+
+<insert id="insertBoard" parameterType="brdVO" useGeneratedKeys="true">
+	<selectKey keyProperty="boardNo" resultType="int" order="BEFORE">
+		select seq_board.nextval from dual
+	</selectKey>
+	insert into board(
+		board_no, board_level, board_title, board_con, board_at, board_hit, users_no
+	)values(
+		#{boardNo}, #{boardLevel}, #{boardTitle}, #{boardCon}, sysdate, 0, #{usersNo}
+	)
+
+</insert>
+
 </mapper>

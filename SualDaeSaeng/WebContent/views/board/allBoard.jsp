@@ -8,6 +8,7 @@
 <%@include file="/header.jsp"%>
 <%
 	List<BoardVO> boardList = (List<BoardVO>)request.getAttribute("boardList");
+	int level = (int)request.getAttribute("level");
 %>
 <main>
 	<!-- ======= End Page Header ======= -->
@@ -100,7 +101,7 @@
 			</nav>
 			<div
 				class="container d-flex align-items-center justify-content-end pb-5 gap-2 p-0">
-				<a href="write.jsp" type="button" class="btn btn-outline-warning">글쓰기</a>
+				<a href="<%=request.getContextPath() %>/board/write.do?level=<%=level %>" type="button" class="btn btn-outline-warning">글쓰기</a>
 			</div>
 		</div>
 	</section>

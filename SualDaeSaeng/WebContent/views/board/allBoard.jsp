@@ -73,12 +73,12 @@
                     	   
                 		   //level별 이름지정
                     	   BoardVO bv = boardList.get(i);
-                    	   int level = bv.getBoardLevel();
+                    	   int level2 = bv.getBoardLevel();
                     	   String boardName = null;
                     	      
-                           if(level == 1) boardName = "자유게시판";
-                           else if(level == 2) boardName = "공부게시판";
-                           else if(level == 3) boardName = "공지사항";
+                           if(level2 == 1) boardName = "자유게시판";
+                           else if(level2 == 2) boardName = "공부게시판";
+                           else if(level2 == 3) boardName = "공지사항";
                            else boardName = "전체게시판";
                 %>
                 
@@ -132,7 +132,7 @@
     </nav>
     
 			<div class="container d-flex align-items-center justify-content-end pb-5 gap-2 p-0">
-				<a href="write.jsp" type="button" class="btn btn-outline-warning">글쓰기</a>
+				<a href="<%=request.getContextPath()%>/board/write.do?level=<%=level %>" type="button" class="btn btn-outline-warning">글쓰기</a>
 			</div>
 		</div>
 	</section>

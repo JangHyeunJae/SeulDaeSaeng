@@ -1,42 +1,115 @@
 package kr.or.ddit.restaurant.vo;
 
 public class RestaurantVO {
-	 private String rest_bizno;
-	 private String rest_name;
-	 private String rest_mcls;
-	 private String rest_scls;
-	 private int addr_no;
+	 private String restBizno;
+	 private String restName;
+	 private String restMcls;
+	 private String restScls;
+	 private int addrNo;
+	 private int addrPost;
+	 private String addrBasic;
+	 private String addrDetail;
+	 private String addrLon;
+	 private String addrLat;
+	 private int addrLevel;
 	 
-	public String getRest_bizno() {
-		return rest_bizno;
+	@Override
+	public String toString() {
+		return "RestaurantVO [restBizno=" + restBizno + ", restName=" + restName + ", restMcls=" + restMcls
+				+ ", restScls=" + restScls + ", addrNo=" + addrNo + ", addrPost=" + addrPost + ", addrBasic="
+				+ addrBasic + ", addrDetail=" + addrDetail + ", addrLon=" + addrLon + ", addrLat=" + addrLat
+				+ ", addrLevel=" + addrLevel + "]";
 	}
-	public void setRest_bizno(String rest_bizno) {
-		this.rest_bizno = rest_bizno;
+
+	public String getRestBizno() {
+		return restBizno;
 	}
-	public String getRest_name() {
-		return rest_name;
+
+	public void setRestBizno(String restBizno) {
+		this.restBizno = restBizno;
 	}
-	public void setRest_name(String rest_name) {
-		this.rest_name = rest_name;
+
+	public String getRestName() {
+		return restName;
 	}
-	public String getRest_mcls() {
-		return rest_mcls;
+
+	public void setRestName(String restName) {
+		this.restName = restName;
 	}
-	public void setRest_mcls(String rest_mcls) {
-		this.rest_mcls = rest_mcls;
+
+	public String getRestMcls() {
+		return restMcls;
 	}
-	public String getRest_scls() {
-		return rest_scls;
+
+	public void setRestMcls(String restMcls) {
+		this.restMcls = restMcls;
 	}
-	public void setRest_scls(String rest_scls) {
-		this.rest_scls = rest_scls;
+
+	public String getRestScls() {
+		return restScls;
 	}
-	public int getAddr_no() {
-		return addr_no;
+
+	public void setRestScls(String restScls) {
+		this.restScls = restScls;
 	}
-	public void setAddr_no(int addr_no) {
-		this.addr_no = addr_no;
+
+	public int getAddrNo() {
+		return addrNo;
 	}
+
+	public void setAddrNo(int addrNo) {
+		this.addrNo = addrNo;
+	}
+
+	public int getAddrPost() {
+		return addrPost;
+	}
+
+	public void setAddrPost(int addrPost) {
+		this.addrPost = addrPost;
+	}
+
+	public String getAddrBasic() {
+		return addrBasic;
+	}
+
+	public void setAddrBasic(String addrBasic) {
+		this.addrBasic = addrBasic;
+	}
+
+	public String getAddrDetail() {
+		return addrDetail;
+	}
+
+	public void setAddrDetail(String addrDetail) {
+		this.addrDetail = addrDetail;
+	}
+
+	public String getAddrLon() {
+		return addrLon;
+	}
+
+	public void setAddrLon(String addrLon) {
+		this.addrLon = addrLon;
+	}
+
+	public String getAddrLat() {
+		return addrLat;
+	}
+
+	public void setAddrLat(String addrLat) {
+		this.addrLat = addrLat;
+	}
+
+	public int getAddrLevel() {
+		return addrLevel;
+	}
+
+	public void setAddrLevel(int addrLevel) {
+		this.addrLevel = addrLevel;
+	}
+	
+	 
 	 
 	 
 }

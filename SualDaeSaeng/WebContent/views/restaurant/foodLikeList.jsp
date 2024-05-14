@@ -28,19 +28,19 @@
               <h6 class="mb-3 d-flex justify-content-between align-items-center">
                 <span>
                   <i class="bi bi-person-circle"></i>
-                  <!-- <img src="../img/testimonials/testimonials-2.jpg" class="testimonial-img" alt=""> --> 고객 아이디 </span>
+                  <!-- <img src="/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt=""> --> 고객 아이디 </span>
                 <button type="button" class="btn btn-secondary btn-sm">
                   <span>00님 맛집 </span>리스트 더보기 </button>
               </h6>
               <ul class="d-flex justify-content-between">
-                <li class="card">
+                <li class="card col">
                   <a href="http://">
                     <p class="card-like">
                       <i class="bi bi-heart-fill"></i>
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                      <img src="/img/no-image.jpg" class="card-img-top" alt="맛집이미지">
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -53,14 +53,14 @@
                     </div>
                   </a>
                 </li>
-                <li class="card dis-none-550">
+                <li class="card col dis-none-550">
                   <a href="http://">
                     <p class="card-like">
                       <i class="bi bi-heart-fill"></i>
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -73,14 +73,14 @@
                     </div>
                   </a>
                 </li>
-                <li class="card dis-none-750">
+                <li class="card col dis-none-750">
                   <a href="http://">
                     <p class="card-like">
                       <i class="bi bi-heart-fill"></i>
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -93,14 +93,14 @@
                     </div>
                   </a>
                 </li>
-                <li class="card dis-none-990">
+                <li class="card col dis-none-990">
                   <a href="http://">
                     <p class="card-like">
                       <i class="bi bi-heart-fill"></i>
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -115,370 +115,7 @@
                 </li>
               </ul>
             </div>
-            <div class="food-list">
-              <h6 class="mb-3 d-flex justify-content-between align-items-center">
-                <span>
-                  <i class="bi bi-person-circle"></i>
-                  <!-- <img src="img/testimonials/testimonials-2.jpg" class="testimonial-img" alt=""> --> 고객 아이디 </span>
-                <button type="button" class="btn btn-secondary btn-sm">
-                  <span>00님 맛집 </span>리스트 더보기 </button>
-              </h6>
-              <ul class="d-flex justify-content-between">
-                <li class="card">
-                  <a href="http://">
-                    <p class="card-like">
-                      <i class="bi bi-heart-fill"></i>
-                      <span>25</span>
-                    </p>
-                    <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
-                    </div>
-                    <div class="card-body">
-                      <small class="badge bg-body-secondary mb-1">한식</small>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                        <span>
-                          <i class="bi bi-star-fill"></i> 4.5 </span>
-                      </div>
-                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                    </div>
-                  </a>
-                </li>
-                <li class="card dis-none-550">
-                  <a href="http://">
-                    <p class="card-like">
-                      <i class="bi bi-heart-fill"></i>
-                      <span>25</span>
-                    </p>
-                    <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
-                    </div>
-                    <div class="card-body">
-                      <small class="badge bg-body-secondary mb-1">한식</small>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                        <span>
-                          <i class="bi bi-star-fill"></i> 4.5 </span>
-                      </div>
-                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                    </div>
-                  </a>
-                </li>
-                <li class="card dis-none-750">
-                  <a href="http://">
-                    <p class="card-like">
-                      <i class="bi bi-heart-fill"></i>
-                      <span>25</span>
-                    </p>
-                    <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
-                    </div>
-                    <div class="card-body">
-                      <small class="badge bg-body-secondary mb-1">한식</small>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                        <span>
-                          <i class="bi bi-star-fill"></i> 4.5 </span>
-                      </div>
-                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                    </div>
-                  </a>
-                </li>
-                <li class="card dis-none-990">
-                  <a href="http://">
-                    <p class="card-like">
-                      <i class="bi bi-heart-fill"></i>
-                      <span>25</span>
-                    </p>
-                    <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
-                    </div>
-                    <div class="card-body">
-                      <small class="badge bg-body-secondary mb-1">한식</small>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                        <span>
-                          <i class="bi bi-star-fill"></i> 4.5 </span>
-                      </div>
-                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                    </div>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div class="food-list">
-              <h6 class="mb-3 d-flex justify-content-between align-items-center">
-                <span>
-                  <i class="bi bi-person-circle"></i>
-                  <!-- <img src="img/testimonials/testimonials-2.jpg" class="testimonial-img" alt=""> --> 고객 아이디 </span>
-                <button type="button" class="btn btn-secondary btn-sm">
-                  <span>00님 맛집 </span>리스트 더보기 </button>
-              </h6>
-              <ul class="d-flex justify-content-between">
-                <li class="card">
-                  <a href="http://">
-                    <p class="card-like">
-                      <i class="bi bi-heart-fill"></i>
-                      <span>25</span>
-                    </p>
-                    <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
-                    </div>
-                    <div class="card-body">
-                      <small class="badge bg-body-secondary mb-1">한식</small>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                        <span>
-                          <i class="bi bi-star-fill"></i> 4.5 </span>
-                      </div>
-                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                    </div>
-                  </a>
-                </li>
-                <li class="card dis-none-550">
-                  <a href="http://">
-                    <p class="card-like">
-                      <i class="bi bi-heart-fill"></i>
-                      <span>25</span>
-                    </p>
-                    <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
-                    </div>
-                    <div class="card-body">
-                      <small class="badge bg-body-secondary mb-1">한식</small>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                        <span>
-                          <i class="bi bi-star-fill"></i> 4.5 </span>
-                      </div>
-                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                    </div>
-                  </a>
-                </li>
-                <li class="card dis-none-750">
-                  <a href="http://">
-                    <p class="card-like">
-                      <i class="bi bi-heart-fill"></i>
-                      <span>25</span>
-                    </p>
-                    <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
-                    </div>
-                    <div class="card-body">
-                      <small class="badge bg-body-secondary mb-1">한식</small>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                        <span>
-                          <i class="bi bi-star-fill"></i> 4.5 </span>
-                      </div>
-                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                    </div>
-                  </a>
-                </li>
-                <li class="card dis-none-990">
-                  <a href="http://">
-                    <p class="card-like">
-                      <i class="bi bi-heart-fill"></i>
-                      <span>25</span>
-                    </p>
-                    <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
-                    </div>
-                    <div class="card-body">
-                      <small class="badge bg-body-secondary mb-1">한식</small>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                        <span>
-                          <i class="bi bi-star-fill"></i> 4.5 </span>
-                      </div>
-                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                    </div>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div class="food-list">
-              <h6 class="mb-3 d-flex justify-content-between align-items-center">
-                <span>
-                  <i class="bi bi-person-circle"></i>
-                  <!-- <img src="img/testimonials/testimonials-2.jpg" class="testimonial-img" alt=""> --> 고객 아이디 </span>
-                <button type="button" class="btn btn-secondary btn-sm">
-                  <span>00님 맛집 </span>리스트 더보기 </button>
-              </h6>
-              <ul class="d-flex justify-content-between">
-                <li class="card">
-                  <a href="http://">
-                    <p class="card-like">
-                      <i class="bi bi-heart-fill"></i>
-                      <span>25</span>
-                    </p>
-                    <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
-                    </div>
-                    <div class="card-body">
-                      <small class="badge bg-body-secondary mb-1">한식</small>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                        <span>
-                          <i class="bi bi-star-fill"></i> 4.5 </span>
-                      </div>
-                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                    </div>
-                  </a>
-                </li>
-                <li class="card dis-none-550">
-                  <a href="http://">
-                    <p class="card-like">
-                      <i class="bi bi-heart-fill"></i>
-                      <span>25</span>
-                    </p>
-                    <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
-                    </div>
-                    <div class="card-body">
-                      <small class="badge bg-body-secondary mb-1">한식</small>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                        <span>
-                          <i class="bi bi-star-fill"></i> 4.5 </span>
-                      </div>
-                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                    </div>
-                  </a>
-                </li>
-                <li class="card dis-none-750">
-                  <a href="http://">
-                    <p class="card-like">
-                      <i class="bi bi-heart-fill"></i>
-                      <span>25</span>
-                    </p>
-                    <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
-                    </div>
-                    <div class="card-body">
-                      <small class="badge bg-body-secondary mb-1">한식</small>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                        <span>
-                          <i class="bi bi-star-fill"></i> 4.5 </span>
-                      </div>
-                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                    </div>
-                  </a>
-                </li>
-                <li class="card dis-none-990">
-                  <a href="http://">
-                    <p class="card-like">
-                      <i class="bi bi-heart-fill"></i>
-                      <span>25</span>
-                    </p>
-                    <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
-                    </div>
-                    <div class="card-body">
-                      <small class="badge bg-body-secondary mb-1">한식</small>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                        <span>
-                          <i class="bi bi-star-fill"></i> 4.5 </span>
-                      </div>
-                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                    </div>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div class="food-list">
-              <h6 class="mb-3 d-flex justify-content-between align-items-center">
-                <span>
-                  <i class="bi bi-person-circle"></i>
-                  <!-- <img src="img/testimonials/testimonials-2.jpg" class="testimonial-img" alt=""> --> 고객 아이디 </span>
-                <button type="button" class="btn btn-secondary btn-sm">
-                  <span>00님 맛집 </span>리스트 더보기 </button>
-              </h6>
-              <ul class="d-flex justify-content-between">
-                <li class="card">
-                  <a href="http://">
-                    <p class="card-like">
-                      <i class="bi bi-heart-fill"></i>
-                      <span>25</span>
-                    </p>
-                    <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
-                    </div>
-                    <div class="card-body">
-                      <small class="badge bg-body-secondary mb-1">한식</small>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                        <span>
-                          <i class="bi bi-star-fill"></i> 4.5 </span>
-                      </div>
-                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                    </div>
-                  </a>
-                </li>
-                <li class="card dis-none-550">
-                  <a href="http://">
-                    <p class="card-like">
-                      <i class="bi bi-heart-fill"></i>
-                      <span>25</span>
-                    </p>
-                    <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
-                    </div>
-                    <div class="card-body">
-                      <small class="badge bg-body-secondary mb-1">한식</small>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                        <span>
-                          <i class="bi bi-star-fill"></i> 4.5 </span>
-                      </div>
-                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                    </div>
-                  </a>
-                </li>
-                <li class="card dis-none-750">
-                  <a href="http://">
-                    <p class="card-like">
-                      <i class="bi bi-heart-fill"></i>
-                      <span>25</span>
-                    </p>
-                    <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
-                    </div>
-                    <div class="card-body">
-                      <small class="badge bg-body-secondary mb-1">한식</small>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                        <span>
-                          <i class="bi bi-star-fill"></i> 4.5 </span>
-                      </div>
-                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                    </div>
-                  </a>
-                </li>
-                <li class="card dis-none-990">
-                  <a href="http://">
-                    <p class="card-like">
-                      <i class="bi bi-heart-fill"></i>
-                      <span>25</span>
-                    </p>
-                    <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
-                    </div>
-                    <div class="card-body">
-                      <small class="badge bg-body-secondary mb-1">한식</small>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                        <span>
-                          <i class="bi bi-star-fill"></i> 4.5 </span>
-                      </div>
-                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                    </div>
-                  </a>
-                </li>
-              </ul>
-            </div>
+            
           </div>
           <!-- <nav class="d-flex justify-content-center align-items-center pt-5 pm-5" aria-label="Page navigation example"><ul class="pagination "><li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li><li class="page-item active"><a class="page-link" href="#">1</a></li><li class="page-item"><a class="page-link" href="#">2</a></li><li class="page-item"><a class="page-link" href="#">3</a></li><li class="page-item"><a class="page-link" href="#">4</a></li><li class="page-item"><a class="page-link" href="#">5</a></li><li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li></ul></nav> -->
           <div class="container d-flex align-items-center justify-content-center py-5 gap-2">

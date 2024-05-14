@@ -3,5 +3,9 @@
 
 
 <mapper namespace="restaurant">
-
+	<insert id="insertRestaurant" parameterType="restVO">
+		
+		
+		
+	</insert>
 </mapper>

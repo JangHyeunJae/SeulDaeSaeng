@@ -5,7 +5,6 @@
 <mapper namespace="board">
 
 <resultMap type="kr.or.ddit.board.vo.BoardVO" id="boardMap"> <!-- 1 -->
-
 <result column="board_no" property="boardNo"/>
 <result column="board_level" property="boardLevel"/>
 <result column="board_title" property="boardTitle"/>
@@ -14,16 +13,39 @@
 <result column="board_yn" property="boardYn"/>
 <result column="board_hit" property="boardHit"/>
 <result column="file_no" property="fileNo"/>
-<result column="user_no" property="userNo"/>
-
+<result column="users_no" property="usersNo"/>
+</resultMap>
+	
+<resultMap type="kr.or.ddit.member.vo.MemberVO" id="memberMap"> <!-- 1 -->
+<result column="users_no" property="usersNo"/>
+<result column="mem_name" property="memName"/>
+<result column="mem_nick" property="memNick"/>
+<result column="mem_birth" property="memBirth"/>
+<result column="mem_email" property="memEmail"/>
+<result column="mem_tel" property="memTel"/>
+<result column="mem_class" property="memClass"/>
+<result column="mem_regdt" property="memRegdt"/>
+<result column="addr_no" property="addrNo"/>
 </resultMap>
 
+<resultMap type="kr.or.ddit.board.vo.ReplyVO" id="replyMap"> <!-- 1 -->
+<result column="reply_no" property="replyNo"/>
+<result column="reply_con" property="replyCon"/>
+<result column="reply_yn" property="replyYn"/>
+<result column="board_no" property="boardNo"/>
+<result column="users_no" property="usersNo"/>
+<result column="reply_dt" property="replyDt"/>
+</resultMap>
+
+	 
+	 
 <select id="allBoardList" resultMap="boardMap">
 		select *
         from board
+        where board_yn = 'Y'
 </select>
 
-<select id="getBoardDetail" resultMap="boardMap">
+<select id="getBoardDetail" parameterType="int" resultMap="boardMap">
 		select *
 	    from board
 	    where board_no =#{boardNo}
@@ -32,6 +54,38 @@
 <select id="selectBoardList" parameterType="int" resultMap="boardMap">
 		select *
 	    from board
-	    where board_level =#{boardLevel}
+	    where board_level =#{boardLevel} and board_yn = 'Y'
 </select>
+
+<select id="getWriterDetail" parameterType="Map" resultMap="memberMap">
+		SELECT MEMBER.* FROM MEMBER,BOARD
+        WHERE MEMBER.USERS_NO = BOARD.USERS_NO
+        AND BOARD.USERS_NO = #{usersNo} AND BOARD.BOARD_NO = #{boardNo}
+</select>
+
+<select id="getReplyWriterDetail" parameterType="Map" resultMap="memberMap">
+		SELECT MEMBER.* FROM MEMBER,REPLY
+        WHERE MEMBER.USERS_NO = REPLY.USERS_NO
+        AND REPLY.USERS_NO = #{usersNo} AND REPLY.reply_no = #{replyNo}
+</select>
+
+<select id="getReplyList" parameterType="int" resultMap="replyMap">
+		select *
+        from reply
+        where board_no =#{boardNo}
+</select>
+
+<update id="deleteBoard" parameterType="int">
+        update board set board_yn = 'N' where board_no =#{boardNo}
+</update>
+
+<insert id="insertReply" parameterType="kr.or.ddit.board.vo.ReplyVO" useGeneratedKeys="true">
+     <selectKey keyProperty="replyNo" resultType="int" order="BEFORE">
+        select seq_reply.nextval from dual
+     </selectKey>
+		INSERT INTO reply 
+		(reply_no, reply_con, reply_yn, board_no, users_no, reply_dt) 
+		VALUES (#{replyNo},#{replyCon},'Y',#{boardNo}, #{usersNo}, sysdate)
+</insert>
+
 </mapper>

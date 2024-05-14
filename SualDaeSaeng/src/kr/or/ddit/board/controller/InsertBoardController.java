@@ -35,7 +35,7 @@ public class InsertBoardController extends HttpServlet{
 		BoardVO boardVO = new BoardVO();
 		boardVO.setBoardTitle(title);
 		boardVO.setBoardCon(content);
-		boardVO.setUserNo(userNo);
+		boardVO.setUserNo(usersNo);
 		boardVO.setBoardLevel(boardLevel);
 		
 		int status = service.insertBoard(boardVO);

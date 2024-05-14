@@ -1,6 +1,7 @@
 package kr.or.ddit.restaurant.vo;
 
 public class RestaurantVO {
+
 	private int addrNo;
 	private String restBizno;
 	private String name;
@@ -180,6 +181,4 @@ public class RestaurantVO {
 				+ ", fileSavednm=" + fileSavednm + ", fileSize=" + fileSize + ", fileExt=" + fileExt + ", fileDt="
 				+ fileDt + ", fileYn=" + fileYn + "]";
 	}
-
-	
 }

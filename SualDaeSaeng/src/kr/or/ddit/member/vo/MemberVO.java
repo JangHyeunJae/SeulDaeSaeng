@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class MemberVO {
 
-	private int userNo;
+	private int usersNo;
 	private String memName;
 	private String memNick;
 	private String memBirth;
@@ -15,11 +15,15 @@ public class MemberVO {
 	private int addrNo;
 	
 	
-	public int getUserNo() {
-		return userNo;
+
+	public MemberVO() {
+		
 	}
-	public void setUserNo(int userNo) {
-		this.userNo = userNo;
+	public int getUsersNo() {
+		return usersNo;
+	}
+	public void setUsersNo(int usersNo) {
+		this.usersNo = usersNo;
 	}
 	public String getMemName() {
 		return memName;

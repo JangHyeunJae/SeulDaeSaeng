@@ -1,11 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-//String currentJSP = request.getServletPath();
-//String fileName = currentJSP.substring(currentJSP.lastIndexOf("/") + 1, currentJSP.lastIndexOf("."));
-//String fileExtension = currentJSP.substring(currentJSP.lastIndexOf(".") + 1);
-
-String uri = request.getRequestURI();
-%>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -35,14 +28,16 @@ String uri = request.getRequestURI();
     <!-- Template Main CSS File -->
     <link href="/css/main.css" rel="stylesheet">
     
-    <% if(uri.contains("index")){ %>
+
+    
+   
+    <% if(request.getRequestURI().contains("index")){ %>
+
       <link href="/css/index.css" rel="stylesheet">
-      
-   <% }else if(uri.contains("timetable")){ %>
-      
+   <% }else if(request.getRequestURI().contains("timetable")){ %>
          <link href="/css/timetable.css" rel="stylesheet">
-         
-    <% }else if(uri.contains("write")){ %>
+
+    <% }else if(request.getRequestURI().contains("write")){ %>
        
     <link rel="stylesheet" href="/css/bootform2.css">  <!-- editer css 추가 -->
        
@@ -97,9 +92,9 @@ String uri = request.getRequestURI();
 	
 	           
 	    </script> -->
-    <% } %>
-    
-    
+    <% } else if(request.getRequestURI().contains("restaurantUpDate")){%>
+       <link href="/css/restaurantUpDate.css" rel="stylesheet">
+   	<% } %>
     
   </head>
   <body>
@@ -134,24 +129,33 @@ String uri = request.getRequestURI();
               </ul>
             </li>
             <li class="dropdown">
-              <a href="restaurantFind.jsp">
+              <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls=all">
                 <span>식당찾기</span>
                 <i class="bi-caret-down-fill"></i>
               </a>
               <ul>
-                <li class="dropdown">
-                  <a href="/views/restaurantFindKorean.jsp">한식</a>
+
+                <li>
+                  <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I201'">한식</a>
                 </li>
-                <li class="dropdown">
-                  <a href="/views/restaurantFindKorean.jsp">중식</a>
+                <li>
+                  <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I202'">중식</a>
                 </li>
-                <li class="dropdown">
-                  <a href="/views/restaurantFindKorean.jsp">일식</a>
+                <li>
+                  <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I203'">일식</a>
                 </li>
-                <li class="dropdown">
-                  <a href="/views/restaurantFindKorean.jsp">서양식</a>
+                <li>
+                  <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I204'">서양식</a>
                 </li>
-              </ul>
+                <li>
+                  <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I205'">동남아식</a>
+                </li>
+                <li>
+                  <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I210'">간이식</a>
+                </li>
+                <li >
+                  <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I212'">카페</a>
+                </li>
             </li>
             <li>
               <a href="/views/foodLikeList.jsp">미식인의 추천맛집</a>

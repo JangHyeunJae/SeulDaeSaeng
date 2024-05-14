@@ -112,7 +112,7 @@
           <hr class="my-0 pb-4">
           <div class="d-flex justify-content-between align-items-center py-3 mb-3 food-list new-review">
             <p class="mb-0 d-flex align-items-center gap-3">
-              <img src="../img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+              <img src="/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
               <span> 00님 아직 리뷰를 작성하지 않으셨군요! 당신의 리뷰를 기다리고 있습니다. <br> ※홍보 및 비방 등 부적절한 평가는 평점 산정에서 제외 될 수 있습니다. </span>
             </p>
             <button type="button" class="btn btn-outline-warning">리뷰쓰기</button>
@@ -123,7 +123,7 @@
                 <h6 class="mb-3 d-flex justify-content-between align-items-center">
                   <span>
                     <!-- <i class="bi bi-person-circle"></i> -->
-                    <img src="../img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+                    <img src="/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
                     <div class="d-flex flex-column ps-2 gap-2">
                       <small>닉네임</small>
                       <small class="stars mb-0 d-flex gap-2">
@@ -143,13 +143,13 @@
                 <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisl tincidunt eget nullam non. Quis hendrerit dolor magna eget est lorem ipsum dolor sit. Volutpat odio facilisis mauris sit amet massa. Commodo odio aenean sed adipiscing diam donec adipiscing tristique. Mi eget mauris pharetra et. Non tellus orci ac auctor augue. Elit at imperdiet dui accumsan sit. Ornare arcu dui vivamus arcu felis. Egestas integer eget aliquet nibh praesent. In hac habitasse platea dictumst quisque sagittis purus. Pulvinar elementum integer enim neque volutpat ac. </p>
                 <div class="d-flex justify-content-between overflow-x-scroll">
                   <div class="col-lg-4 col-md-6 col-12 p-1">
-                    <img src="../img/gallery/gallery-1.jpg" class="img-fluid" alt="">
+                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
                   </div>
                   <div class="col-lg-4 col-md-6 col-12 p-1">
-                    <img src="../img/gallery/gallery-1.jpg" class="img-fluid" alt="">
+                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
                   </div>
                   <div class="col-lg-4 col-md-6 col-12 p-1">
-                    <img src="../img/gallery/gallery-1.jpg" class="img-fluid" alt="">
+                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
                   </div>
                 </div>
                 <hr>
@@ -162,7 +162,7 @@
                 <h6 class="mb-3 d-flex justify-content-between align-items-center">
                   <span>
                     <!-- <i class="bi bi-person-circle"></i> -->
-                    <img src="../img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+                    <img src="/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
                     <div class="d-flex flex-column ps-2 gap-2">
                       <small>닉네임</small>
                       <small class="stars mb-0 d-flex gap-2">
@@ -182,13 +182,13 @@
                 <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisl tincidunt eget nullam non. Quis hendrerit dolor magna eget est lorem ipsum dolor sit. Volutpat odio facilisis mauris sit amet massa. Commodo odio aenean sed adipiscing diam donec adipiscing tristique. Mi eget mauris pharetra et. Non tellus orci ac auctor augue. Elit at imperdiet dui accumsan sit. Ornare arcu dui vivamus arcu felis. Egestas integer eget aliquet nibh praesent. In hac habitasse platea dictumst quisque sagittis purus. Pulvinar elementum integer enim neque volutpat ac. </p>
                 <div class="d-flex justify-content-between overflow-x-scroll">
                   <div class="col-lg-4 col-md-6 col-12 p-1">
-                    <img src="../img/gallery/gallery-1.jpg" class="img-fluid" alt="">
+                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
                   </div>
                   <div class="col-lg-4 col-md-6 col-12 p-1">
-                    <img src="../img/gallery/gallery-1.jpg" class="img-fluid" alt="">
+                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
                   </div>
                   <div class="col-lg-4 col-md-6 col-12 p-1">
-                    <img src="../img/gallery/gallery-1.jpg" class="img-fluid" alt="">
+                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
                   </div>
                 </div>
                 <hr>
@@ -260,7 +260,7 @@
           <div class="row gy-4 justify-content-start">
             <div class="col-xl-3 col-lg-4 col-md-6">
               <div class="gallery-item h-100">
-                <img src="../img/gallery/gallery-1.jpg" class="img-fluid" alt="">
+                <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
                 <div class="gallery-links d-flex align-items-center justify-content-center">
                   <a href="img/gallery/gallery-1.jpg" title="Gallery 1" class="glightbox preview-link">
                     <i class="bi bi-arrows-angle-expand"></i>
@@ -271,7 +271,7 @@
             <!-- End Gallery Item -->
             <div class="col-xl-3 col-lg-4 col-md-6">
               <div class="gallery-item h-100">
-                <img src="../img/gallery/gallery-2.jpg" class="img-fluid" alt="">
+                <img src="/img/gallery/gallery-2.jpg" class="img-fluid" alt="">
                 <div class="gallery-links d-flex align-items-center justify-content-center">
                   <a href="img/gallery/gallery-2.jpg" title="Gallery 2" class="glightbox preview-link">
                     <i class="bi bi-arrows-angle-expand"></i>
@@ -282,7 +282,7 @@
             <!-- End Gallery Item -->
             <div class="col-xl-3 col-lg-4 col-md-6">
               <div class="gallery-item h-100">
-                <img src="../img/gallery/gallery-3.jpg" class="img-fluid" alt="">
+                <img src="/img/gallery/gallery-3.jpg" class="img-fluid" alt="">
                 <div class="gallery-links d-flex align-items-center justify-content-center">
                   <a href="img/gallery/gallery-3.jpg" title="Gallery 3" class="glightbox preview-link">
                     <i class="bi bi-arrows-angle-expand"></i>
@@ -293,7 +293,7 @@
             <!-- End Gallery Item -->
             <div class="col-xl-3 col-lg-4 col-md-6">
               <div class="gallery-item h-100">
-                <img src="../img/gallery/gallery-4.jpg" class="img-fluid" alt="">
+                <img src="/img/gallery/gallery-4.jpg" class="img-fluid" alt="">
                 <div class="gallery-links d-flex align-items-center justify-content-center">
                   <a href="img/gallery/gallery-4.jpg" title="Gallery 4" class="glightbox preview-link">
                     <i class="bi bi-arrows-angle-expand"></i>
@@ -304,7 +304,7 @@
             <!-- End Gallery Item -->
             <div class="col-xl-3 col-lg-4 col-md-6">
               <div class="gallery-item h-100">
-                <img src="../img/gallery/gallery-5.jpg" class="img-fluid" alt="">
+                <img src="/img/gallery/gallery-5.jpg" class="img-fluid" alt="">
                 <div class="gallery-links d-flex align-items-center justify-content-center">
                   <a href="img/gallery/gallery-5.jpg" title="Gallery 5" class="glightbox preview-link">
                     <i class="bi bi-arrows-angle-expand"></i>
@@ -315,7 +315,7 @@
             <!-- End Gallery Item -->
             <div class="col-xl-3 col-lg-4 col-md-6">
               <div class="gallery-item h-100">
-                <img src="../img/gallery/gallery-6.jpg" class="img-fluid" alt="">
+                <img src="/img/gallery/gallery-6.jpg" class="img-fluid" alt="">
                 <div class="gallery-links d-flex align-items-center justify-content-center">
                   <a href="img/gallery/gallery-6.jpg" title="Gallery 6" class="glightbox preview-link">
                     <i class="bi bi-arrows-angle-expand"></i>
@@ -326,7 +326,7 @@
             <!-- End Gallery Item -->
             <div class="col-xl-3 col-lg-4 col-md-6">
               <div class="gallery-item h-100">
-                <img src="../img/gallery/gallery-7.jpg" class="img-fluid" alt="">
+                <img src="/img/gallery/gallery-7.jpg" class="img-fluid" alt="">
                 <div class="gallery-links d-flex align-items-center justify-content-center">
                   <a href="img/gallery/gallery-7.jpg" title="Gallery 7" class="glightbox preview-link">
                     <i class="bi bi-arrows-angle-expand"></i>
@@ -337,7 +337,7 @@
             <!-- End Gallery Item -->
             <div class="col-xl-3 col-lg-4 col-md-6">
               <div class="gallery-item h-100">
-                <img src="../img/gallery/gallery-8.jpg" class="img-fluid" alt="">
+                <img src="/img/gallery/gallery-8.jpg" class="img-fluid" alt="">
                 <div class="gallery-links d-flex align-items-center justify-content-center">
                   <a href="img/gallery/gallery-8.jpg" title="Gallery 8" class="glightbox preview-link">
                     <i class="bi bi-arrows-angle-expand"></i>
@@ -348,7 +348,7 @@
             <!-- End Gallery Item -->
             <div class="col-xl-3 col-lg-4 col-md-6">
               <div class="gallery-item h-100">
-                <img src="../img/gallery/gallery-5.jpg" class="img-fluid" alt="">
+                <img src="/img/gallery/gallery-5.jpg" class="img-fluid" alt="">
                 <div class="gallery-links d-flex align-items-center justify-content-center">
                   <a href="img/gallery/gallery-5.jpg" title="Gallery 5" class="glightbox preview-link">
                     <i class="bi bi-arrows-angle-expand"></i>
@@ -359,7 +359,7 @@
             <!-- End Gallery Item -->
             <div class="col-xl-3 col-lg-4 col-md-6">
               <div class="gallery-item h-100">
-                <img src="../img/gallery/gallery-6.jpg" class="img-fluid" alt="">
+                <img src="/img/gallery/gallery-6.jpg" class="img-fluid" alt="">
                 <div class="gallery-links d-flex align-items-center justify-content-center">
                   <a href="img/gallery/gallery-6.jpg" title="Gallery 6" class="glightbox preview-link">
                     <i class="bi bi-arrows-angle-expand"></i>
@@ -370,7 +370,7 @@
             <!-- End Gallery Item -->
             <div class="col-xl-3 col-lg-4 col-md-6">
               <div class="gallery-item h-100">
-                <img src="../img/gallery/gallery-7.jpg" class="img-fluid" alt="">
+                <img src="/img/gallery/gallery-7.jpg" class="img-fluid" alt="">
                 <div class="gallery-links d-flex align-items-center justify-content-center">
                   <a href="img/gallery/gallery-7.jpg" title="Gallery 7" class="glightbox preview-link">
                     <i class="bi bi-arrows-angle-expand"></i>
@@ -381,7 +381,7 @@
             <!-- End Gallery Item -->
             <div class="col-xl-3 col-lg-4 col-md-6">
               <div class="gallery-item h-100">
-                <img src="../img/gallery/gallery-8.jpg" class="img-fluid" alt="">
+                <img src="/img/gallery/gallery-8.jpg" class="img-fluid" alt="">
                 <div class="gallery-links d-flex align-items-center justify-content-center">
                   <a href="img/gallery/gallery-8.jpg" title="Gallery 8" class="glightbox preview-link">
                     <i class="bi bi-arrows-angle-expand"></i>

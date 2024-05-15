@@ -1,6 +1,7 @@
 package kr.or.ddit.restaurant.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -20,11 +21,13 @@ public class RestaurantDAOImpl implements IRestaurantDAO{
 	}
 
 	@Override
-	public List<RestaurantVO> selectRestaurantType(String mcls) {
+	public List<RestaurantVO> selectRestaurantType(Map<String, Object> cls) {
+		
 		SqlSession session = null;
 		List<RestaurantVO> restaurantList = null;
 		try {
 			session = MyBatisUtil.getSqlSession(true);
+			restaurantList =session.selectList("restaurant/restaurantList", cls);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -32,16 +35,6 @@ public class RestaurantDAOImpl implements IRestaurantDAO{
 				session.close();
 			}
 		}
-		return restaurantList;
-	}
-
-	@Override
-	public List<RestaurantVO> selectRestaurantType(String mcls, String scls) {
-		SqlSession session = null;
-		List<RestaurantVO> restaurantList = null;
-		
-		if(scls.equals("")) selectRestaurantType(mcls);
-		
 		return restaurantList;
 	}
 

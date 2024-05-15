@@ -1,6 +1,7 @@
 package kr.or.ddit.restaurant.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.logging.log4j.CloseableThreadContext.Instance;
 import org.apache.logging.log4j.core.net.DatagramOutputStream;
@@ -26,13 +27,8 @@ public class RestaurantServiceImpl implements IRestaurantService {
 	private IRestaurantDAO dao = RestaurantDAOImpl.getInstance();
 
 	@Override
-	public List<RestaurantVO> selectRestaurantType(String mcls) {
-		return dao.selectRestaurantType(mcls);
-	}
-
-	@Override
-	public List<RestaurantVO> selectRestaurantType(String mcls, String scls) {
-		return dao.selectRestaurantType(mcls,scls);
+	public List<RestaurantVO> selectRestaurantType(Map<String, Object> cls) {
+		return dao.selectRestaurantType(cls);
 	}
 
 	

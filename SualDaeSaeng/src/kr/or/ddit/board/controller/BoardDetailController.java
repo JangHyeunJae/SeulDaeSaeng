@@ -28,6 +28,7 @@ public class BoardDetailController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		 
 		 int boardNo = Integer.parseInt(req.getParameter("boardNo"));
+		 int hit = boardService.updateHit(boardNo);
 		 BoardVO boardDetail = boardService.getBoardDetail(boardNo);
 		 int boardLevel = boardDetail.getBoardLevel();
 		 
@@ -61,6 +62,7 @@ public class BoardDetailController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
+		  //댓글을 db로 넘겨주는 부분
 		  req.setCharacterEncoding("UTF-8");
 		  int idx = Integer.parseInt(req.getParameter("idx"));
            		

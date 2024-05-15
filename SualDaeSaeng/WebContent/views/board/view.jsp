@@ -132,7 +132,7 @@
           <ul class="comment-list">
           <%
           for(ReplyVO rv : replyList){
-        	  Map<String,Object> parameter = new HashMap<>();
+        	   Map<String,Object> parameter = new HashMap<>();
      		   parameter.put("usersNo",rv.getUsersNo());
      		   parameter.put("replyNo",rv.getReplyNo());
         	   MemberVO replyWriterDetail = boardService.getReplyWriterDetail(parameter);

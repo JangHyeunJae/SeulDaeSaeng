@@ -10,14 +10,13 @@
 <%@include file="/header.jsp"%>
 <%
 	List<BoardVO> boardList = (List<BoardVO>)request.getAttribute("boardList");
-
     int level = (int)request.getAttribute("level");
+    
+    //페이징 기능
     int itemsPerPage = 5;
     int currentPage = (request.getParameter("page") != null) ? Integer.parseInt(request.getParameter("page")) : 1;
     int totalItems = (boardList != null) ? boardList.size() : 0;
     int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
-    
-    // Determine the start and end index of items to display for the current page
     int startIndex = (currentPage - 1) * itemsPerPage;
     int endIndex = Math.min(startIndex + itemsPerPage, totalItems);
    

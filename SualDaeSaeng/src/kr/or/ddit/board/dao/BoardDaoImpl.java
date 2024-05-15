@@ -140,7 +140,7 @@ public class BoardDaoImpl implements IBoardDao {
 		try {
 			session = MyBatisUtil.getSqlSession();
 			
-			cnt = session.delete("board.deleteBoard", boardNo);
+			cnt = session.update("board.deleteBoard", boardNo);
 			
 			if(cnt > 0) {
 				session.commit();
@@ -178,8 +178,8 @@ public class BoardDaoImpl implements IBoardDao {
 	}
 
 	public int insertReply(ReplyVO replyVO) {
-    SqlSession session = null;
 		
+        SqlSession session = null;
 		int status = 0;
 		try {
 			session = MyBatisUtil.getSqlSession();
@@ -195,6 +195,27 @@ public class BoardDaoImpl implements IBoardDao {
 			session.close();
 		}
 		return status;
+	}
+
+	@Override
+	public int updateHit(int boardNo) {
+		
+		SqlSession session = null;
+		int hit = 0;
+		try {
+			session = MyBatisUtil.getSqlSession();
+			
+			hit = session.update("board.updateHit", boardNo);
+			
+			if(hit > 0) {
+				session.commit();
+			}
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return hit;
 	}
 
 }

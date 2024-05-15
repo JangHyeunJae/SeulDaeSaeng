@@ -25,4 +25,6 @@ public interface IBoardDao {
 	public int deleteBoard(int boardNo);
 	//댓글 insert
 	public int insertReply(ReplyVO replyVO);
+
+	public int updateHit(int boardNo);
 }

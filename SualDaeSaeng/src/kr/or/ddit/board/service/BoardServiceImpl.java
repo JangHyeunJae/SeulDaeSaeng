@@ -67,4 +67,9 @@ public class BoardServiceImpl implements IBoardService{
 	public int insertBoard(BoardVO boardVO) {
 		return boardDao.insertBoard(boardVO);
 	}
+
+	@Override
+	public int updateHit(int boardNo) {
+		return boardDao.updateHit(boardNo);
+	}
 }

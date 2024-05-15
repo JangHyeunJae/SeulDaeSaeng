@@ -25,4 +25,6 @@ public interface IBoardService {
   public int deleteBoard(int boardNo);
 
   public int insertReply(ReplyVO replyVO);
+
+  public int updateHit(int boardNo);
 }

@@ -87,10 +87,6 @@
 	)
 </insert>
 
-<update id="deleteBoard" parameterType="int">
-        update board set board_yn = 'N' where board_no =#{boardNo}
-</update>
-
 <insert id="insertReply" parameterType="kr.or.ddit.board.vo.ReplyVO" useGeneratedKeys="true">
      <selectKey keyProperty="replyNo" resultType="int" order="BEFORE">
         select seq_reply.nextval from dual
@@ -100,5 +96,13 @@
 		VALUES (#{replyNo},#{replyCon},'Y',#{boardNo}, #{usersNo}, sysdate)
 
 </insert>
+
+<update id="deleteBoard" parameterType="int">
+        update board set board_yn = 'N' where board_no =#{boardNo}
+</update>
+
+<update id="updateHit" parameterType="int">
+        update board set board_hit = board_hit + 1 where board_no =#{boardNo}
+</update>
 
 </mapper>

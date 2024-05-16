@@ -27,4 +27,8 @@ public interface IBoardDao {
 	public int insertReply(ReplyVO replyVO);
 
 	public int updateHit(int boardNo);
+
+	public int updateBoard(Map<String, Object> parameter);
+
+	public int updateReply(Map<String, Object> parameter);
 }

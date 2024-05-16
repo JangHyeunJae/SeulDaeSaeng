@@ -28,9 +28,10 @@ public class BoardDetailController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		 
 		 int boardNo = Integer.parseInt(req.getParameter("boardNo"));
-		 int hit = boardService.updateHit(boardNo);
 		 BoardVO boardDetail = boardService.getBoardDetail(boardNo);
+		 int hit = boardService.updateHit(boardNo);
 		 int boardLevel = boardDetail.getBoardLevel();
+		 int editReply = Integer.parseInt(req.getParameter("editReply"));
 		 
 		 int usersNo = boardDetail.getUsersNo();
 		 Map<String,Object> parameter = new HashMap<>();
@@ -43,18 +44,18 @@ public class BoardDetailController extends HttpServlet{
 		 req.setAttribute("writerDetail", writerDetail);
 		 req.setAttribute("replyList", replyList);
          
+		 int levelChk = Integer.parseInt(req.getParameter("levelChk"));
 		 //각 게시판 중 몇번째인지 체크
 		 int idx = Integer.parseInt(req.getParameter("idx"));
-		 req.setAttribute("idx", idx);
 		 
-		 //이전 url 가져와서 allBoard.do가 있는지 체크
-		 String before_address = req.getHeader("referer");
+		 req.setAttribute("idx", idx);
+		 req.setAttribute("levelChk", levelChk);
+		 req.setAttribute("editReply", editReply);
+		 
 		 List<BoardVO> boardList = null;
-		 if(before_address.contains("allBoard.do")) {
-		 boardList = boardService.allBoardList();
-		 }else {
-		 boardList = boardService.selectBoardList(boardLevel);
-		 }
+		 if(levelChk == 0) boardList = boardService.allBoardList();
+		 else boardList = boardService.selectBoardList(boardLevel);
+		 
 		 req.setAttribute("boardList", boardList);
 		 req.getRequestDispatcher("/views/board/view.jsp").forward(req, resp);
 	}
@@ -65,7 +66,8 @@ public class BoardDetailController extends HttpServlet{
 		  //댓글을 db로 넘겨주는 부분
 		  req.setCharacterEncoding("UTF-8");
 		  int idx = Integer.parseInt(req.getParameter("idx"));
-           		
+		  int levelChk = Integer.parseInt(req.getParameter("levelChk"));
+		  
 		  String replyCon = req.getParameter("replyCon");
 		  int boardNo = Integer.parseInt(req.getParameter("boardNo"));
 		  int usersNo = 1;
@@ -78,7 +80,8 @@ public class BoardDetailController extends HttpServlet{
 		  int status = boardService.insertReply(replyVO);
 
 		  if(status>0) {
-			  resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx);
+			  resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk
+					  		+ "&editReply=-1");
 		  }else {
 			  req.getRequestDispatcher("/views/board/view.jsp").forward(req, resp);
 		  }

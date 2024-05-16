@@ -72,4 +72,14 @@ public class BoardServiceImpl implements IBoardService{
 	public int updateHit(int boardNo) {
 		return boardDao.updateHit(boardNo);
 	}
+
+	@Override
+	public int updateBoard(Map<String, Object> parameter) {
+		return boardDao.updateBoard(parameter);
+	}
+
+	@Override
+	public int updateReply(Map<String, Object> parameter) {
+		return boardDao.updateReply(parameter);
+	}
 }

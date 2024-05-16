@@ -27,7 +27,7 @@ public class NoticeBoardListController extends HttpServlet{
 
 		 req.setAttribute("boardList", boardList);
 
-		 req.setAttribute("level", level);
+		 req.setAttribute("levelChk", level);
 
 		 
 		 req.getRequestDispatcher("/views/board/allBoard.jsp").forward(req, resp);

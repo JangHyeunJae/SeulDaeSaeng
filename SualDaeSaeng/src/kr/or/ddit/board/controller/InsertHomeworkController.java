@@ -19,8 +19,8 @@ public class InsertHomeworkController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int level = Integer.parseInt(req.getParameter("classNo"));
-		req.setAttribute("level", level);
+		int levelChk = Integer.parseInt(req.getParameter("classNo"));
+		req.setAttribute("levelChk", levelChk);
 		req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
 	}
 	
@@ -30,7 +30,7 @@ public class InsertHomeworkController extends HttpServlet{
 		
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
-		int level = Integer.parseInt(req.getParameter("level"));
+		int level = Integer.parseInt(req.getParameter("levelChk"));
 
 		BoardVO boardVO = new BoardVO();
 		boardVO.setBoardTitle(title);

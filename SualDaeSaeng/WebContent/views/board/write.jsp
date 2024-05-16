@@ -26,7 +26,7 @@
   		boardName = "공지사항";
   		board = "noticeBoard";
   	}
-  	else if(level > 300){
+  	else if(levelChk > 300){
   		boardName = "숙제 작성하기";
   		//학생일때랑 선생님일때랑 다르게 보내줘야함.
   		board = "classTeacherBoard";
@@ -45,9 +45,9 @@
       <div class="row d-flex justify-content-center">
         <p class="mb-5 text-start">
           <%
-          if(level>300){
+          if(levelChk>300){
           %>
-          <a href="<%=request.getContextPath() %>/classTeacherBoard.do?classNo=<%=level %>">
+          <a href="<%=request.getContextPath() %>/classTeacherBoard.do?classNo=<%=levelChk %>">
           <%
           }else{
           %>
@@ -95,7 +95,7 @@
 
       <form action="/board/write.do" method="post" role="form" id="insertForm" class="php-email-form needs-validation" novalidate>
         <%
-          if(level>300){
+          if(levelChk>300){
         %>
         <div class="form-group d-flex align-items-center pt-4">
           <p class="pe-2">기간 설정 : <p>

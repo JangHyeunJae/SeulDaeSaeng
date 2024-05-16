@@ -55,6 +55,7 @@ public class BoardDetailController extends HttpServlet{
 		 }else {
 		 boardList = boardService.selectBoardList(boardLevel);
 		 }
+		 boardList = boardService.selectBoardList(boardLevel);
 		 req.setAttribute("boardList", boardList);
 		 req.getRequestDispatcher("/views/board/view.jsp").forward(req, resp);
 	}

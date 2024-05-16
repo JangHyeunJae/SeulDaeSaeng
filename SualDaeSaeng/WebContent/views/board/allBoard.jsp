@@ -67,7 +67,7 @@
 				<p>작성된 게시글이 없습니다</p>
 				<%
                    }else{
-                	   int cnt = 1;
+                	   int cnt = 1 + ((currentPage-1)*5);
                 	   for (int i = startIndex; i < endIndex; i++) {
                     	   
                 		   //level별 이름지정

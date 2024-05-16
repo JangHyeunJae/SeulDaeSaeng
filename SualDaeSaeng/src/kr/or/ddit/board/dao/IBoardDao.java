@@ -6,6 +6,7 @@ import java.util.Map;
 import kr.or.ddit.board.vo.BoardVO;
 import kr.or.ddit.board.vo.ReplyVO;
 import kr.or.ddit.member.vo.MemberVO;
+import kr.or.ddit.member.vo.UsersVO;
 
 public interface IBoardDao {
 
@@ -27,4 +28,10 @@ public interface IBoardDao {
 	public int insertReply(ReplyVO replyVO);
 
 	public int updateHit(int boardNo);
+
+	public UsersVO getUsersDetail(int usersNo);
+
+	public MemberVO getMemberDetail(int usersNo);
+
+	public List<BoardVO> getClassNoticeList(int level);
 }

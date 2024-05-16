@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import kr.or.ddit.board.vo.BoardVO;
 import kr.or.ddit.board.vo.ReplyVO;
 import kr.or.ddit.member.vo.MemberVO;
+import kr.or.ddit.member.vo.UsersVO;
 import kr.or.ddit.util.MyBatisUtil;
 
 public class BoardDaoImpl implements IBoardDao {
@@ -216,6 +217,58 @@ public class BoardDaoImpl implements IBoardDao {
 			session.close();
 		}
 		return hit;
+	}
+
+	@Override
+	public UsersVO getUsersDetail(int usersNo) {
+		
+		SqlSession session = MyBatisUtil.getSqlSession(true);
+
+		UsersVO UsersDetail = null;
+
+		try {
+			UsersDetail = session.selectOne("board.getUsersDetail", usersNo);
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return UsersDetail;
+	}
+
+	@Override
+	public MemberVO getMemberDetail(int usersNo) {
+		
+		SqlSession session = MyBatisUtil.getSqlSession(true);
+
+		MemberVO MemberDetail = null;
+
+		try {
+			MemberDetail = session.selectOne("board.getMemberDetail", usersNo);
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return MemberDetail;
+	}
+
+	@Override
+	public List<BoardVO> getClassNoticeList(int level) {
+		List<BoardVO> boardList = new ArrayList<BoardVO>();
+
+		SqlSession session = null;
+
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			boardList = session.selectList("board.getClassNoticeList", level);
+
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return boardList;
 	}
 
 }

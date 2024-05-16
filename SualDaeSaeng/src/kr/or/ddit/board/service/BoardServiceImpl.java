@@ -87,5 +87,15 @@ public class BoardServiceImpl implements IBoardService{
 	@Override
 	public List<BoardVO> getClassNoticeList(int level) {
 		return boardDao.getClassNoticeList(level);
+  }
+  
+  @Override
+	public int updateBoard(Map<String, Object> parameter) {
+		return boardDao.updateBoard(parameter);
+	}
+
+	@Override
+	public int updateReply(Map<String, Object> parameter) {
+		return boardDao.updateReply(parameter);
 	}
 }

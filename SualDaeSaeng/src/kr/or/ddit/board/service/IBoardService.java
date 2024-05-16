@@ -35,4 +35,8 @@ public interface IBoardService {
   public MemberVO getMemberDetail(int usersNo);
 
   public List<BoardVO> getClassNoticeList(int level);
+
+  public int updateBoard(Map<String, Object> parameter);
+
+  public int updateReply(Map<String, Object> parameter);
 }

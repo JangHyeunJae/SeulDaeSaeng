@@ -1,3 +1,4 @@
+<%@page import="com.itextpdf.text.log.SysoCounter"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="kr.or.ddit.board.service.BoardServiceImpl"%>
@@ -18,14 +19,25 @@
     MemberVO wd = (MemberVO)request.getAttribute("writerDetail");
 	BoardVO bv = (BoardVO)request.getAttribute("boardDetail");
     
-    int idx = Integer.parseInt(request.getParameter("idx"))-1;
+    int idx = (int) request.getAttribute("idx");
+	int levelChk = (int) request.getAttribute("levelChk");
+	int editReply = (int) request.getAttribute("editReply");
     
     int level = bv.getBoardLevel();
     String boardName = null;
-    if(level == 1) boardName = "자유게시판";
-    else if(level == 2) boardName = "공부게시판";
-    else if(level == 3) boardName = "공지사항";
-    else boardName = "전체게시판";
+    String board = null;
+    if(level == 1) {
+  		boardName = "자유게시판";
+  		board = "freeBoard";
+  	}
+  	else if(level == 2) {
+  		boardName = "공부게시판";
+  		board = "studyBoard";
+  	}
+  	else if(level == 3) {
+  		boardName = "공지사항";
+  		board = "noticeBoard";
+  	}
 %>
 
  <main>
@@ -35,7 +47,17 @@
           <div class="row d-flex justify-content-center">
             <div class="text-center">
               <p class="mb-5 d-flex justify-content-between">
-                <a href="/allBoard.do"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
+              	<%
+              		if (levelChk == 0) {
+              	%>
+              	<a href="/allBoard.do"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
+              	<%
+              		}else{
+              	%>
+                <a href="/<%=board %>.do"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
+                <%
+              		}
+                %>
                 <small class="look"><i class="bi bi-eye"></i> <%=bv.getBoardHit() %> </small>
               </p>
               <p class="mb-0">
@@ -70,10 +92,10 @@
           </div>
              <%
               }else{
-                  BoardVO beforeBoardDetail = boardList.get(idx-1); 
+                  BoardVO beforeBoardDetail = boardList.get(idx-1);
               %>
            <div class="prve col-md-6 col-12 ps-2">
-            <a href="#" class="d-block pt-4 pb-4">
+            <a href="/board/detail.do?boardNo=<%=beforeBoardDetail.getBoardNo() %>&idx=<%=idx-1 %>&levelChk=<%=levelChk %>&editReply=-1" class="d-block pt-4 pb-4">
               <span class="d-inline-block pe-3">이전글 <i class="bi bi-chevron-up"></i></span> 
               <b><%=beforeBoardDetail.getBoardTitle() %></b>
             </a>
@@ -97,7 +119,7 @@
                   BoardVO nextBoardDetail =  boardList.get(idx+1); 
               %>
              <div class="next col-md-6 col-12 text-end pe-2">
-              <a href="#" class="d-block pt-4 pb-4">
+              <a href="/board/detail.do?boardNo=<%=nextBoardDetail.getBoardNo() %>&idx=<%=idx+1 %>&levelChk=<%=levelChk %>&editReply=-1" class="d-block pt-4 pb-4">
                 <b class="pe-3"><%=nextBoardDetail.getBoardTitle() %></b>
                 <span class="d-inline-block">다음글 <i class="bi bi-chevron-down"></i></span>
              </a>
@@ -122,7 +144,7 @@
           <%  
           }
           %>
-          <div><%=bv.getBoardCon() %></div>
+          <div style="word-wrap: break-word;"><%=bv.getBoardCon() %></div>
         <!-- END 파일 + 컨텐츠 출력 -->
           
          <!-- START comment-list -->
@@ -145,7 +167,20 @@
               <h3><%=replyWriterDetail.getMemNick() %></h3>
                 <div class="meta"><%=rv.getReplyDt() %></div>
                 <p><%=rv.getReplyCon() %></p>
-                <p><a href="#" class="reply rounded">Reply</a></p>
+                <%
+              		//세션에서 꺼내와야함.
+                	if(rv.getUsersNo()==1){
+                %>
+                <p><a href="#" class="reply rounded">대댓글</a>
+                <a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&editReply=<%=rv.getReplyNo() %>" class="reply rounded">수정</a>
+                <a href="#" class="reply rounded">삭제</a></p>
+                <%
+                	}else{
+                %>
+                <p><a href="#" class="reply rounded">대댓글</a></p>
+                <%
+                	}
+                %>
               </div>
              </li>
           <%
@@ -155,21 +190,50 @@
           
           <!-- END comment-list -->
 
-
           <!-- START reply-insert -->
           
           <div class="contact pt-5">
-            <form action="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx+1 %>" method="post" role="form" id="insertForm" class="p-5">
+          <%
+          	if(editReply == -1){
+          %>
+            <form action="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&editReply=-1" method="post" role="form" id="insertForm" class="p-5">
+          <%
+          	}else{
+          %>
+            <form action="<%=request.getContextPath()%>/board/editReply.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&editReply=-1" method="post" role="form" id="insertForm" class="p-5">
+		  <%
+          	}
+		  %>
               <div class="form-group">
                 <!-- 자동입력 -->
                  <input type="text" class="form-control" id="replyNick" placeholder="<%=wd.getMemNick() %>" readonly> 
               </div>
+              <%
+              	if(editReply == -1){
+              %>
               <div class="form-group">
                 <textarea name="replyCon" id="replyCon" cols="30" rows="10" class="form-control" placeholder="내용을 작성해주세요."></textarea>
               </div>
               <div class="form-group text-center">
                 <button type="submit" id="submitBtn">댓글 작성하기</button>
               </div>
+              <%
+              	}else{
+                    for(ReplyVO rv : replyList){
+                    	if(rv.getReplyNo() == editReply){
+              %>
+              <div class="form-group">
+                <textarea name="replyCon" id="replyCon" cols="30" rows="10" class="form-control" placeholder="내용을 작성해주세요."><%=rv.getReplyCon() %></textarea>
+              </div>
+              <input type="hidden" id="replyNo" name="replyNo" value=<%=rv.getReplyNo() %>>
+              <div class="form-group text-center">
+                <button type="submit" id="submitBtn">댓글 수정하기</button>
+              </div>
+              <%
+                    	}
+              		}
+              	}
+              %>
             </form>
           </div>
         </div>
@@ -179,13 +243,23 @@
           <!-- START MENU -->
           
         <div class="btn-box container d-flex align-items-center justify-content-center pb-5 pt-5 gap-2">
-          <a href="/allBoard.do" type="button" class="btn btn-secondary">목록으로</a>
+        	<%
+              if (levelChk == 0) {
+            %>
+          	<a href="<%=request.getContextPath()%>/allBoard.do" type="button" class="btn btn-secondary">목록으로</a>
+             <%
+              }else{
+             %>
+          	<a href="<%=request.getContextPath()%>/<%=board %>.do" type="button" class="btn btn-secondary">목록으로</a>
+             <%
+              }
+             %>
           <%
-          //세션에서 꺼내와야함. + 위에 댓글입력창 닉네임 또한 함께 수정
+          //세션에서 꺼내와야함. + 위에 댓글입력창 닉네임 또한 함께 수정 + 댓글 수정 삭제 보이는 부분도
           if(bv.getUsersNo()==1){
           %>
-          <a href="/board/edit.do" type="button" class="btn btn-secondary">수정하기</a>
-          <a href="/board/delete.do?boardNo=<%=bv.getBoardNo() %>" type="button" class="btn btn-secondary">삭제하기</a>
+          <a href="<%=request.getContextPath()%>/board/edit.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>" type="button" class="btn btn-secondary">수정하기</a>
+          <a href="<%=request.getContextPath()%>/board/delete.do?boardNo=<%=bv.getBoardNo() %>&levelChk=<%=levelChk %>" type="button" class="btn btn-secondary">삭제하기</a>
           <%
           }
           %>
@@ -200,6 +274,13 @@
 
 	   $("#submitBtn").on("click", function() {
            var replyCon = $("#replyCon").val();
+           var replyNo = $("#replyNo").val();
+           
+           if(replyCon == null || replyCon == ""){
+               alert("내용을 입력해주세요!");
+               return false;
+           }
+           
            insertForm.submit();
 	   });
     </script>

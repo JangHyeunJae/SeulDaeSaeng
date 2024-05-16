@@ -1,7 +1,8 @@
-package kr.or.ddit.member;
+package kr.or.ddit.member.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,42 +19,36 @@ import kr.or.ddit.member.vo.MemberVO;
 
 
 @WebServlet("/login.do")
-public class MemberLogin extends HttpServlet {
+public class LoginController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.getRequestDispatcher("/views/member/login.jsp").forward(req,resp);
 		// req.getRequestDispatcher("/insert.do").forward(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		String userId = req.getParameter("user_Id");
-		String userPw = req.getParameter("user_Pw");
-		Boolean isAdminLogin = Boolean.parseBoolean(req.getParameter("adminLogin"));
+		String usersId = req.getParameter("id");
+		String usersPass = req.getParameter("pw");
+		Boolean isMemberLogin = Boolean.parseBoolean(req.getParameter("memberLogin"));
 
 		IMemberService loginService = MemberServiceImpl.getInstance();
 		MemberVO memberVO = new MemberVO();
-		memberVO.setUserId(userId);
-		memberVO.setUserPw(userPw);
+		memberVO.setUsersId(usersId);
+		memberVO.setUsersPass(usersPass);
 
-		boolean isSuccess = loginService.loginCheck(memberVO, isAdminLogin);
+		boolean isSuccess = loginService.loginCheck(memberVO, isMemberLogin);
 
 		if (isSuccess) {
-			System.out.println("∑Œ±◊¿Œº∫∞¯");
-			req.getSession().setAttribute("userId", userId); // ººº«ø° ªÁπ¯ ≥÷±‚
-			JsonObject jsonObject = new JsonObject();
-			jsonObject.addProperty("isSuccess", "ok");
-			String jsonStr = new Gson().toJson(jsonObject);
-			resp.setContentType("application/json");
-			resp.getWriter().write(jsonStr);
+			System.out.println("Î°úÍ∑∏Ïù∏ÏÑ±Í≥µ");
+			req.getSession().setAttribute("usersId", usersId); // ÔøΩÔøΩÔøΩ«øÔøΩ ÔøΩÔøΩÔøΩ ÔøΩ÷±ÔøΩ
+			resp.sendRedirect(req.getContextPath() + "/views/index.jsp");
 		} else {
 			
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("isSuccess", "fail");
-			String jsonStr = new Gson().toJson(jsonObject);
-			resp.setContentType("application/json");
-			resp.getWriter().write(jsonStr);
 		}
 	}
 }

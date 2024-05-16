@@ -5,6 +5,7 @@
 //String fileExtension = currentJSP.substring(currentJSP.lastIndexOf(".") + 1);
 
 String uri = request.getRequestURI();
+String id = (String) session.getAttribute("usersId");
 %>
 
 <!DOCTYPE html>
@@ -44,7 +45,7 @@ String uri = request.getRequestURI();
        
     <% } %>
     
-    
+   
     
   </head>
   <body>
@@ -113,9 +114,24 @@ String uri = request.getRequestURI();
                 <li>
                   <a class="dropdown-item" href="join.jsp">회원가입</a>
                 </li>
-                <li>
-                  <a class="dropdown-item" href="login.jsp">로그인</a>
+                <%
+	if(id != null) {
+%>
+<li>
+<a href="/logout.do">로그아웃</a>
+ </li>
+<% 
+	}else{
+%>
+ <li>
+                  <a class="dropdown-item" href="/login.do">로그인</a>
                 </li>
+<% 		
+	}
+
+
+%>
+               
                 <!-- <li><a class="dropdown-item" href="logout.html">로그아웃</a></li><li><a class="dropdown-item" href="myPage.html"><span>정윤지</span>페이지</a></li>-->
               </ul>
             </div>

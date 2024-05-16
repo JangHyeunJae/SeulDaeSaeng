@@ -4,4 +4,24 @@
 
 <mapper namespace="member">
 
+<select id="loginCheck" resultMap="memMap" parameterType="kr.or.ddit.member.vo.MemberVO">
+		select
+		* from users
+		where users_id = #{usersId}
+		and users_pass = #{usersPass}
+	</select>
+
+   <resultMap type="kr.or.ddit.member.vo.MemberVO" id="memMap">
+
+      <result column="users_id" property="usersId" />
+      <result column="users_pass" property="usersPass" />
+      <result column="mem_name" property="memName" />
+      <result column="mem_tel" property="memTel" />
+      <result column="mem_addr" property="memAddr" />
+      <result column="atch_file_id" property="atchFileId" />
+      <result column="reg_dt" property="regDt" />
+   </resultMap>
+
+
+
 </mapper>

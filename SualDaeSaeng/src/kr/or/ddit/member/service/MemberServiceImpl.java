@@ -10,7 +10,7 @@ import java.util.List;
 
 public class MemberServiceImpl implements IMemberService{
 	
-	// ½Ì±ÛÅæÆĞÅÏ
+	// ï¿½Ì±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public static IMemberService instance = null;
 	private MemberServiceImpl() {}
 	public static IMemberService getInstance() {
@@ -20,110 +20,21 @@ public class MemberServiceImpl implements IMemberService{
 	IMemberDao memberDao = MemberDaoImpl.getInstance();
 	
 	/**
-	 * ·Î±×ÀÎ Ã¼Å©¸¦ À§ÇÑ ¸Ş¼­µå, ÆÄ¶ó¹ÌÅÍ·Î empVO¿Í °ü¸®ÀÚ·Î±×ÀÎ Ã¼Å© ¿©ºÎ°¡ µé¾î°£´Ù
-	 * @param empvo, isAdminLogin
-	 * @return ·Î±×ÀÎ ¼º°ø¿©ºÎ
+	 * ï¿½Î±ï¿½ï¿½ï¿½ Ã¼Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ş¼ï¿½ï¿½ï¿½, ï¿½Ä¶ï¿½ï¿½ï¿½Í·ï¿½ memberVOï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ú·Î±ï¿½ï¿½ï¿½ Ã¼Å© ï¿½ï¿½ï¿½Î°ï¿½ ï¿½ï¿½î°£ï¿½ï¿½
+	 * @param memberVO, isAdminLogin
+	 * @return ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	@Override
-	public boolean loginCheck(MemberVO memberVO, boolean isAdminLogin) {
-		return memberDao.loginCheck(memberVO, isAdminLogin);
+	public boolean loginCheck(MemberVO memberVO, boolean isMemberLogin) {
+		return memberDao.loginCheck(memberVO, isMemberLogin);
 	}
-		
-
-   /**
-	 * »ç¿øÁ¤º¸ µî·ÏÀ» À§ÇÑ ¸Ş¼­µå
-	 * @param empVO¿¡ µî·ÏÇÒ µ¥ÀÌÅÍ°¡ ´ã°ÜÁø EmpVOÀÇ °´Ã¼
-	 * @return »ç¿ø µî·ÏÀÌ ¼º°øÇÏ¸é 1ÀÌ»óÀÇ °ªÀÌ ¹İÈ¯µÇ°í, ½ÇÆĞÇÏ¸é 0ÀÌ ¹İÈ¯µÊ.
-	 */
-	@Override
-	public int registMember(MemberVO memberVO) {
-		return memberDao.joinEmployee(memberVO);
-	}
-	
-	
 	/**
-	 * »ç¿øÁ¤º¸ ¼öÁ¤À» À§ÇÑ ¸Ş¼­µå
-	 * @param empVO¿¡ µî·ÏÇÒ µ¥ÀÌÅÍ°¡ ´ã°ÜÁø EmpVOÀÇ °´Ã¼
-	 * @return »ç¿øÁ¤º¸ ¼öÁ¤¿¡ ¼º°øÇÏ¸é 1ÀÌ»óÀÇ °ª ¹İÈ¯, ½ÇÆĞÇÏ¸é 0 ¹İÈ¯
+	 * ì´ë©”ì¼ê³¼ ì‚¬ë²ˆì´ ë“¤ì–´ìˆëŠ” ê°ì²´ë¡œ ë¹„ë°€ë²ˆí˜¸ë¥¼ ì°¾ì•„ì„œ ë¹„ë°€ë²ˆí˜¸ë¥¼ ë°˜í™˜
+	 * @param memberVO
+	 * @return usersPass
 	 */
 	@Override
-	public int modifyMember(MemberVO memberVO, boolean isAdmin) {
-		int cnt = memberDao.updateEmployee(memberVO, isAdmin);
-		return cnt;
+	public String forgotPass(MemberVO memberVO) {
+		return memberDao.forgotPass(memberVO);
 	}
-	
-	/**
-	 * »ç¿øÁ¤º¸-»óÅÂ ¼öÁ¤À» À§ÇÑ ¸Ş¼­µå
-	 * @param empVO¿¡ µî·ÏÇÒ µ¥ÀÌÅÍ°¡ ´ã°ÜÁø EmpVOÀÇ °´Ã¼
-	 * @param °ü¸®ÀÚ±ÇÇÑ ¾÷µ¥ÀÌÆ® À¯¹«
-	 * @return »ç¿øÁ¤º¸ ¼öÁ¤¿¡ ¼º°øÇÏ¸é 1ÀÌ»óÀÇ °ª ¹İÈ¯, ½ÇÆĞÇÏ¸é 0 ¹İÈ¯
-	 */
-	@Override
-	public int updateMemberState(MemberVO memberVO) {
-		int cnt = memberDao.updateEmployeeState(memberVO);
-		return cnt;
-	}
-	
-	/**
-	 * »ç¿øÁ¤º¸ »èÁ¦¸¦ À§ÇÑ ¸Ş¼­µå
-	 * @param empNo »èÁ¦ÇÒ »ç¿øÀÇ »ç¹ø
-	 * @return »èÁ¦¿¡ ¼º°øÇÏ¸é 1 ¹İÈ¯, ½ÇÆĞÇÏ¸é 0 ¹İÈ¯
-	 */
-	@Override
-	public int removeMember(String userId) {
-		return memberDao.deleteMember(userId);
-	}
-	
-	
-	/**
-	 * »ç¿øÁ¤º¸°¡ Á¸ÀçÇÏ´ÂÁö È®ÀÎÇÏ´Â ¸Ş¼­µå
-	 * @param empNo Ã¼Å©ÇÒ »ç¿øÀÇ »ç¹ø
-	 * @return »ç¹øÀÌ Á¸ÀçÇÏ¸é true, ¾øÀ¸¸é false ¸®ÅÏ
-	 */
-	@Override
-	public boolean checkMember(String userId) {
-		return memberDao.checkEmployee(userId);
-	}
-	
-	
-	/**
-	 * ÇØ´ç »ç¹ø¿¡ ÇØ´çÇÏ´Â »ç¿øÁ¤º¸¸¦ °¡Á®¿À±â À§ÇÑ¸Ş¼­µå
-	 * @param empNo °¡Á®¿Ã »ç¹ø
-	 * @return ÇØ´ç »ç¿øÀÇ Á¤º¸¸¦ ´ãÀº empVO °´Ã¼
-	 */
-	@Override
-	public MemberVO selectOne(String userId) {
-		return memberDao.selectOne(userId);
-	}
-	
-	
-	/**
-	 * ÀüÃ¼ »ç¿øÁ¤º¸(¸®½ºÆ®)¸¦ °¡Á®¿À´Â ¸Ş¼­µå
-	 */
-	@Override
-	public List<MemberVO> selectAll() {
-		List<MemberVO> memberList = memberDao.selectAll();
-		return memberList;
-	}
-	
-		
-	/**
-	 * ÀÌ¸ŞÀÏ°ú »ç¹øÀÌ µé¾îÀÖ´Â °´Ã¼·Î ºñ¹Ğ¹øÈ£¸¦ Ã£¾Æ¼­ ºñ¹Ğ¹øÈ£¸¦ ¹İÈ¯
-	 * @param empVO
-	 * @return empPw
-	 */
-	@Override
-	public String forgotPw(MemberVO memberVO) {
-		return memberDao.forgotPw(memberVO);
-	}
-	
-	/**
-	 * 	»ç¹øÀ¸·Î ¸ŞÀÏ Ãâ·ÂÀ» À§ÇÑ ¸Ş¼­µå
-	 */
-	@Override
-	public String mailSelect(String userId) {
-		return memberDao.mailSelect(userId);
-	}
-	
-	
 }

@@ -13,7 +13,7 @@ import kr.or.ddit.util.MyBatisUtil;
 
 public class MemberDaoImpl implements IMemberDao {
 
-	// ½Ì±ÛÅæÆĞÅÏ
+	// ï¿½Ì±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public static IMemberDao instance = null;
 
 	private MemberDaoImpl() {
@@ -26,12 +26,12 @@ public class MemberDaoImpl implements IMemberDao {
 	}
 
 	/**
-	 * ·Î±×ÀÎ Ã¼Å©¸¦ À§ÇÑ ¸Ş¼­µå
+	 * ï¿½Î±ï¿½ï¿½ï¿½ Ã¼Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ş¼ï¿½ï¿½ï¿½
 	 * 
-	 * @param empvo
-	 * @return ·Î±×ÀÎ ¼º°ø¿©ºÎ
+	 * @param memberVO
+	 * @return ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
-	public boolean loginCheck(MemberVO memberVO, boolean isAdminLogin) {
+	public boolean loginCheck(MemberVO memberVO, boolean isMemberLogin) {
 
 		boolean isSuccess = false;
 		SqlSession session = kr.or.ddit.util.MyBatisUtil.getSqlSession();
@@ -39,9 +39,9 @@ public class MemberDaoImpl implements IMemberDao {
 
 		try {
 
-			if (isAdminLogin) {
-				result = session.selectOne("member.adminCheck", memberVO);
-			} else if (isAdminLogin == false) {
+			if (isMemberLogin) {
+				result = session.selectOne("member.memberCheck", memberVO);
+			} else if (isMemberLogin == false) {
 				result = session.selectOne("member.loginCheck", memberVO);
 			}
 
@@ -60,207 +60,23 @@ public class MemberDaoImpl implements IMemberDao {
 	}
 
 	/**
-	 * È¸¿ø°¡ÀÔ ½ÃÄÑÁÖ´Â ¸Ş¼­µå
-	 * 
-	 * @param empVO
-	 * @return ¼º°ø¿©ºÎ
-	 */
-	public int joinMember(MemberVO memberVO) {
-
-		SqlSession session = MyBatisUtil.getSqlSession();
-
-		int cnt = 0;
-
-		try {
-			cnt = session.insert("member.joinMember", memberVO);
-			if (cnt > 0) {
-				session.commit();
-			}
-
-		} catch (PersistenceException ex) {
-			session.rollback();
-			ex.printStackTrace();
-		} finally {
-			session.close();
-		}
-
-		return cnt;
-	}
-
-	/**
-	 * »ç¿øÁ¤º¸ ¼öÁ¤À» À§ÇÑ ¸Ş¼­µå
-	 * @param empVO¿¡ µî·ÏÇÒ µ¥ÀÌÅÍ°¡ ´ã°ÜÁø EmpVOÀÇ °´Ã¼
-	 * @param °ü¸®ÀÚ±ÇÇÑ ¾÷µ¥ÀÌÆ® À¯¹«
-	 * @return »ç¿øÁ¤º¸ ¼öÁ¤¿¡ ¼º°øÇÏ¸é 1ÀÌ»óÀÇ °ª ¹İÈ¯, ½ÇÆĞÇÏ¸é 0 ¹İÈ¯
-	 */
-	public int updateMember(MemberVO memberVO, boolean isAdmin) {
-		int cnt = 0;
-		
-		SqlSession session = MyBatisUtil.getSqlSession();
-		
-		try {
-			
-			if(isAdmin) {
-			cnt = session.update("member.updateMemberAdmin", memberVO);
-			} else {
-				cnt = session.update("member.updateMember", memberVO);
-			}
-			if(cnt > 0) {
-				session.commit();
-			}
-			
-		} catch(PersistenceException ex) {
-			session.rollback();
-			ex.printStackTrace();
-		} finally {
-			session.close();
-		}
-		
-		return cnt;
-	}
-	
-	/**
-	 * »ç¿øÁ¤º¸-»óÅÂ ¼öÁ¤À» À§ÇÑ ¸Ş¼­µå
-	 * @param empVO¿¡ µî·ÏÇÒ µ¥ÀÌÅÍ°¡ ´ã°ÜÁø EmpVOÀÇ °´Ã¼
-	 * @param °ü¸®ÀÚ±ÇÇÑ ¾÷µ¥ÀÌÆ® À¯¹«
-	 * @return »ç¿øÁ¤º¸ ¼öÁ¤¿¡ ¼º°øÇÏ¸é 1ÀÌ»óÀÇ °ª ¹İÈ¯, ½ÇÆĞÇÏ¸é 0 ¹İÈ¯
-	 */
-	public int updateMemberState(MemberVO memberVO) {
-		int cnt = 0;
-		
-		SqlSession session = MyBatisUtil.getSqlSession();
-		
-		try {
-			cnt = session.update("member.updateState", memberVO);
-			if(cnt > 0) session.commit();
-	
-		} catch(PersistenceException ex) {
-			session.rollback();
-			ex.printStackTrace();
-		} finally {
-			session.close();
-		}
-		
-		return cnt;
-	}
-
-	/**
-	 * »ç¿øÁ¤º¸ »èÁ¦¸¦ À§ÇÑ ¸Ş¼­µå
-	 * 
-	 * @param empNo »èÁ¦ÇÒ »ç¿øÀÇ »ç¹ø
-	 * @return »èÁ¦¿¡ ¼º°øÇÏ¸é 1 ¹İÈ¯, ½ÇÆĞÇÏ¸é 0 ¹İÈ¯
-	 */
-	public int deleteMember(String userId) {
-		int cnt = 0;
-
-		SqlSession session = MyBatisUtil.getSqlSession();
-
-		try {
-			cnt = session.delete("member.deleteMember", userId);
-
-			if (cnt > 0) {
-				session.commit();
-			}
-
-		} catch (PersistenceException ex) {
-			ex.printStackTrace();
-			session.rollback();
-
-		} finally {
-			session.close();
-		}
-		return cnt;
-	}
-
-	/**
-	 * »ç¿øÁ¤º¸°¡ Á¸ÀçÇÏ´ÂÁö È®ÀÎÇÏ´Â ¸Ş¼­µå
-	 * 
-	 * @param empNo Ã¼Å©ÇÒ »ç¿øÀÇ »ç¹ø
-	 * @return »ç¹øÀÌ Á¸ÀçÇÏ¸é true, ¾øÀ¸¸é false ¸®ÅÏ
-	 */
-	public boolean checkMember(String userId) {
-
-		boolean isExist = false;
-
-		SqlSession session = MyBatisUtil.getSqlSession(true);
-
-		try {
-			int cnt = session.selectOne("member.checkEmployee", userId);
-
-			if (cnt > 0) {
-				isExist = true;
-			}
-
-		} catch (PersistenceException ex) {
-			ex.printStackTrace();
-		} finally {
-			session.close();
-		}
-
-		return isExist;
-	}
-
-	/**
-	 * ÇØ´ç »ç¹ø¿¡ ÇØ´çÇÏ´Â »ç¿øÁ¤º¸¸¦ °¡Á®¿À±â À§ÇÑ ¸Ş¼­µå
-	 * 
-	 * @param empNo °¡Á®¿Ã »ç¹ø
-	 * @return ÇØ´ç »ç¿øÀÇ Á¤º¸¸¦ ´ãÀº empVO °´Ã¼
-	 */
-	public MemberVO selectOne(String userId) {
-
-		SqlSession session = MyBatisUtil.getSqlSession();
-
-		MemberVO ev = null;
-		try {
-			ev = session.selectOne("employee.selectOne", userId);
-			if (ev != null) {
-				session.commit();
-			}
-		} catch (PersistenceException ex) {
-			session.rollback();
-			ex.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return ev;
-	}
-
-	/**
-	 * ÀüÃ¼ »ç¿øÁ¤º¸(¸®½ºÆ®)¸¦ °¡Á®¿À´Â ¸Ş¼­µå
-	 */
-	public List<MemberVO> selectAll() {
-		List<MemberVO> memberList = new ArrayList<MemberVO>();
-
-		SqlSession session = MyBatisUtil.getSqlSession(true);
-
-		try {
-			memberList = session.selectList("member.selectAll");
-		} catch (PersistenceException ex) {
-			ex.printStackTrace();
-		} finally {
-			session.close();
-		}
-
-		return memberList;
-	}
-
-	/**
-	 * ÀÌ¸ŞÀÏ°ú »ç¹øÀÌ µé¾îÀÖ´Â °´Ã¼·Î ºñ¹Ğ¹øÈ£¸¦ Ã£¾Æ¼­ ºñ¹Ğ¹øÈ£¸¦ ¹İÈ¯
+	 * ì´ë©”ì¼ê³¼ ì‚¬ë²ˆì´ ë“¤ì–´ìˆëŠ” ê°ì²´ë¡œ ë¹„ë°€ë²ˆí˜¸ë¥¼ ì°¾ì•„ì„œ ë¹„ë°€ë²ˆí˜¸ë¥¼ ë°˜í™˜
 	 * 
 	 * @param memberVO
-	 * @return userPw
+	 * @return usersPass
 	 */
-	public String forgotPw(MemberVO memberVO) {
+	@Override
+	public String forgotPass(MemberVO memberVO) {
 
 		SqlSession session = MyBatisUtil.getSqlSession();
 
-		String userPw = null;
+		String usersPass = null;
 
 		try {
 
-			userPw = session.selectOne("member.forgotPw", memberVO);
+			usersPass = session.selectOne("member.forgotPass", memberVO);
 
-			if (userPw != null) {
+			if (usersPass != null) {
 				session.commit();
 			}
 
@@ -271,49 +87,7 @@ public class MemberDaoImpl implements IMemberDao {
 			session.close();
 		}
 
-		return userPw;
-	}
-	
-	public String mailSelect(String userId) {
-		
-		SqlSession session = MyBatisUtil.getSqlSession();
-
-		String ev = "";
-		try {
-			ev = session.selectOne("member.mailSelect", userId);
-			if(ev!=null) {
-				 session.commit();
-			 }
-		} catch (PersistenceException ex) {
-			session.rollback();
-			ex.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return ev;
+		return usersPass;
 	}
 
-	@Override
-	public int joinEmployee(MemberVO memberVO) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int updateEmployee(MemberVO memberVO, boolean isAdmin) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int updateEmployeeState(MemberVO memberVO) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public boolean checkEmployee(String userId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 }

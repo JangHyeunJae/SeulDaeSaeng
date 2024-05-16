@@ -4,22 +4,24 @@ import java.time.LocalDate;
 
 public class MemberVO {
 
-	private int userNo;
+	private int usersNo;
 	private String memName;
 	private String memNick;
 	private String memBirth;
 	private String memEmail;
 	private String memTel;
 	private String memClass;
+	private String usersId;
+	private String usersPass;
 	private LocalDate memRegdt;
 	private int addrNo;
 	
 	
-	public int getUserNo() {
-		return userNo;
+	public int getUsersNo() {
+		return usersNo;
 	}
-	public void setUserNo(int userNo) {
-		this.userNo = userNo;
+	public void setUsersNo(int usersNo) {
+		this.usersNo = usersNo;
 	}
 	public String getMemName() {
 		return memName;
@@ -54,9 +56,27 @@ public class MemberVO {
 	public String getMemClass() {
 		return memClass;
 	}
+	
 	public void setMemClass(String memClass) {
 		this.memClass = memClass;
 	}
+	
+	public String getUsersId() {
+		return usersId;
+	}
+	
+	public void setUsersId(String usersId) {
+		this.usersId = usersId;
+	}
+	
+	public String getUsersPass() {
+		return usersPass;
+	}
+	
+	public void setUsersPass(String usersPass) {
+		this.usersPass = usersPass;
+	}
+	
 	public LocalDate getMemRegdt() {
 		return memRegdt;
 	}
@@ -69,7 +89,4 @@ public class MemberVO {
 	public void setAddrNo(int addrNo) {
 		this.addrNo = addrNo;
 	}
-
-
-
 }

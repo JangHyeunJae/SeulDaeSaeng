@@ -8,80 +8,17 @@ import kr.or.ddit.member.vo.MemberVO;
 public interface IMemberService {
 
 	/**
-	 * ·Î±×ÀÎ Ã¼Å©¸¦ À§ÇÑ ¸Ş¼­µå, ÆÄ¶ó¹ÌÅÍ·Î empVO¿Í °ü¸®ÀÚ·Î±×ÀÎ Ã¼Å© ¿©ºÎ°¡ µé¾î°£´Ù
-	 * @param empvo, isAdminLogin
-	 * @return ·Î±×ÀÎ ¼º°ø¿©ºÎ
+	 * ë¡œê·¸ì¸ ì²´í¬ë¥¼ ìœ„í•œ ë©”ì„œë“œ, íŒŒë¼ë¯¸í„°ë¡œ memberVOì™€ ê´€ë¦¬ìë¡œê·¸ì¸ ì²´í¬ ì—¬ë¶€ê°€ ë“¤ì–´ê°„ë‹¤
+	 * @param membervo, isMemberLogin
+	 * @return ë¡œê·¸ì¸ ì„±ê³µì—¬ë¶€
 	 */
-	public boolean loginCheck(MemberVO memberVO, boolean isAdminLogin);
-	
-	
-	/**
-	 * »ç¿øÁ¤º¸ µî·ÏÀ» À§ÇÑ ¸Ş¼­µå
-	 * @param empVO¿¡ µî·ÏÇÒ µ¥ÀÌÅÍ°¡ ´ã°ÜÁø EmpVOÀÇ °´Ã¼
-	 * @return »ç¿ø µî·Ï¿¡ ¼º°øÇÏ¸é 1ÀÌ»óÀÇ °ª ¹İÈ¯, ½ÇÆĞÇÏ¸é 0 ¹İÈ¯
-	 */
-	public int registMember(MemberVO memberVO);
-	
-	
-	/**
-	 * »ç¿øÁ¤º¸ ¼öÁ¤À» À§ÇÑ ¸Ş¼­µå
-	 * @param empVO¿¡ µî·ÏÇÒ µ¥ÀÌÅÍ°¡ ´ã°ÜÁø EmpVOÀÇ °´Ã¼
-	 * @return »ç¿øÁ¤º¸ ¼öÁ¤¿¡ ¼º°øÇÏ¸é 1ÀÌ»óÀÇ °ª ¹İÈ¯, ½ÇÆĞÇÏ¸é 0 ¹İÈ¯
-	 */ 
-	public int modifyMember(MemberVO memberVO, boolean isAdmin);
-	
-	/**
-	 * »ç¿øÁ¤º¸-»óÅÂ ¼öÁ¤À» À§ÇÑ ¸Ş¼­µå
-	 * @param empVO¿¡ µî·ÏÇÒ µ¥ÀÌÅÍ°¡ ´ã°ÜÁø EmpVOÀÇ °´Ã¼
-	 * @param °ü¸®ÀÚ±ÇÇÑ ¾÷µ¥ÀÌÆ® À¯¹«
-	 * @return »ç¿øÁ¤º¸ ¼öÁ¤¿¡ ¼º°øÇÏ¸é 1ÀÌ»óÀÇ °ª ¹İÈ¯, ½ÇÆĞÇÏ¸é 0 ¹İÈ¯
-	 */
-	public int updateMemberState(MemberVO memberVO);
-	
-	/**
-	 * »ç¿øÁ¤º¸ »èÁ¦¸¦ À§ÇÑ ¸Ş¼­µå
-	 * @param empNo »èÁ¦ÇÒ »ç¿øÀÇ »ç¹ø
-	 * @return »èÁ¦¿¡ ¼º°øÇÏ¸é 1 ¹İÈ¯, ½ÇÆĞÇÏ¸é 0 ¹İÈ¯
-	 */
-	public int removeMember(String userId);
-	
-	
-	/**
-	 * »ç¿øÁ¤º¸°¡ Á¸ÀçÇÏ´ÂÁö È®ÀÎÇÏ´Â ¸Ş¼­µå
-	 * @param empNo Ã¼Å©ÇÒ »ç¿øÀÇ »ç¹ø
-	 * @return »ç¹øÀÌ Á¸ÀçÇÏ¸é true, ¾øÀ¸¸é false ¸®ÅÏ
-	 */
-	public boolean checkMember(String userId);
-	
-	
-	/**
-	 * ÇØ´ç »ç¹ø¿¡ ÇØ´çÇÏ´Â »ç¿øÁ¤º¸¸¦ °¡Á®¿À±â À§ÇÑ ¸Ş¼­µå
-	 * @param empNo °¡Á®¿Ã »ç¹ø
-	 * @return ÇØ´ç »ç¿øÀÇ Á¤º¸¸¦ ´ãÀº empVO °´Ã¼
-	 */
-	public MemberVO selectOne(String userId);
-	
-	
-	/**
-	 * »ç¿øµ¥ÀÌÅÍ¸¦ ´Ù °¡Á®¿Ã ¸Ş¼­µå
-	 * @param empvo
-	 * @return List¿¡ »ç¿ø Á¤º¸´Ù ´ã±è.
-	 */
-	public List<MemberVO> selectAll();
+	public boolean loginCheck(MemberVO memberVO, boolean isMemberLogin);
 
-	
 	/**
-	 * °´Ã¼¿¡ ´ã±ä ÀÌ¸ŞÀÏµéÀ» Ãâ·Â¿À±â À§ÇÑ ¸Ş¼­µå
-	 * @param empNo
-	 * @return
+	 * ì´ë©”ì¼ê³¼ ì‚¬ë²ˆì´ ë“¤ì–´ìˆëŠ” ê°ì²´ë¡œ ë¹„ë°€ë²ˆí˜¸ë¥¼ ì°¾ì•„ì„œ ë¹„ë°€ë²ˆí˜¸ë¥¼ ë°˜í™˜
+	 * @param memberVO
+	 * @return usersPass
 	 */
-	public String mailSelect (String empNo);
-
-  
-  /**
-	 * ÀÌ¸ŞÀÏ°ú »ç¹øÀÌ µé¾îÀÖ´Â °´Ã¼·Î ºñ¹Ğ¹øÈ£¸¦ Ã£¾Æ¼­ ºñ¹Ğ¹øÈ£¸¦ ¹İÈ¯
-	 * @param empVO
-	 * @return empPw
-	 */
-	public String forgotPw(MemberVO memberVO);
+	public String forgotPass(MemberVO memberVO);
+	
 }

@@ -26,10 +26,16 @@
   		boardName = "공지사항";
   		board = "noticeBoard";
   	}
+  	else if(level > 300){
+  		boardName = "숙제 작성하기";
+  		//학생일때랑 선생님일때랑 다르게 보내줘야함.
+  		board = "classTeacherBoard";
+  	}
   	else {
   		boardName = "전체게시판";
   		board = "allBoard";
   	}
+
  %>
 <!--<main data-aos="fade" data-aos-delay="1500" >-->
 <main>
@@ -38,7 +44,17 @@
     <div class="container position-relative">
       <div class="row d-flex justify-content-center">
         <p class="mb-5 text-start">
+          <%
+          if(level>300){
+          %>
+          <a href="<%=request.getContextPath() %>/classTeacherBoard.do?classNo=<%=level %>">
+          <%
+          }else{
+          %>
           <a href="<%=request.getContextPath() %>/<%=board %>.do">
+          <%
+          }
+          %>
             <i class="bi bi-chevron-left"></i> 뒤로가기
           </a>
         </p>
@@ -72,9 +88,24 @@
       </div>
     </div>
   </div><!-- End Page Header -->
+        
   <div class="contact">
     <div class="container pb-3">
       <!-- {{changeDetected}} -->
+
+      <form action="/board/write.do" method="post" role="form" id="insertForm" class="php-email-form needs-validation" novalidate>
+        <%
+          if(level>300){
+        %>
+        <div class="form-group d-flex align-items-center pt-4">
+          <p class="pe-2">기간 설정 : <p>
+          <input type="date" class="form-control" name="startDate" id="startDate" value="" max="9999-12-31" style="width:180px; display:inline" required> ~ 
+          <input type="date" class="form-control" name="lastDate" id="lastDate" value="" max="9999-12-31" style="width:180px;  display:inline" required>
+        </div>  
+        <%
+          }
+        %>
+
         <div class="form-group">
           <input type="text" class="form-control" name="title" id="title" placeholder="제목" required>
           <div class="invalid-feedback">제목을 작성해주세요.</div>
@@ -158,8 +189,6 @@ $(".summernote").summernote({
        //추가한 폰트사이즈
        fontSizes:['8','9','10','11','12','13','14','15','20','30','40']
  });
-
-
 </script>
      
 <!-- ======= Footer ======= -->

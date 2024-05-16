@@ -102,7 +102,7 @@
     <!-- ======= Header ======= -->
     <header id="header" class="header d-flex align-items-center fixed-top">
       <div class="container-fluid d-flex align-items-center justify-content-between">
-        <a href="/views/index.jsp" class="logo d-flex align-items-center  me-auto me-lg-0">
+        <a href="<%=request.getContextPath()%>/main.do" class="logo d-flex align-items-center  me-auto me-lg-0">
           <h1>슬.대.생</h1>
         </a>
         <nav id="navbar" class="navbar">
@@ -110,22 +110,22 @@
             <li>
             
             
-              <a href="calssBoard.jsp">반별게시판</a>
+              <a href="<%=request.getContextPath()%>/classBoard.do">반별게시판</a>
             </li>
             <li class="dropdown">
-              <a href="allBoard.jsp">
+              <a href="<%=request.getContextPath()%>/allBoard.do">
                 <span>전체게시판</span>
                 <i class="bi-caret-down-fill"></i>
               </a>
               <ul>
                 <li>
-                  <a href="/views/freeBoard.jsp">자유게시판</a>
+                  <a href="<%=request.getContextPath()%>/freeBoard.do">자유게시판</a>
                 </li>
                 <li>
-                  <a href="/views/studyBoard.jsp">공부게시판</a>
+                  <a href="<%=request.getContextPath()%>/studyBoard.do">공부게시판</a>
                 </li>
                 <li>
-                  <a href="/views/adminPage.do">공지게시판</a>
+                  <a href="<%=request.getContextPath()%>/noticeBoard.do">공지게시판</a>
                 </li>
               </ul>
             </li>

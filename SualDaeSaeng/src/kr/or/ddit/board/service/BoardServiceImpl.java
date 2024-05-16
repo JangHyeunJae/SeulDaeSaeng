@@ -8,6 +8,7 @@ import kr.or.ddit.board.dao.IBoardDao;
 import kr.or.ddit.board.vo.BoardVO;
 import kr.or.ddit.board.vo.ReplyVO;
 import kr.or.ddit.member.vo.MemberVO;
+import kr.or.ddit.member.vo.UsersVO;
 
 public class BoardServiceImpl implements IBoardService{
 	
@@ -74,6 +75,21 @@ public class BoardServiceImpl implements IBoardService{
 	}
 
 	@Override
+	public UsersVO getUsersDetail(int usersNo) {
+		return boardDao.getUsersDetail(usersNo);
+	}
+
+	@Override
+	public MemberVO getMemberDetail(int usersNo) {
+		return boardDao.getMemberDetail(usersNo);
+	}
+
+	@Override
+	public List<BoardVO> getClassNoticeList(int level) {
+		return boardDao.getClassNoticeList(level);
+  }
+  
+  @Override
 	public int updateBoard(Map<String, Object> parameter) {
 		return boardDao.updateBoard(parameter);
 	}

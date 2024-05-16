@@ -1,42 +1,184 @@
 package kr.or.ddit.restaurant.vo;
 
 public class RestaurantVO {
-	 private String rest_bizno;
-	 private String rest_name;
-	 private String rest_mcls;
-	 private String rest_scls;
-	 private int addr_no;
-	 
-	public String getRest_bizno() {
-		return rest_bizno;
+
+	private int addrNo;
+	private String restBizno;
+	private String name;
+	private String mcls;
+	private String scls;
+	private int addrPost;
+	private String addrBasic;
+	private String addrDetail;
+	private String lon;
+	private String lat;
+	private int reviewNo;
+	private int usersNo;
+	private String bizNo;
+	private int reviewStar;
+	private String reviewText;
+	private String reviewYn;
+	private int fileNo;
+	private String fileSavepath;
+	private String fileOgname;
+	private String fileSavednm;
+	private int fileSize;
+	private String fileExt;
+	private String fileDt;
+	private String fileYn;
+	
+	public int getAddrNo() {
+		return addrNo;
 	}
-	public void setRest_bizno(String rest_bizno) {
-		this.rest_bizno = rest_bizno;
+	public void setAddrNo(int addrNo) {
+		this.addrNo = addrNo;
 	}
-	public String getRest_name() {
-		return rest_name;
+	public String getRestBizno() {
+		return restBizno;
 	}
-	public void setRest_name(String rest_name) {
-		this.rest_name = rest_name;
+	public void setRestBizno(String restBizno) {
+		this.restBizno = restBizno;
 	}
-	public String getRest_mcls() {
-		return rest_mcls;
+	public String getName() {
+		return name;
 	}
-	public void setRest_mcls(String rest_mcls) {
-		this.rest_mcls = rest_mcls;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getRest_scls() {
-		return rest_scls;
+	public String getMcls() {
+		return mcls;
 	}
-	public void setRest_scls(String rest_scls) {
-		this.rest_scls = rest_scls;
+	public void setMcls(String mcls) {
+		this.mcls = mcls;
 	}
-	public int getAddr_no() {
-		return addr_no;
+	public String getScls() {
+		return scls;
 	}
-	public void setAddr_no(int addr_no) {
-		this.addr_no = addr_no;
+	public void setScls(String scls) {
+		this.scls = scls;
 	}
-	 
-	 
+	public int getAddrPost() {
+		return addrPost;
+	}
+	public void setAddrPost(int addrPost) {
+		this.addrPost = addrPost;
+	}
+	public String getAddrBasic() {
+		return addrBasic;
+	}
+	public void setAddrBasic(String addrBasic) {
+		this.addrBasic = addrBasic;
+	}
+	public String getAddrDetail() {
+		return addrDetail;
+	}
+	public void setAddrDetail(String addrDetail) {
+		this.addrDetail = addrDetail;
+	}
+	public String getLon() {
+		return lon;
+	}
+	public void setLon(String lon) {
+		this.lon = lon;
+	}
+	public String getLat() {
+		return lat;
+	}
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+	public int getReviewNo() {
+		return reviewNo;
+	}
+	public void setReviewNo(int reviewNo) {
+		this.reviewNo = reviewNo;
+	}
+	public int getUsersNo() {
+		return usersNo;
+	}
+	public void setUsersNo(int usersNo) {
+		this.usersNo = usersNo;
+	}
+	public String getBizNo() {
+		return bizNo;
+	}
+	public void setBizNo(String bizNo) {
+		this.bizNo = bizNo;
+	}
+	public int getReviewStar() {
+		return reviewStar;
+	}
+	public void setReviewStar(int reviewStar) {
+		this.reviewStar = reviewStar;
+	}
+	public String getReviewText() {
+		return reviewText;
+	}
+	public void setReviewText(String reviewText) {
+		this.reviewText = reviewText;
+	}
+	public String getReviewYn() {
+		return reviewYn;
+	}
+	public void setReviewYn(String reviewYn) {
+		this.reviewYn = reviewYn;
+	}
+	public int getFileNo() {
+		return fileNo;
+	}
+	public void setFileNo(int fileNo) {
+		this.fileNo = fileNo;
+	}
+	public String getFileSavepath() {
+		return fileSavepath;
+	}
+	public void setFileSavepath(String fileSavepath) {
+		this.fileSavepath = fileSavepath;
+	}
+	public String getFileOgname() {
+		return fileOgname;
+	}
+	public void setFileOgname(String fileOgname) {
+		this.fileOgname = fileOgname;
+	}
+	public String getFileSavednm() {
+		return fileSavednm;
+	}
+	public void setFileSavednm(String fileSavednm) {
+		this.fileSavednm = fileSavednm;
+	}
+	public int getFileSize() {
+		return fileSize;
+	}
+	public void setFileSize(int fileSize) {
+		this.fileSize = fileSize;
+	}
+	public String getFileExt() {
+		return fileExt;
+	}
+	public void setFileExt(String fileExt) {
+		this.fileExt = fileExt;
+	}
+	public String getFileDt() {
+		return fileDt;
+	}
+	public void setFileDt(String fileDt) {
+		this.fileDt = fileDt;
+	}
+	public String getFileYn() {
+		return fileYn;
+	}
+	public void setFileYn(String fileYn) {
+		this.fileYn = fileYn;
+	}
+	@Override
+	public String toString() {
+		return "RestaurantVO [addrNo=" + addrNo + ", restBizno=" + restBizno + ", name=" + name + ", mcls=" + mcls
+				+ ", scls=" + scls + ", addrPost=" + addrPost + ", addrBasic=" + addrBasic + ", addrDetail="
+				+ addrDetail + ", lon=" + lon + ", lat=" + lat + ", reviewNo=" + reviewNo + ", usersNo=" + usersNo
+				+ ", bizNo=" + bizNo + ", reviewStar=" + reviewStar + ", reviewText=" + reviewText + ", reviewYn="
+				+ reviewYn + ", fileNo=" + fileNo + ", fileSavepath=" + fileSavepath + ", fileOgname=" + fileOgname
+				+ ", fileSavednm=" + fileSavednm + ", fileSize=" + fileSize + ", fileExt=" + fileExt + ", fileDt="
+				+ fileDt + ", fileYn=" + fileYn + "]";
+	}
 }

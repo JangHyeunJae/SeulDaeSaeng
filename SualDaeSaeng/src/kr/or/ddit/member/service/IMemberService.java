@@ -1,3 +1,4 @@
+
 package kr.or.ddit.member.service;
 
 import java.util.List;
@@ -20,5 +21,8 @@ public interface IMemberService {
 	 * @return usersPass
 	 */
 	public String forgotPass(MemberVO memberVO);
+  
+  int memberIdChk(String usersId);
 	
 }
+

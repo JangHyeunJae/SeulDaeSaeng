@@ -16,69 +16,19 @@
     <main data-aos="fade" data-aos-delay="1500" class="aos-init aos-animate">
       <section id="teacherIntro" class="container pt-0 pb-0">
         <div class="row gy-4 justify-content-center">
-          <a href="calssTeacherBoard.html" class="col-xl-3 col-lg-4 col-md-6 mt-0 p-3">
-            <p class="mb-0 p-4 text-center">
-              304호
+        <%
+        for(int i = 304 ; i < 308 ; i++){
+        %>
+          <a href="<%=request.getContextPath()%>/classTeacherBoard.do?classNo=<%=i %>" class="col-xl-3 col-lg-4 col-md-6 mt-0 p-3">
+            <p class="mb-0 p-4 text-center" id="class-no">
+              <%=i %>호
             </p>
-          </a>
-          <a href="calssTeacherBoard.html" class="col-xl-3 col-lg-4 col-md-6 mt-0 p-3">
-            <p class="mb-0 p-4 text-center">
-              304호
-            </p>
-          </a>
-          <a href="calssTeacherBoard.html" class="col-xl-3 col-lg-4 col-md-6 mt-0 p-3">
-            <p class="mb-0 p-4 text-center">
-              304호
-            </p>
-          </a>
-          <a href="calssTeacherBoard.html" class="col-xl-3 col-lg-4 col-md-6 mt-0 p-3">
-            <p class="mb-0 p-4 text-center">
-              304호
-            </p>
-          </a>
-          <a href="calssTeacherBoard.html" class="col-xl-3 col-lg-4 col-md-6 mt-0 p-3">
-            <p class="mb-0 p-4 text-center">
-              304호
-            </p>
-          </a>
-          <a href="calssTeacherBoard.html" class="col-xl-3 col-lg-4 col-md-6 mt-0 p-3">
-            <p class="mb-0 p-4 text-center">
-              304호
-            </p>
-          </a>
-          <a href="calssTeacherBoard.html" class="col-xl-3 col-lg-4 col-md-6 mt-0 p-3">
-            <p class="mb-0 p-4 text-center">
-              304호
-            </p>
-          </a>
-          <a href="calssTeacherBoard.html" class="col-xl-3 col-lg-4 col-md-6 mt-0 p-3">
-            <p class="mb-0 p-4 text-center">
-              304호
-            </p>
-          </a>
-          <a href="calssTeacherBoard.html" class="col-xl-3 col-lg-4 col-md-6 mt-0 p-3">
-            <p class="mb-0 p-4 text-center">
-              304호
-            </p>
-          </a>
-          <a href="calssTeacherBoard.html" class="col-xl-3 col-lg-4 col-md-6 mt-0 p-3">
-            <p class="mb-0 p-4 text-center">
-              304호
-            </p>
-          </a>
-          <a href="calssTeacherBoard.html" class="col-xl-3 col-lg-4 col-md-6 mt-0 p-3">
-            <p class="mb-0 p-4 text-center">
-              304호
-            </p>
-          </a>
-          <a href="calssTeacherBoard.html" class="col-xl-3 col-lg-4 col-md-6 mt-0 p-3">
-            <p class="mb-0 p-4 text-center">
-              304호
-            </p>
-          </a>
+          </a> 
+        <%
+        }
+        %>
         </div>
       </section>
     </main>
     <!-- End #main -->
-
 <%@include file="/footer.jsp" %>

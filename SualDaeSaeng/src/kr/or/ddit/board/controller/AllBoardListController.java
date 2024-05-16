@@ -20,10 +20,13 @@ public class AllBoardListController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		 
+		 int level = 0;
 		 IBoardService boardService = BoardServiceImpl.getInstance();
-		 List<BoardVO> allBoardList = boardService.allBoardList();
-
-		 req.setAttribute("boardList", allBoardList);
+		 List<BoardVO> boardList = boardService.allBoardList();
+		 
+		 // levelChk는 detail 진입 전에 어느 목록에 있었는지 저장(전체, 자유 등)
+		 req.setAttribute("levelChk", level);
+		 req.setAttribute("boardList", boardList);
 		 
 		 req.getRequestDispatcher("/views/board/allBoard.jsp").forward(req, resp);
 	}

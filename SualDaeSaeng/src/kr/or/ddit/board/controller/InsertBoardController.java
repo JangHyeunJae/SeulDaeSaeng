@@ -19,9 +19,10 @@ public class InsertBoardController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		req.setAttribute("boardLevel", );
-		
+		int levelChk = Integer.parseInt(req.getParameter("levelChk"));
+		int idx = Integer.parseInt(req.getParameter("idx"));
+		req.setAttribute("levelChk", levelChk);
+		req.setAttribute("idx", idx);
 		req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
 	}
 	
@@ -31,16 +32,20 @@ public class InsertBoardController extends HttpServlet{
 		
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
-		
+		int levelChk = Integer.parseInt(req.getParameter("levelChk"));
+		int level = Integer.parseInt(req.getParameter("level"));		
+		int idx = Integer.parseInt(req.getParameter("idx"));
+
 		BoardVO boardVO = new BoardVO();
 		boardVO.setBoardTitle(title);
 		boardVO.setBoardCon(content);
-		boardVO.setUserNo(userNo);
-		boardVO.setBoardLevel(boardLevel);
+		boardVO.setUsersNo(1); // 세션에서 꺼내와야함
+		boardVO.setBoardLevel(level);
 		
 		int status = service.insertBoard(boardVO);
 		if(status > 0) { 	// 성공
-			resp.sendRedirect("/board/detail.do?no=" + boardVO.getBoardNo());
+			resp.sendRedirect("/board/detail.do?boardNo=" + boardVO.getBoardNo() + "&idx=" + idx + "&levelChk=" + levelChk
+					+ "&editReply=-1");
 		}else {				// 실패
 			req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
 		}

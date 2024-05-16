@@ -15,8 +15,11 @@ public class MemberVO {
 	private String usersPass;
 	private LocalDate memRegdt;
 	private int addrNo;
-	
-	
+
+	public MemberVO() {
+		
+	}
+
 	public int getUsersNo() {
 		return usersNo;
 	}

@@ -1,3 +1,4 @@
+
 package kr.or.ddit.member.dao;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public interface IMemberDao {
 		 */
 		public String forgotPass(MemberVO memberVO);
 
-	
+	int memberIdChk(String usersId);
 
 }
+

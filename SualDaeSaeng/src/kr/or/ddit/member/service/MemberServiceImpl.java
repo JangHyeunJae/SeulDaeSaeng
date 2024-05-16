@@ -37,4 +37,11 @@ public class MemberServiceImpl implements IMemberService{
 	public String forgotPass(MemberVO memberVO) {
 		return memberDao.forgotPass(memberVO);
 	}
+  
+  @Override
+	public int memberIdChk(String usersId) {
+		return dao.memberIdChk(usersId);
+	}
+  
 }
+

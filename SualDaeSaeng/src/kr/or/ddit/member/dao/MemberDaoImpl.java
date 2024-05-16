@@ -90,4 +90,25 @@ public class MemberDaoImpl implements IMemberDao {
 		return usersPass;
 	}
 
+  @Override
+	public int memberIdChk(String usersId) {
+		
+		SqlSession session = null;
+		int cnt = 99;
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			cnt = session.selectOne("member.memberIdChk", usersId);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			if(session != null) {
+				session.close();
+			}
+		}
+		
+		return cnt;
+	}
+  
 }
+

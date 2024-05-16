@@ -31,51 +31,51 @@
             <div class="slides-icon portfolio-details-slider swiper">
               <div class="swiper-wrapper align-items-center">
                 <a href="#" class="swiper-slide">
-                  <img src="../img/icon/KoreanFood3.png" alt="">
+                  <img src="/img/icon/KoreanFood3.png" alt="">
                   <p>한식</p>
                 </a>
                 <a href="#" class="swiper-slide">
-                  <img src="../img/icon/KoreanFood5.png" alt="">
+                  <img src="/img/icon/KoreanFood5.png" alt="">
                   <p>한식</p>
                 </a>
                 <a href="#" class="swiper-slide">
-                  <img src="../img/icon/KoreanFood4.png" alt="">
+                  <img src="/img/icon/KoreanFood4.png" alt="">
                   <p>한식</p>
                 </a>
                 <a href="#" class="swiper-slide">
-                  <img src="../img/icon/KoreanFood3.png" alt="">
+                  <img src="/img/icon/KoreanFood3.png" alt="">
                   <p>한식</p>
                 </a>
                 <a href="#" class="swiper-slide">
-                  <img src="../img/icon/KoreanFood5.png" alt="">
+                  <img src="/img/icon/KoreanFood5.png" alt="">
                   <p>한식</p>
                 </a>
                 <a href="#" class="swiper-slide">
-                  <img src="../img/icon/KoreanFood4.png" alt="">
+                  <img src="/img/icon/KoreanFood4.png" alt="">
                   <p>한식</p>
                 </a>
                 <a href="#" class="swiper-slide">
-                  <img src="../img/icon/KoreanFood3.png" alt="">
+                  <img src="/img/icon/KoreanFood3.png" alt="">
                   <p>한식</p>
                 </a>
                 <a href="#" class="swiper-slide">
-                  <img src="../img/icon/KoreanFood5.png" alt="">
+                  <img src="/img/icon/KoreanFood5.png" alt="">
                   <p>한식</p>
                 </a>
                 <a href="#" class="swiper-slide">
-                  <img src="../img/icon/KoreanFood4.png" alt="">
+                  <img src="/img/icon/KoreanFood4.png" alt="">
                   <p>한식</p>
                 </a>
                 <a href="#" class="swiper-slide">
-                  <img src="../img/icon/KoreanFood3.png" alt="">
+                  <img src="/img/icon/KoreanFood3.png" alt="">
                   <p>한식</p>
                 </a>
                 <a href="#" class="swiper-slide">
-                  <img src="../img/icon/KoreanFood5.png" alt="">
+                  <img src="/img/icon/KoreanFood5.png" alt="">
                   <p>한식</p>
                 </a>
                 <a href="#" class="swiper-slide">
-                  <img src="../img/icon/KoreanFood4.png" alt="">
+                  <img src="/img/icon/KoreanFood4.png" alt="">
                   <p>한식</p>
                 </a>
               </div>
@@ -100,7 +100,7 @@
             <div class="slides-story portfolio-details-slider swiper">
               <div class="swiper-wrapper align-items-center gallery">
                 <div class="swiper-slide gallery-item">
-                  <img src="../img/gallery/gallery-1.jpg" class="img-fluid" alt="">
+                  <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
                   <p>오늘 날씨 좋은데?</p>
                   <div class="gallery-links d-flex align-items-center justify-content-center">
                     <a href="img/gallery/gallery-1.jpg" data-title="오늘 날씨 좋은데?" class="glightbox preview-link">
@@ -109,7 +109,7 @@
                   </div>
                 </div>
                 <div class="swiper-slide gallery-item">
-                  <img src="../img/gallery/gallery-2.jpg" class="img-fluid" alt="">
+                  <img src="/img/gallery/gallery-2.jpg" class="img-fluid" alt="">
                   <p>오늘 날씨 좋은데?</p>
                   <div class="gallery-links d-flex align-items-center justify-content-center">
                     <a href="img/gallery/gallery-2.jpg" data-title="오늘 날씨 좋은데?" class="glightbox preview-link">
@@ -118,7 +118,7 @@
                   </div>
                 </div>
                 <div class="swiper-slide gallery-item">
-                  <img src="../img/gallery/gallery-3.jpg" class="img-fluid" alt="">
+                  <img src="/img/gallery/gallery-3.jpg" class="img-fluid" alt="">
                   <p>오늘 날씨 좋은데?</p>
                   <div class="gallery-links d-flex align-items-center justify-content-center">
                     <a href="img/gallery/gallery-3.jpg" data-title="오늘 날씨 좋은데?" class="glightbox preview-link">
@@ -127,7 +127,7 @@
                   </div>
                 </div>
                 <div class="swiper-slide gallery-item">
-                  <img src="../img/gallery/gallery-4.jpg" class="img-fluid" alt="">
+                  <img src="/img/gallery/gallery-4.jpg" class="img-fluid" alt="">
                   <p>오늘 날씨 좋은데?</p>
                   <div class="gallery-links d-flex align-items-center justify-content-center">
                     <a href="img/gallery/gallery-4.jpg" data-title="오늘 날씨 좋은데?" class="glightbox preview-link">
@@ -136,7 +136,7 @@
                   </div>
                 </div>
                 <div class="swiper-slide gallery-item">
-                  <img src="../img/gallery/gallery-5.jpg" class="img-fluid" alt="">
+                  <img src="/img/gallery/gallery-5.jpg" class="img-fluid" alt="">
                   <p>오늘 날씨 좋은데?</p>
                   <div class="gallery-links d-flex align-items-center justify-content-center">
                     <a href="img/gallery/gallery-5.jpg" data-title="오늘 날씨 좋은데?" class="glightbox preview-link">
@@ -145,7 +145,7 @@
                   </div>
                 </div>
                 <div class="swiper-slide gallery-item">
-                  <img src="../img/gallery/gallery-6.jpg" class="img-fluid" alt="">
+                  <img src="/img/gallery/gallery-6.jpg" class="img-fluid" alt="">
                   <p>오늘 날씨 좋은데?</p>
                   <div class="gallery-links d-flex align-items-center justify-content-center">
                     <a href="img/gallery/gallery-6.jpg" data-title="오늘 날씨 좋은데?" class="glightbox preview-link">
@@ -358,7 +358,7 @@
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -378,7 +378,7 @@
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -398,7 +398,7 @@
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -429,7 +429,7 @@
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -449,7 +449,7 @@
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -469,7 +469,7 @@
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -500,7 +500,7 @@
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -520,7 +520,7 @@
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -540,7 +540,7 @@
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="../img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>

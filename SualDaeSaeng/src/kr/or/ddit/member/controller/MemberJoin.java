@@ -21,7 +21,7 @@ public class MemberJoin extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("야호");
+		System.out.println("야호 폼 데이터 넘어왔다!");
 	
 	}
 }

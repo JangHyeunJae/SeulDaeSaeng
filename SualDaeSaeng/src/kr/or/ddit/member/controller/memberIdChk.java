@@ -25,10 +25,8 @@ public class memberIdChk extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String usersId = (String)req.getParameter("usersId");
-		System.out.println("넘겨받는 usersId: " + usersId);
 		
 		int cnt = service.memberIdChk(usersId);
-		System.out.println("넘겨온 cnt: " + cnt);
 		PrintWriter pw = resp.getWriter();
 		pw.println(cnt);
 	}

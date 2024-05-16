@@ -32,6 +32,9 @@
 
 
 	<insert id="userJoin" parameterType="memVO">
+		<selectKey>
+		
+		</selectKey>
 	
 		INSERT INTO USERS(USERS_NO, USERS_ROLE, USERS_ID, USERS_PASS)
 		VALUES(#{usersNo}, #{usersRole}, #{usersId}, #{usersPass})

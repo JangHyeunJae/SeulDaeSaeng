@@ -10,7 +10,7 @@
 <%@include file="/header.jsp"%>
 <%
 	List<BoardVO> boardList = (List<BoardVO>)request.getAttribute("boardList");
-    int level = (int)request.getAttribute("level");
+    int levelChk = (int)request.getAttribute("levelChk");
     
     //페이징 기능
     int itemsPerPage = 5;
@@ -67,9 +67,9 @@
 				<p>작성된 게시글이 없습니다</p>
 				<%
                    }else{
-                	   int cnt = 1;
+                	   int idx = (currentPage-1)*5;
                 	   for (int i = startIndex; i < endIndex; i++) {
-                    	   
+                		   
                 		   //level별 이름지정
                     	   BoardVO bv = boardList.get(i);
                     	   int level2 = bv.getBoardLevel();
@@ -79,9 +79,15 @@
                            else if(level2 == 2) boardName = "공부게시판";
                            else if(level2 == 3) boardName = "공지사항";
                            else boardName = "전체게시판";
+                           
+                           // html 제거
+                           String ogText = bv.getBoardCon();
+    					   String regex = "<[^>]*>";
+    					   String pureText = ogText.replaceAll(regex, "");
+                           
                 %>
                 
-				  <a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=cnt++ %>" class="list-group-item">
+				  <a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&editReply=-1" class="list-group-item">
 					<div class="d-flex w-100 justify-content-between align-items-center">
 						<h5 class="mb-2 text-truncate">
 							<small class="attach"> <i class="bi bi-paperclip"></i>
@@ -92,7 +98,7 @@
 						<%=boardName %>
 						</small>
 					</div>
-					<p class="mb-2 text-truncate"><%=bv.getBoardCon() %></p>
+					<p class="mb-2 text-truncate"><%=pureText %></p>
 					<div class="d-flex w-100 justify-content-between align-items-center">
 						<small class="days"><%=bv.getBoardAt() %></small> <small
 							class="look"> <i class="bi bi-eye"></i> <%=bv.getBoardHit() %>
@@ -101,6 +107,7 @@
 				</a>
 				
 				<%
+                		   idx++;
                        }
                    }
                 %>
@@ -131,7 +138,7 @@
     </nav>
     
 			<div class="container d-flex align-items-center justify-content-end pb-5 gap-2 p-0">
-				<a href="<%=request.getContextPath()%>/board/write.do?level=<%=level %>" type="button" class="btn btn-outline-warning">글쓰기</a>
+				<a href="<%=request.getContextPath()%>/board/write.do?levelChk=<%=levelChk %>&idx=0" type="button" class="btn btn-outline-warning">글쓰기</a>
 			</div>
 		</div>
 	</section>

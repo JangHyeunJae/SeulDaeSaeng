@@ -37,7 +37,8 @@
    <% }else if(request.getRequestURI().contains("timetable")){ %>
          <link href="/css/timetable.css" rel="stylesheet">
 
-    <% }else if(request.getRequestURI().contains("write")){ %>
+    <% }else if(request.getRequestURI().contains("write") || 
+    		request.getRequestURI().contains("edit")){ %>
        
     <link rel="stylesheet" href="/css/bootform2.css">  <!-- editer css 추가 -->
        

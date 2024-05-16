@@ -8,20 +8,21 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>		
 <!-- 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
 <%
- 	int level = (int)request.getAttribute("level");
- 	
+ 	int levelChk = (int)request.getAttribute("levelChk");
+	int idx = (int)request.getAttribute("idx");
+
  	String boardName = null;
  	String board = null;
- 	
-  	if(level == 1) {
+ 	// levelChk 0이면 버튼 선택해야함
+  	if(levelChk == 1) {
   		boardName = "자유게시판";
   		board = "freeBoard";
   	}
-  	else if(level == 2) {
+  	else if(levelChk == 2) {
   		boardName = "공부게시판";
   		board = "studyBoard";
   	}
-  	else if(level == 3) {
+  	else if(levelChk == 3) {
   		boardName = "공지사항";
   		board = "noticeBoard";
   	}
@@ -45,6 +46,28 @@
           <h2>
           <%=boardName %>
           </h2>
+      <form action="<%=request.getContextPath()%>/board/write.do" method="post" role="form" id="insertForm" class="php-email-form needs-validation" novalidate>
+      		<%
+      			if(levelChk == 0){
+      		%>
+          <div class="form-group d-flex align-items-center">
+                  <input type="radio" class="btn-check" name="level" id="freeBoard" value="1" autocomplete="off" checked>
+                  <label class="btn btn-outline-warning" for="freeBoard">자유게시판</label>
+                  
+                  <input type="radio" class="btn-check" name="level" id="studyBoard" value="2" autocomplete="off">
+                  <label class="btn btn-outline-warning" for="studyBoard">공부게시판</label>
+                  
+                  <input type="radio" class="btn-check" name="level" id="noticeBoard" value="3" autocomplete="off">
+                  <label class="btn btn-outline-warning" for="noticeBoard">공지사항</label>
+          </div>
+
+          <%
+      			}else{
+          %>
+          <input type="hidden" class="btn-check" name="level" value=<%=levelChk %>>
+          <%
+      			}
+          %>
         </div>
       </div>
     </div>
@@ -52,13 +75,13 @@
   <div class="contact">
     <div class="container pb-3">
       <!-- {{changeDetected}} -->
-      <form action="/board/write.do" method="post" role="form" id="insertForm" class="php-email-form needs-validation" novalidate>
         <div class="form-group">
           <input type="text" class="form-control" name="title" id="title" placeholder="제목" required>
           <div class="invalid-feedback">제목을 작성해주세요.</div>
         </div>
         	<textarea class="form-control summernote" rows="5" id="content" name="content"></textarea>
-        	<input type="hidden" id="level" name="level" value=<%=level %>>
+        	<input type="hidden" id="levelChk" name="levelChk" value=<%=levelChk %>>
+        	<input type="hidden" id="idx" name="idx" value=<%=idx %>>
         <div class="text-center mt-5 mb-5">
           <button type="submit" id="submitBtn">작성하기</button>
         </div>
@@ -81,15 +104,19 @@ $(function(){
 
 		var title = $("#title").val();
 		var content = $("#content").val();
-		var level = $("#level").val();
+		var level = $(".btn-check").val();
+		var levelChk = $("#levelChk").val();
+		var idx = $("#idx").val();
 
-        if (title.trim() || content.trim()) {
-            // 제목 또는 내용이 비어있으면 폼 제출 방지
+		if(title == null || title==""){
+            alert("제목을 입력해주세요!");
             return false;
-        } else {
-            // 제목과 내용이 모두 입력되었을 때 폼 제출
-            insertForm.submit();
         }
+        if(content == null || content==""){
+            alert("내용을 입력해주세요!");
+            return false;
+        }
+        insertForm.submit();
 	});
 });
 

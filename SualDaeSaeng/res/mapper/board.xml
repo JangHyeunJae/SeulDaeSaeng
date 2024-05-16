@@ -43,6 +43,7 @@
 		select *
         from board
         where board_yn = 'Y'
+        order by board_no desc
 </select>
 
 <select id="getBoardDetail" parameterType="int" resultMap="boardMap">
@@ -55,6 +56,7 @@
 		select *
 	    from board
 	    where board_level =#{boardLevel} and board_yn = 'Y'
+	    order by board_no desc
 </select>
 
 <select id="getWriterDetail" parameterType="Map" resultMap="memberMap">
@@ -96,6 +98,18 @@
 		VALUES (#{replyNo},#{replyCon},'Y',#{boardNo}, #{usersNo}, sysdate)
 
 </insert>
+
+<update id="updateBoard" parameterType="Map">
+		update board
+		set board_title = #{boardTitle}, board_con = #{boardCon}
+		where board_no = #{boardNo}
+</update>
+
+<update id="updateReply" parameterType="Map">
+	update reply
+	set reply_con = #{replyCon}
+	where reply_no = #{replyNo}
+</update>
 
 <update id="deleteBoard" parameterType="int">
         update board set board_yn = 'N' where board_no =#{boardNo}

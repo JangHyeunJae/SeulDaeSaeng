@@ -21,11 +21,16 @@ public class DeleteBoardController extends HttpServlet{
 		 IBoardService boardService = BoardServiceImpl.getInstance();
 		 
 		 int boardNo = Integer.parseInt(req.getParameter("boardNo"));
+		 int levelChk = Integer.parseInt(req.getParameter("levelChk"));
 		 
 		 int cnt = boardService.deleteBoard(boardNo);
 	    
+		 // levelChk값에 따라 삭제 후 목록 이동
 		 if(cnt>0) {
-		 resp.sendRedirect(req.getContextPath() + "/allBoard.do");
+			 if(levelChk == 0) resp.sendRedirect(req.getContextPath() + "/allBoard.do");
+			 else if(levelChk == 1) resp.sendRedirect(req.getContextPath() + "/freeBoard.do");
+			 else if(levelChk == 2) resp.sendRedirect(req.getContextPath() + "/studyBoard.do");
+			 else if(levelChk == 3) resp.sendRedirect(req.getContextPath() + "/noticeBoard.do");
 		 }
 	}
 	

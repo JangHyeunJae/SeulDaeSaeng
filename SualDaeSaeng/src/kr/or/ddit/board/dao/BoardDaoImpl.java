@@ -218,4 +218,52 @@ public class BoardDaoImpl implements IBoardDao {
 		return hit;
 	}
 
+	@Override
+	public int updateBoard(Map<String, Object> parameter) {
+		
+		SqlSession session = null;
+		int status = 0;		
+		
+		try {
+			session = MyBatisUtil.getSqlSession();
+			status = session.insert("board.updateBoard", parameter);
+			
+			if(status > 0) {	// 성공
+				session.commit();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		
+		return status;
+	}
+
+	@Override
+	public int updateReply(Map<String, Object> parameter) {
+		
+		SqlSession session = null;
+		int status = 0;		
+		
+		try {
+			session = MyBatisUtil.getSqlSession();
+			status = session.insert("board.updateReply", parameter);
+			
+			if(status > 0) {	// 성공
+				session.commit();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		
+		return status;
+	}
+
 }

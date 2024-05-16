@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -19,7 +20,7 @@
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-lg-6">
-              <form action="forms/contact.php" method="post" role="form" class="php-email-form needs-validation" novalidate>
+              <form action="/login.do" method="post" role="form" >
                 <div class="form-group">
                   <input type="text" class="form-control" name="id" id="id" placeholder="아이디" required>
                   <div class="invalid-feedback"> 아이디를 확인해주세요. </div>

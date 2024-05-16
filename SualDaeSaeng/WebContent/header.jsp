@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%
+//String currentJSP = request.getServletPath();
+//String fileName = currentJSP.substring(currentJSP.lastIndexOf("/") + 1, currentJSP.lastIndexOf("."));
+//String fileExtension = currentJSP.substring(currentJSP.lastIndexOf(".") + 1);
+
+String uri = request.getRequestURI();
+String id = (String) session.getAttribute("usersId");
+%>
+
+
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -40,6 +50,7 @@
     <% }else if(request.getRequestURI().contains("write") || 
     		request.getRequestURI().contains("edit")){ %>
        
+
     <link rel="stylesheet" href="/css/bootform2.css">  <!-- editer css 추가 -->
        
     <!-- <script>
@@ -96,6 +107,7 @@
     <% } else if(request.getRequestURI().contains("restaurantUpDate")){%>
        <link href="/css/restaurantUpDate.css" rel="stylesheet">
    	<% } %>
+
     
   </head>
   <body>
@@ -177,9 +189,26 @@
                   <a class="dropdown-item" href="<%=request.getContextPath() %>/member/join.do">회원가입</a>
 
                 </li>
-                <li>
-                  <a class="dropdown-item" href="/views/login.jsp">로그인</a>
+
+                <%
+	if(id != null) {
+%>
+<li>
+<a href="/logout.do">로그아웃</a>
+ </li>
+<% 
+	}else{
+%>
+ <li>
+                  <a class="dropdown-item" href="/login.do">로그인</a>
+
                 </li>
+<% 		
+	}
+
+
+%>
+               
                 <!-- <li><a class="dropdown-item" href="logout.html">로그아웃</a></li><li><a class="dropdown-item" href="myPage.html"><span>정윤지</span>페이지</a></li>-->
               </ul>
             </div>

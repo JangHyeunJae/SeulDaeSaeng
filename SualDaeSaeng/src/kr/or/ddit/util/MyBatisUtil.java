@@ -16,16 +16,16 @@ public class MyBatisUtil {
 	static {
 		
 		try {
-			// 1-1. 설정파일을 읽기 위한 Reader객체 생성하기
-			// 설정파일의 인코딩 정보 설정(한글처리를 위해서...)
+			// 1-1. �꽕�젙�뙆�씪�쓣 �씫湲� �쐞�븳 Reader媛앹껜 �깮�꽦�븯湲�
+			// �꽕�젙�뙆�씪�쓽 �씤肄붾뵫 �젙蹂� �꽕�젙(�븳湲�泥섎━瑜� �쐞�빐�꽌...)
 			Charset charset = Charset.forName("UTF-8"); 
 			Resources.setCharset(charset);
 			Reader rd = Resources.getResourceAsReader(
 					"config/mybatis-config.xml");
 			
-			// 1-2. Reader객체를 사용하여 SqlSessionFactory객체 생성하기
+			// 1-2. Reader媛앹껜瑜� �궗�슜�븯�뿬 SqlSessionFactory媛앹껜 �깮�꽦�븯湲�
 			sqlSessionFactory = new SqlSessionFactoryBuilder().build(rd);
-			rd.close(); // 자원반납
+			rd.close(); // �옄�썝諛섎궔
 			
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -33,17 +33,17 @@ public class MyBatisUtil {
 	}
 	
 	/**
-	 * SqlSession객체를 제공하기 위한 메서드
-	 * @return SqlSession객체
+	 * SqlSession媛앹껜瑜� �젣怨듯븯湲� �쐞�븳 硫붿꽌�뱶
+	 * @return SqlSession媛앹껜
 	 */
 	public static SqlSession getSqlSession() {
-		return sqlSessionFactory.openSession(); // 기본값 : autoCommit false.
+		return sqlSessionFactory.openSession(); // 湲곕낯媛� : autoCommit false.
 	}
 	
 	/**
-	 * SqlSession객체를 제공하기 위한 메서드
-	 * @param autoCommit autoCommit 여부값
-	 * @return SqlSession객체
+	 * SqlSession媛앹껜瑜� �젣怨듯븯湲� �쐞�븳 硫붿꽌�뱶
+	 * @param autoCommit autoCommit �뿬遺�媛�
+	 * @return SqlSession媛앹껜
 	 */
 	public static SqlSession getSqlSession(boolean autoCommit) {
 		return sqlSessionFactory.openSession(autoCommit);

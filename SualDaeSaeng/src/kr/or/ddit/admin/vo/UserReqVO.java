@@ -1,6 +1,6 @@
 package kr.or.ddit.admin.vo;
 
-public class userReqVO {
+public class UserReqVO {
 	private int usersNo;
 	private int usersRole; 
 	private String usersId; 

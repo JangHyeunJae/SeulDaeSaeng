@@ -41,6 +41,7 @@
   		<mapper resource="mapper/member.xml" />
   		<mapper resource="mapper/restaurant.xml" />
   		<mapper resource="mapper/admin.xml" />
+  		<mapper resource="mapper/contact.xml" />
   	</mappers>
   
   

@@ -1,7 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-
 <mapper namespace="restaurant">
-	<select id="restaurantList"></select>
+
+	<select id="restaurantList" parameterType="hashMap" resultType="restVO">
+		<!-- 식당 카테고리별 리스트 -->
+		SELECT *
+		FROM (
+		    SELECT 
+		        ADDR_NO addrNo, 
+		        REST_BIZNO restBizno, 
+		        NAME name, MCLS mcls, 
+		        MCLS_NAME mclsName, 
+		        SCLS scls, 
+		        SCLS_NAME sclsName, 
+		        ADDR_BASIC addrBasic, 
+		        LIKE_COUNT likeCount,
+		        AVG_REVIEW_STAR avgReviewStar,
+		        DISTANCE,
+		        ROWNUM AS rnum
+		    FROM (
+		        SELECT 
+			        ADDR_NO,
+			        REST_BIZNO,
+			        NAME,
+			        MCLS,
+			        MCLS_NAME,
+			        SCLS,
+			        SCLS_NAME,
+			        ADDR_BASIC,
+			        LIKE_COUNT,
+			        DISTANCE,
+               		COALESCE(AVG(REVIEW_STAR), -1) AS AVG_REVIEW_STAR
+		        FROM RESTVIEW
+		        WHERE 1 = 1
+				<if test="mcls!='all' and mcls!=null and mcls!=''">
+					AND MCLS = #{mcls}
+				</if>
+				<if test="scls!='all' and scls!=null and scls!=''">
+					AND SCLS = #{scls}
+				</if>
+		        GROUP BY ADDR_NO, REST_BIZNO, NAME, MCLS, MCLS_NAME, SCLS, SCLS_NAME, ADDR_BASIC, LIKE_COUNT, DISTANCE
+		        <if test="order==null or order==''">
+					ORDER BY LIKE_COUNT DESC, AVG_REVIEW_STAR DESC, DISTANCE ASC
+				</if>
+				<if test="order=='distanceUp'">
+					ORDER BY DISTANCE ASC
+				</if>
+				<if test="order=='likeUp'">
+					ORDER BY LIKE_COUNT DESC 
+				</if>
+				<if test="order=='starUp'">
+					ORDER BY AVG_REVIEW_STAR DESC 
+				</if>
+				<if test="order=='starDonw'">
+					ORDER BY AVG_REVIEW_STAR ASC 
+				</if>
+				<if test="order=='nameUp'">
+					ORDER BY NAME ASC 
+				</if>
+				<if test="order=='nameDonw'">
+					ORDER BY NAME DESC
+				</if>
+		    )
+		)
+		WHERE rnum BETWEEN #{firstpost} AND #{postperpage}
+	</select>
+	
+	<select id="restaurantTypeTotal" parameterType="hashMap" resultType="int">
+		SELECT COUNT(*) AS total_count
+		FROM RESTVIEW
+		WHERE 1=1
+		<if test="mcls!='all' and mcls!=null and mcls!=''">
+			AND MCLS = #{mcls}
+		</if>
+		<if test="scls!='all' and scls!=null and scls!=''">
+			AND SCLS = #{scls}
+		</if>
+	</select>
+	
+	<select id="selectMslsName" parameterType="hashMap" resultType="String" >
+		SELECT MCLS_NAME FROM RESTMCLS WHERE MCLS_ID = #{mcls}
+	</select>
+	
+	<select id="selectSslsName" parameterType="hashMap" resultType="String" >
+		SELECT SCLS_NAME FROM RESTSCLS WHERE MCLS_ID = #{mcls} AND SCLS_ID = #{scls}
+	</select>
+	
+	<select id="selectMclsList" resultType="restVO" >
+		SELECT MCLS_NAME FROM RESTMCLS
+	</select>
+	
+	<select id="selectSclsList" resultType="restVO" >
+		SELECT SCLS_NAME FROM RESTMCLS
+	</select>
+	
+	
 </mapper>

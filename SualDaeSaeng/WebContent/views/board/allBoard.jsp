@@ -12,6 +12,30 @@
 	List<BoardVO> boardList = (List<BoardVO>)request.getAttribute("boardList");
     int levelChk = (int)request.getAttribute("levelChk");
     
+    String msg = (String) request.getAttribute("msg");
+    if (msg != null) {
+        msg = msg.replace("\\", "\\\\").replace("\'", "\\\'").replace("\"", "\\\"");
+    }else{
+    	msg = "";
+    }
+    
+    String board = null;
+    if(levelChk == 0){
+    	board = "allBoard";
+    }else if(levelChk == 1){
+    	board = "freeBoard";
+    }else if(levelChk == 2){
+    	board = "studyBoard";
+    }else if(levelChk == 3){
+    	board = "noticeBoard";
+    }
+    
+    // 검색
+    String option = null;
+    if(request.getAttribute("searchOption") != null){
+    	option = (String)request.getAttribute("searchOption");
+    }
+    
     //페이징 기능
     int itemsPerPage = 5;
     int currentPage = (request.getParameter("page") != null) ? Integer.parseInt(request.getParameter("page")) : 1;
@@ -49,15 +73,65 @@
                                총 <b><%= (boardList != null) ? boardList.size() : 0 %></b> 개
                 </p>
 				<div class="input-group input-group-sm col-4">
+					<%
+						if(option == null){
+					%>
 					<button class="btn dropdown-toggle" type="button"
 						data-bs-toggle="dropdown" aria-expanded="false">전체</button>
 					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="#title">제목</a></li>
-						<li><a class="dropdown-item" href="#content">내용</a></li>
-						<li><a class="dropdown-item" href="#nickname">닉네임</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=title">제목</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=content">내용</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=nickname">닉네임</a></li>
 					</ul>
-					<input type="text" class="form-control"
-						aria-label="Text input with dropdown button">
+					<%
+						}else if(option.equals("title")){
+					%>
+					<button class="btn dropdown-toggle" type="button"
+						data-bs-toggle="dropdown" aria-expanded="false" value="title">제목</button>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do">전체</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=content">내용</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=nickname">닉네임</a></li>
+					</ul>
+					<%
+						}else if(option.equals("content")){
+					%>
+					<button class="btn dropdown-toggle" type="button"
+						data-bs-toggle="dropdown" aria-expanded="false" value="content">내용</button>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do">전체</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=title">제목</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=nickname">닉네임</a></li>
+					</ul>
+					<%
+						}else if(option.equals("nickname")){
+					%>
+					<button class="btn dropdown-toggle" type="button"
+						data-bs-toggle="dropdown" aria-expanded="false" value="nickname">닉네임</button>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do">전체</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=title">제목</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=content">내용</a></li>
+					</ul>
+					<%
+						}
+					%>
+					<%
+						if(option == null){
+					%>
+						<form action="<%=request.getContextPath()%>/<%=board %>.do" method="post" role="form" id="searchForm">
+					<%
+						}else{
+					%>
+						<form action="<%=request.getContextPath()%>/<%=board %>.do?searchOption=<%=option %>" method="post" role="form" id="searchForm">
+					<%
+						}
+					%>
+						<input type="text" id="searchText" name="searchText" class="form-control"
+							aria-label="Text input with dropdown button" >
+<!-- 							onkeypress="search(event)" -->
+<!-- 						<button id="searchBtn" name="searchBtn" style="display: none;"></button> -->
+					</form>
 				</div>
 			</div>
 			<div class="list-group">
@@ -89,7 +163,7 @@
                            
                 %>
                 
-				  <a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&editReply=-1" class="list-group-item">
+				  <a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>" class="list-group-item">
 					<div class="d-flex w-100 justify-content-between align-items-center">
 						<h5 class="mb-2 text-truncate">
 							<small class="attach"> <i class="bi bi-paperclip"></i>
@@ -149,6 +223,12 @@
 
 <script type="text/javascript">
 
+	window.onload = function() {
+		var msg = '<%= msg %>';
+		if(msg != null && msg != '') alert(msg);
+	
+	};
+
     var buttons = document.querySelectorAll('.cta-btn');
     var boardName = document.querySelector('h2');
 
@@ -178,6 +258,71 @@
             event.target.classList.remove('gray');
             event.target.classList.add('orange');
         });
+    });
+    
+//  	// Enter 키 누를 때 폼 제출 이벤트 처리
+//     $('#searchText').keypress(function(event) {
+//         if (event.key == 'Enter') {
+//             event.preventDefault(); // 기본 제출 동작 방지
+            
+//             var searchText = $('#searchText').val(); // 입력 필드 값
+//             var searchOption = option; // 선언한 option 변수의 값
+
+//             // 선택한 옵션에 따라 페이지 이동
+<%--             var contextPath = '<%= request.getContextPath() %>'; --%>
+<%--             var board = '<%= board %>'; --%>
+//             var url = contextPath + '/' + board + '.do';
+//             if (searchOption != null) {
+//                 url += '?searchOption=' + searchOption;
+//             }
+
+//             // 검색어가 입력되었다면 URL에 추가
+//             if (searchText.trim() != '') {
+//                 url += (searchOption != null ? '&' : '?') + 'searchText=' + encodeURIComponent(searchText);
+//             }
+
+//             window.location.href = url; // 페이지 이동
+//         }
+//     });
+// 		$(function(){
+			
+// 			var submitBtn = $("#submitBtn");
+// 			var insertForm = $("#insertForm");
+			
+// 			// 등록 버튼 클릭 시 이벤트
+// 			submitBtn.on("click", function(){
+		
+// 				var title = $("#title").val();
+// 				var content = $("#content").val();
+// 				var level = $(".btn-check").val();
+// 				var levelChk = $("#levelChk").val();
+// 				var idx = $("#idx").val();
+		
+// 				if(title == null || title==""){
+// 		            alert("제목을 입력해주세요!");
+// 		            return false;
+// 		        }
+// 		        if(content == null || content==""){
+// 		            alert("내용을 입력해주세요!");
+// 		            return false;
+// 		        }
+// 		        insertForm.submit();
+// 			});
+// 		});
+// 		function search(e){
+// 		    var searchText = document.getElementById("searchText").value;
+// 		    var code = e.code;
+		
+// 		    if(code == 'Enter'){
+// 		    	document.getElementById("searchForm").submit();
+// 		    }
+// 		 }
+	// Enter 키를 누를 때 폼 제출 이벤트 처리
+    document.getElementById("searchText").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault(); // 기본 제출 동작 방지
+            document.getElementById("searchForm").submit(); // 폼 제출
+        }
     });
 
 </script>

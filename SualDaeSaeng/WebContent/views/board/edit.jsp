@@ -37,7 +37,7 @@
     <div class="container position-relative">
       <div class="row d-flex justify-content-center">
         <p class="mb-5 text-start">
-          <a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&editReply=-1">
+          <a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>">
             <i class="bi bi-chevron-left"></i> 뒤로가기
           </a>
         </p>
@@ -91,11 +91,16 @@ $(function(){
             alert("제목을 입력해주세요!");
             return false;
         }
-        if(content == null || content == ""){
+        if(content == null || content == "" || content == "<p><br></p>" || content == "<br>"){
             alert("내용을 입력해주세요!");
             return false;
         }
-        insertForm.submit();
+
+        if(confirm("수정하시겠습니까?")){
+        	insertForm.submit();
+		} else{
+			return false;
+		}
 	});
 });
 

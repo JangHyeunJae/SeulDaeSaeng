@@ -4,7 +4,7 @@ import java.util.List;
 
 import kr.or.ddit.admin.dao.AdminDaoImpl;
 import kr.or.ddit.admin.dao.IAdmindao;
-import kr.or.ddit.admin.vo.memberReqVO;
+import kr.or.ddit.admin.vo.MemberReqVO;
 
 public class AdminServiceImpl implements IAdminService {
 	
@@ -20,12 +20,27 @@ public class AdminServiceImpl implements IAdminService {
 	private IAdmindao dao = AdminDaoImpl.getInstance();
 	
 	@Override
-	public List<memberReqVO> selectmemList() {
+	public List<MemberReqVO> selectmemList() {
 		return dao.selectmemList();
 	}
+	
+	
+	
 	@Override
 	public int AdminAccept(int usersNo) {
 		return dao.AdminAccept(usersNo);
+	}
+	
+	
+	@Override
+	public List<MemberReqVO> selectallList() {
+		return dao.selectallList();
+	}
+	
+	
+	@Override
+	public MemberReqVO selectmember(String parameter) {
+		return dao.selectmember(parameter);
 	}
 
 }

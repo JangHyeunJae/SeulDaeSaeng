@@ -46,9 +46,9 @@ public class LoginController extends HttpServlet {
 			req.getSession().setAttribute("usersId", usersId); // ���ǿ� ��� �ֱ�
 			resp.sendRedirect(req.getContextPath() + "/views/index.jsp");
 		} else {
-			
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("isSuccess", "fail");
+			resp.sendRedirect("/views/member/login.jsp");
 		}
 	}
 }

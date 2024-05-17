@@ -15,7 +15,7 @@ import kr.or.ddit.member.service.MemberServiceImpl;
 
 
 @WebServlet("/member/idCheck.do")
-public class memberIdChk extends HttpServlet {
+public class MemberIdChk extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	IMemberService service = MemberServiceImpl.getInstance();

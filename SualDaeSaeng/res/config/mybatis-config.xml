@@ -19,6 +19,8 @@
   	<typeAlias type="kr.or.ddit.board.vo.BoardVO" alias="brdVO"/>
   	<typeAlias type="kr.or.ddit.member.vo.MemberVO" alias="memVO"/>
   	<typeAlias type="kr.or.ddit.restaurant.vo.RestaurantVO" alias="restVO"/>
+  	<typeAlias type="kr.or.ddit.member.vo.UsersVO" alias="usersVO"/>
+  	<typeAlias type="kr.or.ddit.member.vo.AddressVO" alias="addrVO"/>
   </typeAliases>
   
   	<environments default="dev">

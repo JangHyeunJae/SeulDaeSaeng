@@ -39,4 +39,12 @@ public interface IBoardDao {
 
 	public int updateReply(Map<String, Object> parameter);
 
+	public int deleteReply(int replyNo);
+
+	public List<BoardVO> searchAllBoardList(Map<String, Object> parameter);
+
+	public List<BoardVO> searchSelectBoardList(Map<String, Object> parameter);
+
+	public int reportBoard(int boardNo);
+
 }

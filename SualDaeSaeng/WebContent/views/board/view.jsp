@@ -22,7 +22,14 @@
     int idx = (int) request.getAttribute("idx");
 	int levelChk = (int) request.getAttribute("levelChk");
 	int editReply = (int) request.getAttribute("editReply");
-    
+
+	String msg = (String) request.getAttribute("msg");
+    if (msg != null) {
+        msg = msg.replace("\\", "\\\\").replace("\'", "\\\'").replace("\"", "\\\"");
+    }else{
+    	msg = "";
+    }
+	
     int level = bv.getBoardLevel();
     String boardName = null;
     String board = null;
@@ -95,7 +102,7 @@
                   BoardVO beforeBoardDetail = boardList.get(idx-1);
               %>
            <div class="prve col-md-6 col-12 ps-2">
-            <a href="/board/detail.do?boardNo=<%=beforeBoardDetail.getBoardNo() %>&idx=<%=idx-1 %>&levelChk=<%=levelChk %>&editReply=-1" class="d-block pt-4 pb-4">
+            <a href="/board/detail.do?boardNo=<%=beforeBoardDetail.getBoardNo() %>&idx=<%=idx-1 %>&levelChk=<%=levelChk %>" class="d-block pt-4 pb-4">
               <span class="d-inline-block pe-3">이전글 <i class="bi bi-chevron-up"></i></span> 
               <b><%=beforeBoardDetail.getBoardTitle() %></b>
             </a>
@@ -119,7 +126,7 @@
                   BoardVO nextBoardDetail =  boardList.get(idx+1); 
               %>
              <div class="next col-md-6 col-12 text-end pe-2">
-              <a href="/board/detail.do?boardNo=<%=nextBoardDetail.getBoardNo() %>&idx=<%=idx+1 %>&levelChk=<%=levelChk %>&editReply=-1" class="d-block pt-4 pb-4">
+              <a href="/board/detail.do?boardNo=<%=nextBoardDetail.getBoardNo() %>&idx=<%=idx+1 %>&levelChk=<%=levelChk %>" class="d-block pt-4 pb-4">
                 <b class="pe-3"><%=nextBoardDetail.getBoardTitle() %></b>
                 <span class="d-inline-block">다음글 <i class="bi bi-chevron-down"></i></span>
              </a>
@@ -173,7 +180,8 @@
                 %>
                 <p><a href="#" class="reply rounded">대댓글</a>
                 <a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&editReply=<%=rv.getReplyNo() %>" class="reply rounded">수정</a>
-                <a href="#" class="reply rounded">삭제</a></p>
+                <a href="<%=request.getContextPath()%>/board/deleteReply.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&replyNo=<%=rv.getReplyNo() %>" 
+                	onclick="return confirm('삭제하시겠습니까?');" class="reply rounded">삭제</a></p>
                 <%
                 	}else{
                 %>
@@ -196,11 +204,11 @@
           <%
           	if(editReply == -1){
           %>
-            <form action="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&editReply=-1" method="post" role="form" id="insertForm" class="p-5">
+            <form action="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>" method="post" role="form" id="insertForm" class="p-5">
           <%
           	}else{
           %>
-            <form action="<%=request.getContextPath()%>/board/editReply.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&editReply=-1" method="post" role="form" id="insertForm" class="p-5">
+            <form action="<%=request.getContextPath()%>/board/editReply.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>" method="post" role="form" id="insertForm" class="p-5">
 		  <%
           	}
 		  %>
@@ -227,7 +235,7 @@
               </div>
               <input type="hidden" id="replyNo" name="replyNo" value=<%=rv.getReplyNo() %>>
               <div class="form-group text-center">
-                <button type="submit" id="submitBtn">댓글 수정하기</button>
+                <button type="submit" id="submitBtn" onclick="return confirm('수정하시겠습니까?');">댓글 수정하기</button>
               </div>
               <%
                     	}
@@ -259,7 +267,11 @@
           if(bv.getUsersNo()==1){
           %>
           <a href="<%=request.getContextPath()%>/board/edit.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>" type="button" class="btn btn-secondary">수정하기</a>
-          <a href="<%=request.getContextPath()%>/board/delete.do?boardNo=<%=bv.getBoardNo() %>&levelChk=<%=levelChk %>" type="button" class="btn btn-secondary">삭제하기</a>
+          <a href="<%=request.getContextPath()%>/board/delete.do?boardNo=<%=bv.getBoardNo() %>&levelChk=<%=levelChk %>" onclick="return confirm('삭제하시겠습니까?');" type="button" class="btn btn-secondary">삭제하기</a>
+          <%
+          }else{
+          %>
+          <a href="<%=request.getContextPath()%>/board/report.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&report=Y" onclick="return confirm('신고하시겠습니까?');" type="button" class="btn btn-secondary">신고하기</a>
           <%
           }
           %>
@@ -269,6 +281,13 @@
       </section>
     </main>
     <script>
+    
+	    window.onload = function() {
+	    	var msg = '<%= msg %>';
+			if(msg != null && msg != '') alert(msg);
+	
+	   	};
+    	
 	   var submitBtn = $("#submitBtn");
 	   var insertForm = $("#insertForm");
 

@@ -31,5 +31,30 @@ public class RestaurantServiceImpl implements IRestaurantService {
 		return dao.selectRestaurantType(cls);
 	}
 
+	@Override
+	public int selectRestaurantTypeTotal(Map<String, Object> cls) {
+		return dao.selectRestaurantTypeTotal(cls);
+	}
+
+	@Override
+	public String selectMclsName(Map<String, Object> cls) {
+		return dao.selectMclsName(cls);
+	}
+
+	@Override
+	public String selectSclsName(Map<String, Object> cls) {
+		return dao.selectSclsName(cls);
+	}
+
+	@Override
+	public List<RestaurantVO> selectMclsList() {
+		return dao.selectMclsList();
+	}
+
+	@Override
+	public List<RestaurantVO> selectSclsList() {
+		return dao.selectSclsList();
+	}
+
 	
 }

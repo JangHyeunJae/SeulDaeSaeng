@@ -98,4 +98,24 @@ public class BoardServiceImpl implements IBoardService{
 	public int updateReply(Map<String, Object> parameter) {
 		return boardDao.updateReply(parameter);
 	}
+
+	@Override
+	public int deleteReply(int replyNo) {
+		return boardDao.deleteReply(replyNo);
+	}
+
+	@Override
+	public List<BoardVO> searchAllBoardList(Map<String, Object> parameter) {
+		return boardDao.searchAllBoardList(parameter);
+	}
+
+	@Override
+	public List<BoardVO> searchSelectBoardList(Map<String, Object> parameter) {
+		return boardDao.searchSelectBoardList(parameter);
+	}
+
+	@Override
+	public int reportBoard(int boardNo) {
+		return boardDao.reportBoard(boardNo);
+	}
 }

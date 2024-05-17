@@ -31,7 +31,14 @@ public class BoardDetailController extends HttpServlet{
 		 BoardVO boardDetail = boardService.getBoardDetail(boardNo);
 		 int hit = boardService.updateHit(boardNo);
 		 int boardLevel = boardDetail.getBoardLevel();
-		 int editReply = Integer.parseInt(req.getParameter("editReply"));
+		 int editReply = -1;
+		 if(req.getParameter("editReply") != null) {
+			 editReply = Integer.parseInt(req.getParameter("editReply"));
+		 }
+		 String msg = null;
+		 if(req.getParameter("msg") != null) {
+			 msg = req.getParameter("msg");
+		 }
 		 
 		 int usersNo = boardDetail.getUsersNo();
 		 Map<String,Object> parameter = new HashMap<>();
@@ -51,6 +58,7 @@ public class BoardDetailController extends HttpServlet{
 		 req.setAttribute("idx", idx);
 		 req.setAttribute("levelChk", levelChk);
 		 req.setAttribute("editReply", editReply);
+		 req.setAttribute("msg", msg);
 		 
 		 List<BoardVO> boardList = null;
 		 if(levelChk == 0) boardList = boardService.allBoardList();
@@ -80,8 +88,7 @@ public class BoardDetailController extends HttpServlet{
 		  int status = boardService.insertReply(replyVO);
 
 		  if(status>0) {
-			  resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk
-					  		+ "&editReply=-1");
+			  resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk);
 		  }else {
 			  req.getRequestDispatcher("/views/board/view.jsp").forward(req, resp);
 		  }

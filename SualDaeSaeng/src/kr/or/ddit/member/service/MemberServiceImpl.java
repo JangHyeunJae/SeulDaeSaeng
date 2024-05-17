@@ -2,7 +2,9 @@ package kr.or.ddit.member.service;
 
 import kr.or.ddit.member.dao.IMemberDao;
 import kr.or.ddit.member.dao.MemberDaoImpl;
+import kr.or.ddit.member.vo.AddressVO;
 import kr.or.ddit.member.vo.MemberVO;
+import kr.or.ddit.member.vo.UsersVO;
 
 import java.util.List;
 
@@ -38,9 +40,33 @@ public class MemberServiceImpl implements IMemberService{
 		return memberDao.forgotPass(memberVO);
 	}
   
-  @Override
+	@Override
 	public int memberIdChk(String usersId) {
-		return dao.memberIdChk(usersId);
+		return memberDao.memberIdChk(usersId);
+	}
+	@Override
+	public int usersJoin(UsersVO usersVo) {
+		return memberDao.usersJoin(usersVo);
+	}
+	@Override
+	public int addrJoin(AddressVO addrVo) {
+		return memberDao.addrJoin(addrVo);
+	}
+	@Override
+	public int memberJoin(MemberVO memberVo) {
+		return memberDao.memberJoin(memberVo);
+	}
+	@Override
+	public UsersVO selectUsers(String usersId) {
+		return memberDao.selectUsers(usersId);
+	}
+	@Override
+	public MemberVO selectMember(int usersNo) {
+		return memberDao.selectMember(usersNo);
+	}
+	@Override
+	public AddressVO selectAddr(int addrNo) {
+		return memberDao.selectAddr(addrNo);
 	}
   
 }

@@ -2,13 +2,19 @@
 
 <%@include file="/header.jsp" %>
 
+<%
+	UsersVO usersVo = (UsersVO)request.getAttribute("usersVo");
+	MemberVO memberVo = (MemberVO)request.getAttribute("memberVo");
+	AddressVO addrVo = (AddressVO)request.getAttribute("addrVo");
+%>
+
     <main class="pb-5 mb-5" data-aos="fade" data-aos-delay="1500">
       <!-- ======= End Page Header ======= -->
       <div class="page-header d-flex align-items-center">
         <div class="container position-relative">
           <div class="row d-flex justify-content-center">
             <div class="col-lg-6 text-center">
-              <h2>회원가입</h2>
+              <h2>정보수정</h2>
             </div>
           </div>
         </div>
@@ -22,6 +28,11 @@
               <form action="<%=request.getContextPath() %>/member/join.do" method="post" role="form" class="php-email-form needs-validation" novalidate>
                  <div class="form-group d-flex align-items-center">
                   <span>저는 </span>
+                  <%
+                  	if(<%= %> == 1){
+											
+					}	                  	
+                  %>
                   <input type="radio" class="btn-check" name="classify" id="teacher" value="1" autocomplete="off">
                   <label class="btn btn-outline-warning" for="teacher">선생님</label>
                   <input type="radio" class="btn-check" name="classify" id="student" value="2" autocomplete="off" checked>

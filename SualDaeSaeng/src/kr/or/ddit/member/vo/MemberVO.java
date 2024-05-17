@@ -19,6 +19,13 @@ public class MemberVO {
 	public MemberVO() {
 		
 	}
+	
+	@Override
+	public String toString() {
+		return "MemberVO [usersNo=" + usersNo + ", memName=" + memName + ", memNick=" + memNick + ", memBirth="
+				+ memBirth + ", memEmail=" + memEmail + ", memTel=" + memTel + ", memClass=" + memClass + ", usersId="
+				+ usersId + ", usersPass=" + usersPass + ", memRegdt=" + memRegdt + ", addrNo=" + addrNo + "]";
+	}
 
 	public int getUsersNo() {
 		return usersNo;

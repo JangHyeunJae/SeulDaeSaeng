@@ -2,7 +2,7 @@ package kr.or.ddit.admin.vo;
 
 import java.util.Date;
 
-public class memberReqVO {	 
+public class MemberReqVO {	 
 	 private int usersNo; 
 	 private String memName; 
 	 private String memNick; 
@@ -14,7 +14,7 @@ public class memberReqVO {
 	 private int addrNo;
 	 
 	 
-	public memberReqVO() {
+	public MemberReqVO() {
 	}
 	
 	public int getUsersNo() {

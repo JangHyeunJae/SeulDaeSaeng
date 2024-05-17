@@ -29,7 +29,7 @@
                  <div class="form-group d-flex align-items-center">
                   <span>저는 </span>
                   <%
-                  	if(<%= %> == 1){
+                  	if( == 1){
 											
 					}	                  	
                   %>

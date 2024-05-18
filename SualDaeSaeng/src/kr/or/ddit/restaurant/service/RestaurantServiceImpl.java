@@ -52,8 +52,13 @@ public class RestaurantServiceImpl implements IRestaurantService {
 	}
 
 	@Override
-	public List<RestaurantVO> selectSclsList() {
-		return dao.selectSclsList();
+	public List<RestaurantVO> selectSclsList(String mcls) {
+		return dao.selectSclsList(mcls);
+	}
+
+	@Override
+	public RestaurantVO selectRest(String bizno) {
+		return dao.selectRest(bizno);
 	}
 
 	

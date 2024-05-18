@@ -87,12 +87,15 @@
 	</select>
 	
 	<select id="selectMclsList" resultType="restVO" >
-		SELECT MCLS_NAME FROM RESTMCLS
+		SELECT MCLS_NAME mclsName, MCLS_ID mcls FROM RESTMCLS
 	</select>
 	
-	<select id="selectSclsList" resultType="restVO" >
-		SELECT SCLS_NAME FROM RESTMCLS
+	<select id="selectSclsList" parameterType="String" resultType="restVO" >
+		SELECT SCLS_NAME sclsName, MCLS_ID mcls, SCLS_ID scls FROM RESTSCLS WHERE MCLS_ID = #{mcls}
 	</select>
 	
+	<select id="selectRest" parameterType="String" resultType="restVO" >
+	
+	</select>
 	
 </mapper>

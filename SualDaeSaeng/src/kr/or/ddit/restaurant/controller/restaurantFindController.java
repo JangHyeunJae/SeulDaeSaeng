@@ -24,8 +24,6 @@ public class restaurantFindController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		
 		Map<String, Object> cls = new HashMap<String, Object>();
 		String mcls = request.getParameter("mcls");
 		String scls = request.getParameter("scls");
@@ -48,9 +46,10 @@ public class restaurantFindController extends HttpServlet {
 		
 		if(!scls.equals("") && !scls.equals("all")) { 
 			sclsName = service.selectSclsName(cls);
+			mclsName = service.selectMclsName(cls);
 		} else if(!mcls.equals("") && !mcls.equals("all")) {
 			mclsName = service.selectMclsName(cls);
-			List<RestaurantVO> sclsList = service.selectSclsList();
+			List<RestaurantVO> sclsList = service.selectSclsList(mcls);
 			request.setAttribute("sclsList", sclsList);
 		}else {
 			List<RestaurantVO> mclsList = service.selectMclsList();
@@ -106,15 +105,12 @@ public class restaurantFindController extends HttpServlet {
 		request.setAttribute("scls", scls);
 		request.setAttribute("order", order);
 		
-
-	  	
-		
 		request.setAttribute("restList", restList);
 
 		request.getRequestDispatcher("/views/restaurant/restaurantFind.jsp").forward(request, response);
 		
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		doGet(request, response);
 	}
 }

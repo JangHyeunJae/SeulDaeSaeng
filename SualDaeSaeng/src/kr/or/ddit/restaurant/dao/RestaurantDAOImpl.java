@@ -12,7 +12,6 @@ import kr.or.ddit.util.MyBatisUtil;
 
 public class RestaurantDAOImpl implements IRestaurantDAO{
 	
-	
 	private static RestaurantDAOImpl instance = null;
 	
 	private RestaurantDAOImpl() {}
@@ -110,12 +109,12 @@ public class RestaurantDAOImpl implements IRestaurantDAO{
 	}
 
 	@Override
-	public List<RestaurantVO> selectSclsList() {
+	public List<RestaurantVO> selectSclsList(String mcls) {
 		SqlSession session = null;
 		List<RestaurantVO> selectSclsList = null;
 		try {
 			session = MyBatisUtil.getSqlSession(true);
-			selectSclsList = session.selectList("restaurant.selectSclsList");
+			selectSclsList = session.selectList("restaurant.selectSclsList",mcls);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -124,6 +123,24 @@ public class RestaurantDAOImpl implements IRestaurantDAO{
 			}
 		}
 		return selectSclsList;
+	}
+
+	
+	@Override
+	public RestaurantVO selectRest(String bizno) {
+		SqlSession session = null;
+		RestaurantVO selectRest = null;
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			selectRest = session.selectOne("restaurant.selectRest",bizno);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return selectRest;
 	}
 
 }

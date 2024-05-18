@@ -14,6 +14,7 @@ import com.google.gson.JsonObject;
 import kr.or.ddit.member.service.IMemberService;
 import kr.or.ddit.member.service.MemberServiceImpl;
 import kr.or.ddit.member.vo.MemberVO;
+import kr.or.ddit.member.vo.UsersVO;
 
 @WebServlet("/login.do")
 public class LoginController extends HttpServlet {
@@ -39,7 +40,11 @@ public class LoginController extends HttpServlet {
 
 		if (isSuccess) {
 			System.out.println("로그인성공");
+			MemberVO memDetail = loginService.getMemDetail(usersId);
+			UsersVO usersDetail = loginService.getUsersDetail(usersId);
 			req.getSession().setAttribute("usersId", usersId);
+			req.getSession().setAttribute("memDetail", memDetail);
+			req.getSession().setAttribute("usersRole", usersDetail.getUsersRole());
 			resp.sendRedirect(req.getContextPath() + "/main.do");
 		} else {
 			JsonObject jsonObject = new JsonObject();

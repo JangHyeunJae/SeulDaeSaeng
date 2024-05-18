@@ -8,7 +8,8 @@
 
 <%@include file="/header.jsp"%>
 <%
-    int classNo = (int)request.getAttribute("classNo");
+    int levelChk = (int)request.getAttribute("levelChk");
+    int classBoardChk = (int)request.getAttribute("classBoardChk");
     List<BoardVO> boardList = (List<BoardVO>)request.getAttribute("boardList");
     
     String msg = (String) request.getAttribute("msg");
@@ -18,14 +19,14 @@
     	msg = "";
     }
     
-    int levelChk = (int)request.getAttribute("levelChk");
     String board = null;
-    if(levelChk == 1){
+    if(classBoardChk == 1){
     	board = "eachClassNotice";
-    }else if(levelChk == 2){
+    }else if(classBoardChk == 2){
     	board = "eachClassBoard";
     }
     
+    // 페이징
     int itemsPerPage = 5;
     int currentPage = (request.getParameter("page") != null) ? Integer.parseInt(request.getParameter("page")) : 1;
     int totalItems = (boardList != null) ? boardList.size() : 0;
@@ -45,10 +46,10 @@
 		<div class="container position-relative">
 			<div class="row d-flex justify-content-center">
 				<div>
-					<h2><%=classNo %>호 게시판</h2>
+					<h2><%=levelChk %>호 게시판</h2>
 					<p>
-						<a class="cta-btn" href="<%=request.getContextPath()%>/eachClassNotice.do?classNo=<%=classNo %>">공지사항</a> 
-						<a class="cta-btn" href="<%=request.getContextPath()%>/eachClassBoard.do?classNo=<%=classNo %>">자유게시판</a>
+						<a class="cta-btn" href="<%=request.getContextPath()%>/eachClassNotice.do?levelChk=<%=levelChk %>">공지사항</a> 
+						<a class="cta-btn" href="<%=request.getContextPath()%>/eachClassBoard.do?levelChk=<%=levelChk %>">자유게시판</a>
 					</p>
 				</div>
 			</div>
@@ -68,9 +69,9 @@
 					<button class="btn dropdown-toggle" type="button"
 						data-bs-toggle="dropdown" aria-expanded="false">전체</button>
 					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>&searchOption=title">제목</a></li>
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>&searchOption=content">내용</a></li>
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>&searchOption=nickname">닉네임</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=title">제목</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=content">내용</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=nickname">닉네임</a></li>
 					</ul>
 					<%
 						}else if(option.equals("title")){
@@ -78,9 +79,9 @@
 					<button class="btn dropdown-toggle" type="button"
 						data-bs-toggle="dropdown" aria-expanded="false" value="title">제목</button>
 					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>">전체</a></li>
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>&searchOption=content">내용</a></li>
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>&searchOption=nickname">닉네임</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>">전체</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=content">내용</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=nickname">닉네임</a></li>
 					</ul>
 					<%
 						}else if(option.equals("content")){
@@ -88,9 +89,9 @@
 					<button class="btn dropdown-toggle" type="button"
 						data-bs-toggle="dropdown" aria-expanded="false" value="content">내용</button>
 					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>">전체</a></li>
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>&searchOption=title">제목</a></li>
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>&searchOption=nickname">닉네임</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>">전체</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=title">제목</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=nickname">닉네임</a></li>
 					</ul>
 					<%
 						}else if(option.equals("nickname")){
@@ -98,9 +99,9 @@
 					<button class="btn dropdown-toggle" type="button"
 						data-bs-toggle="dropdown" aria-expanded="false" value="nickname">닉네임</button>
 					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>">전체</a></li>
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>&searchOption=title">제목</a></li>
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>&searchOption=content">내용</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>">전체</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=title">제목</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=content">내용</a></li>
 					</ul>
 					<%
 						}
@@ -108,11 +109,11 @@
 					<%
 						if(option == null){
 					%>
-						<form action="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>" method="post" role="form" id="searchForm">
+						<form action="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>" method="post" role="form" id="searchForm">
 					<%
 						}else{
 					%>
-						<form action="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>&searchOption=<%=option %>" method="post" role="form" id="searchForm">
+						<form action="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=<%=option %>" method="post" role="form" id="searchForm">
 					<%
 						}
 					%>
@@ -140,7 +141,7 @@
 								<small class="attach"><i class="bi bi-paperclip"></i></small>
 								<%= bv.getBoardTitle() %>
 							</h5>
-							<small class="badge bg-light"><%= classNo %>호 게시판</small>
+							<small class="badge bg-light"><%= levelChk %>호 게시판</small>
 						</div>
 						<p class="mb-2 text-truncate"><%= bv.getBoardCon() %></p>
 						<div class="d-flex w-100 justify-content-between align-items-center">
@@ -161,28 +162,28 @@
                 <% if (currentPage > 1) { %>
                 <li class="page-item">
                     <!-- Include classNo in the URL -->
-                    <a class="page-link" href="<%= request.getContextPath() %>/eachClassBoard.do?classNo=<%= classNo %>&page=<%= currentPage - 1 %>">&laquo;</a>
+                    <a class="page-link" href="<%= request.getContextPath() %>/eachClassBoard.do?levelChk=<%= levelChk %>&page=<%= currentPage - 1 %>">&laquo;</a>
                 </li>
                 <% } %>
             
                 <% for (int i = 1; i <= totalPages; i++) { %>
                 <li class="page-item <%= (i == currentPage) ? "active" : "" %>">
                     <!-- Include classNo in the URL -->
-                    <a class="page-link" href="<%= request.getContextPath() %>/eachClassBoard.do?classNo=<%= classNo %>&page=<%= i %>"><%= i %></a>
+                    <a class="page-link" href="<%= request.getContextPath() %>/eachClassBoard.do?levelChk=<%= levelChk %>&page=<%= i %>"><%= i %></a>
                 </li>
                 <% } %>
 
                 <% if (currentPage < totalPages) { %>
                 <li class="page-item">
                     <!-- Include classNo in the URL -->
-                    <a class="page-link" href="<%= request.getContextPath() %>/eachClassBoard.do?classNo=<%= classNo %>&page=<%= currentPage + 1 %>">&raquo;</a>
+                    <a class="page-link" href="<%= request.getContextPath() %>/eachClassBoard.do?levelChk=<%= levelChk %>&page=<%= currentPage + 1 %>">&raquo;</a>
                 </li>
                 <% } %>
               </ul>
            </nav>
 
 			<div class="container d-flex align-items-center justify-content-end pb-5 gap-2 p-0">
-				<a href="<%= request.getContextPath() %>/board/write.do?levelChk=<%=classNo %>&idx=0" type="button" class="btn btn-outline-warning">글쓰기</a>
+				<a href="<%= request.getContextPath() %>/board/write.do?levelChk=<%=levelChk %>&idx=0" type="button" class="btn btn-outline-warning">글쓰기</a>
 			</div>
 		</div>
 	</section>

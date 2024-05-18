@@ -12,7 +12,6 @@ import java.util.List;
 
 public class MemberServiceImpl implements IMemberService{
 	
-	// �̱�������
 	public static IMemberService instance = null;
 	private MemberServiceImpl() {}
 	public static IMemberService getInstance() {
@@ -21,11 +20,7 @@ public class MemberServiceImpl implements IMemberService{
 	}
 	IMemberDao memberDao = MemberDaoImpl.getInstance();
 	
-	/**
-	 * �α��� üũ�� ���� �޼���, �Ķ���ͷ� memberVO�� �����ڷα��� üũ ���ΰ� ����
-	 * @param memberVO, isAdminLogin
-	 * @return �α��� ��������
-	 */
+
 	@Override
 	public boolean loginCheck(MemberVO memberVO, boolean isMemberLogin) {
 		return memberDao.loginCheck(memberVO, isMemberLogin);
@@ -67,6 +62,14 @@ public class MemberServiceImpl implements IMemberService{
 	@Override
 	public AddressVO selectAddr(int addrNo) {
 		return memberDao.selectAddr(addrNo);
+	}
+	@Override
+	public MemberVO getMemDetail(String usersId) {
+		return memberDao.getMemDetail(usersId);
+	}
+	@Override
+	public UsersVO getUsersDetail(String usersId) {
+		return memberDao.getUsersDetail(usersId);
 	}
   
 }

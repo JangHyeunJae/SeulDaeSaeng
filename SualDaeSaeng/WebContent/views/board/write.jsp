@@ -30,7 +30,7 @@
   		board = "noticeBoard";
   	}
   	else if(levelChk > 300){
-  		boardName = Integer.toString(levelChk);
+  		boardName = Integer.toString(levelChk) + "호";
   		board = "classTeacherBoard";
   	}
   	else {
@@ -41,7 +41,6 @@
  %>
 <!--<main data-aos="fade" data-aos-delay="1500" >-->
 <main>
-  <!-- ======= End Page Header ======= -->
   <div class="page-header sub d-flex align-items-center">
     <div class="container position-relative">
       <div class="row d-flex justify-content-center">

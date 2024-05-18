@@ -11,14 +11,22 @@ public class MemberVO {
 	private String memEmail;
 	private String memTel;
 	private String memClass;
+	private String usersId;
+	private String usersPass;
 	private LocalDate memRegdt;
 	private int addrNo;
-	
-	
 
 	public MemberVO() {
 		
 	}
+	
+	@Override
+	public String toString() {
+		return "MemberVO [usersNo=" + usersNo + ", memName=" + memName + ", memNick=" + memNick + ", memBirth="
+				+ memBirth + ", memEmail=" + memEmail + ", memTel=" + memTel + ", memClass=" + memClass + ", usersId="
+				+ usersId + ", usersPass=" + usersPass + ", memRegdt=" + memRegdt + ", addrNo=" + addrNo + "]";
+	}
+
 	public int getUsersNo() {
 		return usersNo;
 	}
@@ -58,9 +66,27 @@ public class MemberVO {
 	public String getMemClass() {
 		return memClass;
 	}
+	
 	public void setMemClass(String memClass) {
 		this.memClass = memClass;
 	}
+	
+	public String getUsersId() {
+		return usersId;
+	}
+	
+	public void setUsersId(String usersId) {
+		this.usersId = usersId;
+	}
+	
+	public String getUsersPass() {
+		return usersPass;
+	}
+	
+	public void setUsersPass(String usersPass) {
+		this.usersPass = usersPass;
+	}
+	
 	public LocalDate getMemRegdt() {
 		return memRegdt;
 	}
@@ -73,7 +99,4 @@ public class MemberVO {
 	public void setAddrNo(int addrNo) {
 		this.addrNo = addrNo;
 	}
-
-
-
 }

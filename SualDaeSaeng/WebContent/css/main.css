@@ -144,7 +144,9 @@ h5 {
   border-radius: 50px !important;
   width: 35px;
   height: 35px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .page-link {
@@ -1577,7 +1579,7 @@ font-family: var(--font-secondary);
   padding: 10px 12px;
 }
 
-.contact button[type=submit] {
+.contact button:is([type=submit],[type=button]){
   background: var(--color-orange-900);
   border: 0;
   padding: 10px 35px;
@@ -1586,7 +1588,7 @@ font-family: var(--font-secondary);
   border-radius: 8px;
 }
 
-.contact button[type=submit]:hover {
+.contact button:is([type=submit],[type=button]):hover {
   background: var(--color-orange-100)
 }
 

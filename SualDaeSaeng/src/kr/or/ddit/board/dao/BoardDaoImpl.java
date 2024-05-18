@@ -282,7 +282,7 @@ public class BoardDaoImpl implements IBoardDao {
 		
 		try {
 			session = MyBatisUtil.getSqlSession();
-			status = session.insert("board.updateBoard", parameter);
+			status = session.update("board.updateBoard", parameter);
 			
 			if(status > 0) {	// 성공
 				session.commit();
@@ -306,7 +306,95 @@ public class BoardDaoImpl implements IBoardDao {
 		
 		try {
 			session = MyBatisUtil.getSqlSession();
-			status = session.insert("board.updateReply", parameter);
+			status = session.update("board.updateReply", parameter);
+			
+			if(status > 0) {	// 성공
+				session.commit();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		
+		return status;
+	}
+
+	@Override
+	public int deleteReply(int replyNo) {
+		
+		SqlSession session = null;
+		int status = 0;		
+		
+		try {
+			session = MyBatisUtil.getSqlSession();
+			status = session.update("board.deleteReply", replyNo);
+			
+			if(status > 0) {	// 성공
+				session.commit();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		
+		return status;
+	}
+
+	@Override
+	public List<BoardVO> searchAllBoardList(Map<String, Object> parameter) {
+		
+		List<BoardVO> boardList = new ArrayList<BoardVO>();
+
+		SqlSession session = null;
+
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			boardList = session.selectList("board.searchAllBoardList", parameter);
+
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+		return boardList;
+	}
+
+	@Override
+	public List<BoardVO> searchSelectBoardList(Map<String, Object> parameter) {
+		
+		List<BoardVO> boardList = new ArrayList<BoardVO>();
+
+		SqlSession session = null;
+
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			boardList = session.selectList("board.searchSelectBoardList", parameter);
+
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+		return boardList;
+	}
+
+	@Override
+	public int reportBoard(int boardNo) {
+		
+		SqlSession session = null;
+		int status = 0;		
+		
+		try {
+			session = MyBatisUtil.getSqlSession();
+			status = session.update("board.reportBoard", boardNo);
 			
 			if(status > 0) {	// 성공
 				session.commit();

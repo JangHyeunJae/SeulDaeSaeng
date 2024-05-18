@@ -60,4 +60,12 @@ public interface IBoardService {
   public int insertFileDetail(FileDetailVO fileDetail);
 
   public FileDetailVO getFileDetail(int fileNo);
+
+  public int deleteReply(int replyNo);
+
+  public List<BoardVO> searchAllBoardList(Map<String, Object> parameter);
+
+  public List<BoardVO> searchSelectBoardList(Map<String, Object> parameter);
+
+  public int reportBoard(int boardNo);
 }

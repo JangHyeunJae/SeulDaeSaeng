@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%
+//String currentJSP = request.getServletPath();
+//String fileName = currentJSP.substring(currentJSP.lastIndexOf("/") + 1, currentJSP.lastIndexOf("."));
+//String fileExtension = currentJSP.substring(currentJSP.lastIndexOf(".") + 1);
+
+String uri = request.getRequestURI();
+String id = (String) session.getAttribute("usersId");
+%>
+
+
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -40,6 +50,7 @@
     <% }else if(request.getRequestURI().contains("write") || 
     		request.getRequestURI().contains("edit")){ %>
        
+
     <link rel="stylesheet" href="/css/bootform2.css">  <!-- editer css 추가 -->
        
     <!-- <script>
@@ -96,6 +107,7 @@
     <% } else if(request.getRequestURI().contains("restaurantUpDate")){%>
        <link href="/css/restaurantUpDate.css" rel="stylesheet">
    	<% } %>
+
     
   </head>
   <body>
@@ -130,31 +142,31 @@
               </ul>
             </li>
 			<li class="dropdown">
-				<a href="<%=request.getContextPath() %>/restaurant/find.do?mcls=all">
+				<a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=all'>
 				  <span>식당찾기</span>
 				  <i class="bi-caret-down-fill"></i>
 				</a>
 				<ul>
 					<li>
-					    <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I201'">한식</a>
+					    <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I201'>한식</a>
 					</li>
 					<li>
-					  <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I202'">중식</a>
+					  <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I202'>중식</a>
 					</li>
 					<li>
-					  <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I203'">일식</a>
+					  <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I203'>일식</a>
 					</li>
 					<li>
-					  <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I204'">서양식</a>
+					  <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I204'>서양식</a>
 					</li>
 					<li>
-					  <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I205'">동남아식</a>
+					  <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I205'>동남아식</a>
 					</li>
 					<li>
-					  <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I210'">간이식</a>
+					  <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I210'>간이식</a>
 					</li>
 					<li >
-					  <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls='I212'">카페</a>
+					  <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I212'>카페</a>
 				    </li>
 				</ul>
 			</li>
@@ -172,14 +184,29 @@
                 <!-- <img src="img/testimonials/testimonials-2.jpg" class="testimonial-img" alt=""> -->
               </button>
               <ul class="dropdown-menu">
-                <li>
+                <%
+					if(id == null) {
+				%>
+                	<li>
+                  		<a class="dropdown-item" href="<%=request.getContextPath() %>/member/join.do">회원가입</a>
+                	</li>
+                	<li>
+				  		<a class="dropdown-item" href="<%=request.getContextPath() %>/login.do">로그인</a>
+					</li>
 
-                  <a class="dropdown-item" href="<%=request.getContextPath() %>/member/join.do">회원가입</a>
-
-                </li>
-                <li>
-                  <a class="dropdown-item" href="/views/login.jsp">로그인</a>
-                </li>
+				<% 
+					}else{
+				%>
+                	<li>
+                  		<a class="dropdown-item" href="<%=request.getContextPath() %>/member/myPageHome.do">마이페이지</a>
+                	</li>
+					<li>
+						<a href="<%=request.getContextPath() %>/logout.do">로그아웃</a>
+					</li>
+				<% 
+					}
+				%>
+               
                 <!-- <li><a class="dropdown-item" href="logout.html">로그아웃</a></li><li><a class="dropdown-item" href="myPage.html"><span>정윤지</span>페이지</a></li>-->
               </ul>
             </div>

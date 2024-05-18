@@ -7,9 +7,6 @@ public class UsersVO {
 	private String usersId; /*  */
 	private String usersPass; /*  */
 	private String usersYn; /*  */
-	
-	public UsersVO() {
-	}
 
 	public int getUsersNo() {
 		return usersNo;

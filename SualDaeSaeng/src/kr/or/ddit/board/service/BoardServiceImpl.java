@@ -142,5 +142,24 @@ public class BoardServiceImpl implements IBoardService{
 	@Override
 	public FileDetailVO getFileDetail(int fileNo) {
 		return boardDao.getFileDetail(fileNo);
+
+  @Override  
+	public int deleteReply(int replyNo) {
+		return boardDao.deleteReply(replyNo);
+	}
+
+	@Override
+	public List<BoardVO> searchAllBoardList(Map<String, Object> parameter) {
+		return boardDao.searchAllBoardList(parameter);
+	}
+
+	@Override
+	public List<BoardVO> searchSelectBoardList(Map<String, Object> parameter) {
+		return boardDao.searchSelectBoardList(parameter);
+	}
+
+	@Override
+	public int reportBoard(int boardNo) {
+		return boardDao.reportBoard(boardNo);
 	}
 }

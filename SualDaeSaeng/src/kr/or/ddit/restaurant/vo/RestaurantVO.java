@@ -7,6 +7,8 @@ public class RestaurantVO {
 	private String name;
 	private String mcls;
 	private String scls;
+	private String mclsName;
+	private String sclsName;
 	private int addrPost;
 	private String addrBasic;
 	private String addrDetail;
@@ -26,6 +28,11 @@ public class RestaurantVO {
 	private String fileExt;
 	private String fileDt;
 	private String fileYn;
+	private int likeCount;
+	private int avgReviewStar;
+	private int firstpost;
+	private int postperpage;
+	private int distance;	
 	
 	public int getAddrNo() {
 		return addrNo;
@@ -56,6 +63,18 @@ public class RestaurantVO {
 	}
 	public void setScls(String scls) {
 		this.scls = scls;
+	}
+	public String getMclsName() {
+		return mclsName;
+	}
+	public void setMclsName(String mclsName) {
+		this.mclsName = mclsName;
+	}
+	public String getSclsName() {
+		return sclsName;
+	}
+	public void setSclsName(String sclsName) {
+		this.sclsName = sclsName;
 	}
 	public int getAddrPost() {
 		return addrPost;
@@ -171,14 +190,48 @@ public class RestaurantVO {
 	public void setFileYn(String fileYn) {
 		this.fileYn = fileYn;
 	}
+	public int getLikeCount() {
+		return likeCount;
+	}
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
+	public int getAvgReviewStar() {
+		return avgReviewStar;
+	}
+	public void setAvgReviewStar(int avgReviewStar) {
+		this.avgReviewStar = avgReviewStar;
+	}
+	public int getFirstpost() {
+		return firstpost;
+	}
+	public void setFirstpost(int firstpost) {
+		this.firstpost = firstpost;
+	}
+	public int getPostperpage() {
+		return postperpage;
+	}
+	public void setPostperpage(int postperpage) {
+		this.postperpage = postperpage;
+	}
+	public int getDistance() {
+		return distance;
+	}
+	public void setDistance(int distance) {
+		this.distance = distance;
+	}
+	
 	@Override
 	public String toString() {
 		return "RestaurantVO [addrNo=" + addrNo + ", restBizno=" + restBizno + ", name=" + name + ", mcls=" + mcls
-				+ ", scls=" + scls + ", addrPost=" + addrPost + ", addrBasic=" + addrBasic + ", addrDetail="
-				+ addrDetail + ", lon=" + lon + ", lat=" + lat + ", reviewNo=" + reviewNo + ", usersNo=" + usersNo
-				+ ", bizNo=" + bizNo + ", reviewStar=" + reviewStar + ", reviewText=" + reviewText + ", reviewYn="
-				+ reviewYn + ", fileNo=" + fileNo + ", fileSavepath=" + fileSavepath + ", fileOgname=" + fileOgname
-				+ ", fileSavednm=" + fileSavednm + ", fileSize=" + fileSize + ", fileExt=" + fileExt + ", fileDt="
-				+ fileDt + ", fileYn=" + fileYn + "]";
+				+ ", scls=" + scls + ", mclsName=" + mclsName + ", sclsName=" + sclsName + ", addrPost=" + addrPost
+				+ ", addrBasic=" + addrBasic + ", addrDetail=" + addrDetail + ", lon=" + lon + ", lat=" + lat
+				+ ", reviewNo=" + reviewNo + ", usersNo=" + usersNo + ", bizNo=" + bizNo + ", reviewStar=" + reviewStar
+				+ ", reviewText=" + reviewText + ", reviewYn=" + reviewYn + ", fileNo=" + fileNo + ", fileSavepath="
+				+ fileSavepath + ", fileOgname=" + fileOgname + ", fileSavednm=" + fileSavednm + ", fileSize="
+				+ fileSize + ", fileExt=" + fileExt + ", fileDt=" + fileDt + ", fileYn=" + fileYn + ", likeCount="
+				+ likeCount + ", avgReviewStar=" + avgReviewStar + ", firstpost=" + firstpost + ", postperpage="
+				+ postperpage + "]";
 	}
+	
 }

@@ -275,8 +275,6 @@ document.addEventListener('DOMContentLoaded', () => {
   })();
 
 
-  /////////////////////////////////////////////
-
 $(document).ready(function() {
     var obj = $(".file-drop");
     var label = obj.find('label');
@@ -361,5 +359,4 @@ $(document).ready(function() {
         }
     }
 });
-
 });

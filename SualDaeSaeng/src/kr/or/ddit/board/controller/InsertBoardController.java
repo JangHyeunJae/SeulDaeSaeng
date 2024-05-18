@@ -46,8 +46,7 @@ public class InsertBoardController extends HttpServlet{
 		
 		int status = service.insertBoard(boardVO);
 		if(status > 0) { 	// 성공
-			resp.sendRedirect("/board/detail.do?boardNo=" + boardVO.getBoardNo() + "&idx=" + idx + "&levelChk=" + levelChk
-					+ "&editReply=-1");
+			resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardVO.getBoardNo() + "&idx=" + idx + "&levelChk=" + levelChk);
 		}else {				// 실패
 			req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
 		}

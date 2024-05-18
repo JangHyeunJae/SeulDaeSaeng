@@ -70,7 +70,58 @@
 		select *
         from board
         where board_yn = 'Y'
-        order by board_no desc
+        and board_level &lt; 300
+        order by case when board_level = 3 then 0 else 1 end, board_no desc
+</select>
+
+<select id="searchAllBoardList" parameterType="Map" resultMap="boardMap">
+		select b.*
+		from board b, member m
+		where b.users_no = m.users_no
+		and b.board_yn = 'Y'
+		and b.board_level &lt; 300
+	    <if test='searchOption == null or searchOption.equals("null") or searchOption.equals("")'>
+	      and (
+	        b.board_title like '%' || #{searchText} || '%'
+	        or b.board_con like '%' || #{searchText} || '%'
+	        or m.mem_nick like '%' || #{searchText} || '%'
+	      )
+	    </if>
+	    <if test='searchOption == "title"'>
+	      and b.board_title like '%' || #{searchText} || '%'
+	    </if>
+	    <if test='searchOption == "content"'>
+	      and b.board_con like '%' || #{searchText} || '%'
+	    </if>
+	    <if test='searchOption == "nickname"'>
+	      and m.mem_nick like '%' || #{searchText} || '%'
+	    </if>
+		order by case when b.board_level = 3 then 0 else 1 end, b.board_no desc
+</select>
+
+<select id="searchSelectBoardList" parameterType="Map" resultMap="boardMap">
+		select b.*
+		from board b, member m
+		where b.users_no = m.users_no
+		and b.board_yn = 'Y'
+		and board_level = #{boardLevel}
+	    <if test='searchOption == null or searchOption.equals("null") or searchOption.equals("")'>
+	      and (
+	        b.board_title like '%' || #{searchText} || '%'
+	        or b.board_con like '%' || #{searchText} || '%'
+	        or m.mem_nick like '%' || #{searchText} || '%'
+	      )
+	    </if>
+	    <if test='searchOption == "title"'>
+	      and b.board_title like '%' || #{searchText} || '%'
+	    </if>
+	    <if test='searchOption == "content"'>
+	      and b.board_con like '%' || #{searchText} || '%'
+	    </if>
+	    <if test='searchOption == "nickname"'>
+	      and m.mem_nick like '%' || #{searchText} || '%'
+	    </if>
+		order by case when b.board_level = 3 then 0 else 1 end, b.board_no desc
 </select>
 
 <select id="getBoardDetail" parameterType="int" resultMap="boardMap">
@@ -81,10 +132,9 @@
 
 <select id="selectBoardList" parameterType="int" resultMap="boardMap">
 		select *
-	  from board
-	  where board_level =#{boardLevel} and board_yn = 'Y'
-	  order by board_no desc
-
+	  	from board
+	  	where board_level =#{boardLevel} and board_yn = 'Y'
+	  	order by board_no desc
 </select>
 
 <select id="getWriterDetail" parameterType="Map" resultMap="memberMap">
@@ -103,6 +153,8 @@
 		select *
         from reply
         where board_no =#{boardNo}
+        and reply_yn='Y'
+        order by reply_no desc
 </select>
 
 
@@ -142,13 +194,23 @@
 </update>
 
 <update id="updateReply" parameterType="Map">
-	update reply
-	set reply_con = #{replyCon}
-	where reply_no = #{replyNo}
+		update reply
+		set reply_con = #{replyCon}
+		where reply_no = #{replyNo}
+</update>
+
+<update id="deleteReply" parameterType="int">
+		update reply
+		set reply_yn='N'
+		where reply_no = #{replyNo}
 </update>
 
 <update id="deleteBoard" parameterType="int">
         update board set board_yn = 'N' where board_no =#{boardNo}
+</update>
+
+<update id="reportBoard" parameterType="int">
+		update board set report_yn = 'Y' where board_no = #{boardNo}
 </update>
 
 <update id="updateHit" parameterType="int">

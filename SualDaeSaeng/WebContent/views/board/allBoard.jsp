@@ -12,12 +12,8 @@
 	List<BoardVO> boardList = (List<BoardVO>)request.getAttribute("boardList");
     int levelChk = (int)request.getAttribute("levelChk");
     
-    String msg = (String) request.getAttribute("msg");
-    if (msg != null) {
-        msg = msg.replace("\\", "\\\\").replace("\'", "\\\'").replace("\"", "\\\"");
-    }else{
-    	msg = "";
-    }
+    String msg = session.getAttribute("msg") == null ? "" : (String) session.getAttribute("msg");
+	session.removeAttribute("msg");
     
     String board = null;
     String boardName = null;

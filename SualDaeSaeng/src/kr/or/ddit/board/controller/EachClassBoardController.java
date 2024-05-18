@@ -27,11 +27,6 @@ public class EachClassBoardController extends HttpServlet {
 		int classBoardChk = 2;
 		int levelChk = Integer.parseInt(req.getParameter("levelChk"));
 
-		String msg = null;
-		if (req.getParameter("msg") != null) {
-			msg = req.getParameter("msg");
-		}
-
 		String searchOption = req.getParameter("searchOption");
 		if (searchOption != null && searchOption != "") {
 			req.setAttribute("searchOption", searchOption);

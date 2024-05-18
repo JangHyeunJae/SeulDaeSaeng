@@ -35,10 +35,6 @@ public class BoardDetailController extends HttpServlet{
 		 if(req.getParameter("editReply") != null) {
 			 editReply = Integer.parseInt(req.getParameter("editReply"));
 		 }
-		 String msg = null;
-		 if(req.getParameter("msg") != null) {
-			 msg = req.getParameter("msg");
-		 }
 		 
 		 int usersNo = boardDetail.getUsersNo();
 		 Map<String,Object> parameter = new HashMap<>();
@@ -58,7 +54,6 @@ public class BoardDetailController extends HttpServlet{
 		 req.setAttribute("idx", idx);
 		 req.setAttribute("levelChk", levelChk);
 		 req.setAttribute("editReply", editReply);
-		 req.setAttribute("msg", msg);
 		 
 		 List<BoardVO> boardList = null;
 		 if(levelChk == 0) boardList = boardService.allBoardList();

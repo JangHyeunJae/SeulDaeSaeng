@@ -68,4 +68,6 @@ public interface IBoardService {
   public List<BoardVO> searchSelectBoardList(Map<String, Object> parameter);
 
   public int reportBoard(int boardNo);
+
+  public List<BoardVO> searchClassBoardList(Map<String, Object> parameter);
 }

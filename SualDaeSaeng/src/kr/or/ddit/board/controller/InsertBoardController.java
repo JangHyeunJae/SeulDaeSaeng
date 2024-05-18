@@ -22,9 +22,9 @@ public class InsertBoardController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int classNo = Integer.parseInt(req.getParameter("classNo"));
+		int levelChk = Integer.parseInt(req.getParameter("levelChk"));
 		int idx = Integer.parseInt(req.getParameter("idx"));
-		req.setAttribute("levelChk", classNo);
+		req.setAttribute("levelChk", levelChk);
 		req.setAttribute("idx", idx);
 		req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
 	}

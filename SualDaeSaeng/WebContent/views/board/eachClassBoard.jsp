@@ -11,12 +11,33 @@
     int classNo = (int)request.getAttribute("classNo");
     List<BoardVO> boardList = (List<BoardVO>)request.getAttribute("boardList");
     
+    String msg = (String) request.getAttribute("msg");
+    if (msg != null) {
+        msg = msg.replace("\\", "\\\\").replace("\'", "\\\'").replace("\"", "\\\"");
+    }else{
+    	msg = "";
+    }
+    
+    int levelChk = (int)request.getAttribute("levelChk");
+    String board = null;
+    if(levelChk == 1){
+    	board = "eachClassNotice";
+    }else if(levelChk == 2){
+    	board = "eachClassBoard";
+    }
+    
     int itemsPerPage = 5;
     int currentPage = (request.getParameter("page") != null) ? Integer.parseInt(request.getParameter("page")) : 1;
     int totalItems = (boardList != null) ? boardList.size() : 0;
     int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
     int startIndex = (currentPage - 1) * itemsPerPage;
     int endIndex = Math.min(startIndex + itemsPerPage, totalItems);
+    
+	// 검색
+    String option = null;
+    if(request.getAttribute("searchOption") != null){
+    	option = (String)request.getAttribute("searchOption");
+    }
 %>
 <main>
 	<!-- ======= End Page Header ======= -->
@@ -41,13 +62,63 @@
                     총 <b><%= totalItems %></b> 개
                 </p>
 				<div class="input-group input-group-sm col-4">
-					<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">전체</button>
+					<%
+						if(option == null){
+					%>
+					<button class="btn dropdown-toggle" type="button"
+						data-bs-toggle="dropdown" aria-expanded="false">전체</button>
 					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="#title">제목</a></li>
-						<li><a class="dropdown-item" href="#content">내용</a></li>
-						<li><a class="dropdown-item" href="#nickname">닉네임</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>&searchOption=title">제목</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>&searchOption=content">내용</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>&searchOption=nickname">닉네임</a></li>
 					</ul>
-					<input type="text" class="form-control" aria-label="Text input with dropdown button">
+					<%
+						}else if(option.equals("title")){
+					%>
+					<button class="btn dropdown-toggle" type="button"
+						data-bs-toggle="dropdown" aria-expanded="false" value="title">제목</button>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>">전체</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>&searchOption=content">내용</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>&searchOption=nickname">닉네임</a></li>
+					</ul>
+					<%
+						}else if(option.equals("content")){
+					%>
+					<button class="btn dropdown-toggle" type="button"
+						data-bs-toggle="dropdown" aria-expanded="false" value="content">내용</button>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>">전체</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>&searchOption=title">제목</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>&searchOption=nickname">닉네임</a></li>
+					</ul>
+					<%
+						}else if(option.equals("nickname")){
+					%>
+					<button class="btn dropdown-toggle" type="button"
+						data-bs-toggle="dropdown" aria-expanded="false" value="nickname">닉네임</button>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>">전체</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>&searchOption=title">제목</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>&searchOption=content">내용</a></li>
+					</ul>
+					<%
+						}
+					%>
+					<%
+						if(option == null){
+					%>
+						<form action="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>" method="post" role="form" id="searchForm">
+					<%
+						}else{
+					%>
+						<form action="<%=request.getContextPath()%>/<%=board %>.do?classNo=<%=classNo %>&searchOption=<%=option %>" method="post" role="form" id="searchForm">
+					<%
+						}
+					%>
+						<input type="text" id="searchText" name="searchText" class="form-control"
+							aria-label="Text input with dropdown button" >
+					</form>
 				</div>
 			</div>
 			<div class="list-group">
@@ -111,7 +182,7 @@
            </nav>
 
 			<div class="container d-flex align-items-center justify-content-end pb-5 gap-2 p-0">
-				<a href="<%= request.getContextPath() %>/board/write.do?classNo=<%=classNo %>&idx=0" type="button" class="btn btn-outline-warning">글쓰기</a>
+				<a href="<%= request.getContextPath() %>/board/write.do?levelChk=<%=classNo %>&idx=0" type="button" class="btn btn-outline-warning">글쓰기</a>
 			</div>
 		</div>
 	</section>
@@ -143,6 +214,15 @@
             event.target.classList.add('orange');
         });
     });
+    
+ 	// Enter 키를 누를 때 폼 제출 이벤트 처리
+    document.getElementById("searchText").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault(); // 기본 제출 동작 방지
+            document.getElementById("searchForm").submit(); // 폼 제출
+        }
+    });
+    
 </script>
 
 <%@include file="/footer.jsp"%>

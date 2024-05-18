@@ -279,4 +279,35 @@
 	    where file_no =#{fileNo}
 </select>
 
+<select id="searchClassBoardList" parameterType="Map" resultMap="boardMap">
+		select b.*
+		from board b, member m, users u
+		where b.users_no = m.users_no and b.users_no = u.users_no
+		and b.board_yn = 'Y'
+		and b.board_level = ${level}
+		<if test='boardDiv.equals("class")'>
+        and u.users_role != 1
+		</if>
+		<if test='boardDiv.equals("notice")'>
+        and u.users_role = 1
+		</if>
+	    <if test='searchOption == null or searchOption.equals("null") or searchOption.equals("")'>
+	      and (
+	        b.board_title like '%' || #{searchText} || '%'
+	        or b.board_con like '%' || #{searchText} || '%'
+	        or m.mem_nick like '%' || #{searchText} || '%'
+	      )
+	    </if>
+	    <if test='searchOption == "title"'>
+	      and b.board_title like '%' || #{searchText} || '%'
+	    </if>
+	    <if test='searchOption == "content"'>
+	      and b.board_con like '%' || #{searchText} || '%'
+	    </if>
+	    <if test='searchOption == "nickname"'>
+	      and m.mem_nick like '%' || #{searchText} || '%'
+	    </if>
+		order by b.board_no desc
+</select>
+
 </mapper>

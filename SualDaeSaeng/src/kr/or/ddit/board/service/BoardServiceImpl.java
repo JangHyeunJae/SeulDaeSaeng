@@ -144,7 +144,7 @@ public class BoardServiceImpl implements IBoardService{
 		return boardDao.getFileDetail(fileNo);
 	}
 	
-   @Override  
+  @Override  
 	public int deleteReply(int replyNo) {
 		return boardDao.deleteReply(replyNo);
 	}
@@ -162,5 +162,10 @@ public class BoardServiceImpl implements IBoardService{
 	@Override
 	public int reportBoard(int boardNo) {
 		return boardDao.reportBoard(boardNo);
+	}
+
+	@Override
+	public List<BoardVO> searchClassBoardList(Map<String, Object> parameter) {
+		return boardDao.searchClassBoardList(parameter);
 	}
 }

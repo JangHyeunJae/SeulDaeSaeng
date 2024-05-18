@@ -578,4 +578,24 @@ public class BoardDaoImpl implements IBoardDao {
 		return fileDetail;
 	}
 
+	@Override
+	public List<BoardVO> searchClassBoardList(Map<String, Object> parameter) {
+		
+		List<BoardVO> boardList = new ArrayList<BoardVO>();
+
+		SqlSession session = null;
+
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			boardList = session.selectList("board.searchClassBoardList", parameter);
+
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+		return boardList;
+	}
+
 }

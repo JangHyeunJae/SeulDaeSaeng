@@ -65,4 +65,6 @@ public interface IBoardDao {
 
 	public int reportBoard(int boardNo);
 
+	public List<BoardVO> searchClassBoardList(Map<String, Object> parameter);
+
 }

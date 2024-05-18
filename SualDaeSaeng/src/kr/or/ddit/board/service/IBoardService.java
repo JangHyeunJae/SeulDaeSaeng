@@ -1,9 +1,14 @@
 package kr.or.ddit.board.service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Part;
+
 import kr.or.ddit.board.vo.BoardVO;
+import kr.or.ddit.board.vo.FileDetailVO;
+import kr.or.ddit.board.vo.HomeworkVO;
 import kr.or.ddit.board.vo.ReplyVO;
 import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.member.vo.UsersVO;
@@ -39,4 +44,20 @@ public interface IBoardService {
   public int updateBoard(Map<String, Object> parameter);
 
   public int updateReply(Map<String, Object> parameter);
+
+  public int insertHomework(Map<String,Object> parameter);
+
+  public List<HomeworkVO> getHwList();
+
+  public HomeworkVO getHwDetail(int hwNo);
+
+  public MemberVO getHwWriterDetail(Map<String, Object> parameter);
+
+  public int saveFileDetail(FileDetailVO fileDetail);
+
+  public List<FileDetailVO> getFileList(int classNo);
+
+  public int insertFileDetail(FileDetailVO fileDetail);
+
+  public FileDetailVO getFileDetail(int fileNo);
 }

@@ -1,11 +1,16 @@
 package kr.or.ddit.board.service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.Part;
 
 import kr.or.ddit.board.dao.BoardDaoImpl;
 import kr.or.ddit.board.dao.IBoardDao;
 import kr.or.ddit.board.vo.BoardVO;
+import kr.or.ddit.board.vo.FileDetailVO;
+import kr.or.ddit.board.vo.HomeworkVO;
 import kr.or.ddit.board.vo.ReplyVO;
 import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.member.vo.UsersVO;
@@ -97,5 +102,45 @@ public class BoardServiceImpl implements IBoardService{
 	@Override
 	public int updateReply(Map<String, Object> parameter) {
 		return boardDao.updateReply(parameter);
+	}
+
+	@Override
+	public int insertHomework(Map<String,Object> parameter) {
+		return boardDao.insertHomework(parameter);
+	}
+
+	@Override
+	public List<HomeworkVO> getHwList() {
+		return boardDao.getHwList();
+	}
+
+	@Override
+	public HomeworkVO getHwDetail(int hwNo) {
+		return boardDao.getHwDetail(hwNo);
+	}
+
+	@Override
+	public MemberVO getHwWriterDetail(Map<String, Object> parameter) {
+		return boardDao.getHwWriterDetail(parameter);
+	}
+
+	@Override
+	public int saveFileDetail(FileDetailVO fileDetail) {
+		return boardDao.saveFileDetail(fileDetail);
+	}
+
+	@Override
+	public List<FileDetailVO> getFileList(int classNo) {
+		return boardDao.getFileList(classNo);
+	}
+
+	@Override
+	public int insertFileDetail(FileDetailVO fileDetail) {
+		return boardDao.insertFileDetail(fileDetail);
+	}
+
+	@Override
+	public FileDetailVO getFileDetail(int fileNo) {
+		return boardDao.getFileDetail(fileNo);
 	}
 }

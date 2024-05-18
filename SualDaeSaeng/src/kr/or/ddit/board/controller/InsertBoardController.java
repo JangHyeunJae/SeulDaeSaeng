@@ -1,6 +1,9 @@
 package kr.or.ddit.board.controller;
 
 import java.io.IOException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,9 +22,9 @@ public class InsertBoardController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int levelChk = Integer.parseInt(req.getParameter("levelChk"));
+		int classNo = Integer.parseInt(req.getParameter("classNo"));
 		int idx = Integer.parseInt(req.getParameter("idx"));
-		req.setAttribute("levelChk", levelChk);
+		req.setAttribute("levelChk", classNo);
 		req.setAttribute("idx", idx);
 		req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
 	}
@@ -29,11 +32,10 @@ public class InsertBoardController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		
+		int level = Integer.parseInt(req.getParameter("level"));
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
-		int levelChk = Integer.parseInt(req.getParameter("levelChk"));
-		int level = Integer.parseInt(req.getParameter("level"));		
+		int levelChk = Integer.parseInt(req.getParameter("levelChk"));		
 		int idx = Integer.parseInt(req.getParameter("idx"));
 
 		BoardVO boardVO = new BoardVO();

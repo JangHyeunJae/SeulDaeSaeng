@@ -58,11 +58,12 @@
 				<%
 					} else {
 						// Loop only through items for the current page
-						int cnt = 1 + ((currentPage-1)*5);
+						int idx = ((currentPage-1)*5);
 						for (int i = startIndex; i < endIndex; i++) {
 							BoardVO bv = boardList.get(i);
 				%>
-					<a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=cnt %>" class="list-group-item">
+					<a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>
+					&idx=<%=idx %>&levelChk=<%=bv.getBoardLevel() %>&editReply=<%=-1 %>" class="list-group-item">
 						<div class="d-flex w-100 justify-content-between align-items-center">
 							<h5 class="mb-2 text-truncate">
 								<small class="attach"><i class="bi bi-paperclip"></i></small>
@@ -77,7 +78,7 @@
 						</div>
 					</a>
 				<%
-				    cnt++;
+				    idx++;
 						}
 					}
 				%>
@@ -110,7 +111,7 @@
            </nav>
 
 			<div class="container d-flex align-items-center justify-content-end pb-5 gap-2 p-0">
-				<a href="<%= request.getContextPath() %>/board/write.do?classNo=<%= classNo %>" type="button" class="btn btn-outline-warning">글쓰기</a>
+				<a href="<%= request.getContextPath() %>/board/write.do?classNo=<%=classNo %>&idx=0" type="button" class="btn btn-outline-warning">글쓰기</a>
 			</div>
 		</div>
 	</section>

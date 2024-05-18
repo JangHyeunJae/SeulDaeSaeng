@@ -18,8 +18,8 @@ import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.board.vo.BoardVO;
 import kr.or.ddit.board.vo.HomeworkVO;
 
-@WebServlet("/homework/write.do")
-public class InsertHomeworkController extends HttpServlet{
+@WebServlet("/homework/upload.do")
+public class UploadHomeworkController extends HttpServlet{
 
 	private IBoardService service = BoardServiceImpl.getInstance();
 	

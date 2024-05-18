@@ -109,13 +109,5 @@ public class AdminDaoImpl implements IAdmindao {
 		return memberReqVo;
 
 	};
-	
-	
-	
-	
-	
-	
-	
-
 
 }

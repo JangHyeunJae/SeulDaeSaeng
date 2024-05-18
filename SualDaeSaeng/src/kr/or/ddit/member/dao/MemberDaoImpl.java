@@ -15,7 +15,6 @@ import kr.or.ddit.util.MyBatisUtil;
 
 public class MemberDaoImpl implements IMemberDao {
 
-	// �̱�������
 	public static IMemberDao instance = null;
 
 	private MemberDaoImpl() {
@@ -27,16 +26,11 @@ public class MemberDaoImpl implements IMemberDao {
 		return instance;
 	}
 
-	/**
-	 * �α��� üũ�� ���� �޼���
-	 * 
-	 * @param memberVO
-	 * @return �α��� ��������
-	 */
+
 	public boolean loginCheck(MemberVO memberVO, boolean isMemberLogin) {
 
 		boolean isSuccess = false;
-		SqlSession session = kr.or.ddit.util.MyBatisUtil.getSqlSession();
+		SqlSession session = MyBatisUtil.getSqlSession(true);
 		MemberVO result = null;
 
 		try {
@@ -46,7 +40,6 @@ public class MemberDaoImpl implements IMemberDao {
 			} else if (isMemberLogin == false) {
 				result = session.selectOne("member.loginCheck", memberVO);
 			}
-
 			if (result != null) {
 				isSuccess = true;
 			}
@@ -70,7 +63,7 @@ public class MemberDaoImpl implements IMemberDao {
 	@Override
 	public String forgotPass(MemberVO memberVO) {
 
-		SqlSession session = MyBatisUtil.getSqlSession();
+		SqlSession session = MyBatisUtil.getSqlSession(true);
 
 		String usersPass = null;
 

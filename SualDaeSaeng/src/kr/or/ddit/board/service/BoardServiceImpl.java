@@ -142,8 +142,9 @@ public class BoardServiceImpl implements IBoardService{
 	@Override
 	public FileDetailVO getFileDetail(int fileNo) {
 		return boardDao.getFileDetail(fileNo);
-
-  @Override  
+	}
+	
+   @Override  
 	public int deleteReply(int replyNo) {
 		return boardDao.deleteReply(replyNo);
 	}

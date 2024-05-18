@@ -111,7 +111,7 @@
            </nav>
 
 			<div class="container d-flex align-items-center justify-content-end pb-5 gap-2 p-0">
-				<a href="<%= request.getContextPath() %>/board/write.do?classNo=<%=classNo %>&idx=0" type="button" class="btn btn-outline-warning">글쓰기</a>
+				<a href="<%= request.getContextPath() %>/board/write.do?levelChk=<%=classNo %>&idx=0" type="button" class="btn btn-outline-warning">글쓰기</a>
 			</div>
 		</div>
 	</section>

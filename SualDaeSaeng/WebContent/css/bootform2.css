@@ -2856,7 +2856,7 @@ select[multiple].input-lg {
     font-size: 12px;
   }
 }
-.btn {
+.btn, .contact button:is([type=submit],[type=button]) {
   display: inline-block;
   margin-bottom: 0;
   font-weight: normal;
@@ -2875,7 +2875,11 @@ select[multiple].input-lg {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  color: rgb(51, 51, 51);
+  background-color: rgb(255, 255, 255);
+  
 }
+
 .btn:focus,
 .btn:active:focus,
 .btn.active:focus,

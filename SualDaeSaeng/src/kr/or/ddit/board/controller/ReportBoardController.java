@@ -27,9 +27,10 @@ public class ReportBoardController extends HttpServlet {
 
 		int status = boardService.reportBoard(boardNo);
 		if (status > 0) { // 성공
-			String msg = URLEncoder.encode("신고가 접수되었습니다.", "UTF-8");
+			String msg = "신고가 접수되었습니다.";
+			req.getSession().setAttribute("msg", msg);
 			resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx
-					+ "&levelChk=" + levelChk + "&msg=" + msg);
+					+ "&levelChk=" + levelChk);
 		} else { // 실패
 			req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
 		}

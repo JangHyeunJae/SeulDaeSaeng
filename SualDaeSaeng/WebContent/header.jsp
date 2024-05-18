@@ -53,7 +53,6 @@ String id = (String) session.getAttribute("usersId");
 
     	<link rel="stylesheet" href="/css/bootform2.css">  <!-- editer css 추가 -->
 	           
-	    </script> -->
     <% } else if(request.getRequestURI().contains("restaurantUpDate")){%>
        <link href="/css/restaurantUpDate.css" rel="stylesheet">
    	<% } %>

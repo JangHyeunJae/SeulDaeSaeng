@@ -23,12 +23,8 @@
 	int levelChk = (int) request.getAttribute("levelChk");
 	int editReply = (int) request.getAttribute("editReply");
 
-	String msg = (String) request.getAttribute("msg");
-    if (msg != null) {
-        msg = msg.replace("\\", "\\\\").replace("\'", "\\\'").replace("\"", "\\\"");
-    }else{
-    	msg = "";
-    }
+	String msg = session.getAttribute("msg") == null ? "" : (String) session.getAttribute("msg");
+	session.removeAttribute("msg");
 	
     int level = bv.getBoardLevel();
     String boardName = null;

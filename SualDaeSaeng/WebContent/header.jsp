@@ -1,3 +1,5 @@
+<%@page import="kr.or.ddit.member.vo.UsersVO"%>
+<%@page import="kr.or.ddit.member.vo.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
@@ -53,7 +55,6 @@ String id = (String) session.getAttribute("usersId");
 
     	<link rel="stylesheet" href="/css/bootform2.css">  <!-- editer css 추가 -->
 	           
-	    </script> -->
     <% } else if(request.getRequestURI().contains("restaurantUpDate")){%>
        <link href="/css/restaurantUpDate.css" rel="stylesheet">
    	<% } %>
@@ -70,8 +71,6 @@ String id = (String) session.getAttribute("usersId");
         <nav id="navbar" class="navbar">
           <ul>
             <li>
-            
-            
               <a href="<%=request.getContextPath()%>/classBoard.do">반별게시판</a>
             </li>
             <li class="dropdown">

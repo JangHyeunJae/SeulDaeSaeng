@@ -85,4 +85,12 @@
 		select * from ADDRESS where ADDR_NO = #{addrNo}
 	</select>
 	
+	<select id="getMemDetail" parameterType="String" resultMap="memMap">
+		select a.* from member a,users b where a.users_no = b.users_no and b.users_id= #{usersId}
+	</select>
+	
+	<select id="getUsersDetail" parameterType="String" resultMap="usersMap">
+		select * from users where users_id= #{usersId}
+	</select>
+
 </mapper>

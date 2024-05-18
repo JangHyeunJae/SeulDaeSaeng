@@ -231,6 +231,43 @@ public class MemberDaoImpl implements IMemberDao {
 		}
 		return addrVo;
 	}
+
+	//추가_길도연
+	@Override
+	public MemberVO getMemDetail(String usersId) {
+		
+		SqlSession session = null;
+		MemberVO memDetail = null;
+		
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			memDetail = session.selectOne("member.getMemDetail", usersId);
+		} catch (PersistenceException ex) {
+			session.rollback();
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return memDetail;
+	}
+
+	@Override
+	public UsersVO getUsersDetail(String usersId) {
+		
+		SqlSession session = null;
+		UsersVO usersDetail = null;
+		
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			usersDetail = session.selectOne("member.getUsersDetail", usersId);
+		} catch (PersistenceException ex) {
+			session.rollback();
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return usersDetail;
+	}
   
 }
 

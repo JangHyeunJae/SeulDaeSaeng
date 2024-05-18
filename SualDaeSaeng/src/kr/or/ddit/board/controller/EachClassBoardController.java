@@ -24,8 +24,8 @@ public class EachClassBoardController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		int levelChk = 2;
-		int level = Integer.parseInt(req.getParameter("classNo"));
+		int classBoardChk = 2;
+		int levelChk = Integer.parseInt(req.getParameter("levelChk"));
 
 		String msg = null;
 		if (req.getParameter("msg") != null) {
@@ -37,9 +37,9 @@ public class EachClassBoardController extends HttpServlet {
 			req.setAttribute("searchOption", searchOption);
 		}
 
-		List<BoardVO> boardList = boardService.selectBoardList(level);
+		List<BoardVO> boardList = boardService.selectBoardList(levelChk);
 		req.setAttribute("boardList", boardList);
-		req.setAttribute("classNo", level);
+		req.setAttribute("classBoardChk", classBoardChk);
 		req.setAttribute("levelChk", levelChk);
 		req.getRequestDispatcher("/views/board/eachClassBoard.jsp").forward(req, resp);
 	}
@@ -47,8 +47,8 @@ public class EachClassBoardController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		int levelChk = 2;
-		int level = Integer.parseInt(req.getParameter("classNo"));
+		int classBoardChk = 2;
+		int levelChk = Integer.parseInt(req.getParameter("levelChk"));
 		
 		String searchOption = req.getParameter("searchOption");
 		String searchText = req.getParameter("searchText");
@@ -56,7 +56,7 @@ public class EachClassBoardController extends HttpServlet {
 		Map<String, Object> parameter = new HashMap<>();
 		parameter.put("searchText", searchText);
 		parameter.put("searchOption", searchOption);
-		parameter.put("level", level);
+		parameter.put("level", levelChk); //파라미터여서 name 안바꿈
 		parameter.put("boardDiv", "class");
 		
 		List<BoardVO> boardList = boardService.searchClassBoardList(parameter);
@@ -65,9 +65,9 @@ public class EachClassBoardController extends HttpServlet {
 			req.setAttribute("searchOption", searchOption);
 		}
 
-		req.setAttribute("levelChk", levelChk);
+		req.setAttribute("classBoardChk", classBoardChk);
 		req.setAttribute("boardList", boardList);
-		req.setAttribute("classNo", level);
+		req.setAttribute("levelChk", levelChk);
 
 		req.getRequestDispatcher("/views/board/eachClassBoard.jsp").forward(req, resp);
 	}

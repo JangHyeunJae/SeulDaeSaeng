@@ -16,16 +16,17 @@
 <%
     IBoardService service = BoardServiceImpl.getInstance();
 
-    int classNo = (int)request.getAttribute("classNo");
-    MemberVO tdetail = (MemberVO)request.getAttribute("tDetail");
-    int usersNo = (int)request.getAttribute("usersNo");
     List<BoardVO> noticeBoardList = (List<BoardVO>)request.getAttribute("noticeBoardList");
     List<BoardVO> classBoardList = (List<BoardVO>)request.getAttribute("classBoardList");
     List<FileDetailVO> fileList = (List<FileDetailVO>)request.getAttribute("fileList");
+    MemberVO memDetail = (MemberVO)request.getAttribute("memDetail");
+    int levelChk = (int)request.getAttribute("levelChk");
+    int usersNo = (int)request.getAttribute("usersNo");
+    
 	List<HomeworkVO> hwList = service.getHwList();
     
     LocalDate today = LocalDate.now();
-    long daysDiff = ChronoUnit.DAYS.between(today,tdetail.getMemRegdt().plusDays(190));
+    long daysDiff = ChronoUnit.DAYS.between(today,memDetail.getMemRegdt().plusDays(190));
     
 %>
 <main>
@@ -35,16 +36,16 @@
         <div class="col-lg-3">
           <div class="portfolio-info sticky-top">
             <h3>
-              <span><%=classNo %>호</span>
+              <span><%=levelChk %>호</span>
             </h3>
             <ul>
               <li>
                 <strong>이름(닉네임) </strong>
-                <span><%=tdetail.getMemName() %> (<%=tdetail.getMemNick() %>)</span>
+                <span><%=memDetail.getMemName() %> (<%=memDetail.getMemNick() %>)</span>
               </li>
               <li>
-                <strong><%=classNo %>호 퇴소일자</strong>
-                <span><%=tdetail.getMemRegdt().plusDays(190) %> (d-<%=daysDiff %>)</span>
+                <strong><%=levelChk %>호 퇴소일자</strong>
+                <span><%=memDetail.getMemRegdt().plusDays(190) %> (d-<%=daysDiff %>)</span>
               </li>
               <li>
                 <a href="<%=request.getContextPath()%>/timetable.do" class="btn-visit align-self-start">수업 시간표 확인</a>
@@ -57,12 +58,12 @@
             <div class="section-header">
               <h2>File</h2>
               <p class="d-flex justify-content-between align-items-center"> 수업 파일 공유 
-                <button type="button" class="btn btn-outline-warning btn-sm" onclick="location.href='<%=request.getContextPath() %>/file/fileList.do?classNo=<%=classNo %>'">이전 파일 더보기</button>
+                <button type="button" class="btn btn-outline-warning btn-sm" onclick="location.href='<%=request.getContextPath() %>/file/fileList.do?levelChk=<%=levelChk %>'">이전 파일 더보기</button>
               </p>
             </div>
             <!-- 파일 input -->
             
-            <form class="file-drop" method="post" action="/file/upload.do?classNo=<%=classNo %>" enctype="multipart/form-data">
+            <form class="file-drop" method="post" action="/file/upload.do?levelChk=<%=levelChk %>" enctype="multipart/form-data">
               <input type="file" name="upload" id="upload-file" multiple>
               <!-- 아래 label 내용 변경하지 마세요. js와 연동 -->
               <label for="upload-file">파일을 드레그하거나 클릭해서 등록</label>
@@ -100,7 +101,7 @@
               <h2>board</h2>
               <p class="d-flex justify-content-between align-items-center"> 제출한 숙제 체크
               <button type="button" class="btn btn-outline-warning btn-sm" 
-              onclick="location.href='<%=request.getContextPath()%>/homework/write.do?classNo=<%=classNo %>'">숙제 작성하기</button>
+              onclick="location.href='<%=request.getContextPath()%>/homework/write.do?levelChk=<%=levelChk %>'">숙제 작성하기</button>
               </p>
             </div>
             <div class="list-group d-flex justify-content-start align-items-center flex-row p-3 gap-3">
@@ -131,7 +132,7 @@
                 <h2>board</h2>
                 <p class="d-flex justify-content-between align-items-center"> 공지사항 
                 <button type="button" class="btn btn-outline-warning btn-sm" 
-                onclick="location.href='<%=request.getContextPath()%>/eachClassNotice.do?classNo=<%=classNo %>'">더보기</button>
+                onclick="location.href='<%=request.getContextPath()%>/eachClassNotice.do?levelChk=<%=levelChk %>'">더보기</button>
                 </p>
               </div>
               <div class="list-group">
@@ -169,8 +170,8 @@
               <div class="section-header">
                 <h2>board</h2>
                 <p class="d-flex justify-content-between align-items-center"> 반 게시판 
-                <button type="button" class="btn btn-outline-warning btn-sm" 
-                onclick="location.href='<%=request.getContextPath()%>/eachClassBoard.do?classNo=<%=classNo %>'">더보기</button>
+                <button type="button" class="btn btn-outline-warning btn-sm"
+                onclick="location.href='<%=request.getContextPath()%>/eachClassBoard.do?levelChk=<%=levelChk %>'">더보기</button>
                 </p>
               </div>
               <div class="list-group">

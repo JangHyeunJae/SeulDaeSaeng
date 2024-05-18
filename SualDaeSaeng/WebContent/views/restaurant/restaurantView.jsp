@@ -6,7 +6,26 @@
 
 <%@include file="/header.jsp" %>
 <%
-String responseBody = (String) request.getAttribute("responseBody");
+	String responseBlog = (String) request.getAttribute("responseBlog");
+	
+	// XML 문자열을 파싱하기 위해 DocumentBuilderFactory 객체 생성
+	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	
+	// 파서 객체 생성
+	DocumentBuilder builder = factory.newDocumentBuilder();
+	
+	// XML 문자열을 파싱하여 Document 객체 생성
+	Document document = builder.parse(new ByteArrayInputStream(responseBlog.getBytes()));
+	
+	// 루트 요소(rss) 추출
+	Element rootElement = document.getDocumentElement();
+	
+	// channel 요소 추출
+	NodeList channelList = rootElement.getElementsByTagName("channel");
+	Element channelElement = (Element) channelList.item(0);
+	
+	// 블로그 게시글 목록 요소(item) 추출
+	NodeList itemList = channelElement.getElementsByTagName("item");
 
 %>
 
@@ -404,28 +423,10 @@ String responseBody = (String) request.getAttribute("responseBody");
         </div>
     	
 		<%
-	        // XML 문자열을 파싱하기 위해 DocumentBuilderFactory 객체 생성
-	        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-	        
-	        // 파서 객체 생성
-	        DocumentBuilder builder = factory.newDocumentBuilder();
-	        
-	        // XML 문자열을 파싱하여 Document 객체 생성
-	        Document document = builder.parse(new ByteArrayInputStream(responseBody.getBytes()));
-	        
-	        // 루트 요소(rss) 추출
-	        Element rootElement = document.getDocumentElement();
-	        
-	        // channel 요소 추출
-	        NodeList channelList = rootElement.getElementsByTagName("channel");
-	        Element channelElement = (Element) channelList.item(0);
-	        
-	        // 블로그 게시글 목록 요소(item) 추출
-	        NodeList itemList = channelElement.getElementsByTagName("item");
 	    %>
         <div class="container gallery">
           <div class="section-header">
-            <p><span>네이버</span> 블로그 후기</p>
+            <p><span>네이버</span> 블로그</p>
           </div>
           <ul class="row gy-4 justify-content-start ps-0">
 			<% for (int i = 0; i < itemList.getLength(); i++) { %>

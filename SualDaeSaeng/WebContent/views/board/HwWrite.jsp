@@ -30,7 +30,8 @@
   		board = "noticeBoard";
   	}
   	else if(levelChk > 300){
-  		boardName = Integer.toString(levelChk);
+  		boardName = "숙제 작성하기";
+  		//학생일때랑 선생님일때랑 다르게 보내줘야함.
   		board = "classTeacherBoard";
   	}
   	else {
@@ -98,6 +99,18 @@
   <div class="contact">
     <div class="container pb-3">
       <!-- {{changeDetected}} -->
+       <%
+          if(levelChk>300){
+        %>
+        <form action="<%=request.getContextPath()%>/homework/write.do" method="post" role="form" id="insertForm" class="php-email-form needs-validation" novalidate>
+          <div class="form-group d-flex align-items-center pt-4">
+           <p class="pe-2">기간 설정 : <p>
+           <input type="date" class="form-control" name="startDate" id="startDate" value="" max="9999-12-31" style="width:180px; display:inline" required> ~ 
+           <input type="date" class="form-control" name="endDate" id="endDate" value="" max="9999-12-31" style="width:180px;  display:inline" required>
+          </div> 
+        <%
+          }else
+        %>
        <form action="<%=request.getContextPath()%>/board/write.do" method="post" role="form" id="insertForm" class="php-email-form needs-validation" novalidate>
         <div class="form-group">
           <input type="text" class="form-control" name="title" id="title" placeholder="제목" required>

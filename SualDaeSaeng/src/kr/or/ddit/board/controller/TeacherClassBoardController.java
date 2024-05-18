@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.board.vo.BoardVO;
+import kr.or.ddit.board.vo.FileDetailVO;
 import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.member.vo.UsersVO;
 
@@ -29,11 +30,13 @@ public class TeacherClassBoardController extends HttpServlet{
          List<BoardVO> noticeBoardList = boardService.getClassNoticeList(classNo);
          List<BoardVO> classBoardList = boardService.selectBoardList(classNo);
 		 MemberVO tDetail = boardService.getMemberDetail(usersNo);
+		 List<FileDetailVO> fileList = boardService.getFileList(classNo);
 		 req.setAttribute("usersNo", tDetail.getUsersNo());
 		 req.setAttribute("classNo", classNo);
 		 req.setAttribute("tDetail", tDetail);
 		 req.setAttribute("noticeBoardList", noticeBoardList);
 		 req.setAttribute("classBoardList", classBoardList);
+		 req.setAttribute("fileList", fileList);
 		 
 		 req.getRequestDispatcher("/views/board/classTeacherBoard.jsp").forward(req, resp);
 	}

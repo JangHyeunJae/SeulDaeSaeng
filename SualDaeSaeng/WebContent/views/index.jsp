@@ -3,7 +3,7 @@
 
 <%@include file="../header.jsp" %>
 
-    <main data-aos="fade" data-aos-delay="1500">
+    <main>
       <!-- ======= food Recommendation ======= -->
       <section id="food">
         <div id="textAmin"> 오늘은 <div id=flip>

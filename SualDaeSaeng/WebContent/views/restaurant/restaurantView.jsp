@@ -1,7 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="javax.xml.parsers.*" %>
+<%@ page import="java.io.ByteArrayInputStream" %>
+<%@ page import="org.w3c.dom.*" %>
+<%@ page import="java.util.*" %>
 
 <%@include file="/header.jsp" %>
+<%
+String responseBody = (String) request.getAttribute("responseBody");
+
+%>
 
     <main data-aos="fade" data-aos-delay="1500">
       <!-- ======= End Page Header ======= -->
@@ -395,8 +402,53 @@
             </div>
           </div>
         </div>
-      </section>
+    	
+		<%
+	        // XML 문자열을 파싱하기 위해 DocumentBuilderFactory 객체 생성
+	        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	        
+	        // 파서 객체 생성
+	        DocumentBuilder builder = factory.newDocumentBuilder();
+	        
+	        // XML 문자열을 파싱하여 Document 객체 생성
+	        Document document = builder.parse(new ByteArrayInputStream(responseBody.getBytes()));
+	        
+	        // 루트 요소(rss) 추출
+	        Element rootElement = document.getDocumentElement();
+	        
+	        // channel 요소 추출
+	        NodeList channelList = rootElement.getElementsByTagName("channel");
+	        Element channelElement = (Element) channelList.item(0);
+	        
+	        // 블로그 게시글 목록 요소(item) 추출
+	        NodeList itemList = channelElement.getElementsByTagName("item");
+	    %>
+        <div class="container gallery">
+          <div class="section-header">
+            <p><span>네이버</span> 블로그 후기</p>
+          </div>
+          <ul class="row gy-4 justify-content-start ps-0">
+			<% for (int i = 0; i < itemList.getLength(); i++) { %>
+		       <li class="card col-xl-3 col-lg-4 col-md-6">
+		           <% 
+		               Element itemElement = (Element) itemList.item(i);
+		               String title = itemElement.getElementsByTagName("title").item(0).getTextContent();
+		               String link = itemElement.getElementsByTagName("link").item(0).getTextContent();
+		               String description = itemElement.getElementsByTagName("description").item(0).getTextContent();
+		               String postdate = itemElement.getElementsByTagName("postdate").item(0).getTextContent();
+		               String bloggername = itemElement.getElementsByTagName("bloggername").item(0).getTextContent();
+		           %>
+		           <a href="<%=link %>">
+			          <div class="card-body">
+			            <small class="badge bg-body-secondary mb-1">작성일 :<%=postdate %></small>
+			            <small class="badge bg-body-secondary mb-1">작성자 :<%=bloggername %></small>
+		              <h5 class="card-title text-truncate pt-2"><%=title %></h5>
+			            <p class="card-text "><%=description %></p>
+			          </div>
+		           </a>
+		       </li>
+		     <% } %>
+		   </ul>
+        </div>
     </main>
-
-
 <%@include file="/footer.jsp" %>

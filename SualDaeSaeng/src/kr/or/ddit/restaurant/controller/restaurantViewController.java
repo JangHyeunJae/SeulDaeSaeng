@@ -39,9 +39,9 @@ public class restaurantViewController extends HttpServlet {
 
 
 //        String apiURL = "https://openapi.naver.com/v1/search/blog?query=" + text;    // JSON 결과
-        String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text; // XML 결과
+        String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text+"&display=12"; // XML 결과
 
-
+ 
         Map<String, String> requestHeaders = new HashMap<>();
         requestHeaders.put("X-Naver-Client-Id", clientId);
         requestHeaders.put("X-Naver-Client-Secret", clientSecret);
@@ -49,7 +49,8 @@ public class restaurantViewController extends HttpServlet {
 
 
         System.out.println(responseBody);
-		
+
+		request.setAttribute("requestHeaders", requestHeaders);
 		request.setAttribute("responseBody", responseBody);
 
 		request.getRequestDispatcher("/views/restaurant/restaurantView.jsp").forward(request, response);
@@ -80,7 +81,6 @@ public class restaurantViewController extends HttpServlet {
         }
     }
 
-
     private static HttpURLConnection connect(String apiUrl){
         try {
             URL url = new URL(apiUrl);
@@ -92,21 +92,16 @@ public class restaurantViewController extends HttpServlet {
         }
     }
 
-
     private static String readBody(InputStream body){
         InputStreamReader streamReader = new InputStreamReader(body);
 
-
         try (BufferedReader lineReader = new BufferedReader(streamReader)) {
             StringBuilder responseBody = new StringBuilder();
-
 
             String line;
             while ((line = lineReader.readLine()) != null) {
                 responseBody.append(line);
             }
-
-
             return responseBody.toString();
         } catch (IOException e) {
             throw new RuntimeException("API 응답을 읽는 데 실패했습니다.", e);

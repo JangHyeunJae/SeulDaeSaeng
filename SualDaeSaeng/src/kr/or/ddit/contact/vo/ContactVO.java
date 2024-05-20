@@ -10,9 +10,16 @@ public class ContactVO {
 	private Date qAt; 
 	private int usersNo;
 	private String qEmail; 
+	private String qYn;
 	
 	
 	
+	public String getqYn() {
+		return qYn;
+	}
+	public void setqYn(String qYn) {
+		this.qYn = qYn;
+	}
 	public int getqNO() {
 		return qNO;
 	}

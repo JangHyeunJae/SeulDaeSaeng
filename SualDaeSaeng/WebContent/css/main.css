@@ -125,6 +125,17 @@ h5 {
   width: 50%;
 }
 
+.h-m-180{
+	height : 180px;
+	border-radius : 10px;
+}
+.h-m-180 img{
+	transition: transform .3s;
+}
+.h-m-180:hover img{
+	transform: scale(1.1);
+}
+
 @media (max-width:770px) {
   .glightbox-container .gslide-inner-content {
       width: 100%;

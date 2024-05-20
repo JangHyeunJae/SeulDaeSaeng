@@ -95,7 +95,9 @@
 	</select>
 	
 	<select id="selectRest" parameterType="String" resultType="restVO" >
-	
+		SELECT REST_BIZNO restBizno, NAME, MCLS, MCLS_NAME mclsName, SCLS, SCLS_NAME sclsName, ADDR_BASIC AddrBasic, LON, LAT
+		FROM RESTVIEW
+		WHERE REST_BIZNO = #{restBizno}
 	</select>
 	
 </mapper>

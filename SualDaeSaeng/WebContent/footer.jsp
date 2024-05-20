@@ -39,7 +39,6 @@
     <script src="/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="/vendor/glightbox/js/glightbox.min.js"></script>
     <script src="/vendor/aos/aos.js"></script>
-    <script src="/vendor/php-email-form/validate.js"></script>
     
     <!-- Template Main JS File -->
     <script src="/js/main.js"></script>
@@ -49,6 +48,8 @@
        <!-- <script src="/js/write.js"></script> -->
     <% }else if(request.getRequestURI().contains("restaurantUpDate")){%>
     	<script src="/js/restaurantUpDate.js"></script>
-   	<% } %>
+   	<% }else if(request.getRequestURI().contains("restaurantView")){%>
+   		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDB_rGxKVPYlMG7ViAovZZH84Ezae0R140&callback=initMap&libraries=marker&v=beta" defer></script>	
+   	<%} %>
   </body>
 </html>

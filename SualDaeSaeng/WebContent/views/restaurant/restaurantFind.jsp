@@ -156,7 +156,7 @@
 						RestaurantVO restVo = restList.get(i);
 			%>
 					<li class="card col-xl-3 col-lg-4 col-md-6">
-						<a href="<%=request.getContextPath() %>/restaurant/view.do?no=<%=restVo.getBizNo() %>">
+						<a href="<%=request.getContextPath() %>/restaurant/view.do?no=<%=restVo.getRestBizno() %>">
 							<p class="card-like">
 								<i class="bi bi-heart-fill"></i> 
 								<span><%=restVo.getLikeCount() %></span>

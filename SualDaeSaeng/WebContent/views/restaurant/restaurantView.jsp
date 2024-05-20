@@ -1,3 +1,4 @@
+<%@page import="kr.or.ddit.restaurant.vo.RestaurantVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="javax.xml.parsers.*" %>
 <%@ page import="java.io.ByteArrayInputStream" %>
@@ -6,26 +7,39 @@
 
 <%@include file="/header.jsp" %>
 <%
+	RestaurantVO restDetails = (RestaurantVO) request.getAttribute("restDetails");
 	String responseBlog = (String) request.getAttribute("responseBlog");
+	String responseImg = (String) request.getAttribute("responseImg");
 	
-	// XML 문자열을 파싱하기 위해 DocumentBuilderFactory 객체 생성
+	String menuName1 = request.getAttribute("menuName1")!=null ? (String) request.getAttribute("menuName1") : "";
+	String menuName2 = request.getAttribute("menuName2")!=null ? (String) request.getAttribute("menuName2") : "";
+	String menuName3 = request.getAttribute("menuName3")!=null ? (String) request.getAttribute("menuName3") : "";
+	String menuName4 = request.getAttribute("menuName4")!=null ? (String) request.getAttribute("menuName4") : "";
+	
+	String menuPrice1 = request.getAttribute("menuPrice1")!=null ? (String) request.getAttribute("menuPrice1") : "";
+	String menuPrice2 = request.getAttribute("menuPrice2")!=null ? (String) request.getAttribute("menuPrice2") : "";
+	String menuPrice3 = request.getAttribute("menuPrice3")!=null ? (String) request.getAttribute("menuPrice3") : "";
+	String menuPrice4 = request.getAttribute("menuPrice4")!=null ? (String) request.getAttribute("menuPrice4") : "";
+
+	String restAddr = request.getAttribute("restAddr")!=null ? (String) request.getAttribute("restAddr") : "";
+	String restNaverMap = request.getAttribute("restNaverMap")!=null ? (String) request.getAttribute("restNaverMap"): "";
+	String restNowSales = request.getAttribute("restNowSales")!=null ? (String) request.getAttribute("restNowSales") : "";
+	String restSalesTime = request.getAttribute("restSalesTime")!=null ? (String) request.getAttribute("restSalesTime") : "";
+	String restPhoneNum = request.getAttribute("restPhoneNum")!=null ? (String) request.getAttribute("restPhoneNum") : "";
+	String restAddInfo = request.getAttribute("restAddInfo")!=null ? (String) request.getAttribute("restAddInfo") : "";	
+	
+	// DocumentBuilderFactory 객체 생성
 	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 	
-	// 파서 객체 생성
+	// builder 변수 선언
 	DocumentBuilder builder = factory.newDocumentBuilder();
 	
-	// XML 문자열을 파싱하여 Document 객체 생성
-	Document document = builder.parse(new ByteArrayInputStream(responseBlog.getBytes()));
+	//XML 파싱
+	Document blogDocument = builder.parse(new ByteArrayInputStream(responseBlog.getBytes()));
+	Element blogRootElement = blogDocument.getDocumentElement();
 	
-	// 루트 요소(rss) 추출
-	Element rootElement = document.getDocumentElement();
-	
-	// channel 요소 추출
-	NodeList channelList = rootElement.getElementsByTagName("channel");
-	Element channelElement = (Element) channelList.item(0);
-	
-	// 블로그 게시글 목록 요소(item) 추출
-	NodeList itemList = channelElement.getElementsByTagName("item");
+	Document imageDocument = builder.parse(new ByteArrayInputStream(responseImg.getBytes()));
+	Element imageRootElement = imageDocument.getDocumentElement();
 
 %>
 
@@ -38,18 +52,18 @@
               <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item">
-                    <a href="restaurantFind.htmll">식당찾기</a>
+                    <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls=all">식당찾기</a>
                   </li>
                   <li class="breadcrumb-item">
-                    <a href="restaurantFindKorean.html">한식</a>
+                    <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls=<%=restDetails.getMcls()%>"><%=restDetails.getMclsName()%></a>
                   </li>
                   <li class="breadcrumb-item">
-                    <a href="restaurantFindKorean.html">찜/탕</a>
+                    <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls=<%=restDetails.getScls()%>"><%=restDetails.getSclsName()%></a>
                   </li>
-                  <li class="breadcrumb-item active" aria-current="page">찜찜당한식당</li>
+                  <li class="breadcrumb-item active" aria-current="page"><%=restDetails.getName()%></li>
                 </ol>
               </nav>
-              <h2 class="pb-2">찜찜당한식당</h2>
+              <h2 class="pb-2"><%=restDetails.getName()%></h2>
               <div class="d-flex justify-content-between align-items-center">
                 <p class="stars fs-4">
                   <i class="bi bi-star-fill"></i>
@@ -81,30 +95,77 @@
         <div class="container content">
           <div class="row gap-3">
             <div class="col-lg-6">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3214.6030983949745!2d127.40309803488768!3d36.321930600000016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35654f17d22005ab%3A0x49403681e2c5253f!2z65Ox6rCI67mE7Jes6rSA!5e0!3m2!1sko!2skr!4v1715040725307!5m2!1sko!2skr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+			   	<script>
+				   	function initMap() {
+				   	  const map = new google.maps.Map(document.getElementById("map"), {
+				   	    center: { lat: <%=restDetails.getLat()%>, lng: <%=restDetails.getLon()%> },
+				   	    zoom: 18,
+				   	    mapId: "4504f8b37365c3d0",
+				   	  });
+				   	  const priceTag = document.createElement("div");
+	
+				   	  priceTag.className = "price-tag";
+				   	  priceTag.textContent = "<%=restDetails.getName()%>";
+	
+				   	  const markerView = new google.maps.marker.AdvancedMarkerView({
+				   	    map,
+				   	    position: { lat: <%=restDetails.getLat()%>, lng: <%=restDetails.getLon()%> },
+				   	    content: priceTag,
+				   	  });
+				   	}
+	
+				   	window.initMap = initMap;
+			    </script>
+              	<div id="map" class="w-100 h-100"></div>
             </div>
             <div class="col-lg-5">
               <ul>
+              	<% if(!restAddr.equals("")){ %>
                 <li>
                   <i class="bi bi-geo-alt-fill"></i>
                   <strong>주소 :</strong>
-                  <span>1 May 1995</span>
-                </li>
+                  <span>
+                  	<%=restAddr %>
+              		<% if(!restNaverMap.equals("")){ %>
+              			<a href="<%=restNaverMap%>">네이버지도</a>
+              		<% } %>
+                  </span>
+                </li>              	
+              	<% } else { %>
+                <li>
+                  <i class="bi bi-geo-alt-fill"></i>
+                  <strong>주소 :</strong>
+                  <span>
+                  	<%=restDetails.getAddrBasic()%>
+              		<% if(!restNaverMap.equals("")){ %>
+              			<a href="<%=restNaverMap%>">네이버지도</a>
+              		<% } %>
+                  </span>
+                </li>             		
+              	<% } %>
+       			<% if(!restPhoneNum.equals("")){ %>
                 <li>
                   <i class="bi bi-telephone-fill"></i>
                   <strong>전화번호 :</strong>
-                  <span>www.example.com</span>
-                </li>
+                  <span><%=restPhoneNum %></span>
+                </li>       				
+       			<% } %>
+          		<% if(!restNowSales.equals("")){ %>
                 <li>
                   <i class="bi bi-calendar2-check-fill"></i>
-                  <strong>휴무일 :</strong>
-                  <span>+123 456 7890</span>
-                </li>
+                  <strong><%=restNowSales %> </strong>
+          		  <%if(!restSalesTime.equals("")){%>
+          			  <span><%=restSalesTime%></span>
+          		  <%}%>
+                </li>          			
+          		<% } %>
+   				<%if(!restAddInfo.equals("")){%>
                 <li>
-                  <i class="bi bi-clock-fill"></i>
-                  <strong>영업시간:</strong>
-                  <span>New York, USA</span>
-                </li>
+                  <i class="bi bi-plus-square-fill"></i>
+                  <strong>추가정보:</strong>
+                  <span><%=restAddInfo %></span>
+                </li>	
+   				<%}%>
               </ul>
             </div>
           </div>
@@ -227,229 +288,103 @@
             </div>
           </div>
         </div>
+        <% if(!menuName1.equals("")){ %>
         <div class="container">
           <div class="section-header">
-            <p>메뉴정보</p>
+            <p><span>네이버제공</span> 메뉴</p>
           </div>
           <div class="row gy-4 gx-lg-5">
             <div class="col-lg-6">
               <div class="pricing-item d-flex justify-content-between">
-                <h3>Portrait Photography</h3>
-                <h4>$160.00</h4>
+                <h3><%=menuName1 %></h3>
+                <h4><%=menuPrice1 %></h4>
               </div>
             </div>
-            <!-- End Pricing Item -->
+            <% if(!menuName2.equals("")){ %>
             <div class="col-lg-6">
               <div class="pricing-item d-flex justify-content-between">
-                <h3>Fashion Photography</h3>
-                <h4>$300.00</h4>
+                <h3><%=menuName2 %></h3>
+                <h4><%=menuPrice2 %></h4>
               </div>
             </div>
-            <!-- End Pricing Item -->
+            <% } %>
+            <% if(!menuName3.equals("")){ %>
             <div class="col-lg-6">
               <div class="pricing-item d-flex justify-content-between">
-                <h3>Sports Photography</h3>
-                <h4>$200.00</h4>
+                <h3><%=menuName3 %></h3>
+                <h4><%=menuPrice3 %></h4>
               </div>
             </div>
-            <!-- End Pricing Item -->
+            <% } %>
+            <% if(!menuName4.equals("")){ %>            
             <div class="col-lg-6">
               <div class="pricing-item d-flex justify-content-between">
-                <h3>Still Life Photography</h3>
-                <h4>$120.00</h4>
+                <h3><%=menuName4 %></h3>
+                <h4><%=menuPrice4 %></h4>
               </div>
             </div>
-            <!-- End Pricing Item -->
-            <div class="col-lg-6">
-              <div class="pricing-item d-flex justify-content-between">
-                <h3>Wedding Photography</h3>
-                <h4>$500.00</h4>
-              </div>
-            </div>
-            <!-- End Pricing Item -->
-            <div class="col-lg-6">
-              <div class="pricing-item d-flex justify-content-between">
-                <h3>Photojournalism</h3>
-                <h4>$200.00</h4>
-              </div>
-            </div>
-            <!-- End Pricing Item -->
-            <div class="col-xl-12 col-lg-12 col-md-12 text-center">
-              <a class="cta-btn text-center" href="#">더보기</a>
-            </div>
+            <% } %>
           </div>
         </div>
+        <% } %>
+        <% 
+        NodeList itemNodeList = imageRootElement.getElementsByTagName("item");
+        if(itemNodeList.getLength()>0){
+        %>
         <div class="container gallery">
           <div class="section-header">
-            <p>찜찜당한식당 이미지</p>
+            <p><span>네이버제공</span> 이미지</p>
           </div>
           <div class="row gy-4 justify-content-start">
-            <div class="col-xl-3 col-lg-4 col-md-6">
-              <div class="gallery-item h-100">
-                <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
-                <div class="gallery-links d-flex align-items-center justify-content-center">
-                  <a href="img/gallery/gallery-1.jpg" title="Gallery 1" class="glightbox preview-link">
-                    <i class="bi bi-arrows-angle-expand"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <!-- End Gallery Item -->
-            <div class="col-xl-3 col-lg-4 col-md-6">
-              <div class="gallery-item h-100">
-                <img src="/img/gallery/gallery-2.jpg" class="img-fluid" alt="">
-                <div class="gallery-links d-flex align-items-center justify-content-center">
-                  <a href="img/gallery/gallery-2.jpg" title="Gallery 2" class="glightbox preview-link">
-                    <i class="bi bi-arrows-angle-expand"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <!-- End Gallery Item -->
-            <div class="col-xl-3 col-lg-4 col-md-6">
-              <div class="gallery-item h-100">
-                <img src="/img/gallery/gallery-3.jpg" class="img-fluid" alt="">
-                <div class="gallery-links d-flex align-items-center justify-content-center">
-                  <a href="img/gallery/gallery-3.jpg" title="Gallery 3" class="glightbox preview-link">
-                    <i class="bi bi-arrows-angle-expand"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <!-- End Gallery Item -->
-            <div class="col-xl-3 col-lg-4 col-md-6">
-              <div class="gallery-item h-100">
-                <img src="/img/gallery/gallery-4.jpg" class="img-fluid" alt="">
-                <div class="gallery-links d-flex align-items-center justify-content-center">
-                  <a href="img/gallery/gallery-4.jpg" title="Gallery 4" class="glightbox preview-link">
-                    <i class="bi bi-arrows-angle-expand"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <!-- End Gallery Item -->
-            <div class="col-xl-3 col-lg-4 col-md-6">
-              <div class="gallery-item h-100">
-                <img src="/img/gallery/gallery-5.jpg" class="img-fluid" alt="">
-                <div class="gallery-links d-flex align-items-center justify-content-center">
-                  <a href="img/gallery/gallery-5.jpg" title="Gallery 5" class="glightbox preview-link">
-                    <i class="bi bi-arrows-angle-expand"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <!-- End Gallery Item -->
-            <div class="col-xl-3 col-lg-4 col-md-6">
-              <div class="gallery-item h-100">
-                <img src="/img/gallery/gallery-6.jpg" class="img-fluid" alt="">
-                <div class="gallery-links d-flex align-items-center justify-content-center">
-                  <a href="img/gallery/gallery-6.jpg" title="Gallery 6" class="glightbox preview-link">
-                    <i class="bi bi-arrows-angle-expand"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <!-- End Gallery Item -->
-            <div class="col-xl-3 col-lg-4 col-md-6">
-              <div class="gallery-item h-100">
-                <img src="/img/gallery/gallery-7.jpg" class="img-fluid" alt="">
-                <div class="gallery-links d-flex align-items-center justify-content-center">
-                  <a href="img/gallery/gallery-7.jpg" title="Gallery 7" class="glightbox preview-link">
-                    <i class="bi bi-arrows-angle-expand"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <!-- End Gallery Item -->
-            <div class="col-xl-3 col-lg-4 col-md-6">
-              <div class="gallery-item h-100">
-                <img src="/img/gallery/gallery-8.jpg" class="img-fluid" alt="">
-                <div class="gallery-links d-flex align-items-center justify-content-center">
-                  <a href="img/gallery/gallery-8.jpg" title="Gallery 8" class="glightbox preview-link">
-                    <i class="bi bi-arrows-angle-expand"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <!-- End Gallery Item -->
-            <div class="col-xl-3 col-lg-4 col-md-6">
-              <div class="gallery-item h-100">
-                <img src="/img/gallery/gallery-5.jpg" class="img-fluid" alt="">
-                <div class="gallery-links d-flex align-items-center justify-content-center">
-                  <a href="img/gallery/gallery-5.jpg" title="Gallery 5" class="glightbox preview-link">
-                    <i class="bi bi-arrows-angle-expand"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <!-- End Gallery Item -->
-            <div class="col-xl-3 col-lg-4 col-md-6">
-              <div class="gallery-item h-100">
-                <img src="/img/gallery/gallery-6.jpg" class="img-fluid" alt="">
-                <div class="gallery-links d-flex align-items-center justify-content-center">
-                  <a href="img/gallery/gallery-6.jpg" title="Gallery 6" class="glightbox preview-link">
-                    <i class="bi bi-arrows-angle-expand"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <!-- End Gallery Item -->
-            <div class="col-xl-3 col-lg-4 col-md-6">
-              <div class="gallery-item h-100">
-                <img src="/img/gallery/gallery-7.jpg" class="img-fluid" alt="">
-                <div class="gallery-links d-flex align-items-center justify-content-center">
-                  <a href="img/gallery/gallery-7.jpg" title="Gallery 7" class="glightbox preview-link">
-                    <i class="bi bi-arrows-angle-expand"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <!-- End Gallery Item -->
-            <div class="col-xl-3 col-lg-4 col-md-6">
-              <div class="gallery-item h-100">
-                <img src="/img/gallery/gallery-8.jpg" class="img-fluid" alt="">
-                <div class="gallery-links d-flex align-items-center justify-content-center">
-                  <a href="img/gallery/gallery-8.jpg" title="Gallery 8" class="glightbox preview-link">
-                    <i class="bi bi-arrows-angle-expand"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <!-- End Gallery Item -->
-            <div class="col-xl-12 col-lg-12 col-md-12 text-center">
-              <a class="cta-btn text-center" href="contact.html">더보기</a>
-            </div>
+            <% for (int i = 0; i < itemNodeList.getLength(); i++) { %>
+	             <div class="col-xl-3 col-lg-4 col-md-6">
+	                <% 
+	                   Element itemElement = (Element) itemNodeList.item(i);
+	                   String title = itemElement.getElementsByTagName("title").item(0).getTextContent();
+	                   String link = itemElement.getElementsByTagName("link").item(0).getTextContent();
+	                   String thumbnail = itemElement.getElementsByTagName("link").item(0).getTextContent();
+	               %>
+	               <div class="h-m-180 overflow-hidden">
+	                  <a href="<%=link%>" target="_blank" class="w-100 h-100 d-flex">
+	                    <img src="<%=thumbnail%>" class="card-img" alt="<%=title%>" >
+	                 </a>
+	               </div>
+	             </div>
+            <% } %>
           </div>
         </div>
-    	
-		<%
-	    %>
-        <div class="container gallery">
+        <% } %>
+        <% 
+       	NodeList itemList = blogRootElement.getElementsByTagName("item");
+       	if(itemList.getLength()>0){
+        %>
+		<div class="container gallery">
           <div class="section-header">
-            <p><span>네이버</span> 블로그</p>
+            <p><span>네이버제공</span> 블로그</p>
           </div>
           <ul class="row gy-4 justify-content-start ps-0">
-			<% for (int i = 0; i < itemList.getLength(); i++) { %>
-		       <li class="card col-xl-3 col-lg-4 col-md-6">
-		           <% 
-		               Element itemElement = (Element) itemList.item(i);
-		               String title = itemElement.getElementsByTagName("title").item(0).getTextContent();
-		               String link = itemElement.getElementsByTagName("link").item(0).getTextContent();
-		               String description = itemElement.getElementsByTagName("description").item(0).getTextContent();
-		               String postdate = itemElement.getElementsByTagName("postdate").item(0).getTextContent();
-		               String bloggername = itemElement.getElementsByTagName("bloggername").item(0).getTextContent();
-		           %>
-		           <a href="<%=link %>">
-			          <div class="card-body">
-			            <small class="badge bg-body-secondary mb-1">작성일 :<%=postdate %></small>
-			            <small class="badge bg-body-secondary mb-1">작성자 :<%=bloggername %></small>
-		              <h5 class="card-title text-truncate pt-2"><%=title %></h5>
-			            <p class="card-text "><%=description %></p>
-			          </div>
-		           </a>
-		       </li>
-		     <% } %>
-		   </ul>
+         <% for (int i = 0; i < itemList.getLength(); i++) { %>
+             <li class="card col-xl-3 col-lg-4 col-md-6">
+                 <% 
+                     Element itemElement = (Element) itemList.item(i);
+                     String title = itemElement.getElementsByTagName("title").item(0).getTextContent();
+                     String link = itemElement.getElementsByTagName("link").item(0).getTextContent();
+                     String description = itemElement.getElementsByTagName("description").item(0).getTextContent();
+                     String postdate = itemElement.getElementsByTagName("postdate").item(0).getTextContent();
+                     String bloggername = itemElement.getElementsByTagName("bloggername").item(0).getTextContent();
+                 %>
+                 <a href="<%=link %>">
+                   <div class="card-body">
+                     <small class="badge bg-body-secondary mb-1">작성일 :<%=postdate %></small>
+                     <small class="badge bg-body-secondary mb-1">작성자 :<%=bloggername %></small>
+                    <h5 class="card-title text-truncate pt-2"><%=title %></h5>
+                     <p class="card-text "><%=description %></p>
+                   </div>
+                 </a>
+             </li>
+           <% } %>
+         </ul>
         </div>
+        <% } %>
     </main>
 <%@include file="/footer.jsp" %>

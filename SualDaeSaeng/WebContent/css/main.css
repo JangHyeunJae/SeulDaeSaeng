@@ -2289,6 +2289,14 @@ background:#DC143C;
   margin-right: 5px;
 }
 
+#join form label:not(.btn){
+	min-width: 75px;
+	color: var(--color-gray-700);
+	font-size: 14px;
+}
+#join :is(#addr1,#postAddr){
+	cursor: pointer;
+}
 /*--------------------------------------------------------------
 # login
 --------------------------------------------------------------*/

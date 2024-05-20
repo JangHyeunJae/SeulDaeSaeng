@@ -28,75 +28,51 @@
                   <label class="btn btn-outline-warning" for="student">학생</label>
                   <span>입니다.</span>
                 </div>
-                <div class="form-group mt-2">
+                <div class="form-group mt-2 d-flex gap-2 align-items-center">
+				  <label for="id" class="form-label mb-0 pe-2">아이디 </label>
                   <input type="text" class="form-control" name="id" id="id" placeholder="아이디 (4~12자의 숫자와 영문 대소문자)" required pattern="[a-zA-Z0-9]{4,12}" />
-                  <div class="invalid-feedback" >4~12자의 숫자와 영문 대소문자으로 생성해주세요.</div>
-                  <!-- <div class="valid-feedback">형식에 맞는 아이디입니다.</div> -->
-                  <input type="button" id="idCheck" name="idCheck" value="아이디 중복확인">
+                  <button type="button" id="idCheck" name="idCheck" class="btn btn-warning" > 중복확인</button>
                 </div>
-                 <div class="form-group mt-2">
+                 <div class="form-group mt-2 d-flex gap-2 align-items-center">
+  				  <label for="pw" class="form-label mb-0 pe-2">비밀번호 </label>
                   <input type="password" class="form-control" name="pw" id="pw" placeholder="비밀번호 (8~16자 영문 대소문자,숫자,특수문자조합)" required pattern="(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[~!@#$%^&*]).{8,16}" />
-                  <div class="valid-feedback"></div>
-                  <div class="invalid-feedback">8~16자 영문 대소문자,숫자,특수문자조합으로 생성해주세요.</div>
-                </div>
-                <div class="form-group mt-2">
                   <input type="password" class="form-control" name="pwChk" id="pwChk" placeholder="비밀번호 체크" required />
-                  <div class="valid-feedback"></div>
-                  <div class="invalid-feedback"></div>
                 </div>
-                <div class="form-group mt-2">
+                <div class="form-group mt-2 d-flex gap-2 align-items-center">
+  				  <label for="name" class="form-label mb-0 pe-2">이름 </label>
                   <input type="text" class="form-control" name="name" id="name" placeholder="이름" required />
-                  <div class="invalid-feedback">올바른 이름을 입력해주세요.</div>
                 </div>
-                <div class="form-group mt-2">
+                <div class="form-group mt-2 d-flex gap-2 align-items-center">
+  				  <label for="nickname" class="form-label mb-0 pe-2">닉네임 </label>
                   <input type="text" class="form-control" name="nickname" id="nickname" placeholder="닉네임" required />
-                  <!-- <div class="valid-feedback">사용 가능한 닉네임입니다.</div> -->
-                  <div class="invalid-feedback">올바른 닉네임을 입력해주세요.</div>
                 </div>
-			    <div class="form-group">
-			      <!-- <label for="add1" class="control-label col-sm-2">우편번호<span class="rq"> *</span></label> -->
-			      <div class="col-sm-4">
-			        <input type="text" class="form-control" id="postAddr" name="postAddr" placeholder="우편번호" required>
-			        <input type="button" id="addrBtn" name="addrBtn" value="주소검색">
-			        <!-- <button type="button" id="addrBtn" class="btn btn-info btn-sm" >주소검색</button> -->
-			      </div>
+			    <div class="form-group mt-2 d-flex gap-2">
+  				  	  <label for="addrBtn" class="form-label mb-0 pe-2 pt-2">주소 </label>
+  				  	  <div class="w-100">
+		  				  <div class="w-100 d-flex gap-2 align-items-center">
+					          <input type="text" class="form-control" id="postAddr" name="postAddr" placeholder="우편번호" readonly required>
+					          <button type="button" id="addrBtn" name="addrBtn" class="btn btn-warning">주소검색</button>
+		  				  </div>
+					      <input type="text" class="form-control mt-2" id="addr1" name="addr1" placeholder="주소" readonly required>
+					      <input type="text" class="form-control mt-2" id="addr2" name="addr2" placeholder="상세주소" required>
+  				  	  </div>
 			    </div>
-			    
-			    <div class="form-group">
-			      <!-- <label for="addr1" class="control-label col-sm-2">주소<span class="rq"> *</span></label> -->
-			      <div class="col-sm-6">
-			        <input type="text" class="form-control" id="addr1" name="addr1" placeholder="주소" readonly required>
-			      </div>
-			    </div>
-			    
-			    <div class="form-group mt-2">
-			      <!-- <label for="addr2" class="control-label col-sm-2">상세주소<span class="rq"> *</span></label> -->
-			      <input type="text" class="form-control" id="addr2" name="addr2" placeholder="상세주소" required>
-			    </div>
-<!--                 <div class="form-group mt-2">
-                  <input type="text" class="form-control" name="adrr" id="adrr" placeholder="주소" required />
-                  <input type="button" id="idCheck" name="idCheck" value="주소찾기">
-                  <div class="valid-feedback"></div>
-                  <div class="invalid-feedback">알맞은 주소를 입력해주세요.</div>
-                </div> -->
-                <div class="form-group mt-2">
+                <div class="form-group mt-2 d-flex gap-2 align-items-center">
+  				  <label for="tel" class="form-label mb-0 pe-2">전화번호 </label>
                   <input type="tel" class="form-control" name="tel" id="tel" placeholder="전화번호 (-없이 입력)" required pattern="(01[016789]{1})[0-9]{3,4}[0-9]{4}" />
                   <div class="valid-feedback"></div>
-                  <div class="invalid-feedback">전화번호 형식에 맞게 작성해주세요.</div>
                 </div>
-                <div class="form-group mt-2">
+                <div class="form-group mt-2 d-flex gap-2 align-items-center">
+  				  <label for="email" class="form-label mb-0 pe-2">이메일 </label>
                   <input type="email" class="form-control" name="email" id="email" placeholder="이메일" required pattern="[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}" />
                   <div class="valid-feedback"></div>
-                  <div class="invalid-feedback">이메일 형식에 맞게 작성해주세요.</div>
                 </div>
-                <div class="form-group mt-2">
-                	<label class="control-label col-sm-2" for="birthday">생년월일</label>
+                <div class="form-group mt-2 d-flex gap-2 align-items-center">
+  				  <label for="birthday" class="form-label mb-0 pe-2">생녕월일 </label>
                   <input type="date" class="form-control" name="birthday" id="birthday" placeholder="생년월일" required />
-                  <div class="valid-feedback"></div>
-                  <div class="invalid-feedback"></div>
                 </div>
-                <div class="form-group mt-2">
-                  <!-- <label class="control-label col-sm-2" for="validationCustom04">반 호수</label> -->
+                <div class="form-group mt-2 d-flex gap-2 align-items-center">
+  				  <label for="validationCustom04" class="form-label mb-0 pe-2">반호수 </label>
                   <select class="form-select " name="validationCustom04" id="validationCustom04" required >
                     <option selected disabled value="">반 선택</option>
                     <option value="304">301호</option>
@@ -113,11 +89,9 @@
                   <div class="valid-feedback"></div>
                   <div class="invalid-feedback"></div>
                 </div> -->
-                <div class="form-group mt-2">
-                  <!-- <label class="control-label col-sm-2" for="checkImg">파일등록</label> -->
+                <div class="form-group mt-2 d-flex gap-2 align-items-center">
+  				  <label for="checkImg" class="form-label mb-0 pe-2">HRD 캡쳐</label>
                   <input class="form-control form-control-lg " type="file" name="checkImg" id="checkImg" />
-                  <div class="valid-feedback"></div>
-                  <div class="invalid-feedback">파일을 등록해주세요.</div>
                 </div>
                 <div class="text-center mt-5">
                   <button type="submit">회원가입</button>
@@ -181,7 +155,7 @@ $(function() {
 			}
 		})
 	});
-	
+	/*	
 	$('#addrBtn').on('click',function () {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -190,7 +164,18 @@ $(function() {
             }
         }).open();
     });
-	
+    */
+	function searchAddress() {
+		new daum.Postcode({
+            oncomplete: function(data) {
+                document.getElementById('postAddr').value = data.zonecode;
+                document.querySelector("#addr1").value = data.roadAddress;
+            }
+        }).open();
+	}
+    document.getElementById('postAddr').addEventListener('click', searchAddress);
+    document.getElementById('addr1').addEventListener('click', searchAddress);
+	document.getElementById('addrBtn').addEventListener('click', searchAddress);
  	$('form button').click(function(){
    		const classify = $('input[name=classify]:checked').val();
 		

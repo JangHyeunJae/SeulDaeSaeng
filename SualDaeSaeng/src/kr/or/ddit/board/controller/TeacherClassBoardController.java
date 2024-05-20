@@ -8,10 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.board.vo.BoardVO;
+import kr.or.ddit.board.vo.FileDetailVO;
 import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.member.vo.UsersVO;
 
@@ -23,17 +25,19 @@ public class TeacherClassBoardController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		 IBoardService boardService = BoardServiceImpl.getInstance();
+		 HttpSession session = req.getSession();
+		 MemberVO memDetail = (MemberVO)session.getAttribute("memDetail");
 		 
-		 int usersNo = 3; 
-		 int classNo = Integer.parseInt(req.getParameter("classNo"));
-         List<BoardVO> noticeBoardList = boardService.getClassNoticeList(classNo);
-         List<BoardVO> classBoardList = boardService.selectBoardList(classNo);
-		 MemberVO tDetail = boardService.getMemberDetail(usersNo);
-		 req.setAttribute("usersNo", tDetail.getUsersNo());
-		 req.setAttribute("classNo", classNo);
-		 req.setAttribute("tDetail", tDetail);
+		 int levelChk = Integer.parseInt(req.getParameter("levelChk"));
+         List<BoardVO> noticeBoardList = boardService.getClassNoticeList(levelChk);
+         List<BoardVO> classBoardList = boardService.selectBoardList(levelChk);
+		 List<FileDetailVO> fileList = boardService.getFileList(levelChk);
 		 req.setAttribute("noticeBoardList", noticeBoardList);
 		 req.setAttribute("classBoardList", classBoardList);
+		 req.setAttribute("fileList", fileList);
+		 req.setAttribute("levelChk", levelChk);
+		 req.setAttribute("usersNo", memDetail.getUsersNo());
+		 req.setAttribute("memDetail", memDetail);
 		 
 		 req.getRequestDispatcher("/views/board/classTeacherBoard.jsp").forward(req, resp);
 	}

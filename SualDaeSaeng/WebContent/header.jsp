@@ -1,3 +1,5 @@
+<%@page import="kr.or.ddit.member.vo.UsersVO"%>
+<%@page import="kr.or.ddit.member.vo.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
@@ -51,59 +53,8 @@ String id = (String) session.getAttribute("usersId");
     		request.getRequestURI().contains("edit")){ %>
        
 
-    <link rel="stylesheet" href="/css/bootform2.css">  <!-- editer css 추가 -->
-       
-    <!-- <script>
-	//             var fileInput = document.getElementById('fileInput');
-	//             var toolbar = quill.getModule('toolbar');
-	//             toolbar.addHandler('file', function () {
-	//                 fileInput.click();
-	//             });
-	
-	//             // 파일 선택 시
-	//             fileInput.addEventListener('change', function () {
-	//                 var file = fileInput.files[0];
-	//                 if (file) {
-	//                     uploadFile(file);
-	//                 }
-	//             });
-	
-	//             // 파일 업로드 함수
-	//             function uploadFile(file) {
-	//                 var formData = new FormData();
-	//                 formData.append('file', file);
-	
-	//                 // 서버로 파일 업로드
-	//                 var xhr = new XMLHttpRequest();
-	//                 xhr.open('POST', 'upload.jsp', true);
-	//                 xhr.onload = function () {
-	//                     if (xhr.status === 200) {
-	//                         var response = JSON.parse(xhr.responseText);
-	//                         if (response.success) {
-	//                             // 파일 업로드 성공 시, Quill 에디터에 링크 삽입
-	//                             var range = quill.getSelection(true);
-	//                             quill.insertText(range.index, response.url, { 'link': response.url });
-	//                         } else {
-	//                             console.error('File upload failed:', response.error);
-	//                         }
-	//                     } else {
-	//                         console.error('File upload failed:', xhr.statusText);
-	//                     }
-	//                 };
-	//                 xhr.onerror = function () {
-	//                     console.error('File upload failed.');
-	//                 };
-	//                 xhr.send(formData);
-	//             }
-	            
-	            // 사용자 정의 버튼을 추가합니다.
-	//             var customButton = document.querySelector('.ql-myButton'); //editor요소존재시
-	//             customButton.addEventListener('click', function() {
-	//                 alert('Custom button clicked!');
-	//             });
-	
+    	<link rel="stylesheet" href="/css/bootform2.css">  <!-- editer css 추가 -->
 	           
-	    </script> -->
     <% } else if(request.getRequestURI().contains("restaurantUpDate")){%>
        <link href="/css/restaurantUpDate.css" rel="stylesheet">
    	<% } %>
@@ -120,8 +71,6 @@ String id = (String) session.getAttribute("usersId");
         <nav id="navbar" class="navbar">
           <ul>
             <li>
-            
-            
               <a href="<%=request.getContextPath()%>/classBoard.do">반별게시판</a>
             </li>
             <li class="dropdown">
@@ -201,7 +150,7 @@ String id = (String) session.getAttribute("usersId");
                   		<a class="dropdown-item" href="<%=request.getContextPath() %>/member/myPageHome.do">마이페이지</a>
                 	</li>
 					<li>
-						<a href="<%=request.getContextPath() %>/logout.do">로그아웃</a>
+						<a class="dropdown-item" href="<%=request.getContextPath() %>/logout.do">로그아웃</a>
 					</li>
 				<% 
 					}

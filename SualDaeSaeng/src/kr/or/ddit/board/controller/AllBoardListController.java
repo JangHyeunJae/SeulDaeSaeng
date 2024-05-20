@@ -26,11 +26,6 @@ public class AllBoardListController extends HttpServlet {
 
 		int level = 0;
 		
-		String msg = null;
-		if(req.getParameter("msg") != null) {
-			msg = req.getParameter("msg");
-		}
-		
 		String searchOption = req.getParameter("searchOption");
 		if (searchOption != null && searchOption != "") {
 			req.setAttribute("searchOption", searchOption);
@@ -41,7 +36,6 @@ public class AllBoardListController extends HttpServlet {
 		// levelChk는 detail 진입 전에 어느 목록에 있었는지 저장(전체, 자유 등)
 		req.setAttribute("levelChk", level);
 		req.setAttribute("boardList", boardList);
-		req.setAttribute("msg", msg);
 
 		req.getRequestDispatcher("/views/board/allBoard.jsp").forward(req, resp);
 	}

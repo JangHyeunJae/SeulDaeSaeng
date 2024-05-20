@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 
 <%@include file="/header.jsp" %>
-
     <!--<main data-aos="fade" data-aos-delay="1500" >-->
     <main>
       <section id="calssBoard" class="gallery-single ">
@@ -27,8 +26,8 @@
                     <a href="timetable.html" class="btn-visit align-self-start">수업 시간표 확인</a>
                   </li>
                   <li class="pb-0">
-                    <a href="chat.html" class="btn-visit align-self-start">
-                      <span>304</span>반 채팅입장 </a>
+                    <a onclick="chatWinOpen();" class="btn-visit align-self-start">
+                      <span>304</span>호 채팅입장 </a>
                   </li>
                 </ul>
               </div>
@@ -175,5 +174,11 @@
         </div>
       </section>
     </main>
+    <script>
+		function chatWinOpen() {
+			window.open("/openChat.do", "_blank",
+					"width=530,height=800");
+		}
+	</script>
 
 <%@include file="/footer.jsp" %>

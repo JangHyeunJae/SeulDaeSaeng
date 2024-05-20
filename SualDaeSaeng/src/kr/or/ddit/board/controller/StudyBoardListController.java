@@ -26,11 +26,6 @@ public class StudyBoardListController extends HttpServlet{
 		 
 		int level = 2;
 		
-		String msg = null;
-		if(req.getParameter("msg") != null) {
-			msg = req.getParameter("msg");
-		}
-		
 		String searchOption = req.getParameter("searchOption");
 		if (searchOption != null && searchOption != "") {
 			req.setAttribute("searchOption", searchOption);
@@ -40,7 +35,6 @@ public class StudyBoardListController extends HttpServlet{
 
 		req.setAttribute("levelChk", level);
 		req.setAttribute("boardList", boardList);
-		req.setAttribute("msg", msg);
 		
 		req.getRequestDispatcher("/views/board/allBoard.jsp").forward(req, resp);
 	}

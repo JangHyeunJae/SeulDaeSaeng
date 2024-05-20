@@ -14,8 +14,6 @@
 	   idx = (int)request.getAttribute("idx");
     }
 
-    int usersRole = (int)session.getAttribute("usersRole");
-    
  	String boardName = null;
  	String board = null;
  	// levelChk 0이면 버튼 선택해야함
@@ -32,7 +30,8 @@
   		board = "noticeBoard";
   	}
   	else if(levelChk > 300){
-  		boardName = Integer.toString(levelChk) + "호";
+  		boardName = "숙제 작성하기";
+  		//학생일때랑 선생님일때랑 다르게 보내줘야함.
   		board = "classTeacherBoard";
   	}
   	else {
@@ -43,6 +42,7 @@
  %>
 <!--<main data-aos="fade" data-aos-delay="1500" >-->
 <main>
+  <!-- ======= End Page Header ======= -->
   <div class="page-header sub d-flex align-items-center">
     <div class="container position-relative">
       <div class="row d-flex justify-content-center">
@@ -79,14 +79,8 @@
                   <input type="radio" class="btn-check" name="level" id="studyBoard" value="2" autocomplete="off">
                   <label class="btn btn-outline-warning" for="studyBoard">공부게시판</label>
                   
-                  <%
-                  	if(usersRole == 1){
-                  %>
                   <input type="radio" class="btn-check" name="level" id="noticeBoard" value="3" autocomplete="off">
                   <label class="btn btn-outline-warning" for="noticeBoard">공지사항</label>
-                  <%
-                  	}
-                  %>
           </div>
 
           <%
@@ -105,6 +99,18 @@
   <div class="contact">
     <div class="container pb-3">
       <!-- {{changeDetected}} -->
+       <%
+          if(levelChk>300){
+        %>
+        <form action="<%=request.getContextPath()%>/homework/write.do" method="post" role="form" id="insertForm" class="php-email-form needs-validation" novalidate>
+          <div class="form-group d-flex align-items-center pt-4">
+           <p class="pe-2">기간 설정 : <p>
+           <input type="date" class="form-control" name="startDate" id="startDate" value="" max="9999-12-31" style="width:180px; display:inline" required> ~ 
+           <input type="date" class="form-control" name="endDate" id="endDate" value="" max="9999-12-31" style="width:180px;  display:inline" required>
+          </div> 
+        <%
+          }else
+        %>
        <form action="<%=request.getContextPath()%>/board/write.do" method="post" role="form" id="insertForm" class="php-email-form needs-validation" novalidate>
         <div class="form-group">
           <input type="text" class="form-control" name="title" id="title" placeholder="제목" required>

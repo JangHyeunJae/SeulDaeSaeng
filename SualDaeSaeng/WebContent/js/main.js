@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /**
    * Preloader
    */
-/*  const preloader = document.querySelector('#preloader');
+  const preloader = document.querySelector('#preloader');
   if (preloader) {
     window.addEventListener('load', () => {
       setTimeout(() => {
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         preloader.remove();
       }, 2000);
     });
-  }*/
+  }
 
   /**
    * Mobile nav toggle
@@ -275,5 +275,88 @@ document.addEventListener('DOMContentLoaded', () => {
   })();
 
 
-  
+$(document).ready(function() {
+    var obj = $(".file-drop");
+    var label = obj.find('label');
+    var statusBarContainer = $('<div id="statusBarContainer"></div>');
+
+    obj.on('dragenter', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        $(this).css('border', '2px solid var(--color-orange-900)');
+    });
+
+    obj.on('dragover', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        $(this).css('border', '2px solid var(--color-orange-900)');
+    });
+
+    obj.on('drop', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        $(this).css('border', '2px dotted var(--color-orange-900)');
+        var files = e.originalEvent.dataTransfer.files;
+        handleFileUpload(files);
+    });
+
+    $('#upload-file').on('change', function(e) {
+        e.preventDefault();
+        var files = e.target.files;
+        handleFileUpload(files);
+    });
+
+    function handleFileUpload(files) {
+        label.hide(); // Hide the label
+        if (!$('#statusBarContainer').length) {
+            obj.append(statusBarContainer); // Add status bar container if not already added
+        }
+        for (var i = 0; i < files.length; i++) {
+            var fd = new FormData();
+            fd.append('upload', files[i]);
+
+            var status = new createStatusbar($('#statusBarContainer'));
+            status.setFileNameSize(files[i].name, files[i].size);
+
+            // AJAX call to upload the file
+            $.ajax({
+                url: obj.attr('action'),
+                type: 'POST',
+                data: fd,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    // handle success response
+                    console.log('File uploaded successfully');
+                    // Optionally reload or update the file list
+                },
+                error: function(response) {
+                    // handle error response
+                    console.log('File upload failed');
+                }
+            });
+        }
+    }
+
+    function createStatusbar(obj) {
+        this.statusbar = $("<div class='statusbar'></div>");
+        this.filename = $("<span class='filename'></span>").appendTo(this.statusbar);
+        this.size = $("<span class='filesize'></span>").appendTo(this.statusbar);
+
+        obj.append(this.statusbar);
+
+        this.setFileNameSize = function(name, size) {
+            var sizeStr = "";
+            var sizeKB = size / 1024;
+            if (parseInt(sizeKB) > 1024) {
+                var sizeMB = sizeKB / 1024;
+                sizeStr = sizeMB.toFixed(2) + " MB";
+            } else {
+                sizeStr = sizeKB.toFixed(2) + " KB";
+            }
+            this.filename.html(name);
+            this.size.html(sizeStr);
+        }
+    }
+});
 });

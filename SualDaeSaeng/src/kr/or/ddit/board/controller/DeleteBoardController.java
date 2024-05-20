@@ -29,11 +29,12 @@ public class DeleteBoardController extends HttpServlet{
 	    
 		 // levelChk값에 따라 삭제 후 목록 이동
 		 if(cnt>0) {
-			 String msg = URLEncoder.encode("정상적으로 삭제되었습니다.", "UTF-8");
-			 if(levelChk == 0) resp.sendRedirect(req.getContextPath() + "/allBoard.do?msg=" + msg);
-			 else if(levelChk == 1) resp.sendRedirect(req.getContextPath() + "/freeBoard.do?msg=" + msg);
-			 else if(levelChk == 2) resp.sendRedirect(req.getContextPath() + "/studyBoard.do?msg=" + msg);
-			 else if(levelChk == 3) resp.sendRedirect(req.getContextPath() + "/noticeBoard.do?msg=" + msg);
+			 String msg = "정상적으로 삭제되었습니다.";
+			 req.getSession().setAttribute("msg", msg);
+			 if(levelChk == 0) resp.sendRedirect(req.getContextPath() + "/allBoard.do");
+			 else if(levelChk == 1) resp.sendRedirect(req.getContextPath() + "/freeBoard.do");
+			 else if(levelChk == 2) resp.sendRedirect(req.getContextPath() + "/studyBoard.do");
+			 else if(levelChk == 3) resp.sendRedirect(req.getContextPath() + "/noticeBoard.do");
 		 }else {
 			 req.getRequestDispatcher("/views/board/view.jsp").forward(req, resp);
 		 }

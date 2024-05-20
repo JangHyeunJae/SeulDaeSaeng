@@ -8,30 +8,25 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.board.vo.BoardVO;
-import kr.or.ddit.member.vo.MemberVO;
-import kr.or.ddit.member.vo.UsersVO;
+import kr.or.ddit.board.vo.FileDetailVO;
 
-@WebServlet("/classBoard.do")
-public class ClassBoardListController extends HttpServlet{
-	
+@WebServlet("/file/fileList.do")
+public class EachClassFileController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		 
-		 IBoardService boardService = BoardServiceImpl.getInstance();
-		 HttpSession session = req.getSession();
-		 int usersRole = (int)session.getAttribute("usersRole");
+		 IBoardService service = BoardServiceImpl.getInstance();
 		 
-         if(usersRole==1) {
-		     req.getRequestDispatcher("/views/board/classTeacherBoardIntro.jsp").forward(req, resp);
-         }else if(usersRole==2) {
-        	 req.getRequestDispatcher("/views/board/classBoard.jsp").forward(req, resp);
-         }
+		 int classNo = Integer.parseInt(req.getParameter("classNo"));
+		 List<FileDetailVO> fileList = service.getFileList(classNo);
+         req.setAttribute("fileList", fileList);
+         req.setAttribute("classNo", classNo);
+		 req.getRequestDispatcher("/views/board/fileList.jsp").forward(req, resp);
 	}
 	
 	@Override

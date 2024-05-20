@@ -37,6 +37,11 @@ public interface IMemberService {
 	public MemberVO selectMember(int usersNo);
 
 	public AddressVO selectAddr(int addrNo);
+
+	public MemberVO getMemDetail(String usersId);
+
+	public UsersVO getUsersDetail(String usersId);
+
 	
 }
 

@@ -10,7 +10,7 @@
             <a href="siteMap.jsp">사이트맵</a>
           </li>
           <li>
-            <a href="contact.jsp">오류제보</a>
+            <a href="<%=request.getContextPath()%>/contact.do">오류제보</a>
           </li>
         </ul>
         <div class="copyright"> &copy; Copyright <strong>

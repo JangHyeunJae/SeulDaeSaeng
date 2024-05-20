@@ -1,0 +1,57 @@
+<%@page import="kr.or.ddit.contact.vo.ContactVO"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<%@include file="/header.jsp" %>
+
+<%
+	ContactVO contactVO =(ContactVO) request.getAttribute("contactVO");
+%>
+ <main class="pb-5" data-aos="fade" data-aos-delay="1500">
+      <!-- ======= End Page Header ======= -->
+      <div class="page-header d-flex align-items-center">
+        <div class="container position-relative">
+          <div class="row d-flex justify-content-center">
+            <div class="col-lg-6 text-center">
+              <h2>오류제보</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Page Header -->
+      <!-- ======= Contact Section ======= -->
+      <section id="contact" class="contact">
+        <div class="container">
+          <div class="row justify-content-center mt-4">
+            <div class="col-lg-9">
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <p><%=contactVO.getqAt() %></p>
+                  </div>
+                  <div class="col-md-6 form-group mt-3 mt-md-0">
+                    <p><%=contactVO.getqEmail() %></p>
+                  </div>
+                </div>
+                <div class="form-group mt-3">
+                  <p><%=contactVO.getqTitle() %></p>
+                </div>
+                <div class="form-group mt-3">
+                  <p><%=contactVO.getqCon() %></p>
+                </div>
+              
+                <div class="text-center">
+                  <button type="button" id="submitBtn" >내용 전송</button>
+                </div>
+          
+            </div>
+            <!-- End Contact Form -->
+          </div>
+        </div>
+      </section>
+      <!-- End Contact Section -->
+    </main>
+
+
+
+<%@include file="/footer.jsp" %>

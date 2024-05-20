@@ -49,18 +49,14 @@
 <!-- 	</select> -->
 	
 	
-	<select id="selectmember" resultType="kr.or.ddit.admin.vo.MemberReqVO" parameterType="int">
-		select usersNo,
-			memName,
-			MEM_NICK,
-			MEM_BIRTH,
-			MEM_EMAIL,
-			MEM_TEL,
-			MEM_CLASS,
-			MEM_REGDT,
-			ADDR_NO  from member
+	<select id="selectmember" resultMap="listMap" parameterType="int">
+		select *
+		from member
 		where USERS_NO = #{usersNo}
 	</select>
+	
+	
+	
 	
  	<update id="adminAccept" parameterType="int">
 	UPDATE USERS SET USERS_YN = 'Y' 

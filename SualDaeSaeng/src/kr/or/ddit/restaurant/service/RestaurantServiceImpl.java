@@ -66,5 +66,15 @@ public class RestaurantServiceImpl implements IRestaurantService {
 		return dao.selectRest(restBizno);
 	}
 
+	@Override
+	public List<RestaurantVO> selectRestReview(String restBizno) {
+		return dao.selectRestReview(restBizno);
+	}
+
+	@Override
+	public List<RestaurantVO> selectRestReviewAll(Map<String, Object> cls) {
+		return dao.selectRestReviewAll(cls);
+	}
+
 	
 }

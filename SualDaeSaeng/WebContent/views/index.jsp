@@ -2,8 +2,10 @@
 <%@page import="kr.or.ddit.restaurant.vo.RestaurantVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@include file="../header.jsp" %>
-
+<%@include file="/header.jsp" %>
+<%
+	List<RestaurantVO> restLikeList = (List<RestaurantVO>) request.getAttribute("restLikeList");
+%>
     <main data-aos="fade" data-aos-delay="1500">
       <!-- ======= food Recommendation ======= -->
       <section id="food">
@@ -50,6 +52,7 @@
         </div>
       </section>
       <!-- End #food -->
+      <% if(id!=null && !id.isEmpty()){ %>
       <!-- ======= story Recommendation ======= -->
       <section id="story">
         <div class="container-fluid">
@@ -293,6 +296,7 @@
         </div>
       </section>
       <!-- end #all-board -->
+      <% } %>
       <!-- ======= restaurant Section ======= -->
       <section id="restaurant">
         <nav class="container d-flex">
@@ -525,62 +529,36 @@
               <p class="d-flex justify-content-between align-items-center">
                 <b>좋아요 <span>가 많아요!</span>
                 </b>
-                <button type="button" class="btn btn-outline-warning btn-sm">더보기</button>
+                <a href="http://localhost:8888/restaurant/find.do?mcls=all&order=likeUp" class="btn btn-outline-warning btn-sm">더보기</a>
               </p>
             </div>
             <ul>
-              <li class="card">
-                <a href="http://">
-                  <div class="card-body">
-                    <small class="badge bg-body-secondary mb-1">한식</small>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                      <span>
-                        <i class="bi bi-star-fill"></i> 4.5 (25) </span>
-                    </div>
-                    <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                  </div>
-                </a>
-              </li>
-              <li class="card">
-                <a href="http://">
-                  <div class="card-body">
-                    <small class="badge bg-body-secondary mb-1">한식</small>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                      <span>
-                        <i class="bi bi-star-fill"></i> 4.5 (25) </span>
-                    </div>
-                    <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                  </div>
-                </a>
-              </li>
-              <li class="card">
-                <a href="http://">
-                  <div class="card-body">
-                    <small class="badge bg-body-secondary mb-1">한식</small>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                      <span>
-                        <i class="bi bi-star-fill"></i> 4.5 (25) </span>
-                    </div>
-                    <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                  </div>
-                </a>
-              </li>
-              <li class="card">
-                <a href="http://">
-                  <div class="card-body">
-                    <small class="badge bg-body-secondary mb-1">한식</small>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                      <span>
-                        <i class="bi bi-star-fill"></i> 4.5 (25) </span>
-                    </div>
-                    <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                  </div>
-                </a>
-              </li>
+              <% if(restLikeList==null || restLikeList.isEmpty()){ %>
+            	  <li>식당이 존재하지 않습니다.</li>
+              <% } else { 
+              		for(int i=0; i < restLikeList.size(); i++) {
+						RestaurantVO restVo = restLikeList.get(i);
+						%>
+		              <li class="card">
+		                <a href="<%=request.getContextPath() %>/restaurant/view.do?no=<%=restVo.getRestBizno() %>">
+		                  <div class="card-body">
+		                    <small class="badge bg-body-secondary mb-1">
+								<%=restVo.getMclsName()%>
+								&raquo;
+								<%=restVo.getSclsName()%>
+							</small>
+		                    <div class="d-flex justify-content-between align-items-center pt-2">
+		                      <h5 class="card-title text-truncate"><%=restVo.getName()%></h5>
+		                      <span class="text-danger">
+		                        <i class="bi bi-heart-fill text-danger"></i> <%=restVo.getLikeCount() %> 
+		                      </span>
+		                    </div>
+		                    <p class="card-text "><%=restVo.getAddrBasic() %></p>
+		                  </div>
+		                </a>
+		              </li>
+              	<% 	}
+              	}%>
             </ul>
           </ul>
         </nav>
@@ -694,4 +672,4 @@
       <!-- End Testimonials Section -->
     </main>
 
-<%@include file="../footer.jsp" %>
+<%@include file="/footer.jsp" %>

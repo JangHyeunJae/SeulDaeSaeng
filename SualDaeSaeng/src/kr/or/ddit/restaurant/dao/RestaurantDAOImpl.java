@@ -141,7 +141,6 @@ public class RestaurantDAOImpl implements IRestaurantDAO{
 		}
 		return selectSclsList;
 	}
-
 	
 	@Override
 	public RestaurantVO selectRest(String restBizno) {
@@ -158,6 +157,41 @@ public class RestaurantDAOImpl implements IRestaurantDAO{
 			}
 		}
 		return selectRest;
+	}
+
+	
+	@Override
+	public List<RestaurantVO> selectRestReview(String restBizno) {
+		SqlSession session = null;
+		List<RestaurantVO> selectRestReview = null;
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			selectRestReview = session.selectList("restaurant.selectRestReview",restBizno);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return selectRestReview;
+	}
+
+	@Override
+	public List<RestaurantVO> selectRestReviewAll(Map<String, Object> cls) {
+		SqlSession session = null;
+		List<RestaurantVO> selectRestReviewAll = null;
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			selectRestReviewAll = session.selectList("restaurant.selectRestReviewAll",cls);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return selectRestReviewAll;
 	}
 
 }

@@ -29,8 +29,6 @@ public class restaurantFindController extends HttpServlet {
 		String scls = request.getParameter("scls");
 		String order = request.getParameter("order");
 		String page = request.getParameter("nowPage");
-	
-		
 		
 		if(mcls == null) mcls ="";
 		if(scls == null) scls ="";

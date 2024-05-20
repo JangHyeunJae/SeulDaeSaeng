@@ -1,7 +1,9 @@
 package kr.or.ddit.main.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,6 +29,14 @@ public class MainController extends HttpServlet{
 
 		List<RestaurantVO> sclsList = restService.selectSclsList();
 		req.setAttribute("sclsList", sclsList);
+		Map<String, Object> cls = new HashMap<String, Object>();
+		cls.put("mcls", "");
+		cls.put("scls", "");
+		cls.put("order", "likeUp");
+		cls.put("firstpost", 1);
+		cls.put("postperpage", 4);
+		List<RestaurantVO> restLikeList = restService.selectRestaurantType(cls);
+		req.setAttribute("restLikeList", restLikeList);
 		
 		req.getRequestDispatcher("/views/index.jsp").forward(req, resp);
 	}

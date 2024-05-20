@@ -136,6 +136,10 @@ h5 {
 	transform: scale(1.1);
 }
 
+.breadcrumb-item+.breadcrumb-item::before {
+    color: var(--color-gray-300);
+}
+
 @media (max-width:770px) {
   .glightbox-container .gslide-inner-content {
       width: 100%;

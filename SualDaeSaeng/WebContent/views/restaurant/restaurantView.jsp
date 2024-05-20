@@ -1,5 +1,5 @@
-<%@page import="kr.or.ddit.restaurant.vo.RestaurantVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="kr.or.ddit.restaurant.vo.RestaurantVO"%>
 <%@ page import="javax.xml.parsers.*" %>
 <%@ page import="java.io.ByteArrayInputStream" %>
 <%@ page import="org.w3c.dom.*" %>
@@ -10,6 +10,8 @@
 <%@include file="/header.jsp" %>
 <%
 	RestaurantVO restDetails = (RestaurantVO) request.getAttribute("restDetails");
+	List<RestaurantVO> restReviewList = (List<RestaurantVO>) request.getAttribute("restReviewList");
+
 	String responseBlog = (String) request.getAttribute("responseBlog");
 	String responseImg = (String) request.getAttribute("responseImg");
 	
@@ -52,7 +54,7 @@
         <div class="container position-relative">
           <div class="row d-flex justify-content-center">
             <div>
-              <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+              <nav style="--bs-breadcrumb-divider: '|'; " aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item">
                     <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls=all">식당찾기</a>
@@ -61,7 +63,7 @@
                     <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls=<%=restDetails.getMcls()%>"><%=restDetails.getMclsName()%></a>
                   </li>
                   <li class="breadcrumb-item">
-                    <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls=<%=restDetails.getScls()%>"><%=restDetails.getSclsName()%></a>
+                    <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls=<%=restDetails.getMcls()%>&scls=<%=restDetails.getScls()%>"><%=restDetails.getSclsName()%></a>
                   </li>
                   <li class="breadcrumb-item active" aria-current="page"><%=restDetails.getName()%></li>
                 </ol>
@@ -72,26 +74,37 @@
                 <%
                 String score = (int) restDetails.getAvgReviewStar()!=-1 ? ""+ (int) restDetails.getAvgReviewStar() : "리뷰없음";
                 if(score.equals("10")){%>
+                	score = "5";
                 	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i>
                 <%}else if(score.equals("9")){%> 
+                	score = "4.5";
                 	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i>
                 <%}else if(score.equals("8")){%> 
+                	score = "4";
                 	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star"></i>
                 <%}else if(score.equals("7")){%> 
+                	score = "3.5";
                 	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i> <i class="bi bi-star"></i>
                 <%}else if(score.equals("6")){%> 
+                	score = "3";
                 	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
                 <%}else if(score.equals("5")){%> 
+                	score = "2.5";
                 	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
                 <%}else if(score.equals("4")){%> 
+                	score = "2";
                 	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
                 <%}else if(score.equals("3")){%> 
+                	score = "1.5";
                 	<i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
                 <%}else if(score.equals("2")){%> 
+                	score = "1";
                 	<i class="bi bi-star-fill"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
                 <%}else if(score.equals("1")){%> 
+                	score = "0.5";
                 	<i class="bi bi-star-half"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
                 <%}else if(score.equals("0")){%>
+                	score = "0";
                 	<i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
                 <%}else{%> <%} %> 
                   <b>(<%=score %>) <span>(<%=restDetails.getTotalReview()%>명의 평가)</span>
@@ -257,52 +270,79 @@
           </div>
           <% } %>
           <div class="row gy-4 gx-4">
-          
-            <div class="col-lg-6">
-              <div class="food-list ">
-                <h6 class="mb-3 d-flex justify-content-between align-items-center">
-                  <span>
-                    <img src="/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                    <div class="d-flex flex-column ps-2 gap-2">
-                      <small>닉네임</small>
-                      <small class="stars mb-0 d-flex gap-2">
-                        <span class="gap-0">
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-half"></i>
-                        </span>
-                        <span class="font-200">4.5</span>
-                      </small>
-                    </div>
-                  </span>
-                  <small class="day">2024-05-03</small>
-                </h6>
-                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisl tincidunt eget nullam non. Quis hendrerit dolor magna eget est lorem ipsum dolor sit. Volutpat odio facilisis mauris sit amet massa. Commodo odio aenean sed adipiscing diam donec adipiscing tristique. Mi eget mauris pharetra et. Non tellus orci ac auctor augue. Elit at imperdiet dui accumsan sit. Ornare arcu dui vivamus arcu felis. Egestas integer eget aliquet nibh praesent. In hac habitasse platea dictumst quisque sagittis purus. Pulvinar elementum integer enim neque volutpat ac. </p>
-                <div class="d-flex justify-content-between overflow-x-scroll">
-                  <div class="col-lg-4 col-md-6 col-12 p-1">
-                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
-                  </div>
-                  <div class="col-lg-4 col-md-6 col-12 p-1">
-                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
-                  </div>
-                  <div class="col-lg-4 col-md-6 col-12 p-1">
-                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
-                  </div>
-                </div>
-                <hr>
-                <!-- 
-                <button type="button" class="btn btn-secondary btn-sm">
-                  <span>00님 맛집 </span>리스트 더보기 
-                </button>
-                 -->
-              </div>
-            </div>
-
-            <div class="col-xl-12 col-lg-12 col-md-12 text-center">
-              <a class="cta-btn text-center" href="#">더보기</a>
-            </div>
+          	<%	
+          	if(restReviewList == null || restReviewList.size() == 0){ %>
+				<div class="col-xl-12 col-lg-12 col-md-12 col-12">
+					<p class="card-text ">식당이 존재하지 않습니다.</p>
+				</div>
+			<% } else {
+				for (int i = 0; i < restReviewList.size(); i++) {
+				  		RestaurantVO restVo = restReviewList.get(i);
+		          	%>
+		            <div class="col-lg-6">
+		              <div class="food-list ">
+		                <h6 class="mb-3 d-flex justify-content-between align-items-center">
+		                  <span>
+		                    <img src="/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+		                    <div class="d-flex flex-column ps-2 gap-2">
+		                      <small><%=restVo.getNickName() %></small>
+		                      <small class="stars mb-0 d-flex gap-2">
+		                        <span class="gap-0">
+		                        <%if(restVo.getReviewStar() == 10 ){%>
+				                	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i>
+				                <%}else if(restVo.getReviewStar() == 9){%> 
+				                	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i>
+				                <%}else if(restVo.getReviewStar() == 8){%> 
+				                	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star"></i>
+				                <%}else if(restVo.getReviewStar() == 7){%> 
+				                	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i> <i class="bi bi-star"></i>
+				                <%}else if(restVo.getReviewStar() == 6){%> 
+				                	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
+				                <%}else if(restVo.getReviewStar() == 5){%> 
+				                	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
+				                <%}else if(restVo.getReviewStar() == 4){%> 
+				                	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
+				                <%}else if(restVo.getReviewStar() == 3){%> 
+				                	<i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
+				                <%}else if(restVo.getReviewStar() == 2){%> 
+				                	<i class="bi bi-star-fill"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
+				                <%}else if(restVo.getReviewStar() == 1){%> 
+				                	<i class="bi bi-star-half"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
+				                <%}else if(restVo.getReviewStar() == 0){%>
+				                	<i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
+				                <%}else{%> <%} %>
+		                        </span>
+		                        <span class="font-200"><%=restVo.getReviewStar() / 2 %></span>
+		                      </small>
+		                    </div>
+		                  </span>
+		                  <small class="day"><%=restVo.getReviewDate() %></small>
+		                </h6>
+		                <p> <%=restVo.getReviewText() %> </p>
+		                <div class="d-flex justify-content-between overflow-x-scroll">
+		                  <div class="col-lg-4 col-md-6 col-12 p-1">
+		                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
+		                  </div>
+		                  <div class="col-lg-4 col-md-6 col-12 p-1">
+		                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
+		                  </div>
+		                  <div class="col-lg-4 col-md-6 col-12 p-1">
+		                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
+		                  </div>
+		                </div>
+		                <hr>
+		                <!-- 
+		                <button type="button" class="btn btn-secondary btn-sm">
+		                  <span>00님 맛집 </span>리스트 더보기 
+		                </button>
+		                 -->
+		              </div>
+		            </div>
+					<% } %>
+		            <div class="col-xl-12 col-lg-12 col-md-12 text-center">
+		              <a class="cta-btn text-center" href="<%=request.getContextPath() %>/restaurant/review.do?no=<%=restDetails.getRestBizno() %>&order=latest">더보기</a>
+		            </div>
+				<% } %>
           </div>
         </div>
 		<%
@@ -364,5 +404,6 @@
           </div>
         </div>
         <% } %>
+      </section>
     </main>
 <%@include file="/footer.jsp" %>

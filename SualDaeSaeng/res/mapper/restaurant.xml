@@ -107,4 +107,49 @@
 	  GROUP BY REST_BIZNO, NAME, MCLS, MCLS_NAME, SCLS, SCLS_NAME, ADDR_BASIC, LON, LAT, LIKE_COUNT
 	</select>
 	
+	<select id="selectRestReview" parameterType="String" resultType="restVO">
+	  	 SELECT REVIEW_NO reviewNo, 
+		       USERS_NO usersNo, 
+		       NICK_NAME nickName, 
+		       REVIEW_STAR reviewStar, 
+		       REVIEW_TEXT reviewText, 
+		       FILE_NO fileNo, 
+		       REVIEW_DATE reviewDate 
+		FROM (
+		    SELECT REVIEW_NO, 
+		           USERS_NO, 
+		           NICK_NAME, 
+		           REVIEW_STAR, 
+		           REVIEW_TEXT, 
+		           FILE_NO, 
+		           REVIEW_DATE, 
+		           ROWNUM AS RNUM
+		    FROM RESTVIEW
+		    WHERE REST_BIZNO = #{restBizno}
+		    AND REVIEW_NO IS NOT NULL
+		    ORDER BY REVIEW_DATE DESC
+		)
+		WHERE RNUM <![CDATA[<=]]> 2
+	</select>
+	
+	<select id="selectRestReviewAll" parameterType="hashMap" resultType="restVO">
+	  	SELECT REVIEW_NO reviewNo, USERS_NO usersNo, NICK_NAME nickName, REVIEW_STAR reviewStar, REVIEW_TEXT reviewText, FILE_NO fileNo, REVIEW_DATE reviewDate
+		FROM RESTVIEW
+		WHERE REST_BIZNO = #{restBizno}
+	    AND REVIEW_NO IS NOT NULL
+		<if test="order==null or order=='' or order=='letest'">
+			ORDER BY REVIEW_DATE DESC
+		</if>
+		<if test="order=='lste'">
+			ORDER BY REVIEW_DATE ASC
+		</if>
+		<if test="order=='starUp'">
+			ORDER BY REVIEW_STAR DESC 
+		</if>
+		<if test="order=='starDonw'">
+			ORDER BY REVIEW_STAR ASC 
+		</if>
+	</select>
+	
+	
 </mapper>

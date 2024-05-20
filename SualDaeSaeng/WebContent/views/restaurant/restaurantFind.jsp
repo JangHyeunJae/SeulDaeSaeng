@@ -48,7 +48,7 @@
 		<div class="container position-relative">
 			<div class="row d-flex justify-content-center">
 				<div>
-					<nav style="-bs-breadcrumb-divider: '&gt;';" aria-label="breadcrumb">
+					<nav style="--bs-breadcrumb-divider: '|';" aria-label="breadcrumb">
 						<ol class="breadcrumb">
 							<%if(sclsName.equals("") || sclsName == null){
 								if(mclsName.equals("") || mclsName == null){%>
@@ -147,7 +147,7 @@
 			</div>
 			<ul class="row gy-4 justify-content-start ps-0">
 			<% if(restList == null || restList.size() == 0){ %>
-				<li class="card col-xl-12 col-lg-12 col-md-12 col-12">
+				<li class="col-xl-12 col-lg-12 col-md-12 col-12">
 					<p class="card-text ">식당이 존재하지 않습니다.</p>
 				</li>
 			<% } else {
@@ -188,14 +188,12 @@
 								<div class="d-flex justify-content-between align-items-center">
 									<h5 class="card-title text-truncate">
 									<%=restVo.getName()%>
-									
 									</h5>
 									<span> <i class="bi bi-star-fill"></i> 
-									
 									<% if(restVo.getAvgReviewStar() == -1){%>
 										없음
 									<% } else{%>
-										<%=restVo.getAvgReviewStar() %>
+										<%=restVo.getAvgReviewStar()/2 %>
 									<% } %>
 									</span>
 								</div>

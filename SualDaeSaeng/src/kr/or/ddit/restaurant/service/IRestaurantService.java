@@ -14,4 +14,6 @@ public interface IRestaurantService {
 	public List<RestaurantVO> selectSclsList();
 	public List<RestaurantVO> selectSclsList(String mcls);
 	public RestaurantVO selectRest(String bizno);
+	public List<RestaurantVO> selectRestReview(String restBizno);
+	public List<RestaurantVO> selectRestReviewAll(Map<String, Object> cls);
 }

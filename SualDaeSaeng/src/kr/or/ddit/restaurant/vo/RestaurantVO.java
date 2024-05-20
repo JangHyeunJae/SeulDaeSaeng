@@ -1,5 +1,7 @@
 package kr.or.ddit.restaurant.vo;
 
+import java.time.LocalDate;
+
 public class RestaurantVO {
 
 	private int addrNo;
@@ -33,7 +35,9 @@ public class RestaurantVO {
 	private int firstpost;
 	private int postperpage;
 	private int distance;	
-	private int totalReview;	
+	private int totalReview;
+	private String nickName;	
+	private LocalDate reviewDate;
 	
 	public int getAddrNo() {
 		return addrNo;
@@ -239,6 +243,18 @@ public class RestaurantVO {
 	}
 	public void setTotalReview(int totalReview) {
 		this.totalReview = totalReview;
+	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+	public LocalDate getReviewDate() {
+		return reviewDate;
+	}
+	public void setReviewDate(LocalDate reviewDate) {
+		this.reviewDate = reviewDate;
 	}
 	
 }

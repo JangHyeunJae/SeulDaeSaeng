@@ -37,10 +37,12 @@ public class restaurantViewController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String restBizno = request.getParameter("no");
+		
 		RestaurantVO restDetails = service.selectRest(restBizno);
-System.out.println(restDetails);
+		List<RestaurantVO> restReviewList = service.selectRestReview(restBizno);
 		
 		request.setAttribute("restDetails", restDetails);
+		request.setAttribute("restReviewList", restReviewList);
 		
 		String restName = restDetails.getName();
 		String dongName = extractDongName(restDetails.getAddrBasic());

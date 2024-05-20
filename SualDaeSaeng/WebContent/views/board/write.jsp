@@ -14,6 +14,8 @@
 	   idx = (int)request.getAttribute("idx");
     }
 
+    int usersRole = (int)session.getAttribute("usersRole");
+    
  	String boardName = null;
  	String board = null;
  	// levelChk 0이면 버튼 선택해야함
@@ -77,8 +79,14 @@
                   <input type="radio" class="btn-check" name="level" id="studyBoard" value="2" autocomplete="off">
                   <label class="btn btn-outline-warning" for="studyBoard">공부게시판</label>
                   
+                  <%
+                  	if(usersRole == 1){
+                  %>
                   <input type="radio" class="btn-check" name="level" id="noticeBoard" value="3" autocomplete="off">
                   <label class="btn btn-outline-warning" for="noticeBoard">공지사항</label>
+                  <%
+                  	}
+                  %>
           </div>
 
           <%

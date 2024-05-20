@@ -150,7 +150,7 @@ String id = (String) session.getAttribute("usersId");
                   		<a class="dropdown-item" href="<%=request.getContextPath() %>/member/myPageHome.do">마이페이지</a>
                 	</li>
 					<li>
-						<a href="<%=request.getContextPath() %>/logout.do">로그아웃</a>
+						<a class="dropdown-item" href="<%=request.getContextPath() %>/logout.do">로그아웃</a>
 					</li>
 				<% 
 					}

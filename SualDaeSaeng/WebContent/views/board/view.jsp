@@ -26,6 +26,8 @@
 	String msg = session.getAttribute("msg") == null ? "" : (String) session.getAttribute("msg");
 	session.removeAttribute("msg");
 	
+    MemberVO memDetail = (MemberVO)session.getAttribute("memDetail");
+	
     int level = bv.getBoardLevel();
     String boardName = null;
     String board = null;
@@ -172,16 +174,11 @@
                 <p><%=rv.getReplyCon() %></p>
                 <%
               		//세션에서 꺼내와야함.
-                	if(rv.getUsersNo()==1){
+                	if(rv.getUsersNo()==memDetail.getUsersNo()){
                 %>
-                <p><a href="#" class="reply rounded">대댓글</a>
                 <a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&editReply=<%=rv.getReplyNo() %>" class="reply rounded">수정</a>
                 <a href="<%=request.getContextPath()%>/board/deleteReply.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&replyNo=<%=rv.getReplyNo() %>" 
                 	onclick="return confirm('삭제하시겠습니까?');" class="reply rounded">삭제</a></p>
-                <%
-                	}else{
-                %>
-                <p><a href="#" class="reply rounded">대댓글</a></p>
                 <%
                 	}
                 %>
@@ -210,7 +207,7 @@
 		  %>
               <div class="form-group">
                 <!-- 자동입력 -->
-                 <input type="text" class="form-control" id="replyNick" placeholder="<%=wd.getMemNick() %>" readonly> 
+                 <input type="text" class="form-control" id="replyNick" placeholder="<%=memDetail.getMemNick() %>" readonly> 
               </div>
               <%
               	if(editReply == -1){
@@ -260,7 +257,7 @@
              %>
           <%
           //세션에서 꺼내와야함. + 위에 댓글입력창 닉네임 또한 함께 수정 + 댓글 수정 삭제 보이는 부분도
-          if(bv.getUsersNo()==1){
+          if(bv.getUsersNo()==memDetail.getUsersNo()){
           %>
           <a href="<%=request.getContextPath()%>/board/edit.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>" type="button" class="btn btn-secondary">수정하기</a>
           <a href="<%=request.getContextPath()%>/board/delete.do?boardNo=<%=bv.getBoardNo() %>&levelChk=<%=levelChk %>" onclick="return confirm('삭제하시겠습니까?');" type="button" class="btn btn-secondary">삭제하기</a>

@@ -12,13 +12,6 @@
     int classBoardChk = (int)request.getAttribute("classBoardChk");
     List<BoardVO> boardList = (List<BoardVO>)request.getAttribute("boardList");
     
-    String msg = (String) request.getAttribute("msg");
-    if (msg != null) {
-        msg = msg.replace("\\", "\\\\").replace("\'", "\\\'").replace("\"", "\\\"");
-    }else{
-    	msg = "";
-    }
-    
     String board = null;
     if(classBoardChk == 1){
     	board = "eachClassNotice";

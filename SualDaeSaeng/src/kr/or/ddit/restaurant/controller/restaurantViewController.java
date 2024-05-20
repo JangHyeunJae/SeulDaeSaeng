@@ -38,6 +38,7 @@ public class restaurantViewController extends HttpServlet {
 		
 		String restBizno = request.getParameter("no");
 		RestaurantVO restDetails = service.selectRest(restBizno);
+System.out.println(restDetails);
 		
 		request.setAttribute("restDetails", restDetails);
 		
@@ -49,13 +50,13 @@ public class restaurantViewController extends HttpServlet {
 
         String text = null;
         try {
-            text = URLEncoder.encode("대전 "+dongName+" "+restName+"", "UTF-8");
+            text = URLEncoder.encode("대전 "+dongName+"동 "+restName+"", "UTF-8");
         } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException("검색어 인코딩 실패",e);
+//            throw new RuntimeException("검색어 인코딩 실패",e);
         }
         
         String blogURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text+"&display=12"; // XML 결과(Blog)
-        String imgURL = "https://openapi.naver.com/v1/search/image.xml?query="+ text+"&display=12"; // XML 결과(Img)
+        String imgURL = "https://openapi.naver.com/v1/search/image.xml?query="+ text+"&display=12&sort=sim"; // XML 결과(Img)
 
         
         Map<String, String> requestHeaders = new HashMap<>();
@@ -70,24 +71,59 @@ public class restaurantViewController extends HttpServlet {
 		
 		try {			
         	Document doc = Jsoup.connect("https://m.search.naver.com/search.naver?sm=mtp_hty.top&where=m&query="+text).get();
-        	org.jsoup.select.Elements menuName = doc.getElementsByAttributeValue("class", "VQvNX");
-        	org.jsoup.select.Elements menuPrice = doc.getElementsByAttributeValue("class", "gl2cc");
-        	org.jsoup.select.Elements addr = doc.getElementsByAttributeValue("class", "LDgIH");
-        	org.jsoup.select.Elements naverMap = doc.getElementsByAttributeValue("class", "S8peq");
-        	org.jsoup.select.Elements nowSales = doc.getElementsByAttributeValue("class", "A_cdD");
-        	org.jsoup.select.Elements phoneNum = doc.getElementsByAttributeValue("class", "xlx7Q");
-        	org.jsoup.select.Elements addInfo = doc.getElementsByAttributeValue("class", "xPvPE");
-        	
-        	if (menuName != null && !menuName.isEmpty()) {
-	        	String menuName1 = menuName.get(0)!=null ? menuName.get(0).text() : "";
-	        	String menuName2 = menuName.get(1)!=null ? menuName.get(1).text() : "";
-	        	String menuName3 = menuName.get(2)!=null ? menuName.get(2).text() : "";
-	        	String menuName4 = menuName.get(3)!=null ? menuName.get(3).text() : "";
+        	org.jsoup.select.Elements place = doc.select("#place-main-section-root");
+        	if(place != null && !place.isEmpty()) {
+            	
+	        	String menuName1 = "";
+	        	String menuName2 = "";
+	        	String menuName3 = "";
+	        	String menuName4 = "";
 	        	
-	        	String menuPrice1 = menuPrice.get(0)!=null ? menuPrice.get(0).select("em").text() : "";
-	        	String menuPrice2 = menuPrice.get(1)!=null ? menuPrice.get(1).select("em").text() : "";
-	        	String menuPrice3 = menuPrice.get(2)!=null ? menuPrice.get(2).select("em").text() : "";
-	        	String menuPrice4 = menuPrice.get(3)!=null ? menuPrice.get(3).select("em").text() : "";
+	        	String menuPrice1 = "";
+	        	String menuPrice2 = "";
+	        	String menuPrice3 = "";
+	        	String menuPrice4 = "";
+
+            	org.jsoup.select.Elements menuNameType1 = doc.select(".VQvNX");
+            	org.jsoup.select.Elements menuPriceType1 = doc.select(".gl2cc em");
+
+            	org.jsoup.select.Elements menuNameType2 = doc.select(".JLkY7 .y0EHb .A_cdD");
+            	org.jsoup.select.Elements menuPriceType2 = doc.select(".JLkY7 .CLSES em");
+
+            	org.jsoup.select.Elements menuNameType3 = doc.select(".ihmWt");
+            	org.jsoup.select.Elements menuPriceType3 = doc.select(".mkBm3 em");
+            	
+            	if (menuNameType1 != null && !menuNameType1.isEmpty()) {
+    	        	menuName1 = menuNameType1.get(0)!=null ? menuNameType1.get(0).text() : "";
+    	        	menuName2 = menuNameType1.get(1)!=null ? menuNameType1.get(1).text() : "";
+    	        	menuName3 = menuNameType1.get(2)!=null ? menuNameType1.get(2).text() : "";
+    	        	menuName4 = menuNameType1.get(3)!=null ? menuNameType1.get(3).text() : "";
+    	        	
+    	        	menuPrice1 = menuPriceType1.get(0)!=null ? menuPriceType1.get(0).text() : "";
+    	        	menuPrice2 = menuPriceType1.get(1)!=null ? menuPriceType1.get(1).text() : "";
+    	        	menuPrice3 = menuPriceType1.get(2)!=null ? menuPriceType1.get(2).text() : "";
+    	        	menuPrice4 = menuPriceType1.get(3)!=null ? menuPriceType1.get(3).text() : "";
+            	} else if(menuNameType2 != null && !menuNameType2.isEmpty()) {
+    	        	menuName1 = menuNameType2.get(0)!=null ? menuNameType2.get(0).text() : "";
+    	        	menuName2 = menuNameType2.get(1)!=null ? menuNameType2.get(1).text() : "";
+    	        	menuName3 = menuNameType2.get(2)!=null ? menuNameType2.get(2).text() : "";
+    	        	menuName4 = menuNameType2.get(3)!=null ? menuNameType2.get(3).text() : "";
+    	        	
+    	        	menuPrice1 = menuPriceType2.get(0)!=null ? menuPriceType2.get(0).text() : "";
+    	        	menuPrice2 = menuPriceType2.get(1)!=null ? menuPriceType2.get(1).text() : "";
+    	        	menuPrice3 = menuPriceType2.get(2)!=null ? menuPriceType2.get(2).text() : "";
+    	        	menuPrice4 = menuPriceType2.get(3)!=null ? menuPriceType2.get(3).text() : "";
+            	} else if(menuNameType3 != null && !menuNameType3.isEmpty()) {
+    	        	menuName1 = menuNameType3.get(0)!=null ? menuNameType3.get(0).text() : "";
+    	        	menuName2 = menuNameType3.get(1)!=null ? menuNameType3.get(1).text() : "";
+    	        	menuName3 = menuNameType3.get(2)!=null ? menuNameType3.get(2).text() : "";
+    	        	menuName4 = menuNameType3.get(3)!=null ? menuNameType3.get(3).text() : "";
+    	        	
+    	        	menuPrice1 = menuPriceType3.get(0)!=null ? menuPriceType3.get(0).text() : "";
+    	        	menuPrice2 = menuPriceType3.get(1)!=null ? menuPriceType3.get(1).text() : "";
+    	        	menuPrice3 = menuPriceType3.get(2)!=null ? menuPriceType3.get(2).text() : "";
+    	        	menuPrice4 = menuPriceType3.get(3)!=null ? menuPriceType3.get(3).text() : "";
+            	}
     	        
 				request.setAttribute("menuName1", menuName1);
 				request.setAttribute("menuName2", menuName2);
@@ -99,19 +135,34 @@ public class restaurantViewController extends HttpServlet {
 				request.setAttribute("menuPrice3", menuPrice3);
 				request.setAttribute("menuPrice4", menuPrice4); 
 				
-				String restAddr = addr.get(0)!=null ? addr.get(0).text() : "";
-	        	String restNaverMap = naverMap.get(0)!=null ? naverMap.get(0).select("a").attr("href"): "";
-	        	String restNowSales = nowSales.get(0)!=null ? nowSales.get(0).select("em").text() : "";
-	        	String restSalesTime = nowSales.get(0)!=null ? nowSales.get(0).select("time").text() : "";
-	        	String restPhoneNum = phoneNum.get(0)!=null ? phoneNum.get(0).text() : "";
-	        	String restAddInfo = addInfo.get(0)!=null ? addInfo.get(0).text() : "";
-	    		
-	    		request.setAttribute("restAddr", restAddr);
-	    		request.setAttribute("restNaverMap", restNaverMap);
-	    		request.setAttribute("restNowSales", restNowSales);
-	    		request.setAttribute("restSalesTime", restSalesTime);
-	    		request.setAttribute("restPhoneNum", restPhoneNum);
-	    		request.setAttribute("restAddInfo", restAddInfo);     
+				org.jsoup.select.Elements addr = doc.getElementsByAttributeValue("class", "LDgIH");
+				org.jsoup.select.Elements naverMap = doc.getElementsByAttributeValue("class", "S8peq");
+            	org.jsoup.select.Elements nowSales = doc.select(".y6tNq .A_cdD");
+            	org.jsoup.select.Elements phoneNum = doc.getElementsByAttributeValue("class", "xlx7Q");
+            	org.jsoup.select.Elements addInfo = doc.getElementsByAttributeValue("class", "xPvPE");
+            	
+            	if(addr!=null && !addr.isEmpty()) {
+            		String restAddr = addr.get(0)!=null ? addr.get(0).text() : "";
+    	    		request.setAttribute("restAddr", restAddr);
+            	}
+            	if(naverMap!=null && !naverMap.isEmpty()) {
+            		String restNaverMap = naverMap.get(0)!=null ? naverMap.get(0).select("a").attr("href"): "";
+    	    		request.setAttribute("restNaverMap", restNaverMap);
+            	}
+            	if(nowSales!=null && !nowSales.isEmpty()) {
+            		String restNowSales = nowSales.get(0)!=null ? nowSales.get(0).select("em").text() : "";
+            		String restSalesTime = nowSales.get(0)!=null ? nowSales.get(0).select("time").text() : "";
+    	    		request.setAttribute("restNowSales", restNowSales);
+    	    		request.setAttribute("restSalesTime", restSalesTime);
+            	}
+            	if(phoneNum!=null && !phoneNum.isEmpty()) {
+            		String restPhoneNum = phoneNum.get(0)!=null ? phoneNum.get(0).text() : "";
+    	    		request.setAttribute("restPhoneNum", restPhoneNum);
+            	}
+            	if(addInfo!=null && !addInfo.isEmpty()) {
+            		String restAddInfo = addInfo.get(0)!=null ? addInfo.get(0).text() : "";
+    	    		request.setAttribute("restAddInfo", restAddInfo);     
+            	}
         	}
         	
 		} catch (IOException e) {

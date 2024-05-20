@@ -944,7 +944,7 @@ font-family: "TTHakgyoansimMulgyeolR", "CWDangamAsac-Bold","Inter", sans-serif;;
 .about .content ul li {
   margin-bottom: 20px;
   display: flex;
-  align-items: center;
+  align-items: start;
 }
 
 .about .content ul strong {

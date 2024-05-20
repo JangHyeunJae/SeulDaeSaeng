@@ -33,6 +33,7 @@ public class RestaurantVO {
 	private int firstpost;
 	private int postperpage;
 	private int distance;	
+	private int totalReview;	
 	
 	public int getAddrNo() {
 		return addrNo;
@@ -232,6 +233,12 @@ public class RestaurantVO {
 				+ fileSize + ", fileExt=" + fileExt + ", fileDt=" + fileDt + ", fileYn=" + fileYn + ", likeCount="
 				+ likeCount + ", avgReviewStar=" + avgReviewStar + ", firstpost=" + firstpost + ", postperpage="
 				+ postperpage + "]";
+	}
+	public int getTotalReview() {
+		return totalReview;
+	}
+	public void setTotalReview(int totalReview) {
+		this.totalReview = totalReview;
 	}
 	
 }

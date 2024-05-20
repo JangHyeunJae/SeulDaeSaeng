@@ -63,7 +63,7 @@ public class RestaurantDAOImpl implements IRestaurantDAO{
 		String name = "";
 		try {
 			session = MyBatisUtil.getSqlSession(true);
-			name = session.selectOne("restaurant.selectMslsName", cls);
+			name = session.selectOne("restaurant.selectMclsName", cls);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -80,7 +80,7 @@ public class RestaurantDAOImpl implements IRestaurantDAO{
 		String name = "";
 		try {
 			session = MyBatisUtil.getSqlSession(true);
-			name = session.selectOne("restaurant.selectSslsName", cls);
+			name = session.selectOne("restaurant.selectSclsName", cls);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -125,14 +125,31 @@ public class RestaurantDAOImpl implements IRestaurantDAO{
 		return selectSclsList;
 	}
 
+	@Override
+	public List<RestaurantVO> selectSclsList() {
+		SqlSession session = null;
+		List<RestaurantVO> selectSclsList = null;
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			selectSclsList = session.selectList("restaurant.selectSclsList2");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return selectSclsList;
+	}
+
 	
 	@Override
-	public RestaurantVO selectRest(String bizno) {
+	public RestaurantVO selectRest(String restBizno) {
 		SqlSession session = null;
 		RestaurantVO selectRest = null;
 		try {
 			session = MyBatisUtil.getSqlSession(true);
-			selectRest = session.selectOne("restaurant.selectRest",bizno);
+			selectRest = session.selectOne("restaurant.selectRest",restBizno);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

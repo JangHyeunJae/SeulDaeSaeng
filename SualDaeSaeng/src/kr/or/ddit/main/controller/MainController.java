@@ -12,15 +12,23 @@ import javax.servlet.http.HttpServletResponse;
 import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.board.vo.BoardVO;
+import kr.or.ddit.restaurant.service.IRestaurantService;
+import kr.or.ddit.restaurant.service.RestaurantServiceImpl;
+import kr.or.ddit.restaurant.vo.RestaurantVO;
 
 @WebServlet("/main.do")
 public class MainController extends HttpServlet{
-	
 	private static final long serialVersionUID = 1L;
+	
+	private IRestaurantService restService = RestaurantServiceImpl.getInstance();
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		 
-		 req.getRequestDispatcher("/views/index.jsp").forward(req, resp);
+
+		List<RestaurantVO> sclsList = restService.selectSclsList();
+		req.setAttribute("sclsList", sclsList);
+		
+		req.getRequestDispatcher("/views/index.jsp").forward(req, resp);
 	}
 	
 	@Override

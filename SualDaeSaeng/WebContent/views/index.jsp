@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.or.ddit.restaurant.vo.RestaurantVO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@include file="../header.jsp" %>
 
@@ -8,76 +9,38 @@
       <section id="food">
         <div id="textAmin"> 오늘은 <div id=flip>
             <div>
-              <a href="#">한식</a>
+              <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls=I201">한식</a>
             </div>
             <div>
-              <a href="#">중식</a>
+              <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls=I202">중식</a>
             </div>
             <div>
-              <a href="#">일식</a>
+              <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls=I203">일식</a>
             </div>
             <div>
-              <a href="#">서양식</a>
+              <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls=I204">서양식</a>
             </div>
             <div>
-              <a href="#">동남아식</a>
+              <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls=I205">동남아식</a>
             </div>
             <div>
-              <a href="#">분식</a>
+              <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls=I210">간이식</a>
             </div>
           </div> 어떠세요? </div>
         <div class="container">
           <div class="position-relative h-100">
             <div class="slides-icon portfolio-details-slider swiper">
               <div class="swiper-wrapper align-items-center">
-                <a href="#" class="swiper-slide">
-                  <img src="/img/icon/KoreanFood3.png" alt="">
-                  <p>한식</p>
+              <%
+              	List<RestaurantVO> menuList = (List<RestaurantVO>) request.getAttribute("sclsList");
+	              for (int i = 0; i < menuList.size(); i++) {
+				  		RestaurantVO restVo = menuList.get(i);
+               %>
+                <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls=<%=restVo.getMcls() %>&scls=<%=restVo.getScls()%>" class="swiper-slide">
+                  <img src="/img/icon/<%=restVo.getScls()%>.png" alt="<%=restVo.getSclsName()%> 이미지">
+                  <p><%=restVo.getSclsName()%></p>
                 </a>
-                <a href="#" class="swiper-slide">
-                  <img src="/img/icon/KoreanFood5.png" alt="">
-                  <p>한식</p>
-                </a>
-                <a href="#" class="swiper-slide">
-                  <img src="/img/icon/KoreanFood4.png" alt="">
-                  <p>한식</p>
-                </a>
-                <a href="#" class="swiper-slide">
-                  <img src="/img/icon/KoreanFood3.png" alt="">
-                  <p>한식</p>
-                </a>
-                <a href="#" class="swiper-slide">
-                  <img src="/img/icon/KoreanFood5.png" alt="">
-                  <p>한식</p>
-                </a>
-                <a href="#" class="swiper-slide">
-                  <img src="/img/icon/KoreanFood4.png" alt="">
-                  <p>한식</p>
-                </a>
-                <a href="#" class="swiper-slide">
-                  <img src="/img/icon/KoreanFood3.png" alt="">
-                  <p>한식</p>
-                </a>
-                <a href="#" class="swiper-slide">
-                  <img src="/img/icon/KoreanFood5.png" alt="">
-                  <p>한식</p>
-                </a>
-                <a href="#" class="swiper-slide">
-                  <img src="/img/icon/KoreanFood4.png" alt="">
-                  <p>한식</p>
-                </a>
-                <a href="#" class="swiper-slide">
-                  <img src="/img/icon/KoreanFood3.png" alt="">
-                  <p>한식</p>
-                </a>
-                <a href="#" class="swiper-slide">
-                  <img src="/img/icon/KoreanFood5.png" alt="">
-                  <p>한식</p>
-                </a>
-                <a href="#" class="swiper-slide">
-                  <img src="/img/icon/KoreanFood4.png" alt="">
-                  <p>한식</p>
-                </a>
+                <% } %>
               </div>
               <div class="swiper-pagination"></div>
             </div>

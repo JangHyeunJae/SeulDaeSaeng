@@ -1,5 +1,5 @@
 @charset "UTF-8";
-#map { border-radius: 10px }
+#map { border-radius: 10px ; min-height: 180px;}
 #map * { border: transparent !important; }
 .price-tag {
   background-color: var(--color-orange-900);

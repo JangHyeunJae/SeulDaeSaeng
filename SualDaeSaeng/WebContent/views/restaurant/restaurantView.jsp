@@ -4,6 +4,8 @@
 <%@ page import="java.io.ByteArrayInputStream" %>
 <%@ page import="org.w3c.dom.*" %>
 <%@ page import="java.util.*" %>
+<%@ page import="java.net.HttpURLConnection" %>
+<%@ page import="java.net.URL" %>
 
 <%@include file="/header.jsp" %>
 <%
@@ -22,6 +24,7 @@
 	String menuPrice4 = request.getAttribute("menuPrice4")!=null ? (String) request.getAttribute("menuPrice4") : "";
 
 	String restAddr = request.getAttribute("restAddr")!=null ? (String) request.getAttribute("restAddr") : "";
+	
 	String restNaverMap = request.getAttribute("restNaverMap")!=null ? (String) request.getAttribute("restNaverMap"): "";
 	String restNowSales = request.getAttribute("restNowSales")!=null ? (String) request.getAttribute("restNowSales") : "";
 	String restSalesTime = request.getAttribute("restSalesTime")!=null ? (String) request.getAttribute("restSalesTime") : "";
@@ -66,17 +69,39 @@
               <h2 class="pb-2"><%=restDetails.getName()%></h2>
               <div class="d-flex justify-content-between align-items-center">
                 <p class="stars fs-4">
-                  <i class="bi bi-star-fill"></i>
-                  <i class="bi bi-star-fill"></i>
-                  <i class="bi bi-star-fill"></i>
-                  <i class="bi bi-star-fill"></i>
-                  <i class="bi bi-star-half"></i>
-                  <b>4.5 <span>(45명의 평가)</span>
+                <%
+                String score = (int) restDetails.getAvgReviewStar()!=-1 ? ""+ (int) restDetails.getAvgReviewStar() : "리뷰없음";
+                if(score.equals("10")){%>
+                	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i>
+                <%}else if(score.equals("9")){%> 
+                	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i>
+                <%}else if(score.equals("8")){%> 
+                	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star"></i>
+                <%}else if(score.equals("7")){%> 
+                	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i> <i class="bi bi-star"></i>
+                <%}else if(score.equals("6")){%> 
+                	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
+                <%}else if(score.equals("5")){%> 
+                	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
+                <%}else if(score.equals("4")){%> 
+                	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
+                <%}else if(score.equals("3")){%> 
+                	<i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
+                <%}else if(score.equals("2")){%> 
+                	<i class="bi bi-star-fill"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
+                <%}else if(score.equals("1")){%> 
+                	<i class="bi bi-star-half"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
+                <%}else if(score.equals("0")){%>
+                	<i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
+                <%}else{%> <%} %> 
+                  <b>(<%=score %>) <span>(<%=restDetails.getTotalReview()%>명의 평가)</span>
                   </b>
                 </p>
                 <p class="like d-flex align-items-center gap-3">
                   <span style="color: var(--bs-red)">
-                    <i class="bi bi-heart-fill"></i> 25명 좋아하는 중 </span>
+                    <i class="bi bi-heart-fill"></i> <%=restDetails.getLikeCount() %>명 좋아하는 중 
+                  </span>
+                  <% if(id!=null && !id.isEmpty()){ %>                	  
                   <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off">
                   <label class="btn btn-danger d-flex align-items-center gap-2" for="btn-check">
                     <span>
@@ -84,6 +109,7 @@
                     <span>
                       <i class="bi bi-heart"></i> 취소 </span>
                   </label>
+                  <% } %>
                 </p>
               </div>
             </div>
@@ -107,8 +133,7 @@
 				   	  priceTag.className = "price-tag";
 				   	  priceTag.textContent = "<%=restDetails.getName()%>";
 	
-				   	  const markerView = new google.maps.marker.AdvancedMarkerView({
-				   	    map,
+				   	  const markerView = new google.maps.marker.AdvancedMarkerView({  map,
 				   	    position: { lat: <%=restDetails.getLat()%>, lng: <%=restDetails.getLon()%> },
 				   	    content: priceTag,
 				   	  });
@@ -123,7 +148,7 @@
               	<% if(!restAddr.equals("")){ %>
                 <li>
                   <i class="bi bi-geo-alt-fill"></i>
-                  <strong>주소 :</strong>
+                  <strong>주소 </strong>
                   <span>
                   	<%=restAddr %>
               		<% if(!restNaverMap.equals("")){ %>
@@ -134,7 +159,7 @@
               	<% } else { %>
                 <li>
                   <i class="bi bi-geo-alt-fill"></i>
-                  <strong>주소 :</strong>
+                  <strong>주소 </strong>
                   <span>
                   	<%=restDetails.getAddrBasic()%>
               		<% if(!restNaverMap.equals("")){ %>
@@ -146,8 +171,8 @@
        			<% if(!restPhoneNum.equals("")){ %>
                 <li>
                   <i class="bi bi-telephone-fill"></i>
-                  <strong>전화번호 :</strong>
-                  <span><%=restPhoneNum %></span>
+                  <strong>전화번호 </strong>
+                  <a href="tel:+82<%=restPhoneNum %>"><%=restPhoneNum %></a>
                 </li>       				
        			<% } %>
           		<% if(!restNowSales.equals("")){ %>
@@ -162,129 +187,11 @@
    				<%if(!restAddInfo.equals("")){%>
                 <li>
                   <i class="bi bi-plus-square-fill"></i>
-                  <strong>추가정보:</strong>
+                  <strong>추가정보 </strong>
                   <span><%=restAddInfo %></span>
                 </li>	
    				<%}%>
               </ul>
-            </div>
-          </div>
-        </div>
-        <div class="container">
-          <div class="section-header d-flex justify-content-between align-items-center">
-            <p>
-              <b>45건의 평균</b>
-              <span class="stars">
-                <i class="bi bi-star-fill"></i>
-                <b>4.5</b>
-              </span>
-            </p>
-            <button class="btn filter" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-funnel-fill"></i> 검색 필터 </button>
-            <ul class="dropdown-menu">
-              <li>
-                <a class="dropdown-item" href="#">최신순</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">오래된순</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">별점높은순</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">별점낮은순</a>
-              </li>
-            </ul>
-          </div>
-          <hr class="my-0 pb-4">
-          <div class="d-flex justify-content-between align-items-center py-3 mb-3 food-list new-review">
-            <p class="mb-0 d-flex align-items-center gap-3">
-              <img src="/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-              <span> 00님 아직 리뷰를 작성하지 않으셨군요! 당신의 리뷰를 기다리고 있습니다. <br> ※홍보 및 비방 등 부적절한 평가는 평점 산정에서 제외 될 수 있습니다. </span>
-            </p>
-            <button type="button" class="btn btn-outline-warning">리뷰쓰기</button>
-          </div>
-          <div class="row gy-4 gx-4">
-            <div class="col-lg-6">
-              <div class="food-list ">
-                <h6 class="mb-3 d-flex justify-content-between align-items-center">
-                  <span>
-                    <!-- <i class="bi bi-person-circle"></i> -->
-                    <img src="/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                    <div class="d-flex flex-column ps-2 gap-2">
-                      <small>닉네임</small>
-                      <small class="stars mb-0 d-flex gap-2">
-                        <span class="gap-0">
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-half"></i>
-                        </span>
-                        <span class="font-200">4.5</span>
-                      </small>
-                    </div>
-                  </span>
-                  <small class="day">2024-05-03</small>
-                </h6>
-                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisl tincidunt eget nullam non. Quis hendrerit dolor magna eget est lorem ipsum dolor sit. Volutpat odio facilisis mauris sit amet massa. Commodo odio aenean sed adipiscing diam donec adipiscing tristique. Mi eget mauris pharetra et. Non tellus orci ac auctor augue. Elit at imperdiet dui accumsan sit. Ornare arcu dui vivamus arcu felis. Egestas integer eget aliquet nibh praesent. In hac habitasse platea dictumst quisque sagittis purus. Pulvinar elementum integer enim neque volutpat ac. </p>
-                <div class="d-flex justify-content-between overflow-x-scroll">
-                  <div class="col-lg-4 col-md-6 col-12 p-1">
-                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
-                  </div>
-                  <div class="col-lg-4 col-md-6 col-12 p-1">
-                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
-                  </div>
-                  <div class="col-lg-4 col-md-6 col-12 p-1">
-                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
-                  </div>
-                </div>
-                <hr>
-                <button type="button" class="btn btn-secondary btn-sm">
-                  <span>00님 맛집 </span>리스트 더보기 </button>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="food-list ">
-                <h6 class="mb-3 d-flex justify-content-between align-items-center">
-                  <span>
-                    <!-- <i class="bi bi-person-circle"></i> -->
-                    <img src="/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                    <div class="d-flex flex-column ps-2 gap-2">
-                      <small>닉네임</small>
-                      <small class="stars mb-0 d-flex gap-2">
-                        <span class="gap-0">
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-half"></i>
-                        </span>
-                        <span class="font-200">4.5</span>
-                      </small>
-                    </div>
-                  </span>
-                  <small class="day">2024-05-03</small>
-                </h6>
-                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisl tincidunt eget nullam non. Quis hendrerit dolor magna eget est lorem ipsum dolor sit. Volutpat odio facilisis mauris sit amet massa. Commodo odio aenean sed adipiscing diam donec adipiscing tristique. Mi eget mauris pharetra et. Non tellus orci ac auctor augue. Elit at imperdiet dui accumsan sit. Ornare arcu dui vivamus arcu felis. Egestas integer eget aliquet nibh praesent. In hac habitasse platea dictumst quisque sagittis purus. Pulvinar elementum integer enim neque volutpat ac. </p>
-                <div class="d-flex justify-content-between overflow-x-scroll">
-                  <div class="col-lg-4 col-md-6 col-12 p-1">
-                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
-                  </div>
-                  <div class="col-lg-4 col-md-6 col-12 p-1">
-                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
-                  </div>
-                  <div class="col-lg-4 col-md-6 col-12 p-1">
-                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
-                  </div>
-                </div>
-                <hr>
-                <button type="button" class="btn btn-secondary btn-sm">
-                  <span>00님 맛집 </span>리스트 더보기 </button>
-              </div>
-            </div>
-            <div class="col-xl-12 col-lg-12 col-md-12 text-center">
-              <a class="cta-btn text-center" href="#">더보기</a>
             </div>
           </div>
         </div>
@@ -327,37 +234,81 @@
           </div>
         </div>
         <% } %>
-        <% 
-        NodeList itemNodeList = imageRootElement.getElementsByTagName("item");
-        if(itemNodeList.getLength()>0){
-        %>
-        <div class="container gallery">
-          <div class="section-header">
-            <p><span>네이버제공</span> 이미지</p>
+        
+        <div class="container">
+          <div class="section-header d-flex justify-content-between align-items-center">
+            <p>
+            	<span>슬대생리뷰</span> 
+	            <b><%=restDetails.getTotalReview()%>건 평균 </b>
+	            <span class="stars">
+	              <i class="bi bi-star-fill"></i>
+	              <b><%=score %></b>
+	            </span>
+            </p>
           </div>
-          <div class="row gy-4 justify-content-start">
-            <% for (int i = 0; i < itemNodeList.getLength(); i++) { %>
-	             <div class="col-xl-3 col-lg-4 col-md-6">
-	                <% 
-	                   Element itemElement = (Element) itemNodeList.item(i);
-	                   String title = itemElement.getElementsByTagName("title").item(0).getTextContent();
-	                   String link = itemElement.getElementsByTagName("link").item(0).getTextContent();
-	                   String thumbnail = itemElement.getElementsByTagName("link").item(0).getTextContent();
-	               %>
-	               <div class="h-m-180 overflow-hidden">
-	                  <a href="<%=link%>" target="_blank" class="w-100 h-100 d-flex">
-	                    <img src="<%=thumbnail%>" class="card-img" alt="<%=title%>" >
-	                 </a>
-	               </div>
-	             </div>
-            <% } %>
+          <hr class="my-0 pb-4">
+          <% if(id!=null && !id.isEmpty()){ %>
+          <div class="d-flex justify-content-between align-items-center py-3 mb-3 food-list new-review">
+            <p class="mb-0 d-flex align-items-center gap-3">
+              <img src="/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+              <span> 00님 아직 리뷰를 작성하지 않으셨군요! 당신의 리뷰를 기다리고 있습니다. <br> ※홍보 및 비방 등 부적절한 평가는 평점 산정에서 제외 될 수 있습니다. </span>
+            </p>
+            <button type="button" class="btn btn-outline-warning">리뷰쓰기</button>
+          </div>
+          <% } %>
+          <div class="row gy-4 gx-4">
+          
+            <div class="col-lg-6">
+              <div class="food-list ">
+                <h6 class="mb-3 d-flex justify-content-between align-items-center">
+                  <span>
+                    <img src="/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+                    <div class="d-flex flex-column ps-2 gap-2">
+                      <small>닉네임</small>
+                      <small class="stars mb-0 d-flex gap-2">
+                        <span class="gap-0">
+                          <i class="bi bi-star-fill"></i>
+                          <i class="bi bi-star-fill"></i>
+                          <i class="bi bi-star-fill"></i>
+                          <i class="bi bi-star-fill"></i>
+                          <i class="bi bi-star-half"></i>
+                        </span>
+                        <span class="font-200">4.5</span>
+                      </small>
+                    </div>
+                  </span>
+                  <small class="day">2024-05-03</small>
+                </h6>
+                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisl tincidunt eget nullam non. Quis hendrerit dolor magna eget est lorem ipsum dolor sit. Volutpat odio facilisis mauris sit amet massa. Commodo odio aenean sed adipiscing diam donec adipiscing tristique. Mi eget mauris pharetra et. Non tellus orci ac auctor augue. Elit at imperdiet dui accumsan sit. Ornare arcu dui vivamus arcu felis. Egestas integer eget aliquet nibh praesent. In hac habitasse platea dictumst quisque sagittis purus. Pulvinar elementum integer enim neque volutpat ac. </p>
+                <div class="d-flex justify-content-between overflow-x-scroll">
+                  <div class="col-lg-4 col-md-6 col-12 p-1">
+                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-12 p-1">
+                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-12 p-1">
+                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
+                  </div>
+                </div>
+                <hr>
+                <!-- 
+                <button type="button" class="btn btn-secondary btn-sm">
+                  <span>00님 맛집 </span>리스트 더보기 
+                </button>
+                 -->
+              </div>
+            </div>
+
+            <div class="col-xl-12 col-lg-12 col-md-12 text-center">
+              <a class="cta-btn text-center" href="#">더보기</a>
+            </div>
           </div>
         </div>
-        <% } %>
-        <% 
+		<%
        	NodeList itemList = blogRootElement.getElementsByTagName("item");
-       	if(itemList.getLength()>0){
-        %>
+       	if(itemList.getLength()>0){ 
+       	%>
 		<div class="container gallery">
           <div class="section-header">
             <p><span>네이버제공</span> 블로그</p>
@@ -384,6 +335,33 @@
              </li>
            <% } %>
          </ul>
+        </div>
+        <% } %>
+        <% 
+        NodeList itemNodeList = imageRootElement.getElementsByTagName("item");
+        if(itemNodeList.getLength()>0){
+        %>
+        <div class="container gallery">
+          <div class="section-header">
+            <p><span>네이버제공</span> 이미지</p>
+          </div>
+          <div class="row gy-4 justify-content-start">
+            <% for (int i = 0; i < itemNodeList.getLength(); i++) { %>
+	             <div class="col-xl-3 col-lg-4 col-md-6">
+	                <% 
+	                   Element itemElement = (Element) itemNodeList.item(i);
+	                   String title = itemElement.getElementsByTagName("title").item(0).getTextContent();
+	                   String link = itemElement.getElementsByTagName("link").item(0).getTextContent();
+	                   String thumbnail = itemElement.getElementsByTagName("thumbnail").item(0).getTextContent();
+	               %>
+	               <div class="h-m-180 overflow-hidden">
+	                  <a href="<%=link%>" target="_blank" class="w-100 h-100 d-flex" >
+                  		<img src="<%=link%>" class="card-img" alt="<%=title%>" onError="this.src='<%=thumbnail%>';" />
+	                 </a>
+	               </div>
+	             </div>
+            <% } %>
+          </div>
         </div>
         <% } %>
     </main>

@@ -394,7 +394,7 @@
 	                   String link = itemElement.getElementsByTagName("link").item(0).getTextContent();
 	                   String thumbnail = itemElement.getElementsByTagName("thumbnail").item(0).getTextContent();
 	               %>
-	               <div class="h-m-180 overflow-hidden">
+	               <div class="h-m-180 overflow-hidden" title="<%=title%>">
 	                  <a href="<%=link%>" target="_blank" class="w-100 h-100 d-flex" >
                   		<img src="<%=link%>" class="card-img" alt="<%=title%>" onError="this.src='<%=thumbnail%>';" />
 	                 </a>

@@ -96,35 +96,35 @@ public class restaurantViewController extends HttpServlet {
             	org.jsoup.select.Elements menuPriceType3 = doc.select(".mkBm3 em");
             	
             	if (menuNameType1 != null && !menuNameType1.isEmpty()) {
-    	        	menuName1 = menuNameType1.get(0)!=null ? menuNameType1.get(0).text() : "";
-    	        	menuName2 = menuNameType1.get(1)!=null ? menuNameType1.get(1).text() : "";
-    	        	menuName3 = menuNameType1.get(2)!=null ? menuNameType1.get(2).text() : "";
-    	        	menuName4 = menuNameType1.get(3)!=null ? menuNameType1.get(3).text() : "";
-    	        	
-    	        	menuPrice1 = menuPriceType1.get(0)!=null ? menuPriceType1.get(0).text() : "";
-    	        	menuPrice2 = menuPriceType1.get(1)!=null ? menuPriceType1.get(1).text() : "";
-    	        	menuPrice3 = menuPriceType1.get(2)!=null ? menuPriceType1.get(2).text() : "";
-    	        	menuPrice4 = menuPriceType1.get(3)!=null ? menuPriceType1.get(3).text() : "";
+            	    menuName1 = menuNameType1.size() > 0 ? menuNameType1.get(0).text() : "";
+            	    menuName2 = menuNameType1.size() > 1 ? menuNameType1.get(1).text() : "";
+            	    menuName3 = menuNameType1.size() > 2 ? menuNameType1.get(2).text() : "";
+            	    menuName4 = menuNameType1.size() > 3 ? menuNameType1.get(3).text() : "";
+            	    
+            	    menuPrice1 = menuPriceType1.size() > 0 ? menuPriceType1.get(0).text() : "";
+            	    menuPrice2 = menuPriceType1.size() > 1 ? menuPriceType1.get(1).text() : "";
+            	    menuPrice3 = menuPriceType1.size() > 2 ? menuPriceType1.get(2).text() : "";
+            	    menuPrice4 = menuPriceType1.size() > 3 ? menuPriceType1.get(3).text() : "";
             	} else if(menuNameType2 != null && !menuNameType2.isEmpty()) {
-    	        	menuName1 = menuNameType2.get(0)!=null ? menuNameType2.get(0).text() : "";
-    	        	menuName2 = menuNameType2.get(1)!=null ? menuNameType2.get(1).text() : "";
-    	        	menuName3 = menuNameType2.get(2)!=null ? menuNameType2.get(2).text() : "";
-    	        	menuName4 = menuNameType2.get(3)!=null ? menuNameType2.get(3).text() : "";
-    	        	
-    	        	menuPrice1 = menuPriceType2.get(0)!=null ? menuPriceType2.get(0).text() : "";
-    	        	menuPrice2 = menuPriceType2.get(1)!=null ? menuPriceType2.get(1).text() : "";
-    	        	menuPrice3 = menuPriceType2.get(2)!=null ? menuPriceType2.get(2).text() : "";
-    	        	menuPrice4 = menuPriceType2.get(3)!=null ? menuPriceType2.get(3).text() : "";
+            	    menuName1 = menuNameType2.size() > 0 ? menuNameType2.get(0).text() : "";
+            	    menuName2 = menuNameType2.size() > 1 ? menuNameType2.get(1).text() : "";
+            	    menuName3 = menuNameType2.size() > 2 ? menuNameType2.get(2).text() : "";
+            	    menuName4 = menuNameType2.size() > 3 ? menuNameType2.get(3).text() : "";
+            	    
+            	    menuPrice1 = menuPriceType2.size() > 0 ? menuPriceType2.get(0).text() : "";
+            	    menuPrice2 = menuPriceType2.size() > 1 ? menuPriceType2.get(1).text() : "";
+            	    menuPrice3 = menuPriceType2.size() > 2 ? menuPriceType2.get(2).text() : "";
+            	    menuPrice4 = menuPriceType2.size() > 3 ? menuPriceType2.get(3).text() : "";
             	} else if(menuNameType3 != null && !menuNameType3.isEmpty()) {
-    	        	menuName1 = menuNameType3.get(0)!=null ? menuNameType3.get(0).text() : "";
-    	        	menuName2 = menuNameType3.get(1)!=null ? menuNameType3.get(1).text() : "";
-    	        	menuName3 = menuNameType3.get(2)!=null ? menuNameType3.get(2).text() : "";
-    	        	menuName4 = menuNameType3.get(3)!=null ? menuNameType3.get(3).text() : "";
-    	        	
-    	        	menuPrice1 = menuPriceType3.get(0)!=null ? menuPriceType3.get(0).text() : "";
-    	        	menuPrice2 = menuPriceType3.get(1)!=null ? menuPriceType3.get(1).text() : "";
-    	        	menuPrice3 = menuPriceType3.get(2)!=null ? menuPriceType3.get(2).text() : "";
-    	        	menuPrice4 = menuPriceType3.get(3)!=null ? menuPriceType3.get(3).text() : "";
+            	    menuName1 = menuNameType3.size() > 0 ? menuNameType3.get(0).text() : "";
+            	    menuName2 = menuNameType3.size() > 1 ? menuNameType3.get(1).text() : "";
+            	    menuName3 = menuNameType3.size() > 2 ? menuNameType3.get(2).text() : "";
+            	    menuName4 = menuNameType3.size() > 3 ? menuNameType3.get(3).text() : "";
+            	    
+            	    menuPrice1 = menuPriceType3.size() > 0 ? menuPriceType3.get(0).text() : "";
+            	    menuPrice2 = menuPriceType3.size() > 1 ? menuPriceType3.get(1).text() : "";
+            	    menuPrice3 = menuPriceType3.size() > 2 ? menuPriceType3.get(2).text() : "";
+            	    menuPrice4 = menuPriceType3.size() > 3 ? menuPriceType3.get(3).text() : "";
             	}
     	        
 				request.setAttribute("menuName1", menuName1);

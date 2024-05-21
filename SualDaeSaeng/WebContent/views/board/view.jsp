@@ -282,6 +282,7 @@
           <%
           //세션에서 꺼내와야함. + 위에 댓글입력창 닉네임 또한 함께 수정 + 댓글 수정 삭제 보이는 부분도
           if(bv.getUsersNo()==memDetail.getUsersNo()){
+        	  
           %>
           <a href="<%=request.getContextPath()%>/board/edit.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>" type="button" class="btn btn-secondary">수정하기</a>
           <a href="<%=request.getContextPath()%>/board/delete.do?boardNo=<%=bv.getBoardNo() %>&levelChk=<%=levelChk %>" onclick="return confirm('삭제하시겠습니까?');" type="button" class="btn btn-secondary">삭제하기</a>

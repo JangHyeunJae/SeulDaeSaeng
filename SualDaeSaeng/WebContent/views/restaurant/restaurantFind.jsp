@@ -1,8 +1,7 @@
 <%@page import="java.util.List"%>
 <%@page import="java.io.File" %>
 <%@page import="kr.or.ddit.restaurant.vo.RestaurantVO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@include file="/header.jsp"%>
 <%
@@ -36,17 +35,10 @@
 	String sclsId = (String) request.getAttribute("scls");
 	String order = (String) request.getAttribute("order");
 	
-	if(!mclsId.equals("") && !mclsId.equals("all")) {
-		List<RestaurantVO> sclsList = (List<RestaurantVO>) request.getAttribute("sclsList");
-%>
-	alert("sclsList");
-<%
-	}else {
-		List<RestaurantVO> mclsList = (List<RestaurantVO>) request.getAttribute("mclsList");
-%>
-	alert("mclsList");
-<%
-	}
+	List<RestaurantVO> menuList = !mclsId.equals("") && !mclsId.equals("all") ? 
+            (List<RestaurantVO>) request.getAttribute("sclsList") : 
+            (List<RestaurantVO>) request.getAttribute("mclsList");
+	
 
 %>
 
@@ -56,7 +48,7 @@
 		<div class="container position-relative">
 			<div class="row d-flex justify-content-center">
 				<div>
-					<nav style="-bs-breadcrumb-divider: '&gt;';" aria-label="breadcrumb">
+					<nav style="--bs-breadcrumb-divider: '|';" aria-label="breadcrumb">
 						<ol class="breadcrumb">
 							<%if(sclsName.equals("") || sclsName == null){
 								if(mclsName.equals("") || mclsName == null){%>
@@ -89,24 +81,24 @@
 							<%=sclsName %>
 						<%}%>	
 					</h2>
-					<p>
-						
-						<a class="cta-btn"
-							href='<%=request.getContextPath() %>/restaurant/find.do?mcls=all'>ALL</a>
-						<a class="cta-btn gray"
-							href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I201'>한식</a>
-						<a class="cta-btn gray"
-							href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I202'>중식</a>
-						<a class="cta-btn gray"
-							href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I203'>일식</a>
-						<a class="cta-btn gray"
-							href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I204'>서양식</a>
-						<a class="cta-btn gray"
-							href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I205'>동남아식</a>
-						<a class="cta-btn gray"
-							href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I210'>간이식</a>
-						<a class="cta-btn gray"
-							href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I212'>카페</a>
+					<p class="d-flex gap-2 flex-wrap">
+					<%if(!sclsId.equals("") && !sclsId.equals("all") ){%>
+						<a class="cta-btn" href='<%=request.getContextPath() %>/restaurant/find.do?mcls=<%=mclsId%>&scls=<%=sclsId%>'><%=sclsName%></a>
+					<%}else if(!mclsId.equals("") && !mclsId.equals("all") ){%>
+						<a class="cta-btn" href='<%=request.getContextPath() %>/restaurant/find.do?mcls=<%=mclsId%>'><%=mclsName%></a>
+					  	<% for (int i = 0; i < menuList.size(); i++) {
+					  		RestaurantVO restVo = menuList.get(i);
+					  	%>
+						    <a class="cta-btn gray" href='<%=request.getContextPath() %>/restaurant/find.do?mcls=<%=restVo.getMcls() %>&scls=<%=restVo.getScls()%>'><%=restVo.getSclsName() %></a>
+						<% }
+					 }else{%>
+					   <a class="cta-btn" href='<%=request.getContextPath() %>/restaurant/find.do?mcls=all'>ALL</a>
+					  	<% for (int i = 0; i < menuList.size(); i++) {
+					  		RestaurantVO restVo = menuList.get(i);
+					  	%>
+						    <a class="cta-btn gray" href='<%=request.getContextPath() %>/restaurant/find.do?mcls=<%=restVo.getMcls() %>'><%=restVo.getMclsName() %></a>
+						<% } 
+				  	}%>	
 					</p>
 				</div>
 			</div>
@@ -155,7 +147,7 @@
 			</div>
 			<ul class="row gy-4 justify-content-start ps-0">
 			<% if(restList == null || restList.size() == 0){ %>
-				<li class="card col-xl-12 col-lg-12 col-md-12 col-12">
+				<li class="col-xl-12 col-lg-12 col-md-12 col-12">
 					<p class="card-text ">식당이 존재하지 않습니다.</p>
 				</li>
 			<% } else {
@@ -163,7 +155,7 @@
 						RestaurantVO restVo = restList.get(i);
 			%>
 					<li class="card col-xl-3 col-lg-4 col-md-6">
-						<a href="restaurantView.html">
+						<a href="<%=request.getContextPath() %>/restaurant/view.do?no=<%=restVo.getRestBizno() %>">
 							<p class="card-like">
 								<i class="bi bi-heart-fill"></i> 
 								<span><%=restVo.getLikeCount() %></span>
@@ -173,7 +165,6 @@
 								String restBizno = restVo.getRestBizno();
 								String filePath = getServletContext().getRealPath("/img/restaurantImage/" + restBizno);
 								String fileUrl = "/img/restaurantImage/" + restBizno;
-								System.out.print(filePath);
 								
 								// File 객체 생성
 							  	File file = new File(filePath+".jpg");
@@ -197,14 +188,12 @@
 								<div class="d-flex justify-content-between align-items-center">
 									<h5 class="card-title text-truncate">
 									<%=restVo.getName()%>
-									
 									</h5>
 									<span> <i class="bi bi-star-fill"></i> 
-									
 									<% if(restVo.getAvgReviewStar() == -1){%>
 										없음
 									<% } else{%>
-										<%=restVo.getAvgReviewStar() %>
+										<%=restVo.getAvgReviewStar()/2 %>
 									<% } %>
 									</span>
 								</div>

@@ -40,26 +40,18 @@ String id = (String) session.getAttribute("usersId");
     <!-- Template Main CSS File -->
     <link href="/css/main.css" rel="stylesheet">
     
-
-    
-   
     <% if(request.getRequestURI().contains("index")){ %>
-
       <link href="/css/index.css" rel="stylesheet">
-   <% }else if(request.getRequestURI().contains("timetable")){ %>
+    <% }else if(request.getRequestURI().contains("timetable")){ %>
          <link href="/css/timetable.css" rel="stylesheet">
-
-    <% }else if(request.getRequestURI().contains("write") || 
-    		request.getRequestURI().contains("edit")){ %>
-       
-
-    	<link rel="stylesheet" href="/css/bootform2.css">  <!-- editer css 추가 -->
-	           
+    <% }else if(request.getRequestURI().contains("write") || request.getRequestURI().contains("edit")){ %>
+    	<link rel="stylesheet" href="/css/bootform2.css">  
     <% } else if(request.getRequestURI().contains("restaurantUpDate")){%>
        <link href="/css/restaurantUpDate.css" rel="stylesheet">
+   	<% } else if(request.getRequestURI().contains("restaurantView")){ %>
+   		<link href="/css/restaurantView.css" rel="stylesheet">
    	<% } %>
-
-    
+   	
   </head>
   <body>
     <!-- ======= Header ======= -->
@@ -70,26 +62,28 @@ String id = (String) session.getAttribute("usersId");
         </a>
         <nav id="navbar" class="navbar">
           <ul>
-            <li>
-              <a href="<%=request.getContextPath()%>/classBoard.do">반별게시판</a>
-            </li>
-            <li class="dropdown">
-              <a href="<%=request.getContextPath()%>/allBoard.do">
-                <span>전체게시판</span>
-                <i class="bi-caret-down-fill"></i>
-              </a>
-              <ul>
-                <li>
-                  <a href="<%=request.getContextPath()%>/freeBoard.do">자유게시판</a>
-                </li>
-                <li>
-                  <a href="<%=request.getContextPath()%>/studyBoard.do">공부게시판</a>
-                </li>
-                <li>
-                  <a href="<%=request.getContextPath()%>/noticeBoard.do">공지게시판</a>
-                </li>
-              </ul>
-            </li>
+          	<% if(id!=null && !id.isEmpty()){ %>
+	            <li>
+	              <a href="<%=request.getContextPath()%>/classBoard.do">반별게시판</a>
+	            </li>
+	            <li class="dropdown">
+	              <a href="<%=request.getContextPath()%>/allBoard.do">
+	                <span>전체게시판</span>
+	                <i class="bi-caret-down-fill"></i>
+	              </a>
+	              <ul>
+	                <li>
+	                  <a href="<%=request.getContextPath()%>/freeBoard.do">자유게시판</a>
+	                </li>
+	                <li>
+	                  <a href="<%=request.getContextPath()%>/studyBoard.do">공부게시판</a>
+	                </li>
+	                <li>
+	                  <a href="<%=request.getContextPath()%>/noticeBoard.do">공지게시판</a>
+	                </li>
+	              </ul>
+	            </li>
+          	<% } %>
 			<li class="dropdown">
 				<a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=all'>
 				  <span>식당찾기</span>
@@ -114,6 +108,9 @@ String id = (String) session.getAttribute("usersId");
 					<li>
 					  <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I210'>간이식</a>
 					</li>
+					<li >
+					  <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I211'>주점</a>
+				    </li>
 					<li >
 					  <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I212'>카페</a>
 				    </li>

@@ -50,7 +50,7 @@
                   </li>
                   <!-- <li><strong>마이페이지</strong><a href="timetable.html">확인하기</a></li> -->
                   <li>
-                    <a href="<%=request.getContextPath()%>/timetable.do" class="btn-visit align-self-start">수업 시간표 확인</a>
+                   <a href="<%=request.getContextPath() %>/file/download.do?fileNo=254" download class="btn-visit align-self-start">시간표 다운로드</a>
                   </li>
                   <li class="pb-0">
                     <a onclick="chatWinOpen();" class="btn-visit align-self-start">
@@ -110,7 +110,6 @@
                     <div class="card-body">
                       <div class="d-flex justify-content-between align-items-center">
                         <h5 class="card-title text-truncate"><%=hw.getHwTitle() %></h5>
-                        <span><%=hwTeacher.getMemName() %></span>
                       </div>
                       <p class="card-text "><%=hw.getHwEnd() %>까지</p>
                       <%

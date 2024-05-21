@@ -24,12 +24,15 @@
 	int levelChk = (int) request.getAttribute("levelChk");
 	int editReply = (int) request.getAttribute("editReply");
 	MemberVO memDetail = (MemberVO)session.getAttribute("memDetail");
+	int classBoardChk = 0;
+	if(request.getAttribute("classBoardChk")!=null){
+	   classBoardChk = (int)request.getAttribute("classBoardChk");
+	}
+	
 	
 	String msg = session.getAttribute("msg") == null ? "" : (String) session.getAttribute("msg");
 	session.removeAttribute("msg");
-	
-    MemberVO memDetail = (MemberVO)session.getAttribute("memDetail");
-	
+
     int level = bv.getBoardLevel();
     String boardName = null;
     String board = null;
@@ -45,6 +48,17 @@
   		boardName = "공지사항";
   		board = "noticeBoard";
   	}
+
+    if(boardName==null){
+    	boardName = String.valueOf(levelChk) + "호";
+    }
+    
+    if(classBoardChk==1){
+  		board = "eachClassNotice";
+    }else if(classBoardChk==2){
+  		board = "eachClassBoard";
+    }
+    
 %>
 
  <main>
@@ -59,9 +73,13 @@
               	%>
               	<a href="/allBoard.do"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
               	<%
-              		}else{
+              		}else if(levelChk!=0 && classBoardChk!=0){
               	%>
-                <a href="/<%=board %>.do"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
+                <a href="/<%=board %>.do?levelChk=<%=levelChk %>"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
+                <%
+              		}else{
+                %>
+                   <a href="/<%=board %>.do"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
                 <%
               		}
                 %>
@@ -246,17 +264,22 @@
           <!-- START MENU -->
           
         <div class="btn-box container d-flex align-items-center justify-content-center pb-5 pt-5 gap-2">
-        	<%
-              if (levelChk == 0) {
-            %>
-          	<a href="<%=request.getContextPath()%>/allBoard.do" type="button" class="btn btn-secondary">목록으로</a>
-             <%
-              }else{
-             %>
-          	<a href="<%=request.getContextPath()%>/<%=board %>.do" type="button" class="btn btn-secondary">목록으로</a>
-             <%
-              }
-             %>
+                <%
+              		if (levelChk == 0) {
+              	%>
+              	<a href="<%=request.getContextPath()%>/allBoard.do"  type="button" class="btn btn-secondary"> 목록으로 </a>
+              	<%
+              		}else if(levelChk!=0 && classBoardChk!=0){
+              	%>
+                <a href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>"  type="button" class="btn btn-secondary"> 목록으로 </a>
+                <%
+              		}else{
+                %>
+                   <a href="<%=request.getContextPath()%>/<%=board %>.do"  type="button" class="btn btn-secondary"> 목록으로 </a>
+                <%
+              		}
+                %>
+     
           <%
           //세션에서 꺼내와야함. + 위에 댓글입력창 닉네임 또한 함께 수정 + 댓글 수정 삭제 보이는 부분도
           if(bv.getUsersNo()==memDetail.getUsersNo()){

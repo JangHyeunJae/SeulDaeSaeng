@@ -62,7 +62,8 @@
                             <input type="radio" class="btn-check" name="level" id="studyBoard" value="2" autocomplete="off">
                             <label class="btn btn-outline-warning" for="studyBoard">공부게시판</label>
                             
-                            <input type="radio" class="btn-check" name="level" id="noticeBoard" value="3" autocomplete="off">
+                            <input type="radio" class="btn-check" name="level" id="noticeBoard
+                            " value="3" autocomplete="off">
                             <label class="btn btn-outline-warning" for="noticeBoard">공지사항</label>
                         </div>
                         <% 
@@ -80,10 +81,14 @@
                         <textarea class="form-control summernote" rows="5" id="content" name="content"></textarea>
                         <input type="hidden" id="levelChk" name="levelChk" value="<%=levelChk %>">
                         <input type="hidden" id="idx" name="idx" value="<%=idx %>">
-                        <input type="file" name="file" id="file">
-                        <div class="text-center mt-5 mb-5">
+                        
+		                <div class="form-group mt-2 d-flex gap-2 align-items-center">
+		                  <input class="form-control form-control-lg " type="file" name="file" id="file" />
+		                </div>
+                        
+                         <div class="text-center mt-5 mb-5">
                             <button type="submit" id="submitBtn" name="submitBtn" style="background-color:orange;">작성하기</button>
-                        </div>
+                         </div>
                         </div>
                         </div>
                     </form>

@@ -30,6 +30,7 @@ public class BoardDetailController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		 
 		 int boardNo = Integer.parseInt(req.getParameter("boardNo"));
+		 String classBoardChk = req.getParameter("classBoardChk");
 		 BoardVO boardDetail = boardService.getBoardDetail(boardNo);
 		 int hit = boardService.updateHit(boardNo);
 		 int boardLevel = boardDetail.getBoardLevel();
@@ -56,6 +57,10 @@ public class BoardDetailController extends HttpServlet{
 		 req.setAttribute("idx", idx);
 		 req.setAttribute("levelChk", levelChk);
 		 req.setAttribute("editReply", editReply);
+		 
+		 if(classBoardChk!=null) {
+			 req.setAttribute("classBoardChk", Integer.parseInt(classBoardChk));
+		 }
 		 
 		 List<BoardVO> boardList = null;
 		 if(levelChk == 0) boardList = boardService.allBoardList();

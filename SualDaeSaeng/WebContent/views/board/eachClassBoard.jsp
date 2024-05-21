@@ -140,7 +140,7 @@
 							BoardVO bv = boardList.get(i);
 				%>
 					<a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>
-					&idx=<%=idx %>&levelChk=<%=bv.getBoardLevel() %>&editReply=<%=-1 %>" class="list-group-item">
+					&idx=<%=idx %>&levelChk=<%=bv.getBoardLevel() %>&editReply=<%=-1 %>&classBoardChk=<%=classBoardChk %>" class="list-group-item">
 						<div class="d-flex w-100 justify-content-between align-items-center">
 							<h5 class="mb-2 text-truncate">
 								<small class="attach"><i class="bi bi-paperclip"></i></small>
@@ -163,49 +163,28 @@
 
 			<!-- Pagination links -->
             <nav aria-label="Page navigation" class="d-flex justify-content-center align-items-center pt-5 pm-5">
-              <ul class="pagination">
-                <% if (currentPage > 1) { %>
+               <ul class="pagination">
+            <% if (currentPage > 1) { %>
                 <li class="page-item">
-                    <!-- Include classNo in the URL -->
-                    <a class="page-link" href="<%= request.getContextPath() %>/eachClassBoard.do?levelChk=<%= levelChk %>&page=<%= currentPage - 1 %>">&laquo;</a>
+                    <a class="page-link" href="<%= request.getContextPath() + "?levelChk=" + levelChk + "&page=" + (currentPage - 1) %>">&laquo;</a>
                 </li>
-                <% } %>
+            <% } %>
             
-                <% for (int i = 1; i <= totalPages; i++) { %>
+            <% for (int i = 1; i <= totalPages; i++) { %>
                 <li class="page-item <%= (i == currentPage) ? "active" : "" %>">
-                    <!-- Include classNo in the URL -->
-                    <a class="page-link" href="<%= request.getContextPath() %>/eachClassBoard.do?levelChk=<%= levelChk %>&page=<%= i %>"><%= i %></a>
+                    <a class="page-link" href="<%= request.getContextPath() +  "?levelChk=" + levelChk + "&page=" + i %>"><%= i %></a>
                 </li>
-                <% } %>
+            <% } %>
 
-                <% if (currentPage < totalPages) { %>
+            <% if (currentPage < totalPages) { %>
                 <li class="page-item">
-                    <!-- Include classNo in the URL -->
-                    <a class="page-link" href="<%= request.getContextPath() %>/eachClassBoard.do?levelChk=<%= levelChk %>&page=<%= currentPage + 1 %>">&raquo;</a>
+                    <a class="page-link" href="<%= request.getContextPath() +  "?levelChk=" + levelChk + "&page=" + (currentPage + 1) %>">&raquo;</a>
                 </li>
-                <% } %>
-              </ul>
+            <% } %>
+        </ul>
            </nav>
 			<div class="container d-flex align-items-center justify-content-end pb-5 gap-2 p-0">
-			<%
-			  String fullUrl = (String) request.getAttribute("originalUrl");
-		      boolean isNoticePage = fullUrl.contains("eachClassNotice.do");
-
-		      // 디버깅을 위해 변수 값을 출력합니다.
-		      System.out.println("fullUrl: " + fullUrl);
-		      System.out.println("isNoticePage: " + isNoticePage);
-		      System.out.println("usersRole: " + usersRole);
-
-			  if(!isNoticePage){
-			  %>
-				<a href="<%= request.getContextPath() %>/board/write.do?levelChk=<%=levelChk %>&idx=0" type="button" class="btn btn-outline-warning">글쓰기</a>
-				<%
-			  }else if( isNoticePage && usersRole==1){
-				%>
-				<a href="<%= request.getContextPath() %>/board/write.do?levelChk=<%=levelChk %>&idx=0" type="button" class="btn btn-outline-warning">글쓰기</a>
-			    <%
-			  }
-				%>
+			<a href="<%= request.getContextPath() %>/board/write.do?levelChk=<%=levelChk %>&idx=0" type="button" class="btn btn-outline-warning">글쓰기</a>
 			</div>
 		</div>
 	</section>

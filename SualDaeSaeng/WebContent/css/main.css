@@ -2552,18 +2552,20 @@ background:#DC143C;
 
 #chat .msg_time {
   position: absolute;
-  left: 0;
-  bottom: -23px;
-  color: var(--color-gray-600);
+  right: 110%;
+  bottom: 0;
+  color: var(--color-gray-500);
   font-size: 11px;
+  width: 70px;
 }
 
 #chat .msg_time_send {
   position: absolute;
-  right: 0;
-  bottom: -23px;
-  color: var(--color-gray-600);
+  left: 110%;
+  bottom: 0;
+  color: var(--color-gray-500);
   font-size: 11px;
+  width: 70px;
 }
 
 /*--------------------------------------------------------------

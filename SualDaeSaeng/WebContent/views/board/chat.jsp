@@ -66,8 +66,9 @@
           </div>
         </div>
 </section>
-        <button id="closeBtn" style="border:none; display: flex; 
-         justify-content: center; /* 버튼 내부 텍스트 가로 중앙 정렬 */"class="cta-btn" onclick="disconnect();" >채팅 종료</button>
+<div class="d-flex justify-content-center">
+	<button id="closeBtn" style="border:none; display: flex; justify-content: center; /* 버튼 내부 텍스트 가로 중앙 정렬 */"class="cta-btn" onclick="disconnect();" >채팅 종료</button>
+</div>
     
 <script>
 var classId = "<%=classId%>";
@@ -91,11 +92,14 @@ var webSocket = new WebSocket("ws://192.168.34.118:8888/ChatingServer/" + classI
 	    hours = hours % 12;
 	    hours = hours ? hours : 12; // 0 시간은 12로 표시
 	    minutes = minutes < 10 ? '0' + minutes : minutes;
-	    var formattedTime = hours + ':' + minutes + ' ' + ampm;
+
+	    // 현재 요일 가져오기
+	    var days = ['일', '월', '화', '수', '목', '금', '토'];
+	    var dayOfWeek = days[currentTime.getDay()];
+
+	    var formattedTime = hours + ':' + minutes + ' ' + ampm + ' ' + dayOfWeek;
 	    return formattedTime;
 	}
-
-
 
 	// 메시지 전송
 	function sendMessage() {

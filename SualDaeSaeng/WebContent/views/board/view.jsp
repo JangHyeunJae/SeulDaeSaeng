@@ -18,11 +18,13 @@
     List<ReplyVO> replyList = (List<ReplyVO>)request.getAttribute("replyList");
     MemberVO wd = (MemberVO)request.getAttribute("writerDetail");
 	BoardVO bv = (BoardVO)request.getAttribute("boardDetail");
+	FileDetailVO file = (FileDetailVO)request.getAttribute("file");
     
     int idx = (int) request.getAttribute("idx");
 	int levelChk = (int) request.getAttribute("levelChk");
 	int editReply = (int) request.getAttribute("editReply");
-
+	MemberVO memDetail = (MemberVO)session.getAttribute("memDetail");
+	
 	String msg = session.getAttribute("msg") == null ? "" : (String) session.getAttribute("msg");
 	session.removeAttribute("msg");
 	
@@ -141,10 +143,10 @@
           <%
           	if(bv.getFileNo() != 0){
           %>
-          <a href="file/01.수행계획서.odt" download class="attached-file d-flex justify-content-between align-items-center">
+          <a href="<%=request.getContextPath() %>/file/download.do?fileNo=<%=file.getFileNo() %>" download class="attached-file d-flex justify-content-between align-items-center">
             <span>
-              <i class="bi bi-download px-2"></i> 01.수행계획서.odt </span>
-            <span>23KB</span>
+              <i class="bi bi-download px-2"></i><%=file.getFileOgname() %> </span>
+            <span><%=file.getFileSize() %></span>
           </a>
           <%  
           }

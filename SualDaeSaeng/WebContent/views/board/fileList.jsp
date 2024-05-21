@@ -10,8 +10,9 @@
 
 <%@include file="/header.jsp"%>
 <%
+    int usersRole = (int)session.getAttribute("usersRole");
     List<FileDetailVO> fileList = (List<FileDetailVO>)request.getAttribute("fileList");
-    int classNo = (int)request.getAttribute("classNo");
+    int levelChk = (int)request.getAttribute("levelChk");
     //페이징 기능
     int itemsPerPage = 5;
     int currentPage = (request.getParameter("page") != null) ? Integer.parseInt(request.getParameter("page")) : 1;
@@ -26,9 +27,19 @@
 	<div class="page-header d-flex align-items-center">
 		<div class="container position-relative">
 			<div class="row d-flex justify-content-center">
-			   <a href="<%=request.getContextPath()%>/classTeacherBoard.do?classNo=<%=classNo%>" class="pb-4"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
+			<%
+			if(usersRole==1){
+			%>
+			   <a href="<%=request.getContextPath()%>/classTeacherBoard.do?levelChk=<%=levelChk%>" class="pb-4"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
+			<%
+			}else{
+			%>
+			   <a href="<%=request.getContextPath()%>/classBoard.do?levelChk=<%=levelChk%>" class="pb-4"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
+			<%
+			}
+			%>
 				<div>
-					<h2><%=classNo %>호 파일</h2>
+					<h2><%=levelChk %>호 파일</h2>
 				</div>
 			</div>
 		</div>
@@ -65,7 +76,7 @@
 							<%=fd.getFileSavednm()%>
 						</h5>
 						<small class="badge bg-light">
-						<%=classNo %>호
+						<%=levelChk %>호
 						</small>
 					</div>
 					<div class="d-flex w-100 justify-content-between align-items-center">
@@ -88,19 +99,19 @@
         <ul class="pagination">
             <% if (currentPage > 1) { %>
                 <li class="page-item">
-                    <a class="page-link" href="<%= request.getContextPath() %>?classNo=<%=classNo %>&page=<%= currentPage - 1 %>">&laquo;</a>
+                    <a class="page-link" href="<%= request.getContextPath() %>?levelChk=<%=levelChk %>&page=<%= currentPage - 1 %>">&laquo;</a>
                 </li>
             <% } %>
             
             <% for (int i = 1; i <= totalPages; i++) { %>
                 <li class="page-item <%= (i == currentPage) ? "active" : "" %>">
-                    <a class="page-link" href="<%= request.getContextPath() %>?classNo=<%=classNo %>&page=<%= i %>"><%= i %></a>
+                    <a class="page-link" href="<%= request.getContextPath() %>?levelChk=<%=levelChk %>&page=<%= i %>"><%= i %></a>
                 </li>
             <% } %>
 
             <% if (currentPage < totalPages) { %>
                 <li class="page-item">
-                    <a class="page-link" href="<%= request.getContextPath() %>?classNo=<%=classNo %>&page=<%= currentPage + 1 %>">&raquo;</a>
+                    <a class="page-link" href="<%= request.getContextPath() %>?levelChk=<%=levelChk %>&page=<%= currentPage + 1 %>">&raquo;</a>
                 </li>
             <% } %>
         </ul>

@@ -25,14 +25,23 @@ public class AllBoardListController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		int level = 0;
-		
+		List<BoardVO> boardList = null;
 		String searchOption = req.getParameter("searchOption");
+		String searchText = req.getParameter("searchText");
+		if (searchText != null && searchText != "") {
+			Map<String, Object> parameter = new HashMap<>();
+			parameter.put("searchText", searchText);
+			parameter.put("searchOption", searchOption);
+			
+			boardList = boardService.searchAllBoardList(parameter);
+		}else {
+			boardList = boardService.allBoardList();
+		}
+
 		if (searchOption != null && searchOption != "") {
 			req.setAttribute("searchOption", searchOption);
+			req.setAttribute("searchText", searchText);
 		}
-		
-		List<BoardVO> boardList = boardService.allBoardList();
-
 		// levelChk는 detail 진입 전에 어느 목록에 있었는지 저장(전체, 자유 등)
 		req.setAttribute("levelChk", level);
 		req.setAttribute("boardList", boardList);
@@ -60,7 +69,7 @@ public class AllBoardListController extends HttpServlet {
 
 		req.setAttribute("levelChk", level);
 		req.setAttribute("boardList", boardList);
-
-		req.getRequestDispatcher("/views/board/allBoard.jsp").forward(req, resp);
+		
+		resp.sendRedirect("/allBoard.do?searchText=" + searchText);
 	}
 }

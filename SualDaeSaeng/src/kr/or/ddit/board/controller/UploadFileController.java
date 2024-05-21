@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
@@ -24,6 +25,9 @@ import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.board.vo.BoardVO;
 import kr.or.ddit.board.vo.FileDetailVO;
+import kr.or.ddit.board.vo.FileShareVO;
+import kr.or.ddit.board.vo.HwSubmitVO;
+import kr.or.ddit.member.vo.MemberVO;
 
 @MultipartConfig
 @WebServlet("/file/upload.do")
@@ -41,7 +45,16 @@ public class UploadFileController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     	
-        int classNo = Integer.parseInt(req.getParameter("classNo"));
+		req.setCharacterEncoding("UTF-8");
+    	HttpSession session = req.getSession();
+		int usersRole = (int)session.getAttribute("usersRole");
+        MemberVO memDetail = (MemberVO)session.getAttribute("memDetail");
+        int levelChk = Integer.parseInt(req.getParameter("levelChk"));
+        int hwNo = 0;
+    	if(usersRole==2) {
+           hwNo = Integer.parseInt(req.getParameter("hwNo"));
+    	}
+        
         
 		Collection<Part> parts = req.getParts();
 		
@@ -64,7 +77,7 @@ public class UploadFileController extends HttpServlet {
         	fileSavednm = UUID.randomUUID().toString().replace("-", "");
         		
         	fileSavepath = uploadPath + "/" + fileSavednm;
-        		
+        	
         	try {
 					part.write(fileSavepath); //파일 업로드 처리
 			} catch (IOException e) {
@@ -76,18 +89,39 @@ public class UploadFileController extends HttpServlet {
         				"" : orignFileName.substring(orignFileName.lastIndexOf(".") + 1);
         		
         	FileDetailVO fileDetail = new FileDetailVO();
-        	fileDetail.setFileLevel(classNo);
+        	fileDetail.setFileLevel(levelChk);
         	fileDetail.setFileExt(fileExtension);
         	fileDetail.setFileOgname(orignFileName);
         	fileDetail.setFileSavednm(fileSavednm);
         	fileDetail.setFileSavepath(fileSavepath);
         	fileDetail.setFileSize(fileSize);
-        		
-    		int status = service.insertFileDetail(fileDetail);
-    		List<FileDetailVO> fileList = service.getFileList(classNo);
-    		 req.setAttribute("fileList", fileList);
+        	
+    		int status = service.saveFileDetail(fileDetail);
     		
+    		List<FileDetailVO> fileList = service.getFileList(levelChk);
+    		req.setAttribute("fileList", fileList);
+    		System.out.println(fileList.get(0).getFileNo());
+    		
+        	if(usersRole==2) {
+        		HwSubmitVO hwSubmit = new HwSubmitVO();
+        		hwSubmit.setFileNo(fileList.get(0).getFileNo());
+        		hwSubmit.setHwNo(hwNo);
+        		hwSubmit.setUsersNo(memDetail.getUsersNo());
+        		int submit = service.studentSubmitHw(hwSubmit);
+        	}
+
+			if(levelChk>300 && usersRole==1) {
+				 FileShareVO fileShare = new FileShareVO();
+			     fileShare.setFileNo(fileList.get(0).getFileNo());
+			     fileShare.setUsersNo(memDetail.getUsersNo());
+			     int status2 = service.insertFileShare(fileShare); 
+			}
+
         }
-        resp.sendRedirect("/classTeacherBoard.do?classNo=" + classNo);
+        if(usersRole==1) {
+            resp.sendRedirect(req.getContextPath() +"/classTeacherBoard.do?levelChk=" + levelChk);
+        }else if(usersRole==2) {
+        	resp.sendRedirect(req.getContextPath() +"/homework/detail.do?levelChk=" + levelChk + "&hwNo=" + hwNo);
+        }
     }
 }

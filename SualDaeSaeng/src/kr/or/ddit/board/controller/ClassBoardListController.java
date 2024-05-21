@@ -23,7 +23,7 @@ public class ClassBoardListController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		 
-		 IBoardService boardService = BoardServiceImpl.getInstance();
+		 IBoardService service = BoardServiceImpl.getInstance();
 		 HttpSession session = req.getSession();
 		 int usersRole = (int)session.getAttribute("usersRole");
 		 

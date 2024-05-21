@@ -98,7 +98,7 @@ public class ContactDaoImpl implements IContactDao {
 		
 		try {
 			session = MyBatisUtil.getSqlSession(true);
-			contactVO = session.selectOne("contact.selectBoard", qNO);
+			contactVO = session.selectOne("contact.detailList", qNO);
 		
 		} catch (Exception e) {
 			e.printStackTrace();

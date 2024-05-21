@@ -41,7 +41,7 @@
                 </div>
               
                 <div class="text-center">
-                  <button type="button" id="submitBtn" >내용 전송</button>
+                  <button type="button" id="submitBtn" >답변 전송</button>
                 </div>
           
             </div>

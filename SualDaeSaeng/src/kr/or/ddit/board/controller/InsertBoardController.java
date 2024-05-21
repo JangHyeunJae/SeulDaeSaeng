@@ -56,8 +56,8 @@ public class InsertBoardController extends HttpServlet {
 		Part filePart = req.getPart("file");
 		
 		if(filePart != null && filePart.getSize() != 0) {
-			 int fileStatus = service.insertBoardFile(filePart,levelChk); 
-			 List<FileDetailVO> fileList = service.getFileList(levelChk); 
+			 int fileStatus = service.insertBoardFile(filePart,levelChk);
+			 List<FileDetailVO> fileList = service.getFileList(levelChk);
 			 req.setAttribute("fileList", fileList);
 		     boardVO.setFileNo(fileList.get(0).getFileNo());
 		}

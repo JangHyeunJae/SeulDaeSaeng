@@ -48,7 +48,7 @@
                 <span><%=memDetail.getMemRegdt().plusDays(190) %> (d-<%=daysDiff %>)</span>
               </li>
               <li>
-                <a href="<%=request.getContextPath()%>/timetable.do" class="btn-visit align-self-start">수업 시간표 확인</a>
+                  <a href="<%=request.getContextPath() %>/file/download.do?fileNo=254" download class="btn-visit align-self-start">시간표 다운로드</a>
               </li>
             </ul>
           </div>

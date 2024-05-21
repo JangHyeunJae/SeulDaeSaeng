@@ -86,7 +86,7 @@ public class BoardDetailController extends HttpServlet{
 		  String replyCon = req.getParameter("replyCon");
 		  int boardNo = Integer.parseInt(req.getParameter("boardNo"));
 		  int usersNo = memDetail.getUsersNo();
-		  
+
 		  ReplyVO replyVO = new ReplyVO();
 		  replyVO.setReplyCon(replyCon);
 		  replyVO.setBoardNo(boardNo);

@@ -65,6 +65,20 @@
 <result column="file_dt" property="fileDt"/>
 <result column="file_level" property="fileLevel"/>
 </resultMap>
+
+<resultMap type="kr.or.ddit.board.vo.FileShareVO" id="fileShareMap"> <!-- 1 -->
+<result column="share_no" property="shareNo"/>
+<result column="file_no" property="fileNo"/>
+<result column="users_no" property="usersNo"/>
+</resultMap>
+
+<resultMap type="kr.or.ddit.board.vo.HwSubmitVO" id="hwSubmitMap"> <!-- 1 -->
+<result column="submit_no" property="submitNo"/>
+<result column="submit_dt" property="submitDt"/>
+<result column="file_no" property="fileNo"/>
+<result column="hw_no" property="hwNo"/>
+<result column="users_no" property="usersNo"/>
+</resultMap>
 	 
 <select id="allBoardList" resultMap="boardMap">
 		select *
@@ -163,9 +177,9 @@
 		select seq_board.nextval from dual
 	</selectKey>
 	insert into board(
-		board_no, board_level, board_title, board_con, board_at, board_hit, users_no
+		board_no, board_level, board_title, board_con, board_at, board_hit, file_no, users_no
 	)values(
-		#{boardNo}, #{boardLevel}, #{boardTitle}, #{boardCon}, sysdate, 0, #{usersNo}
+		#{boardNo}, #{boardLevel}, #{boardTitle}, #{boardCon}, sysdate, 0, #{fileNo}, #{usersNo}
 	)
 </insert>
 
@@ -235,9 +249,10 @@
         where a.board_level = #{boardLevel} and a.board_yn = 'Y' and a.users_no = b.users_no and b.users_role = 1
 </select>
 
-<select id="getHwList" resultMap="hwMap">
+<select id="getHwList" parameterType="int" resultMap="hwMap">
 		select *
         from homework
+        where hw_class=#{hwClass}
         order by hw_no desc
 </select>
 
@@ -308,6 +323,41 @@
 	      and m.mem_nick like '%' || #{searchText} || '%'
 	    </if>
 		order by b.board_no desc
+</select>
+
+<insert id="insertFileShare" parameterType="kr.or.ddit.board.vo.FileShareVO" useGeneratedKeys="true">
+	<selectKey keyProperty="shareNo" resultType="int" order="BEFORE">
+		select seq_fileshare.nextval from dual
+	</selectKey>
+	    insert into file_SHARE(share_no, file_no, users_no)
+        values(#{shareNo},#{fileNo},#{usersNo})
+</insert>
+
+<select id="getFile" parameterType="int" resultMap="fileMap">
+		select a.*
+	    from file_detail a, board b
+	    where b.file_no = a.file_no and b.board_no=#{boardNo}
+</select>
+
+<select id="getHwTeacher" parameterType="int" resultMap="memberMap">
+		select a.*
+	    from member a, homework b
+	    where a.users_no = b.users_no and b.hw_no=#{hwNo}
+</select>
+
+<insert id="studentSubmitHw" parameterType="kr.or.ddit.board.vo.HwSubmitVO" useGeneratedKeys="true">
+	<selectKey keyProperty="submitNo" resultType="int" order="BEFORE">
+		select seq_hwsubmit.nextval from dual
+	</selectKey>
+	insert into hw_submit(SUBMIT_NO, submit_dt, file_no, hw_no, users_no)
+	values(#{submitNo}, sysdate, #{fileNo}, #{hwNo}, #{usersNo})
+</insert>
+
+<select id="mySubmit" parameterType="Map" resultMap="fileMap">
+	    select b.*
+	    from hw_submit a, file_detail b
+	    where a.hw_No = #{hwNo} and a.users_No = #{usersNo} and a.file_No = b.file_No 
+	    order by b.file_no desc
 </select>
 
 </mapper>

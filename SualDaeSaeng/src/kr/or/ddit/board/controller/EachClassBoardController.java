@@ -36,6 +36,17 @@ public class EachClassBoardController extends HttpServlet {
 		req.setAttribute("boardList", boardList);
 		req.setAttribute("classBoardChk", classBoardChk);
 		req.setAttribute("levelChk", levelChk);
+		
+		//////////////////////URL체크////////////////////////////////
+		String originalUrl = req.getRequestURL().toString();
+	    String queryString = req.getQueryString();
+	    if (queryString != null) {
+	        originalUrl += "?" + queryString;
+	    }
+	    req.setAttribute("originalUrl", originalUrl);
+		//////////////////////////////////////////////////////
+		
+	    
 		req.getRequestDispatcher("/views/board/eachClassBoard.jsp").forward(req, resp);
 	}
 

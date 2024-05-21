@@ -11,6 +11,7 @@
     int levelChk = (int)request.getAttribute("levelChk");
     int classBoardChk = (int)request.getAttribute("classBoardChk");
     List<BoardVO> boardList = (List<BoardVO>)request.getAttribute("boardList");
+    int usersRole = (int)session.getAttribute("usersRole");
     
     String msg = (String) request.getAttribute("msg");
     if (msg != null) {
@@ -45,6 +46,17 @@
 	<div class="page-header d-flex align-items-center">
 		<div class="container position-relative">
 			<div class="row d-flex justify-content-center">
+			 <%
+              if(usersRole==1){
+              %>
+              	<a href="<%=request.getContextPath() %>/classTeacherBoard.do?levelChk=<%=levelChk %>"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
+              <%
+              }else{
+              %>
+              <a href="<%=request.getContextPath() %>/classBoard.do?levelChk=<%=levelChk %>"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
+              <%
+              }
+              %>
 				<div>
 					<h2><%=levelChk %>호 게시판</h2>
 					<p>
@@ -181,9 +193,26 @@
                 <% } %>
               </ul>
            </nav>
-
 			<div class="container d-flex align-items-center justify-content-end pb-5 gap-2 p-0">
+			<%
+			  String fullUrl = (String) request.getAttribute("originalUrl");
+		      boolean isNoticePage = fullUrl.contains("eachClassNotice.do");
+
+		      // 디버깅을 위해 변수 값을 출력합니다.
+		      System.out.println("fullUrl: " + fullUrl);
+		      System.out.println("isNoticePage: " + isNoticePage);
+		      System.out.println("usersRole: " + usersRole);
+
+			  if(!isNoticePage){
+			  %>
 				<a href="<%= request.getContextPath() %>/board/write.do?levelChk=<%=levelChk %>&idx=0" type="button" class="btn btn-outline-warning">글쓰기</a>
+				<%
+			  }else if( isNoticePage && usersRole==1){
+				%>
+				<a href="<%= request.getContextPath() %>/board/write.do?levelChk=<%=levelChk %>&idx=0" type="button" class="btn btn-outline-warning">글쓰기</a>
+			    <%
+			  }
+				%>
 			</div>
 		</div>
 	</section>

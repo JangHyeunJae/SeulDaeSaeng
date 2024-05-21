@@ -40,7 +40,7 @@
 
 </select>
 
-	<select id="detailList" parameterType="int" resultType="contactMap">
+	<select id="detailList" parameterType="int" resultMap="contactMap">
 		select
 			*
 		from question

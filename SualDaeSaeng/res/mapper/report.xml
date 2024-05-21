@@ -5,14 +5,14 @@
  <select id="selectReportList" resultMap="reportMap">
  select
  	* from board 
- 		where REPORT_YN ='Y'
+ 		where trim(REPORT_YN) ='Y'
 <!--  		and BOARD_YN ='Y' -->
  </select>
  
  <select id="selectallList" resultMap="reportMap">
   select
  	* from board 
- 		where REPORT_YN ='Y'
+ 		where trim(REPORT_YN) ='Y'
 <!--  		and BOARD_YN ='Y' -->
  </select>
    

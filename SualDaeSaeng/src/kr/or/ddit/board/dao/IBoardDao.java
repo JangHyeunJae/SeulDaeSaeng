@@ -84,4 +84,6 @@ public interface IBoardDao {
 
 	public List<FileDetailVO> mySubmit(Map<String, Object> parameter2);
 
+	public MemberVO writerDetail(int boardNo);
+
 }

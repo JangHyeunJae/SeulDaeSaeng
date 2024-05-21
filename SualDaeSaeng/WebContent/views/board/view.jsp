@@ -32,7 +32,6 @@
 	
 	String msg = session.getAttribute("msg") == null ? "" : (String) session.getAttribute("msg");
 	session.removeAttribute("msg");
-
     int level = bv.getBoardLevel();
     String boardName = null;
     String board = null;

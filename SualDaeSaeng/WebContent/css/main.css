@@ -2575,7 +2575,7 @@ background:#DC143C;
 
 #chat .msg_time {
   position: absolute;
-  right: 110%;
+  left: -83;
   bottom: 0;
   color: var(--color-gray-500);
   font-size: 11px;
@@ -2584,11 +2584,29 @@ background:#DC143C;
 
 #chat .msg_time_send {
   position: absolute;
-  left: 110%;
+  right: -100;
   bottom: 0;
   color: var(--color-gray-500);
   font-size: 11px;
   width: 95px;
+}
+
+#chat .masBox {
+    max-width: 100%;
+}
+#chat .masBox > div {
+    max-width: calc(60% - 10px);
+}
+
+#chatWindow::-webkit-scrollbar{
+  width: 8px;
+}
+#chatWindow::-webkit-scrollbar-thumb{
+  background-color: rgba(255,255,255,0.4);
+  border-radius: 10px; 
+}
+#chatWindow::-webkit-scrollbar-track{
+  display: none;
 }
 
 /*--------------------------------------------------------------

@@ -1,3 +1,5 @@
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="kr.or.ddit.board.vo.FileDetailVO"%>
 <%@page import="kr.or.ddit.board.vo.HomeworkVO"%>
 <%@page import="kr.or.ddit.board.service.BoardServiceImpl"%>
@@ -91,13 +93,18 @@
               <div class="portfolio-description homework">
                 <div class="section-header">
                   <h2>Homework</h2>
-                  <p class="d-flex justify-content-between align-items-center"> 미제출 숙제 <button type="button" class="btn btn-outline-warning btn-sm">제출한 숙제보기</button>
+                  <p class="d-flex justify-content-between align-items-center"> 숙제 관리 
                   </p>
                 </div>
                 <div class="list-group d-flex justify-content-start align-items-center flex-row p-3 gap-3">
                 <%
                 for(HomeworkVO hw : hwList){
                 	MemberVO hwTeacher = service.getHwTeacher(hw.getHwNo());
+                    Map<String,Object> parameter2 = new HashMap<>();
+                    parameter2.put("usersNo",memDetail.getUsersNo());
+                    parameter2.put("hwNo",hw.getHwNo());
+                    List<FileDetailVO> mySubmit = service.mySubmit(parameter2);
+                	
                 %>
                   <a href="<%=request.getContextPath() %>/homework/detail.do?hwNo=<%=hw.getHwNo() %>&levelChk=<%=levelChk %>" class="card">
                     <div class="card-body">
@@ -105,7 +112,18 @@
                         <h5 class="card-title text-truncate"><%=hw.getHwTitle() %></h5>
                         <span><%=hwTeacher.getMemName() %></span>
                       </div>
-                      <p class="card-text "><%=hw.getHwEnd() %> (제한기간)</p>
+                      <p class="card-text "><%=hw.getHwEnd() %>까지</p>
+                      <%
+                      if(mySubmit.size()==0){
+                      %>
+                      <small class="badge bg-body-secondary me-2">미제출</small>
+                      <%
+                      }else{
+                      %>
+                      <small class="badge text-bg-warning me-2">제출완료</small>
+                      <%
+                      }
+                      %>
                     </div>
                   </a>
                <%

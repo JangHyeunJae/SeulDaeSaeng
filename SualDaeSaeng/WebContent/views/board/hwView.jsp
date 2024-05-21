@@ -45,7 +45,7 @@
               </p>
               <p class="mb-0">
                 <small class="badge bg-body-secondary mb-3 me-2">
-               <%=hw.getHwClass() %>호 숙제
+                  <%=hw.getHwClass() %>호 숙제
                 </small>
               </p>
               <h3><%=hw.getHwTitle() %></h3>

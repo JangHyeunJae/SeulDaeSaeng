@@ -37,15 +37,13 @@ public class EachClassNoticeController extends HttpServlet {
 		req.setAttribute("levelChk", levelChk);
 		req.setAttribute("classBoardChk", classBoardChk);
 		
-		////////////////////////URL체크//////////////////////////////
-		String originalUrl = req.getRequestURL().toString();
-	    String queryString = req.getQueryString();
-	    if (queryString != null) {
-	        originalUrl += "?" + queryString;
-	    }
-	    req.setAttribute("originalUrl", originalUrl);
-        ////////////////////////URL체크//////////////////////////////
-	    
+		/*
+		 * ////////////////////////URL체크////////////////////////////// String
+		 * originalUrl = req.getRequestURL().toString(); String queryString =
+		 * req.getQueryString(); if (queryString != null) { originalUrl += "?" +
+		 * queryString; } req.setAttribute("originalUrl", originalUrl);
+		 * ////////////////////////URL체크//////////////////////////////
+		 */	    
 	    
 		req.getRequestDispatcher("/views/board/eachClassBoard.jsp").forward(req, resp);
 	}

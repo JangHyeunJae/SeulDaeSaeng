@@ -108,10 +108,10 @@ String id = (String) session.getAttribute("usersId");
 					<li>
 					  <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I210'>간이식</a>
 					</li>
-					<li >
+					<li>
 					  <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I211'>주점</a>
 				    </li>
-					<li >
+					<li>
 					  <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I212'>카페</a>
 				    </li>
 				</ul>

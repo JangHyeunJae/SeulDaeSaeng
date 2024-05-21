@@ -97,7 +97,7 @@ var webSocket = new WebSocket("ws://192.168.34.118:8888/ChatingServer/" + classI
 	    var days = ['일', '월', '화', '수', '목', '금', '토'];
 	    var dayOfWeek = days[currentTime.getDay()];
 
-	    var formattedTime = hours + ':' + minutes + ' ' + ampm + ' ' + dayOfWeek;
+	    var formattedTime = hours + ':' + minutes + ' ' + ampm + ', ' + dayOfWeek + '요일';
 	    return formattedTime;
 	}
 

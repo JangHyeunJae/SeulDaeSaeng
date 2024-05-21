@@ -2556,7 +2556,7 @@ background:#DC143C;
   bottom: 0;
   color: var(--color-gray-500);
   font-size: 11px;
-  width: 70px;
+  width: 95px;
 }
 
 #chat .msg_time_send {
@@ -2565,7 +2565,7 @@ background:#DC143C;
   bottom: 0;
   color: var(--color-gray-500);
   font-size: 11px;
-  width: 70px;
+  width: 95px;
 }
 
 /*--------------------------------------------------------------

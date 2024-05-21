@@ -30,42 +30,40 @@
     m.MEM_CLASS,
     m.MEM_REGDT,
     m.ADDR_NO
-   FROM member m, users u 
-   WHERE 
-         m.USERS_NO = u.USERS_NO AND  u.USERS_YN = 'Y'
-   </select>
-   
-   
-<!--    <select id="selectmember" resultType="kr.or.ddit.admin.vo.memberReqVO"> -->
-<!--       select * from member -->
-<!--       where USERS_NO = #{usersNo} -->
-   
-<!--    </select> -->
-   
-<!--    <select id="selectmember2" resultType="kr.or.ddit.admin.vo.memberReqVO"> -->
-<!--       select * from member -->
-<!--       where USERS_NO = #{usersNo} -->
-   
-<!--    </select> -->
-   
-   
-   <select id="selectmember" parameterType="int"  resultMap="listMap">
-      select usersNo,
-         memName,
-         MEM_NICK,
-         MEM_BIRTH,
-         MEM_EMAIL,
-         MEM_TEL,
-         MEM_CLASS,
-         MEM_REGDT,
-         ADDR_NO  from member
-      where USERS_NO = #{usersNo}
-   </select>
-   
-    <update id="adminAccept" parameterType="int">
-   UPDATE USERS SET USERS_YN = 'Y' 
-   WHERE USERS_NO = #{usersNo}
-    </update>
+
+	FROM member m, users u 
+	WHERE 
+   		m.USERS_NO = u.USERS_NO AND  u.USERS_YN = 'Y'
+	</select>
+	
+	
+<!-- 	<select id="selectmember" resultType="kr.or.ddit.admin.vo.memberReqVO"> -->
+<!-- 		select * from member -->
+<!-- 		where USERS_NO = #{usersNo} -->
+	
+<!-- 	</select> -->
+	
+<!-- 	<select id="selectmember2" resultType="kr.or.ddit.admin.vo.memberReqVO"> -->
+<!-- 		select * from member -->
+<!-- 		where USERS_NO = #{usersNo} -->
+	
+<!-- 	</select> -->
+	
+	
+	<select id="selectmember" resultMap="listMap" parameterType="int">
+		select *
+		from member
+		where USERS_NO = #{usersNo}
+	</select>
+	
+	
+	
+	
+ 	<update id="adminAccept" parameterType="int">
+	UPDATE USERS SET USERS_YN = 'Y' 
+	WHERE USERS_NO = #{usersNo}
+ 	</update>
+
 
 
    

@@ -28,6 +28,8 @@
 	String msg = session.getAttribute("msg") == null ? "" : (String) session.getAttribute("msg");
 	session.removeAttribute("msg");
 	
+    MemberVO memDetail = (MemberVO)session.getAttribute("memDetail");
+	
     int level = bv.getBoardLevel();
     String boardName = null;
     String board = null;
@@ -176,14 +178,9 @@
               		//세션에서 꺼내와야함.
                 	if(rv.getUsersNo()==memDetail.getUsersNo()){
                 %>
-                <p><a href="#" class="reply rounded">대댓글</a>
                 <a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&editReply=<%=rv.getReplyNo() %>" class="reply rounded">수정</a>
                 <a href="<%=request.getContextPath()%>/board/deleteReply.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&replyNo=<%=rv.getReplyNo() %>" 
                 	onclick="return confirm('삭제하시겠습니까?');" class="reply rounded">삭제</a></p>
-                <%
-                	}else{
-                %>
-                <p><a href="#" class="reply rounded">대댓글</a></p>
                 <%
                 	}
                 %>

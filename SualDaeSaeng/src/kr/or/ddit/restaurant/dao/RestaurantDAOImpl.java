@@ -12,7 +12,6 @@ import kr.or.ddit.util.MyBatisUtil;
 
 public class RestaurantDAOImpl implements IRestaurantDAO{
 	
-	
 	private static RestaurantDAOImpl instance = null;
 	
 	private RestaurantDAOImpl() {}
@@ -64,7 +63,7 @@ public class RestaurantDAOImpl implements IRestaurantDAO{
 		String name = "";
 		try {
 			session = MyBatisUtil.getSqlSession(true);
-			name = session.selectOne("restaurant.selectMslsName", cls);
+			name = session.selectOne("restaurant.selectMclsName", cls);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -81,7 +80,7 @@ public class RestaurantDAOImpl implements IRestaurantDAO{
 		String name = "";
 		try {
 			session = MyBatisUtil.getSqlSession(true);
-			name = session.selectOne("restaurant.selectSslsName", cls);
+			name = session.selectOne("restaurant.selectSclsName", cls);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -110,12 +109,12 @@ public class RestaurantDAOImpl implements IRestaurantDAO{
 	}
 
 	@Override
-	public List<RestaurantVO> selectSclsList() {
+	public List<RestaurantVO> selectSclsList(String mcls) {
 		SqlSession session = null;
 		List<RestaurantVO> selectSclsList = null;
 		try {
 			session = MyBatisUtil.getSqlSession(true);
-			selectSclsList = session.selectList("restaurant.selectSclsList");
+			selectSclsList = session.selectList("restaurant.selectSclsList",mcls);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -124,6 +123,75 @@ public class RestaurantDAOImpl implements IRestaurantDAO{
 			}
 		}
 		return selectSclsList;
+	}
+
+	@Override
+	public List<RestaurantVO> selectSclsList() {
+		SqlSession session = null;
+		List<RestaurantVO> selectSclsList = null;
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			selectSclsList = session.selectList("restaurant.selectSclsList2");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return selectSclsList;
+	}
+	
+	@Override
+	public RestaurantVO selectRest(String restBizno) {
+		SqlSession session = null;
+		RestaurantVO selectRest = null;
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			selectRest = session.selectOne("restaurant.selectRest",restBizno);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return selectRest;
+	}
+
+	
+	@Override
+	public List<RestaurantVO> selectRestReview(String restBizno) {
+		SqlSession session = null;
+		List<RestaurantVO> selectRestReview = null;
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			selectRestReview = session.selectList("restaurant.selectRestReview",restBizno);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return selectRestReview;
+	}
+
+	@Override
+	public List<RestaurantVO> selectRestReviewAll(Map<String, Object> cls) {
+		SqlSession session = null;
+		List<RestaurantVO> selectRestReviewAll = null;
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			selectRestReviewAll = session.selectList("restaurant.selectRestReviewAll",cls);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return selectRestReviewAll;
 	}
 
 }

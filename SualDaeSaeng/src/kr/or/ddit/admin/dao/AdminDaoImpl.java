@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.ddit.admin.vo.MemberReqVO;
+import kr.or.ddit.contact.vo.ContactVO;
 import kr.or.ddit.util.MyBatisUtil;
 
 public class AdminDaoImpl implements IAdmindao {
@@ -27,9 +28,7 @@ public class AdminDaoImpl implements IAdmindao {
 		try {
 			session = MyBatisUtil.getSqlSession(true);
 			memList = session.selectList("admin.selectmemList");   // xml 
-			for(MemberReqVO vo : memList) {
-				System.out.println(vo);
-			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -108,6 +107,10 @@ public class AdminDaoImpl implements IAdmindao {
 		}
 		return memberReqVo;
 
-	};
+
+	}
+	
+
+
 
 }

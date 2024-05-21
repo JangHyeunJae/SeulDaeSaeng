@@ -13,13 +13,6 @@
     List<BoardVO> boardList = (List<BoardVO>)request.getAttribute("boardList");
     int usersRole = (int)session.getAttribute("usersRole");
     
-    String msg = (String) request.getAttribute("msg");
-    if (msg != null) {
-        msg = msg.replace("\\", "\\\\").replace("\'", "\\\'").replace("\"", "\\\"");
-    }else{
-    	msg = "";
-    }
-    
     String board = null;
     if(classBoardChk == 1){
     	board = "eachClassNotice";

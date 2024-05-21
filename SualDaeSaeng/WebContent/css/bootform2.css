@@ -5898,6 +5898,17 @@ button.close {
 .visible-print-block {
   display: none !important;
 }
+
+/* #submitBtn 작업*/
+.contact #submitBtn{
+	background: var(--color-orange-900);
+    border: 0;
+    padding: 10px 35px;
+    color: var(--color-white);
+    transition: 0.4s;
+    border-radius: 8px;
+}
+
 @media print {
   .visible-print-block {
     display: block !important;
@@ -5925,3 +5936,5 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+

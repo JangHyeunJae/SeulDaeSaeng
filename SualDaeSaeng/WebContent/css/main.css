@@ -125,6 +125,21 @@ h5 {
   width: 50%;
 }
 
+.h-m-180{
+	height : 180px;
+	border-radius : 10px;
+}
+.h-m-180 img{
+	transition: transform .3s;
+}
+.h-m-180:hover img{
+	transform: scale(1.1);
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+    color: var(--color-gray-300);
+}
+
 @media (max-width:770px) {
   .glightbox-container .gslide-inner-content {
       width: 100%;
@@ -933,7 +948,7 @@ font-family: "TTHakgyoansimMulgyeolR", "CWDangamAsac-Bold","Inter", sans-serif;;
 .about .content ul li {
   margin-bottom: 20px;
   display: flex;
-  align-items: center;
+  align-items: start;
 }
 
 .about .content ul strong {
@@ -2274,6 +2289,14 @@ background:#DC143C;
   margin-right: 5px;
 }
 
+#join form label:not(.btn){
+	min-width: 75px;
+	color: var(--color-gray-700);
+	font-size: 14px;
+}
+#join :is(#addr1,#postAddr){
+	cursor: pointer;
+}
 /*--------------------------------------------------------------
 # login
 --------------------------------------------------------------*/
@@ -2552,18 +2575,20 @@ background:#DC143C;
 
 #chat .msg_time {
   position: absolute;
-  left: 0;
-  bottom: -23px;
-  color: var(--color-gray-600);
+  right: 110%;
+  bottom: 0;
+  color: var(--color-gray-500);
   font-size: 11px;
+  width: 70px;
 }
 
 #chat .msg_time_send {
   position: absolute;
-  right: 0;
-  bottom: -23px;
-  color: var(--color-gray-600);
+  left: 110%;
+  bottom: 0;
+  color: var(--color-gray-500);
   font-size: 11px;
+  width: 70px;
 }
 
 /*--------------------------------------------------------------

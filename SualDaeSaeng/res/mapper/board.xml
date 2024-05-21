@@ -45,6 +45,26 @@
 <result column="users_yn" property="usersYn"/>
 </resultMap>
 
+<resultMap type="kr.or.ddit.board.vo.HomeworkVO" id="hwMap"> <!-- 1 -->
+<result column="hw_no" property="hwNo"/>
+<result column="hw_title" property="hwTitle"/>
+<result column="hw_con" property="hwCon"/>
+<result column="hw_start" property="hwStart"/>
+<result column="hw_end" property="hwEnd"/>
+<result column="users_no" property="usersNo"/>
+<result column="hw_class" property="hwClass"/>
+</resultMap>
+
+<resultMap type="kr.or.ddit.board.vo.FileDetailVO" id="fileMap"> <!-- 1 -->
+<result column="file_no" property="fileNo"/>
+<result column="file_savepath" property="fileSavepath"/>
+<result column="file_ogname" property="fileOgname"/>
+<result column="file_savednm" property="fileSavednm"/>
+<result column="file_size" property="fileSize"/>
+<result column="file_ext" property="fileExt"/>
+<result column="file_dt" property="fileDt"/>
+<result column="file_level" property="fileLevel"/>
+</resultMap>
 	 
 <select id="allBoardList" resultMap="boardMap">
 		select *
@@ -159,6 +179,14 @@
 
 </insert>
 
+<insert id="insertHomework" parameterType="Map" useGeneratedKeys="true">
+	<selectKey keyProperty="hwNo" resultType="int" order="BEFORE">
+		select seq_homework.nextval from dual
+	</selectKey>
+        insert into homework(hw_no, hw_title, hw_con, hw_start, hw_end, users_no,hw_class)
+        values(#{hwNo}, #{hwTitle}, #{hwCon},#{hwStart}, #{hwEnd}, #{usersNo}, #{hwClass})
+</insert>
+
 <update id="updateBoard" parameterType="Map">
 		update board
 		set board_title = #{boardTitle}, board_con = #{boardCon}
@@ -205,6 +233,81 @@
 		select a.*
         from board a,users b
         where a.board_level = #{boardLevel} and a.board_yn = 'Y' and a.users_no = b.users_no and b.users_role = 1
+</select>
+
+<select id="getHwList" resultMap="hwMap">
+		select *
+        from homework
+        order by hw_no desc
+</select>
+
+<select id="getHwDetail" parameterType="int" resultMap="hwMap">
+		select *
+	    from homework
+	    where hw_no =#{hwNo}
+</select>
+
+<select id="getHwWriterDetail" parameterType="Map" resultMap="memberMap">
+		SELECT MEMBER.* FROM MEMBER,HOMEWORK
+        WHERE MEMBER.USERS_NO = HOMEWORK.USERS_NO
+        AND HOMEWORK.USERS_NO = #{usersNo} AND HOMEWORK.HW_NO = #{hwNo}
+</select>
+
+<insert id="saveFile" parameterType="kr.or.ddit.board.vo.FileDetailVO" useGeneratedKeys="true">
+	<selectKey keyProperty="fileNo" resultType="int" order="BEFORE">
+		select seq_file.nextval from dual
+	</selectKey>
+	    insert into files(file_no,file_yn)
+        values(#{fileNo},'Y')
+</insert>
+
+<insert id="saveFileDetail" parameterType="kr.or.ddit.board.vo.FileDetailVO" useGeneratedKeys="true">
+        insert into file_detail(file_no, file_savepath, file_ogname, file_savednm, file_size, file_ext, file_dt, file_level)
+        values(#{fileNo}, #{fileSavepath}, #{fileOgname},#{fileOgname}, #{fileSize}, #{fileExt}, sysdate, #{fileLevel})
+</insert>
+
+<select id="getFileList" parameterType="int" resultMap="fileMap">
+		select *
+        from file_detail
+        where file_level =#{fileLevel}
+        order by file_no desc
+</select>
+
+<select id="getFileDetail" parameterType="int" resultMap="fileMap">
+		select *
+	    from file_detail
+	    where file_no =#{fileNo}
+</select>
+
+<select id="searchClassBoardList" parameterType="Map" resultMap="boardMap">
+		select b.*
+		from board b, member m, users u
+		where b.users_no = m.users_no and b.users_no = u.users_no
+		and b.board_yn = 'Y'
+		and b.board_level = ${level}
+		<if test='boardDiv.equals("class")'>
+        and u.users_role != 1
+		</if>
+		<if test='boardDiv.equals("notice")'>
+        and u.users_role = 1
+		</if>
+	    <if test='searchOption == null or searchOption.equals("null") or searchOption.equals("")'>
+	      and (
+	        b.board_title like '%' || #{searchText} || '%'
+	        or b.board_con like '%' || #{searchText} || '%'
+	        or m.mem_nick like '%' || #{searchText} || '%'
+	      )
+	    </if>
+	    <if test='searchOption == "title"'>
+	      and b.board_title like '%' || #{searchText} || '%'
+	    </if>
+	    <if test='searchOption == "content"'>
+	      and b.board_con like '%' || #{searchText} || '%'
+	    </if>
+	    <if test='searchOption == "nickname"'>
+	      and m.mem_nick like '%' || #{searchText} || '%'
+	    </if>
+		order by b.board_no desc
 </select>
 
 </mapper>

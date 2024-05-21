@@ -1,6 +1,11 @@
 package kr.or.ddit.board.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,8 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.board.vo.BoardVO;
+import kr.or.ddit.board.vo.HomeworkVO;
 
-@WebServlet("/Homework/write.do")
+@WebServlet("/homework/write.do")
 public class InsertHomeworkController extends HttpServlet{
 
 	private IBoardService service = BoardServiceImpl.getInstance();
@@ -28,19 +34,26 @@ public class InsertHomeworkController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		
+		int levelChk = Integer.parseInt(req.getParameter("levelChk"));
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
-		int level = Integer.parseInt(req.getParameter("levelChk"));
+		Date startDate = java.sql.Date.valueOf(req.getParameter("startDate"));
+		Date endDate = java.sql.Date.valueOf(req.getParameter("endDate"));
 
-		BoardVO boardVO = new BoardVO();
-		boardVO.setBoardTitle(title);
-		boardVO.setBoardCon(content);
-		boardVO.setUsersNo(1); // 세션에서 꺼내와야함
-		boardVO.setBoardLevel(level);
-		
-		int status = service.insertBoard(boardVO);
+	    Map<String,Object> parameter = new HashMap<>();
+	    parameter.put("hwTitle",title);
+	    parameter.put("hwCon",content);
+	    parameter.put("hwStart",startDate);
+	    parameter.put("hwEnd",endDate);
+	    parameter.put("hwClass",levelChk);
+	    parameter.put("usersNo",3);
+
+		int status = service.insertHomework(parameter);
+		List<HomeworkVO> hw = service.getHwList();
+		HomeworkVO recentHw = hw.get(0);
+				
 		if(status > 0) { 	// 성공
-			resp.sendRedirect("/board/detail.do?boardNo=" + boardVO.getBoardNo());
+			resp.sendRedirect("/homework/detail.do?hwNo=" + recentHw.getHwNo());
 		}else {				// 실패
 			req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
 		}

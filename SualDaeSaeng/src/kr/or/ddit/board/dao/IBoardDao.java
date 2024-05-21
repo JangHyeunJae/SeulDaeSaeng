@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import kr.or.ddit.board.vo.BoardVO;
+import kr.or.ddit.board.vo.FileDetailVO;
+import kr.or.ddit.board.vo.HomeworkVO;
 import kr.or.ddit.board.vo.ReplyVO;
 import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.member.vo.UsersVO;
@@ -39,6 +41,22 @@ public interface IBoardDao {
 
 	public int updateReply(Map<String, Object> parameter);
 
+	public int insertHomework(Map<String,Object> parameter);
+
+	public List<HomeworkVO> getHwList();
+
+	public HomeworkVO getHwDetail(int hwNo);
+
+	public MemberVO getHwWriterDetail(Map<String, Object> parameter);
+
+	public int saveFileDetail(FileDetailVO fileDetail);
+
+	public List<FileDetailVO> getFileList(int classNo);
+
+	public int insertFileDetail(FileDetailVO fileDetail);
+
+	public FileDetailVO getFileDetail(int fileNo);
+
 	public int deleteReply(int replyNo);
 
 	public List<BoardVO> searchAllBoardList(Map<String, Object> parameter);
@@ -46,5 +64,7 @@ public interface IBoardDao {
 	public List<BoardVO> searchSelectBoardList(Map<String, Object> parameter);
 
 	public int reportBoard(int boardNo);
+
+	public List<BoardVO> searchClassBoardList(Map<String, Object> parameter);
 
 }

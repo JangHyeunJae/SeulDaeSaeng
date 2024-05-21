@@ -3,6 +3,7 @@ package kr.or.ddit.admin.service;
 import java.util.List;
 
 import kr.or.ddit.admin.vo.MemberReqVO;
+import kr.or.ddit.contact.vo.ContactVO;
 
 public interface IAdminService {
 
@@ -14,5 +15,6 @@ public interface IAdminService {
 
 	public MemberReqVO selectmember(String parameter);
 
+//	public List<ContactVO> selectContactList();
 
 }

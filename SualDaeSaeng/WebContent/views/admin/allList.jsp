@@ -49,7 +49,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
-	</section>
+		</section>
+	</div>
 </main>
 <%@include file="/footer.jsp"%>

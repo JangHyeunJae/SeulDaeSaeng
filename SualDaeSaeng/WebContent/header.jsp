@@ -1,3 +1,5 @@
+<%@page import="kr.or.ddit.member.vo.UsersVO"%>
+<%@page import="kr.or.ddit.member.vo.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
@@ -61,7 +63,6 @@ String id = (String) session.getAttribute("usersId");
         <nav id="navbar" class="navbar">
           <ul>
           	<% if(id!=null && !id.isEmpty()){ %>
-          	
 	            <li>
 	              <a href="<%=request.getContextPath()%>/classBoard.do">반별게시판</a>
 	            </li>
@@ -82,7 +83,6 @@ String id = (String) session.getAttribute("usersId");
 	                </li>
 	              </ul>
 	            </li>
-                      			
           	<% } %>
 			<li class="dropdown">
 				<a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=all'>
@@ -147,7 +147,7 @@ String id = (String) session.getAttribute("usersId");
                   		<a class="dropdown-item" href="<%=request.getContextPath() %>/member/myPageHome.do">마이페이지</a>
                 	</li>
 					<li>
-						<a href="<%=request.getContextPath() %>/logout.do">로그아웃</a>
+						<a class="dropdown-item" href="<%=request.getContextPath() %>/logout.do">로그아웃</a>
 					</li>
 				<% 
 					}

@@ -55,9 +55,9 @@ public class EditBoardController extends HttpServlet{
 		
 		int status = service.updateBoard(parameter);
 		if(status > 0) { 	// 성공
-			String msg = URLEncoder.encode("정상적으로 수정되었습니다.", "UTF-8");
-			resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk
-					+ "&msg=" + msg);
+			String msg = "정상적으로 수정되었습니다.";
+			req.getSession().setAttribute("msg", msg);
+			resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk);
 		}else {				// 실패
 			req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
 		}

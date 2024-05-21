@@ -12,22 +12,23 @@
 	List<BoardVO> boardList = (List<BoardVO>)request.getAttribute("boardList");
     int levelChk = (int)request.getAttribute("levelChk");
     
-    String msg = (String) request.getAttribute("msg");
-    if (msg != null) {
-        msg = msg.replace("\\", "\\\\").replace("\'", "\\\'").replace("\"", "\\\"");
-    }else{
-    	msg = "";
-    }
+    String msg = session.getAttribute("msg") == null ? "" : (String) session.getAttribute("msg");
+	session.removeAttribute("msg");
     
     String board = null;
+    String boardName = null;
     if(levelChk == 0){
     	board = "allBoard";
+    	boardName = "전체게시판";
     }else if(levelChk == 1){
     	board = "freeBoard";
+    	boardName = "자유게시판";
     }else if(levelChk == 2){
     	board = "studyBoard";
+    	boardName = "공부게시판";
     }else if(levelChk == 3){
     	board = "noticeBoard";
+    	boardName = "공지사항";
     }
     
     // 검색
@@ -51,7 +52,7 @@
 		<div class="container position-relative">
 			<div class="row d-flex justify-content-center">
 				<div>
-					<h2>전체게시판</h2>
+					<h2><%=boardName %></h2>
 					<p>
 						<a class="cta-btn" href="<%=request.getContextPath()%>/allBoard.do">전체게시판</a> 
 						<a class="cta-btn" href="<%=request.getContextPath()%>/freeBoard.do">자유게시판</a>
@@ -129,8 +130,6 @@
 					%>
 						<input type="text" id="searchText" name="searchText" class="form-control"
 							aria-label="Text input with dropdown button" >
-<!-- 							onkeypress="search(event)" -->
-<!-- 						<button id="searchBtn" name="searchBtn" style="display: none;"></button> -->
 					</form>
 				</div>
 			</div>
@@ -149,12 +148,6 @@
                 		   //level별 이름지정
                     	   BoardVO bv = boardList.get(i);
                     	   int level2 = bv.getBoardLevel();
-                    	   String boardName = null;
-                    	      
-                           if(level2 == 1) boardName = "자유게시판";
-                           else if(level2 == 2) boardName = "공부게시판";
-                           else if(level2 == 3) boardName = "공지사항";
-                           else boardName = "전체게시판";
                            
                            // html 제거
                            String ogText = bv.getBoardCon();
@@ -230,7 +223,6 @@
 	};
 
     var buttons = document.querySelectorAll('.cta-btn');
-    var boardName = document.querySelector('h2');
 
     // 페이지 로드될 때 현재 URL을 확인하여 해당 버튼의 스타일을 변경
     var currentUrl = window.location.href;
@@ -238,7 +230,6 @@
         if (currentUrl.includes(button.getAttribute('href'))) {
             button.classList.remove('gray');
             button.classList.add('orange');
-            boardName.innerText = button.innerText;
         } else {
             button.classList.add('gray');
             button.classList.remove('orange');
@@ -247,8 +238,6 @@
 
     buttons.forEach(function (button) {
         button.addEventListener('click', function (event) {
-            var clickedText = event.target.innerText;
-            boardName.innerText = clickedText;
 
             buttons.forEach(function (btn) {
                 btn.classList.add('gray');
@@ -260,63 +249,6 @@
         });
     });
     
-//  	// Enter 키 누를 때 폼 제출 이벤트 처리
-//     $('#searchText').keypress(function(event) {
-//         if (event.key == 'Enter') {
-//             event.preventDefault(); // 기본 제출 동작 방지
-            
-//             var searchText = $('#searchText').val(); // 입력 필드 값
-//             var searchOption = option; // 선언한 option 변수의 값
-
-//             // 선택한 옵션에 따라 페이지 이동
-<%--             var contextPath = '<%= request.getContextPath() %>'; --%>
-<%--             var board = '<%= board %>'; --%>
-//             var url = contextPath + '/' + board + '.do';
-//             if (searchOption != null) {
-//                 url += '?searchOption=' + searchOption;
-//             }
-
-//             // 검색어가 입력되었다면 URL에 추가
-//             if (searchText.trim() != '') {
-//                 url += (searchOption != null ? '&' : '?') + 'searchText=' + encodeURIComponent(searchText);
-//             }
-
-//             window.location.href = url; // 페이지 이동
-//         }
-//     });
-// 		$(function(){
-			
-// 			var submitBtn = $("#submitBtn");
-// 			var insertForm = $("#insertForm");
-			
-// 			// 등록 버튼 클릭 시 이벤트
-// 			submitBtn.on("click", function(){
-		
-// 				var title = $("#title").val();
-// 				var content = $("#content").val();
-// 				var level = $(".btn-check").val();
-// 				var levelChk = $("#levelChk").val();
-// 				var idx = $("#idx").val();
-		
-// 				if(title == null || title==""){
-// 		            alert("제목을 입력해주세요!");
-// 		            return false;
-// 		        }
-// 		        if(content == null || content==""){
-// 		            alert("내용을 입력해주세요!");
-// 		            return false;
-// 		        }
-// 		        insertForm.submit();
-// 			});
-// 		});
-// 		function search(e){
-// 		    var searchText = document.getElementById("searchText").value;
-// 		    var code = e.code;
-		
-// 		    if(code == 'Enter'){
-// 		    	document.getElementById("searchForm").submit();
-// 		    }
-// 		 }
 	// Enter 키를 누를 때 폼 제출 이벤트 처리
     document.getElementById("searchText").addEventListener("keypress", function(event) {
         if (event.key === "Enter") {

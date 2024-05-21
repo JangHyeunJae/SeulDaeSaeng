@@ -2,6 +2,40 @@
 <!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
 
+	<resultMap type="memVO" id="memMap">
+		<result property="usersNo" column="USERS_NO"/>
+		<result property="memName" column="MEM_NAME"/>
+		<result property="memNick" column="MEM_NICK"/>
+		<result property="memBirth" column="MEM_BIRTH"/>
+		<result property="memEmail" column="MEM_EMAIL"/>
+		<result property="memTel" column="MEM_TEL"/>
+		<result property="memClass" column="MEM_CLASS"/>
+		<result property="memRegdt" column="MEM_REGDT"/>
+		<result property="addrNo" column="ADDR_NO"/>
+		<result column="users_id" property="usersId" />
+		<result column="users_pass" property="usersPass" />
+		<result column="mem_addr" property="memAddr" />
+		<result column="atch_file_id" property="atchFileId" />
+		<result column="reg_dt" property="regDt" />
+	</resultMap>
+	
+	<resultMap type="usersVO" id="usersMap">
+		<result property="usersNo" column="USERS_NO"/>
+		<result property="usersRole" column="USERS_ROLE"/>
+		<result property="usersId" column="USERS_ID"/>
+		<result property="usersPass" column="USERS_PASS"/>
+		<result property="usersYn" column="USERS_YN"/>
+	</resultMap>
+	
+	<resultMap type="addrVO" id="addrMap">
+		<result property="addrNo" column="ADDR_NO"/>
+		<result property="addrPost" column="ADDR_POST"/>
+		<result property="addrBasic" column="ADDR_BASIC"/>
+		<result property="addrDetail" column="ADDR_DETAIL"/>
+		<result property="addrLon" column="ADDR_LON"/>
+		<result property="addrLat" column="ADDR_LAT"/>
+		<result property="addrLevel" column="ADDR_LEVEL"/>
+	</resultMap>
 
 	<select id="memberIdChk" parameterType="String" resultType="int">
 		select count(*) as cnt from users where USERS_ID = #{usersId}
@@ -50,42 +84,13 @@
 	<select id="selectAddr" parameterType="int" resultMap="addrMap">
 		select * from ADDRESS where ADDR_NO = #{addrNo}
 	</select>
+	
+	<select id="getMemDetail" parameterType="String" resultMap="memMap">
+		select a.* from member a,users b where a.users_no = b.users_no and b.users_id= #{usersId}
+	</select>
+	
+	<select id="getUsersDetail" parameterType="String" resultMap="usersMap">
+		select * from users where users_id= #{usersId}
+	</select>
 
-	
-	<resultMap type="memVO" id="memMap">
-		<result property="usersNo" column="USERS_NO"/>
-		<result property="memName" column="MEM_NAME"/>
-		<result property="memNick" column="MEM_NICK"/>
-		<result property="memBirth" column="MEM_BIRTH"/>
-		<result property="memEmail" column="MEM_EMAIL"/>
-		<result property="memTel" column="MEM_TEL"/>
-		<result property="memClass" column="MEM_CLASS"/>
-		<result property="memRegdt" column="MEM_REGDT"/>
-		<result property="addrNo" column="ADDR_NO"/>
-		
-		<result column="users_id" property="usersId" />
-		<result column="users_pass" property="usersPass" />
-		<result column="mem_addr" property="memAddr" />
-		<result column="atch_file_id" property="atchFileId" />
-		<result column="reg_dt" property="regDt" />
-	</resultMap>
-	
-	<resultMap type="usersVO" id="usersMap">
-		<result property="usersNo" column="USERS_NO"/>
-		<result property="usersRole" column="USERS_ROLE"/>
-		<result property="usersId" column="USERS_ID"/>
-		<result property="usersPass" column="USERS_PASS"/>
-		<result property="usersYn" column="USERS_YN"/>
-	</resultMap>
-	
-	<resultMap type="addrVO" id="addrMap">
-		<result property="addrNo" column="ADDR_NO"/>
-		<result property="addrPost" column="ADDR_POST"/>
-		<result property="addrBasic" column="ADDR_BASIC"/>
-		<result property="addrDetail" column="ADDR_DETAIL"/>
-		<result property="addrLon" column="ADDR_LON"/>
-		<result property="addrLat" column="ADDR_LAT"/>
-		<result property="addrLevel" column="ADDR_LEVEL"/>
-	</resultMap>
-	
 </mapper>

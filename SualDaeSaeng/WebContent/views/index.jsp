@@ -3,9 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@include file="/header.jsp" %>
-<%
-	List<RestaurantVO> restLikeList = (List<RestaurantVO>) request.getAttribute("restLikeList");
-%>
+<% List<RestaurantVO> restLikeList = (List<RestaurantVO>) request.getAttribute("restLikeList"); %>
     <main data-aos="fade" data-aos-delay="1500">
       <!-- ======= food Recommendation ======= -->
       <section id="food">

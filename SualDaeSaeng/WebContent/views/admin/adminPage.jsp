@@ -1,3 +1,4 @@
+<%@page import="kr.or.ddit.contact.vo.ContactVO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.io.Console"%>
@@ -15,11 +16,12 @@
 <%
 	List<MemberReqVO> memList = (List<MemberReqVO>)request.getAttribute("memberList");
 
-	/* memberReqVO memreqVO = (memberReqVO) request.getAttribute("memreqVO"); */
-/*    		memberReqVO memreqVO = new memberReqVO();
-     	memreqVO = memList.get(0) ;
+	List<ContactVO> conList = (List<ContactVO>)request.getAttribute("contactList");
+	
+	 MemberReqVO memreqVO = (MemberReqVO) request.getAttribute("memreqVO"); 
+
   	
-   	int usersNo = memreqVO.getUsersNo(); */
+//    	int usersNo = memreqVO.getUsersNo();  
 %>
 
 <!-- Modal -->
@@ -28,19 +30,26 @@
     <div class="modal-content">
 
       <div class="modal-header" id="list">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">님의 요청내역</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel"><span id="memName1"></span>님의 요청내역</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
- 
-        <p>이름: <span id="memName"></span></p>
-        <p>닉네임: <span id="memNick"></span></p>
-        <p>생년월일: <span id="memBirth"></span></p>
-        <p>이메일: <span id="memEmail"></span></p>
-        <p>전화번호: <span id="memTel"></span></p>
-        <p>분반: <span id="memClass"></span></p>
-        <p>등록일시: <span id="memRegdt"></span></p>
-        <p>주소 번호: <span id="addrNo"></span></p>
+ 		<form action="/views/adminaccept.do" method="post" id="userForm">
+<%-- 	        <input type ='hidden' name = 'usersNo' value = '<%=memreqVO.getUsersNo() %>' /> --%>
+	        <p>이름: <span id="memName"></span></p>
+	        <p>닉네임: <span id="memNick"></span></p>
+	        <p>생년월일: <span id="memBirth"></span></p>
+	        <p>이메일: <span id="memEmail"></span></p>
+	        <p>전화번호: <span id="memTel"></span></p>
+	        <p>분반: <span id="memClass"></span></p>
+	        <p>등록일시: <span id="memRegdt"></span></p>
+	        <p>주소 번호: <span id="addrNo"></span></p>
+		    <div class="modal-footer">
+		    	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		       
+		    	<button type="submit" class="btn btn-primary" id="accept" name="accept">수락</button>
+		    </div>
+ 		</form>
   
 <%--         <p>이름: <%=memreqVO.getMemName() %></p> --%>
 <%--         <p>닉네임: <%=memreqVO.getMemNick()%></p> --%>
@@ -56,11 +65,6 @@
         </div>
    
 	
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-       
-        <button type="button" class="btn btn-primary" id="accept" name="accept">수락</button>
-      </div>
     </div>
   </div>
 </div>
@@ -83,9 +87,9 @@
                  
           
      <%
-                                	if(memList != null && !memList.isEmpty()) {	
-                                     			for(MemberReqVO member : memList) {
-                                %>
+     	 if(memList != null && !memList.isEmpty()) {	
+                   for(MemberReqVO member : memList) {
+    %>
      
             <a href="#" class="card" data-selectno="<%=member.getUsersNo()%>" >
               <div class="card-body" data-bs-toggle="modal" data-bs-target="#exampleModal"  >
@@ -156,41 +160,44 @@
                 </a>
               </div>
             </div>
+            
             <div class="col">
               <div class="section-header">
                 <h2>board</h2>
-                <p class="d-flex justify-content-between align-items-center"> 오류제보 <button type="button" class="btn btn-outline-warning btn-sm">더보기</button>
+                <p class="d-flex justify-content-between align-items-center"> 오류제보 <button type="button" class="btn btn-outline-warning btn-sm">
+                	<a href="/views/contactList.do">더보기</a></button>
                 </p>
               </div>
               <div class="list-group">
-                <a href="#" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
-                  <h6 class="mb-2 text-truncate">
-                    <small class="badge bg-light">주제내용</small>
-                    오류제보 제목
-                  </h6>
-                  <small class="days">2024-05-03</small>
+    <% 
+    
+         	if(conList != null && !conList.isEmpty()) {	
+//                 for(ContactVO contact : conList) {
+                for(int i = 0; i<4 ; i++) {
+                	 ContactVO contact = conList.get(i);	
+                
+	%>
+			
+	   <a href="<%=request.getContextPath() %>/views/contactDetail.do?no=<%=contact.getqNO()%>" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
+                  <h6 class="mb-2 text-truncate">                  
+                    <small class="badge bg-light">
+                    	<%= "Y".equals(contact.getqYn()) ? "완료" : "미완료" %>
+                    </small>
+                    <%=contact.getqTitle()%>
+                 </h6>
+                  <small class="days"><%=sdf.format(contact.getqAt()) %></small>
                 </a>
-                <a href="#" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
-                  <h6 class="mb-2 text-truncate">
-                    <small class="badge bg-light">주제내용</small>
-                    오류제보 제목
-                  </h6>
-                  <small class="days">2024-05-03</small>
-                </a>
-                <a href="#" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
-                  <h6 class="mb-2 text-truncate">
-                    <small class="badge bg-light">주제내용</small>
-                    오류제보 제목
-                  </h6>
-                  <small class="days">2024-05-03</small>
-                </a>
-                <a href="#" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
-                  <h6 class="mb-2 text-truncate">
-                    <small class="badge bg-light">주제내용</small>
-                    오류제보 제목
-                  </h6>
-                  <small class="days">2024-05-03</small>
-                </a>
+  <%
+                if(conList.size()-1 == i) break;
+      		}
+      	}
+     		else{
+ 	%> 
+     	<div>오류제보가  없습니다.</div>
+                
+   	<%   
+	    	}
+   	%> 
               </div>
             </div>
           </div>
@@ -303,14 +310,11 @@
 
 	
  document.addEventListener('DOMContentLoaded', function() {
-	
-   		
-    $(".modal-footer #accept").click(function(){
-    	console.log("야호야호");
+	 $(".modal-footer #accept").click(function(){
         $.ajax({
             type: 'POST',
             url: '/views/adminaccept.do',
-            data: { usersNo:usersNo},
+            data: { usersNo: '${usersNo}'},
             success: function (response) {
                 console.log(response);
                 $('.modal').modal('hide');
@@ -339,19 +343,21 @@
   	            data: { usersNo: usersNo}, 
  	            success: function (data) {
  	            	
-//  	            	for(int i = 0; i<selectno; i++){
-  	                console.log(JSON.parse(data)); // list 정보 들어옴
- 	                let rst = JSON.parse(data)[0]; //index로 접근 
- 	                7
-  	            	var memreqVO = data;
-  	                $('#memName').text(rst.memName);
- 	                $('#memNick').text(rst.memNick);
-  	                $('#memBirth').text(rst.memBirth);
-  	                $('#memEmail').text(rst.memEmail);
-  	                $('#memTel').text(rst.memTel);
-  	                $('#memClass').text(rst.memClass);
-  	                $('#memRegdt').text(rst.memRegdt);
-  	                $('#addrNo').text(rst.addrNo);
+
+  	          /*       console.log(JSON.parse(data)); // list 정보 들어옴
+ 	                let rst = JSON.parse(data)[0]; //index로 접근  */
+ 	                
+//   	            	var memreqVO = data;
+  	                $('#usersNo').text(data.usersNo);
+  	                $('#memName1').text(data.memName);
+  	                $('#memName').text(data.memName);
+ 	                $('#memNick').text(data.memNick);
+  	                $('#memBirth').text(data.memBirth);
+  	                $('#memEmail').text(data.memEmail);
+  	                $('#memTel').text(data.memTel);
+  	                $('#memClass').text(data.memClass);
+  	                $('#memRegdt').text(data.memRegdt);
+  	                $('#addrNo').text(data.addrNo);
   	                
  	            },
  	            error: function () {

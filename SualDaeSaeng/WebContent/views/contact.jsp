@@ -4,7 +4,7 @@
 <%@include file="../header.jsp" %>
 
 <% 
-	String UsersNo = (String) session.getAttribute("UsersNo");
+	int UsersNo =  (Integer)request.getAttribute("UsersNo");
 %>
     <main class="pb-5" data-aos="fade" data-aos-delay="1500">
       <!-- ======= End Page Header ======= -->
@@ -27,7 +27,7 @@
               <form action="/contact.do" method="post" role="form" class="php-email-form" id="insertForm">
                 <div class="row">
                   <div class="col-md-6 form-group">
-                    <input type="text" name="name" class="form-control" id="name" placeholder="이름" required>
+                    <input type="text" name="name" class="form-control" id="name" placeholder="제목" required>
                   </div>
                   <div class="col-md-6 form-group mt-3 mt-md-0">
                     <input type="email" class="form-control" name="email" id="email" placeholder="답변받을 Eemail" required>

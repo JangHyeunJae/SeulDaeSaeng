@@ -83,4 +83,6 @@ public interface IBoardService {
 
   public List<FileDetailVO> mySubmit(Map<String, Object> parameter2);
 
+ public MemberVO writerDetail(int boardNo);
+
 }

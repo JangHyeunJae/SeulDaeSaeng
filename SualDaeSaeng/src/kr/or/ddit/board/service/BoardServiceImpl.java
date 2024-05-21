@@ -236,4 +236,9 @@ public class BoardServiceImpl implements IBoardService{
 	public List<FileDetailVO> mySubmit(Map<String, Object> parameter2) {
 		return boardDao.mySubmit(parameter2);
 	}
+
+	@Override
+	public MemberVO writerDetail(int boardNo) {
+		return boardDao.writerDetail(boardNo);
+	}
 }

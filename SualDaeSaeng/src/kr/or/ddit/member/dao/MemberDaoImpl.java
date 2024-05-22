@@ -413,6 +413,7 @@ public class MemberDaoImpl implements IMemberDao {
       }
       return memDetail;
    }
+
    
    //추가_길도연
    @Override

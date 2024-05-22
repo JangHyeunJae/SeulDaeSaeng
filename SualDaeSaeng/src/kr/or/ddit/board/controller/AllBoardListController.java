@@ -26,7 +26,13 @@ public class AllBoardListController extends HttpServlet {
 
 		int level = 0;
 		List<BoardVO> boardList = null;
-		String searchOption = req.getParameter("searchOption");
+		String searchOption = null;
+		if(req.getParameter("searchOption") == null) {
+			searchOption = "all";
+		}else {
+			searchOption = req.getParameter("searchOption");
+		}
+		
 		String searchText = req.getParameter("searchText");
 		if (searchText != null && searchText != "") {
 			Map<String, Object> parameter = new HashMap<>();
@@ -38,7 +44,7 @@ public class AllBoardListController extends HttpServlet {
 		}else {
 			boardList = boardService.allBoardList();
 		}
-
+		
 		if (searchOption != null && searchOption != "") {
 			req.setAttribute("searchOption", searchOption);
 		}

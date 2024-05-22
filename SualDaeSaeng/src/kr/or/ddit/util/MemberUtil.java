@@ -1,6 +1,7 @@
 package kr.or.ddit.util;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -60,8 +61,38 @@ public class MemberUtil {
 		
 	}
 	
-	public static void boardGroup(BoardVO boardVo) {
+	public static void boardLevelKr(BoardVO boardVo) {
 		
+		int level = boardVo.getBoardLevel();
+		
+		if(level == 1) boardVo.setBoardLevelKr("자유");
+		if(level == 2) boardVo.setBoardLevelKr("공부");
+		if(level == 3) boardVo.setBoardLevelKr("공지");
+		if(level == 301) boardVo.setBoardLevelKr("301호");
+		if(level == 302) boardVo.setBoardLevelKr("302호");
+		if(level == 303) boardVo.setBoardLevelKr("303호");
+		if(level == 304) boardVo.setBoardLevelKr("304호");
+		if(level == 305) boardVo.setBoardLevelKr("305호");
+		
+	}
+	
+	public static void boardLevelKr(List<BoardVO> boardList) {
+		
+		int cnt = 0;
+		for(BoardVO boardVo : boardList) {
+			
+			int level = boardVo.getBoardLevel();
+			
+			if(level == 1) boardVo.setBoardLevelKr("자유");
+			if(level == 2) boardVo.setBoardLevelKr("공부");
+			if(level == 3) boardVo.setBoardLevelKr("공지");
+			if(level == 301) boardVo.setBoardLevelKr("301호");
+			if(level == 302) boardVo.setBoardLevelKr("302호");
+			if(level == 303) boardVo.setBoardLevelKr("303호");
+			if(level == 304) boardVo.setBoardLevelKr("304호");
+			if(level == 305) boardVo.setBoardLevelKr("305호");
+			boardList.set(cnt++, boardVo);
+		}
 	}
 	
 }

@@ -63,7 +63,7 @@ public class FindPass extends HttpServlet {
             
             resp.setContentType("application/json");
             resp.getWriter().write(jsonResponse.toString());
-        } else {
+        } else{
             jsonResponse.addProperty("status", "fail");
             jsonResponse.addProperty("message", "아이디와 이메일이 일치하지 않습니다.");
             resp.setContentType("application/json");

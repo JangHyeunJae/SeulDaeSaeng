@@ -10,17 +10,23 @@
 <%@page import="kr.or.ddit.board.service.BoardServiceImpl"%>
 <%@page import="kr.or.ddit.board.service.IBoardService"%>
 <%@page import="kr.or.ddit.board.vo.StoryVO"%>
+<%@page import="kr.or.ddit.board.service.BoardServiceImpl"%>
+<%@page import="kr.or.ddit.board.service.IBoardService"%>
+<%@page import="kr.or.ddit.board.vo.BoardVO"%>
 <%@page import="java.util.List"%>
 <%@ page import="java.net.URLEncoder" %>
 <%@page import="kr.or.ddit.restaurant.vo.RestaurantVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@include file="/header.jsp" %>
-<%
-    IBoardService boardService = BoardServiceImpl.getInstance();
 
-    List<RestaurantVO> restLikeList = (List<RestaurantVO>) request.getAttribute("restLikeList"); 
-    List<StoryVO> storyList = (List<StoryVO>)request.getAttribute("storyList"); 
+<% 
+	IBoardService boardService = BoardServiceImpl.getInstance();
+
+	List<RestaurantVO> restLikeList = (List<RestaurantVO>) request.getAttribute("restLikeList"); 
+	List<BoardVO> boardList = (List<BoardVO>)boardService.allBoardList();
+	List<BoardVO> noticeList = (List<BoardVO>)boardService.selectBoardList(3);
+  List<StoryVO> storyList = (List<StoryVO>)request.getAttribute("storyList"); 
 %>
 
     <main data-aos="fade" data-aos-delay="1500">
@@ -156,115 +162,113 @@
           <div>
             <div class="section-header">
               <h2>board</h2>
-              <p class="d-flex justify-content-between align-items-center"> 전체 인기글 <button type="button" class="btn btn-outline-warning btn-sm">더보기</button>
+              <p class="d-flex justify-content-between align-items-center"> 전체 공지글 <button type="button" class="btn btn-outline-warning btn-sm"
+              		onclick="location.href='<%=request.getContextPath()%>/noticeBoard.do'">더보기</button>
               </p>
             </div>
+            
             <div class="list-group">
-              <a href="#" class="list-group-item">
-                <div class="d-flex w-100 justify-content-between align-items-center">
-                  <h5 class="mb-2 text-truncate">
-                    <small class="attach">
-                      <i class="bi bi-paperclip"></i>
-                    </small> List group item heading
-                  </h5>
-                  <small class="badge bg-light">자유게시판</small>
-                </div>
-                <p class="mb-2 text-truncate">Some placeholder content in a paragraph.</p>
-                <div class="d-flex w-100 justify-content-between align-items-center">
-                  <small class="days">2024-05-03</small>
-                  <small class="look">
-                    <i class="bi bi-eye"></i> 24 </small>
-                </div>
-              </a>
-              <a href="#" class="list-group-item">
-                <div class="d-flex w-100 justify-content-between align-items-center">
-                  <h5 class="mb-2 text-truncate">
-                    <small class="attach">
-                      <i class="bi bi-paperclip"></i>
-                    </small> List group item heading
-                  </h5>
-                  <small class="badge bg-light">공부게시판</small>
-                </div>
-                <p class="mb-2 text-truncate">Some placeholder content in a paragraph.</p>
-                <div class="d-flex w-100 justify-content-between align-items-center">
-                  <small class="days">2024-05-03</small>
-                  <small class="look">
-                    <i class="bi bi-eye"></i> 24 </small>
-                </div>
-              </a>
-              <a href="#" class="list-group-item">
-                <div class="d-flex w-100 justify-content-between align-items-center">
-                  <h5 class="mb-2 text-truncate">
-                    <small class="attach">
-                      <i class="bi bi-paperclip"></i>
-                    </small> List group item heading
-                  </h5>
-                  <small class="badge bg-light">자유게시판</small>
-                </div>
-                <p class="mb-2 text-truncate">Some placeholder content in a paragraph.</p>
-                <div class="d-flex w-100 justify-content-between align-items-center">
-                  <small class="days">2024-05-03</small>
-                  <small class="look">
-                    <i class="bi bi-eye"></i> 24 </small>
-                </div>
-              </a>
+            	<%
+					if (noticeList == null || noticeList.isEmpty()) {
+			    %>
+			    <p>    작성된 글이 없습니다</p>
+               	<%
+					}else{
+						int length = noticeList.size();
+						if(noticeList.size()>=3){
+							length = 3;
+						}
+						for(int i=0 ; i<length ; i++){
+		               		BoardVO bv = noticeList.get(i);
+		               		// html 제거
+	                        String ogContent = bv.getBoardCon();
+	                      	String regex = "<[^>]*>";
+	                      	String pureContent = ogContent.replaceAll(regex, "");
+               	%>
+              		  <a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>
+							&idx=<%=i %>&levelChk=3" class="list-group-item">
+		                <div class="d-flex w-100 justify-content-between align-items-center">
+		                  <h5 class="mb-2 text-truncate">
+		                    <small class="attach">
+		                      <i class="bi bi-paperclip"></i>
+		                    </small> <%=bv.getBoardTitle() %>
+		                  </h5>
+		                  <%
+		                  	String boardName = "공지사항";
+		                  %>
+		                  <small class="badge bg-light"><%=boardName %></small>
+		                </div>
+		                <p class="mb-2 text-truncate"><%=pureContent %></p>
+		                <div class="d-flex w-100 justify-content-between align-items-center">
+		                  <small class="days"><%=bv.getBoardAt() %></small>
+		                  <small class="look">
+		                    <i class="bi bi-eye"></i> <%=bv.getBoardHit() %> </small>
+		                </div>
+		              </a>
+              	<%
+                 		}
+					}
+                %>
             </div>
           </div>
           <div>
             <div class="section-header">
               <h2>board</h2>
-              <p class="d-flex justify-content-between align-items-center"> 전체 최신글 <button type="button" class="btn btn-outline-warning btn-sm">더보기</button>
+              <p class="d-flex justify-content-between align-items-center"> 전체 최신글 <button type="button" class="btn btn-outline-warning btn-sm"
+              		onclick="location.href='<%=request.getContextPath()%>/allBoard.do'">더보기</button>
               </p>
             </div>
+            
             <div class="list-group">
-              <a href="#" class="list-group-item">
-                <div class="d-flex w-100 justify-content-between align-items-center">
-                  <h5 class="mb-2 text-truncate">
-                    <small class="attach">
-                      <i class="bi bi-paperclip"></i>
-                    </small> List group item heading
-                  </h5>
-                  <small class="badge bg-light">자유게시판</small>
-                </div>
-                <p class="mb-2 text-truncate">Some placeholder content in a paragraph.</p>
-                <div class="d-flex w-100 justify-content-between align-items-center">
-                  <small class="days">2024-05-03</small>
-                  <small class="look">
-                    <i class="bi bi-eye"></i> 24 </small>
-                </div>
-              </a>
-              <a href="#" class="list-group-item">
-                <div class="d-flex w-100 justify-content-between align-items-center">
-                  <h5 class="mb-2 text-truncate">
-                    <small class="attach">
-                      <i class="bi bi-paperclip"></i>
-                    </small> List group item heading
-                  </h5>
-                  <small class="badge bg-light">자유게시판</small>
-                </div>
-                <p class="mb-2 text-truncate">Some placeholder content in a paragraph.</p>
-                <div class="d-flex w-100 justify-content-between align-items-center">
-                  <small class="days">2024-05-03</small>
-                  <small class="look">
-                    <i class="bi bi-eye"></i> 24 </small>
-                </div>
-              </a>
-              <a href="#" class="list-group-item">
-                <div class="d-flex w-100 justify-content-between align-items-center">
-                  <h5 class="mb-2 text-truncate">
-                    <small class="attach">
-                      <i class="bi bi-paperclip"></i>
-                    </small> List group item heading
-                  </h5>
-                  <small class="badge bg-light">자유게시판</small>
-                </div>
-                <p class="mb-2 text-truncate">Some placeholder content in a paragraph.</p>
-                <div class="d-flex w-100 justify-content-between align-items-center">
-                  <small class="days">2024-05-03</small>
-                  <small class="look">
-                    <i class="bi bi-eye"></i> 24 </small>
-                </div>
-              </a>
+            	<%
+					if (boardList == null || boardList.isEmpty()) {
+			    %>
+			    <p>    작성된 글이 없습니다</p>
+               	<%
+					}else{
+						int length = boardList.size();
+						int cnt = 0;
+						for(int i=0 ; i<length ; i++){
+							if(cnt == 3) break;
+		               		BoardVO bv = boardList.get(i);
+		               		if(bv.getBoardLevel() == 3){
+		               			continue;
+		               		}
+		               		cnt++;
+		               		// html 제거
+	                        String ogContent = bv.getBoardCon();
+	                      	String regex = "<[^>]*>";
+	                      	String pureContent = ogContent.replaceAll(regex, "");
+               	%>
+		              <a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>
+							&idx=<%=i %>&levelChk=0" class="list-group-item">
+		                <div class="d-flex w-100 justify-content-between align-items-center">
+		                  <h5 class="mb-2 text-truncate">
+		                    <small class="attach">
+		                      <i class="bi bi-paperclip"></i>
+		                    </small> <%=bv.getBoardTitle() %>
+		                  </h5>
+		                  <%
+		                  	String boardName = null;
+		                  	if(bv.getBoardLevel() == 1){
+		                  		boardName = "자유게시판";
+		                  	}else if(bv.getBoardLevel() == 2){
+		                  		boardName = "공부게시판";
+		                  	}
+		                  %>
+		                  <small class="badge bg-light"><%=boardName %></small>
+		                </div>
+		                <p class="mb-2 text-truncate"><%=pureContent %></p>
+		                <div class="d-flex w-100 justify-content-between align-items-center">
+		                  <small class="days"><%=bv.getBoardAt() %></small>
+		                  <small class="look">
+		                    <i class="bi bi-eye"></i> <%=bv.getBoardHit() %> </small>
+		                </div>
+		              </a>
+              	<%
+                 		}
+					}
+                 %>
             </div>
           </div>
         </div>

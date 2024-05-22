@@ -2,13 +2,11 @@ package kr.or.ddit.member.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import kr.or.ddit.member.service.IMemberService;
@@ -18,6 +16,8 @@ import kr.or.ddit.member.vo.UsersVO;
 
 @WebServlet("/login.do")
 public class LoginController extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -44,14 +44,14 @@ public class LoginController extends HttpServlet {
 			UsersVO usersDetail = loginService.getUsersDetail(usersId);
 			req.getSession().setAttribute("usersId", usersId);
 			req.getSession().setAttribute("memDetail", memDetail);
-            req.getSession().setAttribute("usersPass", usersPass);
+			req.getSession().setAttribute("usersPass", usersPass); 
 			req.getSession().setAttribute("usersRole", usersDetail.getUsersRole());
 			resp.sendRedirect(req.getContextPath() + "/main.do");
 
 		} else {
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("isSuccess", "fail");
-			resp.sendRedirect("/views/member/login.jsp");
+			resp.sendRedirect("/login.do");
 		}
 	}
 }

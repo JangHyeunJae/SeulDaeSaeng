@@ -19,6 +19,8 @@ import kr.or.ddit.member.vo.UsersVO;
 @WebServlet("/login.do")
 public class LoginController extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getRequestDispatcher("/views/member/login.jsp").forward(req,resp);
@@ -44,14 +46,14 @@ public class LoginController extends HttpServlet {
 			UsersVO usersDetail = loginService.getUsersDetail(usersId);
 			req.getSession().setAttribute("usersId", usersId);
 			req.getSession().setAttribute("memDetail", memDetail);
-      req.getSession().setAttribute("usersPass", usersPass); 
+			req.getSession().setAttribute("usersPass", usersPass); 
 			req.getSession().setAttribute("usersRole", usersDetail.getUsersRole());
 			resp.sendRedirect(req.getContextPath() + "/main.do");
 
 		} else {
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("isSuccess", "fail");
-			resp.sendRedirect("/views/member/login.jsp");
+			resp.sendRedirect("/login.do");
 		}
 	}
 }

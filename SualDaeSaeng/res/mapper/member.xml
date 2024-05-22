@@ -50,18 +50,6 @@
 		<result property="addrLevel" column="ADDR_LEVEL"/>
 	</resultMap>
 
-	<resultMap type="kr.or.ddit.board.vo.BoardVO" id="boardMap">
-		<result column="board_no" property="boardNo"/>
-		<result column="board_level" property="boardLevel"/>
-		<result column="board_title" property="boardTitle"/>
-		<result column="board_con" property="boardCon"/>
-		<result column="board_at" property="boardAt"/>
-		<result column="board_yn" property="boardYn"/>
-		<result column="board_hit" property="boardHit"/>
-		<result column="file_no" property="fileNo"/>
-		<result column="users_no" property="usersNo"/>
-	</resultMap>
-
 	<select id="memberIdChk" parameterType="String" resultType="int">
 		select count(*) as cnt from users where USERS_ID = #{usersId} 
 		AND USERS_YN IN ('Y', 'S')
@@ -153,7 +141,6 @@
 	
 	<select id="checking" parameterType="String" resultType="String">
 	    select member.mem_Name from member where mem_name=#{memName}
-
 	</select>
        
        

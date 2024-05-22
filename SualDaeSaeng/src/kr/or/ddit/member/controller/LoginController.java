@@ -17,41 +17,41 @@ import kr.or.ddit.member.vo.UsersVO;
 @WebServlet("/login.do")
 public class LoginController extends HttpServlet {
 
-   private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-   @Override
-   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-      req.getRequestDispatcher("/views/member/login.jsp").forward(req,resp);
-   }
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.getRequestDispatcher("/views/member/login.jsp").forward(req,resp);
+	}
 
-   @Override
-   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-      req.setCharacterEncoding("UTF-8");
-      String usersId = req.getParameter("id");
-      String usersPass = req.getParameter("pw");
-      Boolean isMemberLogin = Boolean.parseBoolean(req.getParameter("memberLogin"));
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		String usersId = req.getParameter("id");
+		String usersPass = req.getParameter("pw");
+		Boolean isMemberLogin = Boolean.parseBoolean(req.getParameter("memberLogin"));
 
-      IMemberService loginService = MemberServiceImpl.getInstance();
-      MemberVO memberVO = new MemberVO();
-      memberVO.setUsersId(usersId);
-      memberVO.setUsersPass(usersPass);
+		IMemberService loginService = MemberServiceImpl.getInstance();
+		MemberVO memberVO = new MemberVO();
+		memberVO.setUsersId(usersId);
+		memberVO.setUsersPass(usersPass);
 
-      boolean isSuccess = loginService.loginCheck(memberVO, isMemberLogin);
+		boolean isSuccess = loginService.loginCheck(memberVO, isMemberLogin);
 
-      if (isSuccess) {
-         System.out.println("로그인성공");
-         MemberVO memDetail = loginService.getMemDetail(usersId);
-         UsersVO usersDetail = loginService.getUsersDetail(usersId);
-         req.getSession().setAttribute("usersId", usersId);
-         req.getSession().setAttribute("memDetail", memDetail);
-         req.getSession().setAttribute("usersPass", usersPass); 
-         req.getSession().setAttribute("usersRole", usersDetail.getUsersRole());
-         resp.sendRedirect(req.getContextPath() + "/main.do");
+		if (isSuccess) {
+			System.out.println("로그인성공");
+			MemberVO memDetail = loginService.getMemDetail(usersId);
+			UsersVO usersDetail = loginService.getUsersDetail(usersId);
+			req.getSession().setAttribute("usersId", usersId);
+			req.getSession().setAttribute("memDetail", memDetail);
+			req.getSession().setAttribute("usersPass", usersPass); 
+			req.getSession().setAttribute("usersRole", usersDetail.getUsersRole());
+			resp.sendRedirect(req.getContextPath() + "/main.do");
 
-      } else {
-         JsonObject jsonObject = new JsonObject();
-         jsonObject.addProperty("isSuccess", "fail");
-         resp.sendRedirect("/login.do");
-      }
-   }
+		} else {
+			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("isSuccess", "fail");
+			resp.sendRedirect("/login.do");
+		}
+	}
 }

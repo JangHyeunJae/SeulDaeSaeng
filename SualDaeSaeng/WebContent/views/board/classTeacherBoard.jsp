@@ -107,7 +107,7 @@
               for(int i=0;i<hwList.size();i++){
             	  HomeworkVO hw = hwList.get(i);
               %>
-              <a href="#" class="card">
+              <a href="<%=request.getContextPath() %>/homework/detail.do?hwNo=<%=hw.getHwNo() %>&levelChk=<%=levelChk %>" class="card">
                 <div class="card-body">
                   <div class="d-flex justify-content-between align-items-center">
                     <h5 class="card-title text-truncate"><%=hw.getHwTitle() %></h5>

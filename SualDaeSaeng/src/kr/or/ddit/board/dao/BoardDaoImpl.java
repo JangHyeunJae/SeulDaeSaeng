@@ -1,5 +1,7 @@
 package kr.or.ddit.board.dao;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +15,7 @@ import kr.or.ddit.board.vo.FileShareVO;
 import kr.or.ddit.board.vo.HomeworkVO;
 import kr.or.ddit.board.vo.HwSubmitVO;
 import kr.or.ddit.board.vo.ReplyVO;
+import kr.or.ddit.board.vo.StoryVO;
 import kr.or.ddit.contact.vo.ContactVO;
 import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.member.vo.UsersVO;
@@ -735,6 +738,84 @@ public class BoardDaoImpl implements IBoardDao {
 	}
 
 	@Override
+	public int insertStory(StoryVO storyVO) {
+		
+		SqlSession session = null;
+		int status = 0;		
+		
+		try {
+			session = MyBatisUtil.getSqlSession();
+			status = session.insert("board.insertStory", storyVO);
+			
+			if(status > 0) {// 성공
+				session.commit();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		
+		return status;
+	}
+
+	@Override
+	public List<StoryVO> getStoryList(int usersNo) {
+		
+		List<StoryVO> storyVo = null;
+		SqlSession session = null;
+
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+            
+			storyVo = session.selectList("board.getStoryList",usersNo);
+
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return storyVo;
+	}
+
+	@Override
+	public String getStoryTime(int storyNo) {
+		
+		String time = null;
+		SqlSession session = null;
+
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+            time = session.selectOne("board.getStoryTime",storyNo);
+
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return time;
+	}
+
+	@Override
+	public StoryVO getStoryOne(int storyNo) {
+		
+		StoryVO storyOne = null;
+		SqlSession session = null;
+
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+            
+			storyOne = session.selectOne("board.getStoryOne",storyNo);
+
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return storyOne;
+
 	public MemberVO writerDetail(int boardNo) {
 		SqlSession session = null;		// 디비와 연결하기 위한 생산품
 		MemberVO memberVO = null;	// 전체 목록 데이터를 받을 변수 

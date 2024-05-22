@@ -143,5 +143,11 @@
 	    select member.mem_Name from member where mem_name=#{memName}
 
 	</select>
-
+       
+       
+       
+       
+       
+       
+       
 </mapper>

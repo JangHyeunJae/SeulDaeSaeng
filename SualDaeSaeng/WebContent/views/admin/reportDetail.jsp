@@ -10,8 +10,6 @@
 %>
 
 <%
-
-
 	String msg = session.getAttribute("msg") == null ? "" : (String) session.getAttribute("msg");
 	session.removeAttribute("msg");
 	int level = bv.getBoardLevel();
@@ -84,26 +82,18 @@
              
          </div>
          
-      <!-- END 이전글/다음글 구분 출력-->
-      
-      <!-- START 파일 + 컨텐츠 출력 -->     
         <div class="container pt-5 pb-5 aos-init aos-animate" data-aos="fade-up">
           
           <div style="word-wrap: break-word;"><p>테스트 게시판<br></p></div>
-        <!-- END 파일 + 컨텐츠 출력 -->
-          
-         <!-- START comment-list -->
-         
-        
-          <!-- END reply-insert -->
-          
-          <!-- START MENU -->
+
+ 
           
         <div class="btn-box container d-flex align-items-center justify-content-center pb-5 pt-5 gap-2">
                 
-   
-          <a href="/board/report.do?boardNo=113&amp;idx=0&amp;levelChk=1&amp;report=Y" onclick="return confirm('신고하시겠습니까?');" type="button" class="btn btn-secondary">신고하기</a>
-          
+   		<form action="<%=request.getContextPath()%>/views/reportDetail.do" method="post">
+   			<input type="hidden" name="boardNo" value="<%=bv.getBoardNo()%>">
+          <button type="submit" class="btn btn-secondary">블라인드처리</button>
+         </form>
         </div>
         
         <!-- END MENU -->

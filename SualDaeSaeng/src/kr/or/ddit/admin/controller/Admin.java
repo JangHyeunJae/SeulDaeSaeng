@@ -50,6 +50,10 @@ public class Admin extends HttpServlet {
 		List<BoardVO> reportList = reportservice.selectReportList();   //신고 게시글 리스트 
 		req.setAttribute("reportList", reportList);
 	 
+		List<MemberReqVO> reportmember = reportservice.reportmemberList();  // 신고당한 회원 리스트 
+		req.setAttribute("reportmember", reportmember);
+		
+		
 		
 	   req.getRequestDispatcher("/views/admin/adminPage.jsp").forward(req, resp);
    }
@@ -59,6 +63,7 @@ public class Admin extends HttpServlet {
    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 	   
+	   // 모달 
 	   MemberReqVO memberReqVO = new MemberReqVO();
 	   memberReqVO = adminservice.selectmember(req.getParameter("usersNo" ));
 	    
@@ -72,16 +77,7 @@ public class Admin extends HttpServlet {
 	   PrintWriter wrt = resp.getWriter();
 	   wrt.print(json);
 	   
-		/*
-		
-		 * 
-		 * 
-		 * 
-		 * // 요청받은 위치( ajax)로 응답보내주기 
-		 * Gson gson = new Gson(); 
-		 * String json = gson.toJson(memberList); 
-		 * resp.getWriter().print(json);
-		 */
+
     
    }
 }

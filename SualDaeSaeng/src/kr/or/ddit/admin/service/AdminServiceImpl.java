@@ -27,10 +27,10 @@ public class AdminServiceImpl implements IAdminService {
 	
 	
 	
-	@Override
-	public int AdminAccept(int usersNo) {
-		return dao.AdminAccept(usersNo);
-	}
+//	@Override
+//	public int AdminAccept(int usersNo) {
+//		return dao.AdminAccept(usersNo);
+//	}
 	
 	
 	@Override

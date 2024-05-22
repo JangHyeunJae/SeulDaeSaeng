@@ -26,13 +26,19 @@
  	if(repallList != null && !repallList.isEmpty()) {	
       	for(BoardVO report : repallList) {
  %>						
-							<a href="#"
-								class="list-group-item py-2 d-flex justify-content-between align-items-center">
-								<span> <i class="bi bi-person-fill px-2"></i> <b><%=report.getBoardNo() %></b>
-									<small><%=report.getBoardTitle() %></small>
-									<small><%=report.getBoardAt() %></small>
-								</span>
-							</a> 
+		<a href="<%=request.getContextPath() %>/views/reportDetail.do?boardNo=<%=report.getBoardNo()%>"
+			class="list-group-item py-2 d-flex justify-content-between align-items-center">
+		 <h6 class="mb-2 text-truncate">
+			  <small class="badge bg-light">
+                 <%= "Y".equals(report.getBoardYn().trim()) ? "미확인" : "확인" %>
+              </small>
+
+					<i class="bi bi-person-fill px-2"></i> <b><%=report.getBoardNo() %></b>
+					<small><%=report.getBoardTitle() %></small>
+		</h6>
+					<small><%=report.getBoardAt() %></small>
+
+		</a> 
  <%
      	}
   	}else{

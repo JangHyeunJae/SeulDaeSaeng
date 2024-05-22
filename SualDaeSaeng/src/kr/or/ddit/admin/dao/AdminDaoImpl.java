@@ -42,26 +42,26 @@ public class AdminDaoImpl implements IAdmindao {
 	
 	
 	
-	@Override
-	public int AdminAccept(int usersNo) {
-		SqlSession session = null;
-		int cnt=-1;
-		
-		try {
-			session = MyBatisUtil.getSqlSession();	
-			 cnt = session.update("admin.adminAccept", usersNo);   // xml 
-			 
-			 if(cnt>0) session.commit();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			if(session != null) {
-				session.close();
-			}
-		}
-		return cnt;
-	}
+//	@Override
+//	public int AdminAccept(int usersNo) {
+//		SqlSession session = null;
+//		int cnt=-1;
+//		
+//		try {
+//			session = MyBatisUtil.getSqlSession();	
+//			 cnt = session.update("admin.adminAccept", usersNo);   // xml 
+//			 
+//			 if(cnt>0) session.commit();
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}finally {
+//			if(session != null) {
+//				session.close();
+//			}
+//		}
+//		return cnt;
+//	}
 	
 	
 	

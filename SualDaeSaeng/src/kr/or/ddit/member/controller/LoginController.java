@@ -44,9 +44,13 @@ public class LoginController extends HttpServlet {
 			UsersVO usersDetail = loginService.getUsersDetail(usersId);
 			req.getSession().setAttribute("usersId", usersId);
 			req.getSession().setAttribute("memDetail", memDetail);
-      req.getSession().setAttribute("usersPass", usersPass); 
+			req.getSession().setAttribute("usersPass", usersPass); 
 			req.getSession().setAttribute("usersRole", usersDetail.getUsersRole());
-			resp.sendRedirect(req.getContextPath() + "/main.do");
+			if(usersDetail.getUsersRole() == 3) {
+				resp.sendRedirect(req.getContextPath() + "/views/adminPage.do");
+			}else {
+				resp.sendRedirect(req.getContextPath() + "/main.do");
+			}
 
 		} else {
 			JsonObject jsonObject = new JsonObject();

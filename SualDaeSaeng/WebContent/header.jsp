@@ -50,7 +50,9 @@ String id = (String) session.getAttribute("usersId");
        <link href="/css/restaurantUpDate.css" rel="stylesheet">
    	<% } else if(request.getRequestURI().contains("restaurantView")){ %>
    		<link href="/css/restaurantView.css" rel="stylesheet">
-   	<% } %>
+   	<% } else if(request.getRequestURI().contains("reviewWrite")){ %>
+		<link href="/css/reviewWrite.css" rel="stylesheet">
+	<% } %>
    	
   </head>
   <body>

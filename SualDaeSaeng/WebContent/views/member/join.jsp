@@ -30,7 +30,7 @@
                 </div>
                 <div class="form-group mt-2 d-flex gap-2 align-items-center">
 				  <label for="id" class="form-label mb-0 pe-2">아이디 </label>
-                  <input type="text" class="form-control" name="id" id="id" placeholder="4~12자의 숫자와 영문 대소문자 required pattern="[a-zA-Z0-9]{4,12}" />
+                  <input type="text" class="form-control" name="id" id="id" placeholder="4~12자의 숫자와 영문 대소문자" required pattern="[a-zA-Z0-9]{4,12}" />
                   <button type="button" id="idCheck" name="idCheck" class="btn btn-warning" > 중복확인</button>
                 </div>
                  <div class="form-group mt-2 d-flex gap-2 align-items-center">

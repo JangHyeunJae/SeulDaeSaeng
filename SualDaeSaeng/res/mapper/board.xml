@@ -131,7 +131,7 @@
 	    <if test='searchOption == "all"'>
 	      and (
 	        b.board_title like '%' || #{searchText} || '%'
-	        or b.board_con like '%' || #{searchText} || '%'
+	        or b.board_con like '%' || #{searchText} || '%' 
 	        or m.mem_nick like '%' || #{searchText} || '%'
 	      )
 	    </if>

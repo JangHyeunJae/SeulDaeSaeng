@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.itextpdf.text.log.SysoCounter"%>
 <%@page import="java.time.Duration"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
@@ -24,7 +25,9 @@
 	MemberVO memberVo = (MemberVO)request.getAttribute("memberVo");
 	AddressVO addrVo = (AddressVO)request.getAttribute("addrVo");
 	List<StoryVO> storyVo = service.getStoryList(memDetail.getUsersNo());
-	List<BoardVO> memBoardList = (List<BoardVO>)request.getAttribute("memBoardList");
+	List<BoardVO> memBoardList = request.getAttribute("memBoardList") == null 
+								? new ArrayList() : (List<BoardVO>)request.getAttribute("memBoardList");
+	
 %>
 
  <main class="myPage" data-aos="fade" data-aos-delay="1500">
@@ -169,95 +172,93 @@
                     </p>
                   </div>
                   <div class="list-group">
-                  <%
-                  		for(BoardVO boardVo : memBoardList){
-                  			for(int i=0; i<4; i++){
+                  <%	
+                  		for(int i=0; i<4; i++){
+                  			if(memBoardList.size() == 0){
+                  	%>
+                  	<p>작성한 글이 없습니다.</p>
+                  <%			
+                  				break;
+                  			}
+                  			BoardVO boardVo = memBoardList.get(i);
                   	%>			
                     <a href="#" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
                       <h6 class="mb-2 text-truncate">
-                        <small class="badge bg-light">자유</small>
+                        <small class="badge bg-light"><%=boardVo.getBoardLevelKr() %></small>
+                        <%
+                        	if(boardVo.getFileNo() > 0){
+                        %>
                         <small class="attach">
                           <i class="bi bi-paperclip"></i>
-                        </small> List group item heading
+                        </small>
+                        <%
+                        	}else{
+                        %>
+						<small class="attach">
+                          <i></i>
+                        </small>
+						<%
+                        	}
+	                        String Title = boardVo.getBoardTitle();
+	                        if(Title.length() > 10) Title = Title.substring(0, 11) + "...";
+						%>                        		
+                        <%=Title %>
                       </h6>
-                      <small class="days">2024-05-03</small>
+                      <small class="days"><%=boardVo.getBoardAt() %></small>
                     </a>
                   <%
-                  			}
+                  			if(memBoardList.size() == i) break;
                   		}
                   %>
-                    <a href="#" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
-                      <h6 class="mb-2 text-truncate">
-                        <small class="badge bg-light">자유</small>
-                        <small class="attach">
-                          <i class="bi bi-paperclip"></i>
-                        </small> List group item heading
-                      </h6>
-                      <small class="days">2024-05-03</small>
-                    </a>
-                    <a href="#" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
-                      <h6 class="mb-2 text-truncate">
-                        <small class="badge bg-light">자유</small>
-                        <small class="attach">
-                          <i class="bi bi-paperclip"></i>
-                        </small> List group item heading
-                      </h6>
-                      <small class="days">2024-05-03</small>
-                    </a>
-                    <a href="#" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
-                      <h6 class="mb-2 text-truncate">
-                        <small class="badge bg-light">자유</small>
-                        <small class="attach">
-                          <i class="bi bi-paperclip"></i>
-                        </small> List group item heading
-                      </h6>
-                      <small class="days">2024-05-03</small>
-                    </a>
                   </div>
                 </div>
-                <div class="col">
+                 <div class="col">
                   <div class="section-header">
                     <h2>board</h2>
-                    <p class="d-flex justify-content-between align-items-center"> 내가 댓글 쓴 게시글 <button type="button" class="btn btn-outline-warning btn-sm">더보기</button>
+                    <p class="d-flex justify-content-between align-items-center"> 
+                     	 내가 댓슬 쓴 게시글 
+                      <button type="button" class="btn btn-outline-warning btn-sm">더보기</button>
                     </p>
                   </div>
                   <div class="list-group">
+                  <%	
+                  		for(int i=0; i<4; i++){
+                  			if(memBoardList.size() == 0){
+                  	%>
+                  	<p>작성한 글이 없습니다.</p>
+                  <%			
+                  				break;
+                  			}
+                  			BoardVO boardVo = memBoardList.get(i);
+                  	%>			
                     <a href="#" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
                       <h6 class="mb-2 text-truncate">
-                        <small class="badge bg-light">자유</small>
+                        <small class="badge bg-light"><%=boardVo.getBoardLevelKr() %></small>
+                        <%
+                        	if(boardVo.getFileNo() > 0){
+                        %>
                         <small class="attach">
                           <i class="bi bi-paperclip"></i>
-                        </small> List group item heading
+                        </small>
+                        <%
+                        	}else{
+                        %>
+						<small class="attach">
+                          <i></i>
+                        </small>
+						<%
+                        	}
+	                        String Title = boardVo.getBoardTitle();
+	                        if(Title.length() > 10) Title = Title.substring(0, 11) + "...";
+						%>                        		
+                        <%=Title %>
                       </h6>
-                      <small class="days">2024-05-03</small>
+                      <small class="days"><%=boardVo.getBoardAt() %></small>
                     </a>
-                    <a href="#" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
-                      <h6 class="mb-2 text-truncate">
-                        <small class="badge bg-light">자유</small>
-                        <small class="attach">
-                          <i class="bi bi-paperclip"></i>
-                        </small> List group item heading
-                      </h6>
-                      <small class="days">2024-05-03</small>
-                    </a>
-                    <a href="#" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
-                      <h6 class="mb-2 text-truncate">
-                        <small class="badge bg-light">자유</small>
-                        <small class="attach">
-                          <i class="bi bi-paperclip"></i>
-                        </small> List group item heading
-                      </h6>
-                      <small class="days">2024-05-03</small>
-                    </a>
-                    <a href="#" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
-                      <h6 class="mb-2 text-truncate">
-                        <small class="badge bg-light">자유</small>
-                        <small class="attach">
-                          <i class="bi bi-paperclip"></i>
-                        </small> List group item heading
-                      </h6>
-                      <small class="days">2024-05-03</small>
-                    </a>
+                  <%
+                  			if(memBoardList.size() == i) break;
+                  		}
+                  %>
                   </div>
                 </div>
               </div>

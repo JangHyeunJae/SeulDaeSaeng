@@ -403,4 +403,14 @@ where story_no = #{storyNo}
 	    where story_no=#{storyNo}
 </select>
 
+<update id="deleteStory" parameterType="int">
+        update story set story_yn = 'N' where story_no =#{storyNo}
+</update>
+
+<select id="allStoryList" resultMap="storyMap">
+		select *
+        from story
+        where story_yn = 'Y'
+        order by story_no desc
+</select>
 </mapper>

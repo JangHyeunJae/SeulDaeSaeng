@@ -36,7 +36,7 @@ public class UploadFileController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private IBoardService service = BoardServiceImpl.getInstance();
     private static final String UPLOAD_DIR = "upload_files";
-    
+   
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
           doPost(req,resp);

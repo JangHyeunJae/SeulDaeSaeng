@@ -97,4 +97,8 @@ public interface IBoardService {
 
   public MemberVO writerDetail(int boardNo);
 
+  public int deleteStory(int storyNo);
+
+  public List<StoryVO> allStoryList();
+
 }

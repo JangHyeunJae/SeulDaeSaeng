@@ -336,7 +336,6 @@ public class MemberDaoImpl implements IMemberDao {
             session.close();
          }
       }
-      
       return memList;
    }
   
@@ -415,6 +414,8 @@ public class MemberDaoImpl implements IMemberDao {
       return memDetail;
    }
 
+   
+   //추가_길도연
    @Override
    public UsersVO getUsersDetail(String usersId) {
       

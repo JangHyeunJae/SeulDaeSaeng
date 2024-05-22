@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.board.vo.BoardVO;
+import kr.or.ddit.board.vo.StoryVO;
 import kr.or.ddit.restaurant.service.IRestaurantService;
 import kr.or.ddit.restaurant.service.RestaurantServiceImpl;
 import kr.or.ddit.restaurant.vo.RestaurantVO;
@@ -23,7 +24,7 @@ public class MainController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
 	private IRestaurantService restService = RestaurantServiceImpl.getInstance();
-	
+	private IBoardService boardService = BoardServiceImpl.getInstance();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -37,6 +38,9 @@ public class MainController extends HttpServlet{
 		cls.put("postperpage", 4);
 		List<RestaurantVO> restLikeList = restService.selectRestaurantType(cls);
 		req.setAttribute("restLikeList", restLikeList);
+		
+	    List<StoryVO> storyList = boardService.allStoryList();
+	    req.setAttribute("storyList", storyList);
 		
 		System.out.println("메인 페이지 접속");
 		req.getRequestDispatcher("/views/index.jsp").forward(req, resp);

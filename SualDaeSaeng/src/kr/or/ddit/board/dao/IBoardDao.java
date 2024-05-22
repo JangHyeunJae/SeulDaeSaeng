@@ -26,6 +26,7 @@ public interface IBoardDao {
 	public List<BoardVO> selectBoardList(int level);
 
 	public int insertBoard(BoardVO boardVO);
+	
 	public MemberVO getwriterDetail(Map<String,Object> parameter);
 
 	public List<ReplyVO> getReplyList(int boardNo);
@@ -98,5 +99,9 @@ public interface IBoardDao {
 	public StoryVO getStoryOne(int storyNo);
 
 	public MemberVO writerDetail(int boardNo);
+
+	public int deleteStory(int storyNo);
+
+	public List<StoryVO> allStoryList();
 
 }

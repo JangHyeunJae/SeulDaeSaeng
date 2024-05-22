@@ -358,6 +358,12 @@ public class MemberDaoImpl implements IMemberDao {
       }
       return memDetail;
    }
+
+	@Override
+	public UsersVO getUsersDetail(String usersId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
   
 }
 

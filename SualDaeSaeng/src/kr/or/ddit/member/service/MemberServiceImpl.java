@@ -81,6 +81,8 @@ public class MemberServiceImpl implements IMemberService{
 	@Override
 	public List<BoardVO> memberBoardList(int usersNo) {
 		return memberDao.memberBoardList(usersNo);
+	}
+	@Override
 	public MemberVO getMemDetail(String usersId) {
 		return memberDao.getMemDetail(usersId);
 	}

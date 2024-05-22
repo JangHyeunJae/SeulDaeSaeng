@@ -1,7 +1,8 @@
+<%@page import="kr.or.ddit.restaurant.vo.RestaurantVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/header.jsp" %>
 <%
-	String restBizno = request.getParameter("restBizno");
+	String restBizno = request.getParameter("no");
 %>
 
 <main>
@@ -15,7 +16,7 @@
                 </p>
                 <div>
                     <h2>리뷰작성</h2>
-                    <form action="<%=request.getContextPath()%>/restaurant/reviewWrite.do" method="post" enctype="multipart/form-data" role="form" id="insertForm" class=" needs-validation" novalidate>
+                    <form action="<%=request.getContextPath()%>/restaurant/reviewWrite.do?no=<%=restBizno %>" method="post" enctype="multipart/form-data" role="form" id="insertForm" class=" needs-validation" novalidate>
                         <div class="contact container px-0">
                        		<div class="d-flex align-items-center mb-3 starBox gap-3 is-valid">
  

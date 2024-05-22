@@ -45,6 +45,10 @@
 	
 	Document imageDocument = builder.parse(new ByteArrayInputStream(responseImg.getBytes()));
 	Element imageRootElement = imageDocument.getDocumentElement();
+	
+
+	MemberVO memDetail = (MemberVO) session.getAttribute("memDetail");
+	UsersVO usersDetail = (UsersVO) session.getAttribute("usersDetail");
 
 %>
 
@@ -73,38 +77,59 @@
                 <p class="stars fs-4">
                 <%
                 String score = (int) restDetails.getAvgReviewStar()!=-1 ? ""+ (int) restDetails.getAvgReviewStar() : "리뷰없음";
-                if(score.equals("10")){%>
+                if(score.equals("10")){
                 	score = "5";
+                %>
                 	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i>
-                <%}else if(score.equals("9")){%> 
+                <%
+                }else if(score.equals("9")){
                 	score = "4.5";
+                %> 
                 	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i>
-                <%}else if(score.equals("8")){%> 
+                <%
+                }else if(score.equals("8")){
                 	score = "4";
+                %> 
                 	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star"></i>
-                <%}else if(score.equals("7")){%> 
+                <%
+                }else if(score.equals("7")){
                 	score = "3.5";
+                %> 
                 	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i> <i class="bi bi-star"></i>
-                <%}else if(score.equals("6")){%> 
+                <%
+                }else if(score.equals("6")){
                 	score = "3";
+                %> 
                 	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
-                <%}else if(score.equals("5")){%> 
+                <%
+                }else if(score.equals("5")){
                 	score = "2.5";
+                %> 
                 	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
-                <%}else if(score.equals("4")){%> 
+                <%
+                }else if(score.equals("4")){
                 	score = "2";
+                %> 
                 	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
-                <%}else if(score.equals("3")){%> 
+                <%
+                }else if(score.equals("3")){
                 	score = "1.5";
+                %> 
                 	<i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
-                <%}else if(score.equals("2")){%> 
+                <%
+                }else if(score.equals("2")){
                 	score = "1";
+                %> 
                 	<i class="bi bi-star-fill"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
-                <%}else if(score.equals("1")){%> 
+                <%
+                }else if(score.equals("1")){
                 	score = "0.5";
+                %> 
                 	<i class="bi bi-star-half"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
-                <%}else if(score.equals("0")){%>
+                <%
+                }else if(score.equals("0")){
                 	score = "0";
+                %>
                 	<i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
                 <%}else{%> <%} %> 
                   <b>(<%=score %>) <span>(<%=restDetails.getTotalReview()%>명의 평가)</span>
@@ -260,11 +285,20 @@
             </p>
           </div>
           <hr class="my-0 pb-4">
-          <% if(id!=null && !id.isEmpty()){ %>
+          <% 
+			int noReview = 0;
+			for(int i = 0; i < restReviewList.size(); i++){
+				RestaurantVO restVo = restReviewList.get(i);
+				if(restVo.getUsersNo() == usersDetail.getUsersNo()){
+					noReview = 1;
+				}
+			}
+          if(id!=null && !id.isEmpty() && noReview==0){ 
+          %>
           <div class="d-flex justify-content-between align-items-center py-3 mb-3 food-list new-review">
             <p class="mb-0 d-flex align-items-center gap-3">
               <img src="/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-              <span> 00님 아직 리뷰를 작성하지 않으셨군요! 당신의 리뷰를 기다리고 있습니다. <br> ※홍보 및 비방 등 부적절한 평가는 평점 산정에서 제외 될 수 있습니다. </span>
+              <span> <%=memDetail.getMemNick() %>님 아직 리뷰를 작성하지 않으셨군요! 당신의 리뷰를 기다리고 있습니다. <br> ※홍보 및 비방 등 부적절한 평가는 평점 산정에서 제외 될 수 있습니다. </span>
             </p>
             <a href="<%=request.getContextPath() %>/restaurant/reviewWrite.do?no=<%=restDetails.getRestBizno() %>" class="btn btn-outline-warning">리뷰쓰기</a>
           </div>
@@ -279,12 +313,12 @@
 				for (int i = 0; i < restReviewList.size(); i++) {
 				  		RestaurantVO restVo = restReviewList.get(i);
 		          	%>
-		            <div class="col-lg-6">
+		            <div class="col-lg-4">
 		              <div class="food-list ">
 		                <h6 class="mb-3 d-flex justify-content-between align-items-center">
 		                  <span>
-		                    <img src="/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-		                    <div class="d-flex flex-column ps-2 gap-2">
+		                    <!-- <img src="/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt=""> -->
+		                    <div class="d-flex flex-column gap-2">
 		                      <small><%=restVo.getNickName() %></small>
 		                      <small class="stars mb-0 d-flex gap-2">
 		                        <span class="gap-0">
@@ -319,23 +353,26 @@
 		                  <small class="day"><%=restVo.getReviewDate() %></small>
 		                </h6>
 		                <p> <%=restVo.getReviewText() %> </p>
+		                <%
+		                if( restVo.getFileNo() > 0 ){
+		                %>
 		                <div class="d-flex justify-content-between overflow-x-scroll">
-		                  <div class="col-lg-4 col-md-6 col-12 p-1">
-		                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
-		                  </div>
-		                  <div class="col-lg-4 col-md-6 col-12 p-1">
-		                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
-		                  </div>
-		                  <div class="col-lg-4 col-md-6 col-12 p-1">
+		                  <div class="col p-1">
 		                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
 		                  </div>
 		                </div>
+		                <% } %>
 		                <hr>
-		                <!-- 
-		                <button type="button" class="btn btn-secondary btn-sm">
-		                  <span>00님 맛집 </span>리스트 더보기 
-		                </button>
-		                 -->
+		                <div class="d-flex justify-content-between">
+			                <a type="button" class="btn btn-secondary btn-sm">
+			                  <span><%=restVo.getNickName() %>님 좋아요</span> 전체보기 
+			                </a>
+			                <% if(restVo.getUsersNo() == usersDetail.getUsersNo()){ %>
+			                <a type="button" class="btn btn-danger btn-sm">
+			                  삭제 
+			                </a>
+			                <% } %>
+		                </div>
 		              </div>
 		            </div>
 					<% } %>

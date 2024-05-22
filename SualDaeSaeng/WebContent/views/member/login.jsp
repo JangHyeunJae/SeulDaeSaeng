@@ -35,9 +35,9 @@
               </form>
               <hr class="mt-5">
               <div class="w-100 d-flex gap-5 text-center justify-content-center">
-                <a href="#">회원 아이디 찾기</a>
+                <a href="/findId.do">회원 아이디 찾기</a>
                 <div class="vr"></div>
-                <a href="#">회원 비밀번호 찾기</a>
+                <a href="/findPass.do">회원 비밀번호 찾기</a>
               </div>
             </div>
             <!-- End Contact Form -->

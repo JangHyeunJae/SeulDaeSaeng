@@ -7,6 +7,7 @@
 
 String uri = request.getRequestURI();
 String id = (String) session.getAttribute("usersId");
+
 %>
 
 
@@ -189,26 +190,25 @@ String id = (String) session.getAttribute("usersId");
                   <a class="dropdown-item" href="<%=request.getContextPath() %>/member/join.do">회원가입</a>
 
                 </li>
-
+                
                 <%
-	if(id != null) {
-%>
-<li>
-<a href="/logout.do">로그아웃</a>
- </li>
-<% 
-	}else{
-%>
- <li>
+				if(id != null) {
+				%>
+				<li>
+				<a href="/logout.do">로그아웃</a>
+ 				</li>
+				<% 
+				}else{
+				%>
+				<li>
                   <a class="dropdown-item" href="/login.do">로그인</a>
-
                 </li>
-<% 		
-	}
-
-
-%>
-               
+				<% 		
+				}
+				%>
+				
+				
+      
                 <!-- <li><a class="dropdown-item" href="logout.html">로그아웃</a></li><li><a class="dropdown-item" href="myPage.html"><span>정윤지</span>페이지</a></li>-->
               </ul>
             </div>

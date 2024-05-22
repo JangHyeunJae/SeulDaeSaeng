@@ -29,7 +29,7 @@ public class LoginController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		req.setCharacterEncoding("UTF-8");
 		String usersId = req.getParameter("id");
 		String usersPass = req.getParameter("pw");
 		Boolean isMemberLogin = Boolean.parseBoolean(req.getParameter("memberLogin"));

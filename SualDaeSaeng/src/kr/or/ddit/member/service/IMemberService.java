@@ -60,7 +60,9 @@ public interface IMemberService {
 
 	public String checking(String memName);
 
+	public MemberVO selectScore(String usersId);
 
-	
+	public MemberVO selectOne(String usersId);
+
 }
 

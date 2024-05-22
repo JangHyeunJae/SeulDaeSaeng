@@ -131,7 +131,7 @@
                     <div class="service-item position-relative w-100">
                       <i class="bi bi-card-list"></i>
                       <h4>
-                        <a href="" class="stretched-link">내가 쓴 리뷰</a>
+                        <a href="/myReview.do" class="stretched-link">내가 쓴 리뷰</a>
                       </h4>
                       <p>식당에 내가 남긴 리뷰를 확인하고 삭제할 수 있습니다. </p>
                     </div>

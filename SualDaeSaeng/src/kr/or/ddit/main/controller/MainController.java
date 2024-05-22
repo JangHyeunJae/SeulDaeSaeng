@@ -38,6 +38,7 @@ public class MainController extends HttpServlet{
 		List<RestaurantVO> restLikeList = restService.selectRestaurantType(cls);
 		req.setAttribute("restLikeList", restLikeList);
 		
+		System.out.println("메인 페이지 접속");
 		req.getRequestDispatcher("/views/index.jsp").forward(req, resp);
 
 	}

@@ -9,6 +9,7 @@
 
 String uri = request.getRequestURI();
 String id = (String) session.getAttribute("usersId");
+
 %>
 
 
@@ -130,6 +131,7 @@ String id = (String) session.getAttribute("usersId");
                 <!-- <img src="img/testimonials/testimonials-2.jpg" class="testimonial-img" alt=""> -->
               </button>
               <ul class="dropdown-menu">
+
                 <%
 					if(id == null) {
 				%>
@@ -153,6 +155,7 @@ String id = (String) session.getAttribute("usersId");
 					}
 				%>
                
+
                 <!-- <li><a class="dropdown-item" href="logout.html">로그아웃</a></li><li><a class="dropdown-item" href="myPage.html"><span>정윤지</span>페이지</a></li>-->
               </ul>
             </div>

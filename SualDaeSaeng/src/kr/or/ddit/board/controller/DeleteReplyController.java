@@ -22,6 +22,10 @@ public class DeleteReplyController extends HttpServlet {
 
 		int boardNo = Integer.parseInt(req.getParameter("boardNo"));
 		int levelChk = Integer.parseInt(req.getParameter("levelChk"));
+		int classBoardChk = 0;
+		if(req.getParameter("classBoardChk")!=null) {
+			classBoardChk = Integer.parseInt(req.getParameter("classBoardChk"));
+		}
 		int idx = Integer.parseInt(req.getParameter("idx"));
 		int replyNo = Integer.parseInt(req.getParameter("replyNo"));
 
@@ -29,8 +33,12 @@ public class DeleteReplyController extends HttpServlet {
 		if (status > 0) { // 성공
 			String msg = "정상적으로 삭제되었습니다.";
 			req.getSession().setAttribute("msg", msg);
-			resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx
-					+ "&levelChk=" + levelChk);
+			if(classBoardChk != 0) {
+				resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk
+						+ "&classBoardChk=" + classBoardChk);
+			}else {
+				resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk);
+			}
 		} else { // 실패
 			req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
 		}

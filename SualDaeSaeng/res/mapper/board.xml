@@ -94,7 +94,7 @@
 		where b.users_no = m.users_no
 		and b.board_yn = 'Y'
 		and b.board_level &lt; 300
-	    <if test='searchOption == null or searchOption.equals("null") or searchOption.equals("")'>
+	    <if test='searchOption != "title" and searchOption != "content" and searchOption != "nickname" '>
 	      and (
 	        b.board_title like '%' || #{searchText} || '%'
 	        or b.board_con like '%' || #{searchText} || '%'
@@ -149,6 +149,14 @@
 	  	from board
 	  	where board_level =#{boardLevel} and board_yn = 'Y'
 	  	order by board_no desc
+</select>
+
+<select id="selectClassBoardList" parameterType="int" resultMap="boardMap">
+		select *
+	  	from board a, users b
+	  	where board_level =304 and board_yn = 'Y'
+        and a.users_no = b.users_no
+	  	order by case when b.users_role = 1 then 0 else 1 end, a.board_no desc
 </select>
 
 <select id="getWriterDetail" parameterType="Map" resultMap="memberMap">
@@ -299,9 +307,6 @@
 		where b.users_no = m.users_no and b.users_no = u.users_no
 		and b.board_yn = 'Y'
 		and b.board_level = ${level}
-		<if test='boardDiv.equals("class")'>
-        and u.users_role != 1
-		</if>
 		<if test='boardDiv.equals("notice")'>
         and u.users_role = 1
 		</if>

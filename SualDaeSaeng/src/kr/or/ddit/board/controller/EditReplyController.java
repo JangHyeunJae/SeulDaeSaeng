@@ -33,7 +33,11 @@ public class EditReplyController extends HttpServlet{
 		int boardNo = Integer.parseInt(req.getParameter("boardNo"));		
 		int idx = Integer.parseInt(req.getParameter("idx"));
 		int replyNo = Integer.parseInt(req.getParameter("replyNo"));
-
+		int classBoardChk = 0;
+		if(req.getParameter("classBoardChk")!=null) {
+			classBoardChk = Integer.parseInt(req.getParameter("classBoardChk"));
+		}
+		
 		Map<String,Object> parameter = new HashMap<>();
 		parameter.put("replyCon", replyCon);
 		parameter.put("replyNo", replyNo);
@@ -42,7 +46,12 @@ public class EditReplyController extends HttpServlet{
 		if(status > 0) { 	// 성공
 			String msg = "정상적으로 수정되었습니다.";
 			req.getSession().setAttribute("msg", msg);
-			resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk);
+			if(classBoardChk != 0) {
+				resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk
+						+ "&classBoardChk=" + classBoardChk);
+			}else {
+				resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk);
+			}
 		}else {				// 실패
 			req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
 		}

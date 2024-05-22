@@ -13,6 +13,9 @@
     List<BoardVO> boardList = (List<BoardVO>)request.getAttribute("boardList");
     int usersRole = (int)session.getAttribute("usersRole");
     
+    String msg = session.getAttribute("msg") == null ? "" : (String) session.getAttribute("msg");
+    session.removeAttribute("msg");
+    
     String board = null;
     if(classBoardChk == 1){
     	board = "eachClassNotice";
@@ -28,10 +31,15 @@
     int startIndex = (currentPage - 1) * itemsPerPage;
     int endIndex = Math.min(startIndex + itemsPerPage, totalItems);
     
-	// 검색
+	// 검색 옵션 선택
     String option = null;
     if(request.getAttribute("searchOption") != null){
-    	option = (String)request.getAttribute("searchOption");
+       option = (String)request.getAttribute("searchOption");
+    }
+    // 검색 텍스트
+    String searchTxt = null;
+    if(request.getAttribute("searchText") != null){
+    	searchTxt = (String)request.getAttribute("searchText");
     }
 %>
 <main>
@@ -114,16 +122,27 @@
 					<%
 						if(option == null){
 					%>
-						<form action="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>" method="post" role="form" id="searchForm">
+						<form action="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>" method="get" role="form" id="searchForm">
 					<%
 						}else{
 					%>
-						<form action="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=<%=option %>" method="post" role="form" id="searchForm">
+						<form action="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=<%=option %>" method="get" role="form" id="searchForm">
 					<%
 						}
 					%>
+					<%
+               	  		if(searchTxt != null){
+               		%>
+               			<input type="text" id="searchText" name="searchText" value=<%=searchTxt%> class="form-control"
+                     		aria-label="Text input with dropdown button" >
+					<%
+               	  		}else{
+               		%>
 						<input type="text" id="searchText" name="searchText" class="form-control"
 							aria-label="Text input with dropdown button" >
+               		<%
+               	  		}
+                	%>
 					</form>
 				</div>
 			</div>
@@ -140,7 +159,7 @@
 							BoardVO bv = boardList.get(i);
 				%>
 					<a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>
-					&idx=<%=idx %>&levelChk=<%=bv.getBoardLevel() %>&editReply=<%=-1 %>&classBoardChk=<%=classBoardChk %>" class="list-group-item">
+					&idx=<%=idx %>&levelChk=<%=bv.getBoardLevel() %>&classBoardChk=<%=classBoardChk %>" class="list-group-item">
 						<div class="d-flex w-100 justify-content-between align-items-center">
 							<h5 class="mb-2 text-truncate">
 								<small class="attach"><i class="bi bi-paperclip"></i></small>
@@ -183,14 +202,27 @@
             <% } %>
         </ul>
            </nav>
+           <%
+           	if(classBoardChk != 1 || (classBoardChk == 1 && usersRole == 1)){
+           %>
 			<div class="container d-flex align-items-center justify-content-end pb-5 gap-2 p-0">
-			<a href="<%= request.getContextPath() %>/board/write.do?levelChk=<%=levelChk %>&idx=0" type="button" class="btn btn-outline-warning">글쓰기</a>
+			<a href="<%= request.getContextPath() %>/board/write.do?levelChk=<%=levelChk %>&classBoardChk=<%=classBoardChk %>" type="button" class="btn btn-outline-warning">글쓰기</a>
 			</div>
+			<%
+			}
+			%>
 		</div>
 	</section>
 </main>
 
 <script type="text/javascript">
+	
+	window.onload = function() {
+	    var msg = '<%= msg %>';
+	    if(msg != null && msg != '') alert(msg);
+	 
+	 };
+
     var buttons = document.querySelectorAll('.cta-btn');
 
     // 페이지 로드될 때 현재 URL을 확인하여 해당 버튼의 스타일을 변경

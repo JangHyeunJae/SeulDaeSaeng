@@ -134,7 +134,7 @@
               <div class="service-item position-relative">
                 <i class="bi bi-card-list"></i>
                 <h4>
-                  <a href="" class="stretched-link">자유게시판</a>
+                  <a href="<%=request.getContextPath()%>/freeBoard.do" class="stretched-link">자유게시판</a>
                 </h4>
                 <p>대덕인재개발원이면 누구나 어떤 주제로도 자유롭게 게시글을 작성할 수 있습니다. 지금 한번 작성해 보세요!</p>
               </div>
@@ -144,7 +144,7 @@
               <div class="service-item position-relative">
                 <i class="bi bi-highlighter"></i>
                 <h4>
-                  <a href="" class="stretched-link">공부게시판</a>
+                  <a href="<%=request.getContextPath()%>/studyBoard.do" class="stretched-link">공부게시판</a>
                 </h4>
                 <p>공부에 도움이되는 자료나 사이트등을 공유해보세요! 혹은 잘 안풀리는 코드나 이해가 안되는 내용을 올려 도움을 받아보세요!</p>
               </div>
@@ -154,7 +154,7 @@
               <div class="service-item position-relative">
                 <i class="bi bi-collection"></i>
                 <h4>
-                  <a href="" class="stretched-link">학급별 게시판</a>
+                  <a href="<%=request.getContextPath()%>/classBoard.do" class="stretched-link">학급별 게시판</a>
                 </h4>
                 <p> 학급별 시간표, 채팅방, 게시판을 통해 교류를 해보세요. 과제제출 및 관리 파일공유도 가능합니다.</p>
               </div>

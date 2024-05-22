@@ -733,4 +733,23 @@ public class BoardDaoImpl implements IBoardDao {
 		return submit;
 	}
 
+	@Override
+	public List<BoardVO> selectClassBoardList(int levelChk) {
+		
+		List<BoardVO> boardList = new ArrayList<BoardVO>();
+
+		SqlSession session = null;
+
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			boardList = session.selectList("board.selectClassBoardList", levelChk);
+
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return boardList;
+	}
+
 }

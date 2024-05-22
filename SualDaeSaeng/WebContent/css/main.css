@@ -2836,6 +2836,14 @@ form.file-drop button:active{
   box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
 }
 
+/* 반별게시판 뒤로가기 */
+.backbtn{
+	color: var(--color-gray-400);
+}
+.backbtn:hover {
+	color: var(--color-orange-900);
+}
+
 /*--------------------------------------------------------------
 .Footer
 --------------------------------------------------------------*/

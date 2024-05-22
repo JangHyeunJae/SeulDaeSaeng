@@ -29,7 +29,7 @@
   List<StoryVO> storyList = (List<StoryVO>)request.getAttribute("storyList"); 
 %>
 
-    <main data-aos="fade" data-aos-delay="1500">
+    <main data-aos="fade" data-aos-delay="700">
       <!-- ======= food Recommendation ======= -->
       <section id="food">
         <div id="textAmin"> 오늘은 <div id=flip>

@@ -11,7 +11,7 @@
 	List<RestaurantVO> restReviewList = (List<RestaurantVO>) request.getAttribute("restReviewList");
 %>
 
-    <main data-aos="fade" data-aos-delay="1500">
+    <main data-aos="fade" data-aos-delay="700">
       <!-- ======= End Page Header ======= -->
       <div class="page-header restaurant d-flex align-items-center">
         <div class="container position-relative">

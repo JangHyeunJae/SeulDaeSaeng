@@ -13,7 +13,7 @@
       </div>
     </div>
     <!-- End Header -->
-    <main data-aos="fade" data-aos-delay="1500" class="aos-init aos-animate">
+    <main data-aos="fade" data-aos-delay="700" class="aos-init aos-animate">
       <section id="teacherIntro" class="container pt-0 pb-0">
         <div class="row gy-4 justify-content-center">
         <%

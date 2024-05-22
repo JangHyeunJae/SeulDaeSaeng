@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/header.jsp" %>
-<main class="pb-5 mb-5" data-aos="fade" data-aos-delay="1500">
+<main class="pb-5 mb-5" data-aos="fade" data-aos-delay="700">
     <div class="page-header d-flex align-items-center">
         <div class="container position-relative">
             <div class="row d-flex justify-content-center">

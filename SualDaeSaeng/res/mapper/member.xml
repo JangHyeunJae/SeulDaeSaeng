@@ -119,8 +119,9 @@
        where USERS_ID = #{usersId}
    </update>
    
-   <select id="memBoardList" parameterType="String" >
-   
+   <select id="memberBoardList" parameterType="int" resultMap="boardMap">
+   		select * from BOARD where USERS_NO = #{usersNo} AND BOARD_YN = 'Y'
+		 order by BOARD_NO desc
    </select>
   
 	<select id="getMemDetail" parameterType="String" resultMap="memMap">

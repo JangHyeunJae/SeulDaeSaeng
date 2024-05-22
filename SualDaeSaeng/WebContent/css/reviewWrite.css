@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+label.form-check-label {
+    position: relative;
+    width: 23px;
+    height: 28px;
+}
+
+label.form-check-label I {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 23px;
+    height: 28px;
+    transition: opacity 0.3s;
+    cursor: pointer;
+}
+label.form-check-label i.bi.bi-star-fill {
+    opacity: 0;
+}
+label.form-check-label:hover i.bi.bi-star-fill,
+label.form-check-label:hover ~ label i.bi.bi-star-fill{
+    opacity: 0.6;
+	
+}
+.form-check-input[type=radio]:checked~.form-check-label i.bi.bi-star-fill {
+    opacity: 1;
+}
+
+.starBox{
+
+	flex-direction: row-reverse;
+    justify-content: flex-end;
+}

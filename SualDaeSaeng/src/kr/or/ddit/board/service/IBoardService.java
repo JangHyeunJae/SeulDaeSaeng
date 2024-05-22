@@ -1,5 +1,6 @@
 package kr.or.ddit.board.service;
 
+import java.time.LocalTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import kr.or.ddit.board.vo.FileShareVO;
 import kr.or.ddit.board.vo.HomeworkVO;
 import kr.or.ddit.board.vo.HwSubmitVO;
 import kr.or.ddit.board.vo.ReplyVO;
+import kr.or.ddit.board.vo.StoryVO;
 import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.member.vo.UsersVO;
 
@@ -83,4 +85,11 @@ public interface IBoardService {
 
   public List<FileDetailVO> mySubmit(Map<String, Object> parameter2);
 
+  public int insertStory(StoryVO storyVO);
+
+  public List<StoryVO> getStoryList(int usersNo);
+  
+  public String getStoryTime(int storyNo);
+  
+  public StoryVO getStoryOne(int storyNo);
 }

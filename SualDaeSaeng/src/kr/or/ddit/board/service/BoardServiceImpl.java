@@ -2,6 +2,7 @@ package kr.or.ddit.board.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import kr.or.ddit.board.vo.FileShareVO;
 import kr.or.ddit.board.vo.HomeworkVO;
 import kr.or.ddit.board.vo.HwSubmitVO;
 import kr.or.ddit.board.vo.ReplyVO;
+import kr.or.ddit.board.vo.StoryVO;
 import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.member.vo.UsersVO;
 
@@ -235,5 +237,25 @@ public class BoardServiceImpl implements IBoardService{
 	@Override
 	public List<FileDetailVO> mySubmit(Map<String, Object> parameter2) {
 		return boardDao.mySubmit(parameter2);
+	}
+
+	@Override
+	public int insertStory(StoryVO storyVO) {
+		return boardDao.insertStory(storyVO);
+	}
+
+	@Override
+	public List<StoryVO> getStoryList(int usersNo) {
+		return boardDao.getStoryList(usersNo);
+	}
+
+	@Override
+	public String getStoryTime(int storyNo) {
+		return boardDao.getStoryTime(storyNo);
+	}
+
+	@Override
+	public StoryVO getStoryOne(int storyNo) {
+		return boardDao.getStoryOne(storyNo);
 	}
 }

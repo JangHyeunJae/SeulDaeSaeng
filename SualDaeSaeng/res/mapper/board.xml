@@ -80,6 +80,15 @@
 <result column="users_no" property="usersNo"/>
 </resultMap>
 	 
+<resultMap type="kr.or.ddit.board.vo.StoryVO" id="storyMap"> <!-- 1 -->
+<result column="story_no" property="storyNo"/>
+<result column="story_con" property="storyCon"/>
+<result column="story_yn" property="storyYn"/>
+<result column="story_at" property="storyAt"/>
+<result column="file_no" property="fileNo"/>
+<result column="users_no" property="usersNo"/>
+</resultMap>
+
 <select id="allBoardList" resultMap="boardMap">
 		select *
         from board
@@ -357,6 +366,36 @@
 	    from hw_submit a, file_detail b
 	    where a.hw_No = #{hwNo} and a.users_No = #{usersNo} and a.file_No = b.file_No 
 	    order by b.file_no desc
+</select>
+
+<insert id="insertStory" parameterType="kr.or.ddit.board.vo.StoryVO" useGeneratedKeys="true">
+	<selectKey keyProperty="storyNo" resultType="int" order="BEFORE">
+		select seq_story.nextval from dual
+	</selectKey>
+	    insert into story(
+		   story_no, story_con, story_yn, story_at, file_no, users_no
+	    )values(
+		   #{storyNo}, #{storyCon}, 'Y', sysdate, #{fileNo}, #{usersNo}
+	    )
+</insert>
+
+<select id="getStoryList" parameterType="int" resultMap="storyMap">
+	    select *
+	    from story
+	    where users_no=#{usersNo}
+	    order by story_no desc
+</select>
+
+<select id="getStoryTime" parameterType="int" resultType="String">
+select to_char(story_at, 'yyyy-MM-dd HH24:MI:SS')
+from story
+where story_no = #{storyNo}
+</select>
+
+<select id="getStoryOne" parameterType="int" resultMap="storyMap">
+	    select *
+	    from story
+	    where story_no=#{storyNo}
 </select>
 
 </mapper>

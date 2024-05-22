@@ -97,4 +97,6 @@ public interface IBoardService {
 
   public MemberVO writerDetail(int boardNo);
 
+  public List<BoardVO> getMemberBoardReply(int usersNo);
+
 }

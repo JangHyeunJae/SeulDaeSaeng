@@ -268,4 +268,9 @@ public class BoardServiceImpl implements IBoardService{
 	public MemberVO writerDetail(int boardNo) {
 		return boardDao.writerDetail(boardNo);
 	}
+
+	@Override
+	public List<BoardVO> getMemberBoardReply(int usersNo) {
+		return boardDao.getMemberBoardReply(usersNo);
+	}
 }

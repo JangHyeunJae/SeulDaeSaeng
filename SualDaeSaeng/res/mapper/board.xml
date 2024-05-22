@@ -403,4 +403,15 @@ where story_no = #{storyNo}
 	    where story_no=#{storyNo}
 </select>
 
+<select id="getMemberBoardReply" parameterType="int" resultType="list">
+	select DISTINCT(BOARD_NO) as BOARD_NO from REPLY 
+    where USERS_NO = #{usersNo}
+    order by BOARD_NO desc
+</select>
+
+<select id="getMemberBoardOne" parameterType="int" resultMap="boardMap">
+	select * from BOARD_NO 
+	where BOARD_NO = #{boardNo}
+</select>
+
 </mapper>

@@ -99,4 +99,6 @@ public interface IBoardDao {
 
 	public MemberVO writerDetail(int boardNo);
 
+	public List<BoardVO> getMemberBoardReply(int usersNo);
+
 }

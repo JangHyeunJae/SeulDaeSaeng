@@ -65,15 +65,7 @@ public class MemberServiceImpl implements IMemberService{
 	public AddressVO selectAddr(int addrNo) {
 		return memberDao.selectAddr(addrNo);
 	}
-	@Override
 
-	public MemberVO getMemDetail(String usersId) {
-		return memberDao.getMemDetail(usersId);
-	}
-	@Override
-	public UsersVO getUsersDetail(String usersId) {
-		return memberDao.getUsersDetail(usersId);
-	}
 	@Override
 	public String checkFindId(MemberVO memberVO) {
 		return memberDao.checkFindId(memberVO);
@@ -85,7 +77,8 @@ public class MemberServiceImpl implements IMemberService{
 	@Override
 	public String checking(String memName) {
 		return memberDao.checking(memName);
-
+	}	
+	@Override		
 	public int addrModify(AddressVO addrVo) {
 		return memberDao.addrModify(addrVo);
 	}
@@ -104,6 +97,8 @@ public class MemberServiceImpl implements IMemberService{
 	@Override
 	public List<BoardVO> memberBoardList(int usersNo) {
 		return memberDao.memberBoardList(usersNo);
+	}
+	@Override
 	public MemberVO getMemDetail(String usersId) {
 		return memberDao.getMemDetail(usersId);
 	}

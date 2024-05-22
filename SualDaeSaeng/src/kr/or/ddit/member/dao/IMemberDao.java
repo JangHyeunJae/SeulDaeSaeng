@@ -4,7 +4,7 @@ package kr.or.ddit.member.dao;
 import java.util.List;
 import java.util.Map;
 
-
+import kr.or.ddit.board.vo.BoardVO;
 import kr.or.ddit.member.vo.AddressVO;
 import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.member.vo.UsersVO;
@@ -29,11 +29,19 @@ public interface IMemberDao {
 
 	public AddressVO selectAddr(int addrNo);
 
+	public int addrModify(AddressVO addrVo);
 
+	public int memberModify(MemberVO memberVo);
+
+	public int memberUnregister(String usersId);
+
+	public int pwModify(Map<String, String> pwModifyMap);
+
+	public List<BoardVO> memberBoardList(int usersNo);
+	
 	public MemberVO getMemDetail(String usersId);
 
 	public UsersVO getUsersDetail(String usersId);
-
 
 	public String checkFindId(MemberVO memberVO);
 	

@@ -205,9 +205,12 @@ $(function() {
 			id.next().css("display", "block");
  			return false;
  		} 
-		if(!pwreg.test(pw.val())) return false;
+		if(!pwreg.test(pw.val())) {
+			alert("비밀번호 형식이 틀렸습니다.")
+			return false;
+		}
 		if(pw.val() != pwChk.val()) {
-			alert("비밀번호 중복확인 실패");			
+			alert("비밀번호 중복확인 실패했습니다.");			
 			return false;
 		}
 		if(name.val() == "") return false;

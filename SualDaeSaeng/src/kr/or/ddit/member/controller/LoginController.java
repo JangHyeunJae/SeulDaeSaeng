@@ -43,7 +43,8 @@ public class LoginController extends HttpServlet {
 
 		if (isSuccess) {
 			System.out.println("로그인성공");
-			req.getSession().setAttribute("usersId", usersId); // ���ǿ� ��� �ֱ�
+			req.getSession().setAttribute("usersId", usersId); // 
+			req.getSession().setAttribute("usersPass", usersPass); // usersPass 담김
 			resp.sendRedirect(req.getContextPath() + "/views/index.jsp");
 		} else {
 			JsonObject jsonObject = new JsonObject();

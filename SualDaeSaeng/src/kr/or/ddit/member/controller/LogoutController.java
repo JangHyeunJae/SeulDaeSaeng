@@ -21,8 +21,8 @@ public class LogoutController extends HttpServlet{
 			session.removeAttribute("usersId");
 		}
 		
-		resp.sendRedirect("/views/index.jsp");
 		session.invalidate();
+		resp.sendRedirect("/views/index.jsp");
 	}
 
 	@Override

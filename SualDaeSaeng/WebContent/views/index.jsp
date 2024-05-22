@@ -567,7 +567,7 @@
         <div class="container">
           <div class="section-header">
             <h2>restaurant</h2>
-            <p class="d-flex justify-content-between align-items-center"> 최신 리뷰 <button type="button" class="btn btn-outline-warning btn-sm">리뷰많은 식당보기</button>
+            <p class="d-flex justify-content-between align-items-center"> 최신 리뷰 <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls=all&order=likeUp" class="btn btn-outline-warning btn-sm">별점높은 식당보기</a>
             </p>
           </div>
           <div class="slides-3 swiper">

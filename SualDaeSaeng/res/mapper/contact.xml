@@ -22,6 +22,7 @@
 
 
 
+
 <select id="selectContactList" resultMap="contactMap">
 	select 
 		Q_NO,
@@ -40,22 +41,21 @@
 
 </select>
 
-	<select id="detailList" parameterType="int" resultMap="contactMap">
-		select
-			*
-		from question
-		where Q_NO = #{qNO}
-	</select>
-
-   <resultMap type="kr.or.ddit.contact.vo.ContactVO" id="contactMap">
-        <result property="qNO" column="Q_NO"/>
-        <result property="qTitle" column="Q_TITLE"/>
-        <result property="qCon" column="Q_CON"/>
-        <result property="qAt" column="Q_AT"/>
-        <result property="usersNo" column="USERS_NO"/>
-        <result property="qEmail" column="Q_EMAIL"/>
-        <result property="qYn" column="Q_YN"/>
-    </resultMap>
+<select id="detailList" parameterType="int" resultMap="contactMap">
+	select
+		*
+	from question
+	where Q_NO = #{qNO}
+</select>
+<resultMap type="kr.or.ddit.contact.vo.ContactVO" id="contactMap">
+     <result property="qNO" column="Q_NO"/>
+     <result property="qTitle" column="Q_TITLE"/>
+     <result property="qCon" column="Q_CON"/>
+     <result property="qAt" column="Q_AT"/>
+     <result property="usersNo" column="USERS_NO"/>
+     <result property="qEmail" column="Q_EMAIL"/>
+     <result property="qYn" column="Q_YN"/>
+ </resultMap>
 
 
 

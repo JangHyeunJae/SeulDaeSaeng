@@ -7,14 +7,15 @@ import java.util.List;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 
+import kr.or.ddit.member.vo.AddressVO;
 import kr.or.ddit.member.vo.MemberVO;
+import kr.or.ddit.member.vo.UsersVO;
 import kr.or.ddit.util.MyBatisUtil;
 
 
 public class MemberDaoImpl implements IMemberDao {
 
-	// �̱�������
-	public static IMemberDao instance = null;
+	private static IMemberDao instance;
 
 	private MemberDaoImpl() {
 	}
@@ -25,36 +26,30 @@ public class MemberDaoImpl implements IMemberDao {
 		return instance;
 	}
 
-	/**
-	 * �α��� üũ�� ���� �޼���
-	 * 
-	 * @param memberVO
-	 * @return �α��� ��������
-	 */
-	public boolean loginCheck(MemberVO memberVO, boolean isMemberLogin) {
+
+	public boolean loginCheck(MemberVO memberVO, boolean isMemberLogin) throws PersistenceException {
 
 		boolean isSuccess = false;
-		SqlSession session = kr.or.ddit.util.MyBatisUtil.getSqlSession();
+		SqlSession session = MyBatisUtil.getSqlSession(true);
 		MemberVO result = null;
 
-		try {
+//		try {
 
 			if (isMemberLogin) {
 				result = session.selectOne("member.memberCheck", memberVO);
 			} else if (isMemberLogin == false) {
 				result = session.selectOne("member.loginCheck", memberVO);
 			}
-
 			if (result != null) {
 				isSuccess = true;
 			}
 
-		} catch (PersistenceException e) {
-			e.printStackTrace();
-			session.rollback();
-		} finally {
-			session.close();
-		}
+//		} catch (PersistenceException e) {
+//			e.printStackTrace();
+//			session.rollback();
+//		} finally {
+//			session.close();
+//		}
 
 		return isSuccess;
 	}
@@ -68,7 +63,7 @@ public class MemberDaoImpl implements IMemberDao {
 	@Override
 	public String forgotPass(MemberVO memberVO) {
 
-		SqlSession session = MyBatisUtil.getSqlSession();
+		SqlSession session = MyBatisUtil.getSqlSession(true);
 
 		String usersPass = null;
 
@@ -90,7 +85,7 @@ public class MemberDaoImpl implements IMemberDao {
 		return usersPass;
 	}
 
-  @Override
+	@Override
 	public int memberIdChk(String usersId) {
 		
 		SqlSession session = null;
@@ -109,6 +104,223 @@ public class MemberDaoImpl implements IMemberDao {
 		
 		return cnt;
 	}
-  
-}
 
+	@Override
+	public int usersJoin(UsersVO usersVo) {
+		
+		SqlSession session = null;
+		int usersCnt = -1;
+		
+		try {
+			session = MyBatisUtil.getSqlSession();
+			usersCnt = session.insert("member.usersJoin", usersVo);
+			System.out.println("마이바티스 끝 usersJoin 인서트 => " + usersCnt);
+			if (usersCnt > 0) {
+				session.commit();
+			}
+
+		} catch (PersistenceException ex) {
+			session.rollback();
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+		return usersCnt;
+	}
+
+	@Override
+	public int addrJoin(AddressVO addrVo) {
+		
+		SqlSession session = null;
+		int addrCnt = -1;
+		
+		try {
+			session = MyBatisUtil.getSqlSession();
+			addrCnt = session.insert("member.addrJoin", addrVo);
+			System.out.println("마이바티스 끝 addrJoin 인서트 => " + addrCnt);
+			if (addrCnt > 0) {
+				session.commit();
+			}
+
+		} catch (PersistenceException ex) {
+			session.rollback();
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+		return addrCnt;
+	}
+
+	@Override
+	public int memberJoin(MemberVO memberVo) {
+		
+		SqlSession session = null;
+		int memberCnt = -1;
+		
+		try {
+			session = MyBatisUtil.getSqlSession();
+			memberCnt = session.insert("member.memberJoin", memberVo);
+			System.out.println("마이바티스 끝 memberJoin 인서트 => " + memberCnt);
+			if (memberCnt > 0) {
+				session.commit();
+			}
+
+		} catch (PersistenceException ex) {
+			session.rollback();
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+		return memberCnt;
+	}
+
+	@Override
+	public UsersVO selectUsers(String usersId) {
+		
+		SqlSession session = null;
+		UsersVO usersVo = null;
+		
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			usersVo = session.selectOne("member.selectUsers", usersId);
+
+		} catch (PersistenceException ex) {
+			session.rollback();
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return usersVo;
+	}
+
+	@Override
+	public MemberVO selectMember(int usersNo) {
+		SqlSession session = null;
+		MemberVO memberVo = null;
+		
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			memberVo = session.selectOne("member.selectMember", usersNo);
+
+		} catch (PersistenceException ex) {
+			session.rollback();
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return memberVo;
+	}
+
+	@Override
+	public AddressVO selectAddr(int addrNo) {
+		SqlSession session = null;
+		AddressVO addrVo = null;
+		
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			addrVo = session.selectOne("member.selectAddr", addrNo);
+
+		} catch (PersistenceException ex) {
+			session.rollback();
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return addrVo;
+	}
+
+	//추가_길도연
+	@Override
+	public MemberVO getMemDetail(String usersId) {
+		
+		SqlSession session = null;
+		MemberVO memDetail = null;
+		
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			memDetail = session.selectOne("member.getMemDetail", usersId);
+		} catch (PersistenceException ex) {
+			session.rollback();
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return memDetail;
+	}
+
+	@Override
+	public UsersVO getUsersDetail(String usersId) {
+		
+		SqlSession session = null;
+		UsersVO usersDetail = null;
+		
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			usersDetail = session.selectOne("member.getUsersDetail", usersId);
+		} catch (PersistenceException ex) {
+			session.rollback();
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return usersDetail;
+	}
+	
+	@Override
+	public String checkFindId(MemberVO memberVO) {
+		
+		SqlSession session = null;
+		String memberIdInfo = null;
+		
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			memberIdInfo = session.selectOne("member.checkFindId", memberVO);
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return memberIdInfo;
+	}
+  
+	@Override
+	public String checkFindPw(MemberVO memberVO) {
+		
+		SqlSession session = null;
+		String memberPwInfo = null;
+		
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			memberPwInfo = session.selectOne("member.checkFindPw", memberVO);
+		} catch (PersistenceException ex) {
+			session.rollback();
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return memberPwInfo;
+	}
+
+	@Override
+	public String checking(String memName) {
+		
+		SqlSession session = null;
+		String name = null;
+		
+		try {
+			session = MyBatisUtil.getSqlSession();
+			name = session.selectOne("member.checking", memName);
+
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			 if (session != null) {
+		            session.close();
+		        }
+		}
+		return name;
+	}
+}

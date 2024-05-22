@@ -40,7 +40,7 @@
     }
 %>
 
-<main>
+<main data-aos="fade" data-aos-delay="700">
     <div class="page-header sub d-flex align-items-center">
         <div class="container position-relative">
             <div class="row d-flex justify-content-center">

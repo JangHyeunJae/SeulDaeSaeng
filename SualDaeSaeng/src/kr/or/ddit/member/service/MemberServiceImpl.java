@@ -107,5 +107,15 @@ public class MemberServiceImpl implements IMemberService{
 		return memberDao.getUsersDetail(usersId);
 
 	}
+	@Override
+	public MemberVO selectScore(String usersId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public MemberVO selectOne(String usersId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 

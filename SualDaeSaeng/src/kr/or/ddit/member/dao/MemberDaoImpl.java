@@ -336,7 +336,6 @@ public class MemberDaoImpl implements IMemberDao {
             session.close();
          }
       }
-      
       return memList;
    }
   

@@ -103,7 +103,7 @@
 		where b.users_no = m.users_no
 		and b.board_yn = 'Y'
 		and b.board_level &lt; 300
-	    <if test='searchOption != "title" and searchOption != "content" and searchOption != "nickname" '>
+	    <if test='searchOption == "all"'>
 	      and (
 	        b.board_title like '%' || #{searchText} || '%'
 	        or b.board_con like '%' || #{searchText} || '%'
@@ -128,10 +128,10 @@
 		where b.users_no = m.users_no
 		and b.board_yn = 'Y'
 		and board_level = #{boardLevel}
-	    <if test='searchOption == null or searchOption.equals("null") or searchOption.equals("")'>
+	    <if test='searchOption == "all"'>
 	      and (
 	        b.board_title like '%' || #{searchText} || '%'
-	        or b.board_con like '%' || #{searchText} || '%'
+	        or b.board_con like '%' || #{searchText} || '%' 
 	        or m.mem_nick like '%' || #{searchText} || '%'
 	      )
 	    </if>
@@ -142,7 +142,7 @@
 	      and b.board_con like '%' || #{searchText} || '%'
 	    </if>
 	    <if test='searchOption == "nickname"'>
-	      and m.mem_nick like '%' || #{searchText} || '%'
+	      and m.mem_nick like '%' || #{searchText} || '%' 
 	    </if>
 		order by case when b.board_level = 3 then 0 else 1 end, b.board_no desc
 </select>
@@ -319,7 +319,7 @@
 		<if test='boardDiv.equals("notice")'>
         and u.users_role = 1
 		</if>
-	    <if test='searchOption == null or searchOption.equals("null") or searchOption.equals("")'>
+	    <if test='searchOption == "all"'>
 	      and (
 	        b.board_title like '%' || #{searchText} || '%'
 	        or b.board_con like '%' || #{searchText} || '%'
@@ -335,7 +335,7 @@
 	    <if test='searchOption == "nickname"'>
 	      and m.mem_nick like '%' || #{searchText} || '%'
 	    </if>
-		order by b.board_no desc
+		order by case when u.users_role = 1 then 0 else 1 end, b.board_no desc
 </select>
 
 <insert id="insertFileShare" parameterType="kr.or.ddit.board.vo.FileShareVO" useGeneratedKeys="true">
@@ -403,4 +403,14 @@ where story_no = #{storyNo}
 	    where story_no=#{storyNo}
 </select>
 
+<update id="deleteStory" parameterType="int">
+        update story set story_yn = 'N' where story_no =#{storyNo}
+</update>
+
+<select id="allStoryList" resultMap="storyMap">
+		select *
+        from story
+        where story_yn = 'Y'
+        order by story_no desc
+</select>
 </mapper>

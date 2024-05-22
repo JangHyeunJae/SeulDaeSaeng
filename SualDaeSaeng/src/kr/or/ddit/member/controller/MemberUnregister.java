@@ -41,17 +41,6 @@ public class MemberUnregister extends HttpServlet{
 			req.setAttribute("url", url);
 			req.getRequestDispatcher("/views/alert.jsp").forward(req, resp);
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 
 	@Override

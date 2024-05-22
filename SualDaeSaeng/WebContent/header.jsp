@@ -26,12 +26,8 @@ String id = (String) session.getAttribute("usersId");
     <!-- Fonts -->
     <link rel="stylesheet" href="/css/font.css">
     
-    <script defer src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous" ></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"  ></script>
     
-    <!-- Vendor CSS Files -->
-<!--     footer34line에서 복사 -->
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-<!--     footer34line에서 복사 -->
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
@@ -42,9 +38,9 @@ String id = (String) session.getAttribute("usersId");
     <link href="/css/main.css" rel="stylesheet">
     
     <% if(request.getRequestURI().contains("index")){ %>
-      <link href="/css/index.css" rel="stylesheet">
+      	<link href="/css/index.css" rel="stylesheet">
     <% }else if(request.getRequestURI().contains("timetable")){ %>
-         <link href="/css/timetable.css" rel="stylesheet">
+      	<link href="/css/timetable.css" rel="stylesheet">
     <% }else if(request.getRequestURI().contains("write") || request.getRequestURI().contains("edit")){ %>
     	<link rel="stylesheet" href="/css/bootform2.css">  
     <% } else if(request.getRequestURI().contains("restaurantUpDate")){%>

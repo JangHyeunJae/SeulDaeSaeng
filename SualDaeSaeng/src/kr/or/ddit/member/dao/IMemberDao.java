@@ -10,7 +10,7 @@ import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.member.vo.UsersVO;
 
 public interface IMemberDao {
-	
+
 	public boolean loginCheck(MemberVO memberVO, boolean isMemberLogin);
 
 	public String forgotPass(MemberVO memberVO);
@@ -38,11 +38,16 @@ public interface IMemberDao {
 	public int pwModify(Map<String, String> pwModifyMap);
 
 	public List<BoardVO> memberBoardList(int usersNo);
-
+	
 	public MemberVO getMemDetail(String usersId);
 
 	public UsersVO getUsersDetail(String usersId);
 
+	public String checkFindId(MemberVO memberVO);
+	
+	public String checkFindPw(MemberVO memberVO);
+
+	public String checking(String memName);
 
 }
 

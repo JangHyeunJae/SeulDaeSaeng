@@ -39,7 +39,7 @@ public interface IMemberService {
 	public MemberVO selectMember(int usersNo);
 
 	public AddressVO selectAddr(int addrNo);
-
+	
 	public int addrModify(AddressVO addrVo);
 
 	public int memberModify(MemberVO memberVo);
@@ -49,10 +49,17 @@ public interface IMemberService {
 	public int pwModify(Map<String, String> pwModifyMap);
 
 	public List<BoardVO> memberBoardList(int usersNo);
-
+	 
 	public MemberVO getMemDetail(String usersId);
 
 	public UsersVO getUsersDetail(String usersId);
+
+	public String checkFindId(MemberVO memberVO);
+	
+	public String checkFindPw(MemberVO memberVO);
+
+	public String checking(String memName);
+
 
 	
 }

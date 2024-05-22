@@ -10,9 +10,11 @@ import kr.or.ddit.member.vo.AddressVO;
 import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.member.vo.UsersVO;
 
+
 public class MemberServiceImpl implements IMemberService{
 	
 	public static IMemberService instance = null;
+
 	private MemberServiceImpl() {}
 	public static IMemberService getInstance() {
 		if(instance == null) instance = new MemberServiceImpl();
@@ -20,6 +22,7 @@ public class MemberServiceImpl implements IMemberService{
 	}
 	IMemberDao memberDao = MemberDaoImpl.getInstance();
 	
+
 	@Override
 	public boolean loginCheck(MemberVO memberVO, boolean isMemberLogin) {
 		return memberDao.loginCheck(memberVO, isMemberLogin);
@@ -62,7 +65,20 @@ public class MemberServiceImpl implements IMemberService{
 	public AddressVO selectAddr(int addrNo) {
 		return memberDao.selectAddr(addrNo);
 	}
+
 	@Override
+	public String checkFindId(MemberVO memberVO) {
+		return memberDao.checkFindId(memberVO);
+	}
+	@Override
+	public String checkFindPw(MemberVO memberVO) {
+		return memberDao.checkFindPw(memberVO);
+	}
+	@Override
+	public String checking(String memName) {
+		return memberDao.checking(memName);
+	}	
+	@Override		
 	public int addrModify(AddressVO addrVo) {
 		return memberDao.addrModify(addrVo);
 	}
@@ -89,7 +105,7 @@ public class MemberServiceImpl implements IMemberService{
 	@Override
 	public UsersVO getUsersDetail(String usersId) {
 		return memberDao.getUsersDetail(usersId);
+
 	}
-  
 }
 

@@ -133,7 +133,7 @@
 	      and b.board_con like '%' || #{searchText} || '%'
 	    </if>
 	    <if test='searchOption == "nickname"'>
-	      and m.mem_nick like '%' || #{searchText} || '%'
+	      and m.mem_nick like '%' || #{searchText} || '%' 
 	    </if>
 		order by case when b.board_level = 3 then 0 else 1 end, b.board_no desc
 </select>

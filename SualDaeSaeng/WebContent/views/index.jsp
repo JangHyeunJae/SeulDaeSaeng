@@ -1,9 +1,28 @@
+<%@page import="javax.imageio.ImageIO"%>
+<%@page import="java.awt.Image"%>
+<%@page import="java.nio.charset.StandardCharsets"%>
+<%@page import="java.io.IOException"%>
+<%@page import="java.io.OutputStream"%>
+<%@page import="java.io.FileInputStream"%>
+<%@page import="java.io.File"%>
+<%@page import="java.net.URLEncoder"%>
+<%@page import="kr.or.ddit.board.vo.FileDetailVO"%>
+<%@page import="kr.or.ddit.board.service.BoardServiceImpl"%>
+<%@page import="kr.or.ddit.board.service.IBoardService"%>
+<%@page import="kr.or.ddit.board.vo.StoryVO"%>
 <%@page import="java.util.List"%>
+<%@ page import="java.net.URLEncoder" %>
 <%@page import="kr.or.ddit.restaurant.vo.RestaurantVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@include file="/header.jsp" %>
-<% List<RestaurantVO> restLikeList = (List<RestaurantVO>) request.getAttribute("restLikeList"); %>
+<%
+    IBoardService boardService = BoardServiceImpl.getInstance();
+
+    List<RestaurantVO> restLikeList = (List<RestaurantVO>) request.getAttribute("restLikeList"); 
+    List<StoryVO> storyList = (List<StoryVO>)request.getAttribute("storyList"); 
+%>
+
     <main data-aos="fade" data-aos-delay="1500">
       <!-- ======= food Recommendation ======= -->
       <section id="food">
@@ -50,7 +69,7 @@
         </div>
       </section>
       <!-- End #food -->
-      <% if(id!=null && !id.isEmpty()){ %>
+       <% if(id!=null && !id.isEmpty()){ %>
       <!-- ======= story Recommendation ======= -->
       <section id="story">
         <div class="container-fluid">
@@ -63,60 +82,17 @@
           <div class="position-relative ">
             <div class="slides-story portfolio-details-slider swiper">
               <div class="swiper-wrapper align-items-center gallery">
-                <div class="swiper-slide gallery-item">
-                  <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
-                  <p>오늘 날씨 좋은데?</p>
-                  <div class="gallery-links d-flex align-items-center justify-content-center">
-                    <a href="img/gallery/gallery-1.jpg" data-title="오늘 날씨 좋은데?" class="glightbox preview-link">
-                      <i class="bi bi-arrows-angle-expand"></i>
-                    </a>
-                  </div>
+              <%
+              for(StoryVO story : storyList){
+            	  FileDetailVO img = boardService.getFileDetail(story.getFileNo());
+              %>
+                <div class="swiper-slide">
+                  <img src="<%= request.getContextPath() %>/file/download.do?fileNo=<%=img.getFileNo() %>" class="img-fluid" alt="">
+                  <p><%=story.getStoryCon() %></p>
                 </div>
-                <div class="swiper-slide gallery-item">
-                  <img src="/img/gallery/gallery-2.jpg" class="img-fluid" alt="">
-                  <p>오늘 날씨 좋은데?</p>
-                  <div class="gallery-links d-flex align-items-center justify-content-center">
-                    <a href="img/gallery/gallery-2.jpg" data-title="오늘 날씨 좋은데?" class="glightbox preview-link">
-                      <i class="bi bi-arrows-angle-expand"></i>
-                    </a>
-                  </div>
-                </div>
-                <div class="swiper-slide gallery-item">
-                  <img src="/img/gallery/gallery-3.jpg" class="img-fluid" alt="">
-                  <p>오늘 날씨 좋은데?</p>
-                  <div class="gallery-links d-flex align-items-center justify-content-center">
-                    <a href="img/gallery/gallery-3.jpg" data-title="오늘 날씨 좋은데?" class="glightbox preview-link">
-                      <i class="bi bi-arrows-angle-expand"></i>
-                    </a>
-                  </div>
-                </div>
-                <div class="swiper-slide gallery-item">
-                  <img src="/img/gallery/gallery-4.jpg" class="img-fluid" alt="">
-                  <p>오늘 날씨 좋은데?</p>
-                  <div class="gallery-links d-flex align-items-center justify-content-center">
-                    <a href="img/gallery/gallery-4.jpg" data-title="오늘 날씨 좋은데?" class="glightbox preview-link">
-                      <i class="bi bi-arrows-angle-expand"></i>
-                    </a>
-                  </div>
-                </div>
-                <div class="swiper-slide gallery-item">
-                  <img src="/img/gallery/gallery-5.jpg" class="img-fluid" alt="">
-                  <p>오늘 날씨 좋은데?</p>
-                  <div class="gallery-links d-flex align-items-center justify-content-center">
-                    <a href="img/gallery/gallery-5.jpg" data-title="오늘 날씨 좋은데?" class="glightbox preview-link">
-                      <i class="bi bi-arrows-angle-expand"></i>
-                    </a>
-                  </div>
-                </div>
-                <div class="swiper-slide gallery-item">
-                  <img src="/img/gallery/gallery-6.jpg" class="img-fluid" alt="">
-                  <p>오늘 날씨 좋은데?</p>
-                  <div class="gallery-links d-flex align-items-center justify-content-center">
-                    <a href="img/gallery/gallery-6.jpg" data-title="오늘 날씨 좋은데?" class="glightbox preview-link">
-                      <i class="bi bi-arrows-angle-expand"></i>
-                    </a>
-                  </div>
-                </div>
+              <%
+               }
+              %>
               </div>
               <div class="swiper-pagination"></div>
             </div>

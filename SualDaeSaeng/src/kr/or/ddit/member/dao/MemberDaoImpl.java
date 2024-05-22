@@ -336,7 +336,6 @@ public class MemberDaoImpl implements IMemberDao {
             session.close();
          }
       }
-      
       return memList;
    }
   
@@ -414,12 +413,25 @@ public class MemberDaoImpl implements IMemberDao {
       }
       return memDetail;
    }
-
-	@Override
-	public UsersVO getUsersDetail(String usersId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+   
+   //추가_길도연
+   @Override
+   public UsersVO getUsersDetail(String usersId) {
+      
+      SqlSession session = null;
+      UsersVO usersDetail = null;
+      
+      try {
+         session = MyBatisUtil.getSqlSession(true);
+         usersDetail = session.selectOne("member.getUsersDetail", usersId);
+      } catch (PersistenceException ex) {
+         session.rollback();
+         ex.printStackTrace();
+      } finally {
+         session.close();
+      }
+      return usersDetail;
+   }
   
 }
 

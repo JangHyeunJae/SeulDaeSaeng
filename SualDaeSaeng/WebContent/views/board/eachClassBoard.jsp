@@ -8,26 +8,53 @@
 
 <%@include file="/header.jsp"%>
 <%
-    int classNo = (int)request.getAttribute("classNo");
+    int levelChk = (int)request.getAttribute("levelChk");
+    int classBoardChk = (int)request.getAttribute("classBoardChk");
     List<BoardVO> boardList = (List<BoardVO>)request.getAttribute("boardList");
+    int usersRole = (int)session.getAttribute("usersRole");
     
+    String board = null;
+    if(classBoardChk == 1){
+    	board = "eachClassNotice";
+    }else if(classBoardChk == 2){
+    	board = "eachClassBoard";
+    }
+    
+    // 페이징
     int itemsPerPage = 5;
     int currentPage = (request.getParameter("page") != null) ? Integer.parseInt(request.getParameter("page")) : 1;
     int totalItems = (boardList != null) ? boardList.size() : 0;
     int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
     int startIndex = (currentPage - 1) * itemsPerPage;
     int endIndex = Math.min(startIndex + itemsPerPage, totalItems);
+    
+	// 검색
+    String option = null;
+    if(request.getAttribute("searchOption") != null){
+    	option = (String)request.getAttribute("searchOption");
+    }
 %>
 <main>
 	<!-- ======= End Page Header ======= -->
 	<div class="page-header d-flex align-items-center">
 		<div class="container position-relative">
 			<div class="row d-flex justify-content-center">
+			 <%
+              if(usersRole==1){
+              %>
+              	<a href="<%=request.getContextPath() %>/classTeacherBoard.do?levelChk=<%=levelChk %>"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
+              <%
+              }else{
+              %>
+              <a href="<%=request.getContextPath() %>/classBoard.do?levelChk=<%=levelChk %>"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
+              <%
+              }
+              %>
 				<div>
-					<h2><%=classNo %>호 게시판</h2>
+					<h2><%=levelChk %>호 게시판</h2>
 					<p>
-						<a class="cta-btn" href="<%=request.getContextPath()%>/eachClassNotice.do?classNo=<%=classNo %>">공지사항</a> 
-						<a class="cta-btn" href="<%=request.getContextPath()%>/eachClassBoard.do?classNo=<%=classNo %>">자유게시판</a>
+						<a class="cta-btn" href="<%=request.getContextPath()%>/eachClassNotice.do?levelChk=<%=levelChk %>">공지사항</a> 
+						<a class="cta-btn" href="<%=request.getContextPath()%>/eachClassBoard.do?levelChk=<%=levelChk %>">자유게시판</a>
 					</p>
 				</div>
 			</div>
@@ -41,13 +68,63 @@
                     총 <b><%= totalItems %></b> 개
                 </p>
 				<div class="input-group input-group-sm col-4">
-					<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">전체</button>
+					<%
+						if(option == null){
+					%>
+					<button class="btn dropdown-toggle" type="button"
+						data-bs-toggle="dropdown" aria-expanded="false">전체</button>
 					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="#title">제목</a></li>
-						<li><a class="dropdown-item" href="#content">내용</a></li>
-						<li><a class="dropdown-item" href="#nickname">닉네임</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=title">제목</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=content">내용</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=nickname">닉네임</a></li>
 					</ul>
-					<input type="text" class="form-control" aria-label="Text input with dropdown button">
+					<%
+						}else if(option.equals("title")){
+					%>
+					<button class="btn dropdown-toggle" type="button"
+						data-bs-toggle="dropdown" aria-expanded="false" value="title">제목</button>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>">전체</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=content">내용</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=nickname">닉네임</a></li>
+					</ul>
+					<%
+						}else if(option.equals("content")){
+					%>
+					<button class="btn dropdown-toggle" type="button"
+						data-bs-toggle="dropdown" aria-expanded="false" value="content">내용</button>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>">전체</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=title">제목</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=nickname">닉네임</a></li>
+					</ul>
+					<%
+						}else if(option.equals("nickname")){
+					%>
+					<button class="btn dropdown-toggle" type="button"
+						data-bs-toggle="dropdown" aria-expanded="false" value="nickname">닉네임</button>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>">전체</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=title">제목</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=content">내용</a></li>
+					</ul>
+					<%
+						}
+					%>
+					<%
+						if(option == null){
+					%>
+						<form action="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>" method="post" role="form" id="searchForm">
+					<%
+						}else{
+					%>
+						<form action="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=<%=option %>" method="post" role="form" id="searchForm">
+					<%
+						}
+					%>
+						<input type="text" id="searchText" name="searchText" class="form-control"
+							aria-label="Text input with dropdown button" >
+					</form>
 				</div>
 			</div>
 			<div class="list-group">
@@ -58,17 +135,18 @@
 				<%
 					} else {
 						// Loop only through items for the current page
-						int cnt = 1 + ((currentPage-1)*5);
+						int idx = ((currentPage-1)*5);
 						for (int i = startIndex; i < endIndex; i++) {
 							BoardVO bv = boardList.get(i);
 				%>
-					<a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=cnt %>" class="list-group-item">
+					<a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>
+					&idx=<%=idx %>&levelChk=<%=bv.getBoardLevel() %>&editReply=<%=-1 %>&classBoardChk=<%=classBoardChk %>" class="list-group-item">
 						<div class="d-flex w-100 justify-content-between align-items-center">
 							<h5 class="mb-2 text-truncate">
 								<small class="attach"><i class="bi bi-paperclip"></i></small>
 								<%= bv.getBoardTitle() %>
 							</h5>
-							<small class="badge bg-light"><%= classNo %>호 게시판</small>
+							<small class="badge bg-light"><%= levelChk %>호 게시판</small>
 						</div>
 						<p class="mb-2 text-truncate"><%= bv.getBoardCon() %></p>
 						<div class="d-flex w-100 justify-content-between align-items-center">
@@ -77,7 +155,7 @@
 						</div>
 					</a>
 				<%
-				    cnt++;
+				    idx++;
 						}
 					}
 				%>
@@ -85,32 +163,28 @@
 
 			<!-- Pagination links -->
             <nav aria-label="Page navigation" class="d-flex justify-content-center align-items-center pt-5 pm-5">
-              <ul class="pagination">
-                <% if (currentPage > 1) { %>
+               <ul class="pagination">
+            <% if (currentPage > 1) { %>
                 <li class="page-item">
-                    <!-- Include classNo in the URL -->
-                    <a class="page-link" href="<%= request.getContextPath() %>/eachClassBoard.do?classNo=<%= classNo %>&page=<%= currentPage - 1 %>">&laquo;</a>
+                    <a class="page-link" href="<%= request.getContextPath() + "?levelChk=" + levelChk + "&page=" + (currentPage - 1) %>">&laquo;</a>
                 </li>
-                <% } %>
+            <% } %>
             
-                <% for (int i = 1; i <= totalPages; i++) { %>
+            <% for (int i = 1; i <= totalPages; i++) { %>
                 <li class="page-item <%= (i == currentPage) ? "active" : "" %>">
-                    <!-- Include classNo in the URL -->
-                    <a class="page-link" href="<%= request.getContextPath() %>/eachClassBoard.do?classNo=<%= classNo %>&page=<%= i %>"><%= i %></a>
+                    <a class="page-link" href="<%= request.getContextPath() +  "?levelChk=" + levelChk + "&page=" + i %>"><%= i %></a>
                 </li>
-                <% } %>
+            <% } %>
 
-                <% if (currentPage < totalPages) { %>
+            <% if (currentPage < totalPages) { %>
                 <li class="page-item">
-                    <!-- Include classNo in the URL -->
-                    <a class="page-link" href="<%= request.getContextPath() %>/eachClassBoard.do?classNo=<%= classNo %>&page=<%= currentPage + 1 %>">&raquo;</a>
+                    <a class="page-link" href="<%= request.getContextPath() +  "?levelChk=" + levelChk + "&page=" + (currentPage + 1) %>">&raquo;</a>
                 </li>
-                <% } %>
-              </ul>
+            <% } %>
+        </ul>
            </nav>
-
 			<div class="container d-flex align-items-center justify-content-end pb-5 gap-2 p-0">
-				<a href="<%= request.getContextPath() %>/board/write.do?classNo=<%= classNo %>" type="button" class="btn btn-outline-warning">글쓰기</a>
+			<a href="<%= request.getContextPath() %>/board/write.do?levelChk=<%=levelChk %>&idx=0" type="button" class="btn btn-outline-warning">글쓰기</a>
 			</div>
 		</div>
 	</section>
@@ -142,6 +216,15 @@
             event.target.classList.add('orange');
         });
     });
+    
+ 	// Enter 키를 누를 때 폼 제출 이벤트 처리
+    document.getElementById("searchText").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault(); // 기본 제출 동작 방지
+            document.getElementById("searchForm").submit(); // 폼 제출
+        }
+    });
+    
 </script>
 
 <%@include file="/footer.jsp"%>

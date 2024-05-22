@@ -12,7 +12,6 @@ import kr.or.ddit.member.vo.UsersVO;
 
 public class MemberServiceImpl implements IMemberService{
 	
-	// �̱�������
 	public static IMemberService instance = null;
 	private MemberServiceImpl() {}
 	public static IMemberService getInstance() {
@@ -82,6 +81,12 @@ public class MemberServiceImpl implements IMemberService{
 	@Override
 	public List<BoardVO> memberBoardList(int usersNo) {
 		return memberDao.memberBoardList(usersNo);
+	public MemberVO getMemDetail(String usersId) {
+		return memberDao.getMemDetail(usersId);
+	}
+	@Override
+	public UsersVO getUsersDetail(String usersId) {
+		return memberDao.getUsersDetail(usersId);
 	}
   
 }

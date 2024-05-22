@@ -19,7 +19,7 @@
         <%
         for(int i = 304 ; i < 308 ; i++){
         %>
-          <a href="<%=request.getContextPath()%>/classTeacherBoard.do?classNo=<%=i %>" class="col-xl-3 col-lg-4 col-md-6 mt-0 p-3">
+          <a href="<%=request.getContextPath()%>/classTeacherBoard.do?levelChk=<%=i %>" class="col-xl-3 col-lg-4 col-md-6 mt-0 p-3">
             <p class="mb-0 p-4 text-center" id="class-no">
               <%=i %>호
             </p>

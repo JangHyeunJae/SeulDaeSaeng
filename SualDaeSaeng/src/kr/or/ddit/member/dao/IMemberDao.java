@@ -13,11 +13,6 @@ public interface IMemberDao {
 	
 	public boolean loginCheck(MemberVO memberVO, boolean isMemberLogin);
 
-	 /**
-	  * 이메일과 사번이 들어있는 객체로 비밀번호를 찾아서 비밀번호를 반환
-	  * @param memberVO
-	  * @return memPass
-	  */
 	public String forgotPass(MemberVO memberVO);
 
 	int memberIdChk(String usersId);
@@ -43,6 +38,11 @@ public interface IMemberDao {
 	public int pwModify(Map<String, String> pwModifyMap);
 
 	public List<BoardVO> memberBoardList(int usersNo);
+
+	public MemberVO getMemDetail(String usersId);
+
+	public UsersVO getUsersDetail(String usersId);
+
 
 }
 

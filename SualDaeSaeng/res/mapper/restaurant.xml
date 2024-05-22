@@ -78,20 +78,77 @@
 		</if>
 	</select>
 	
-	<select id="selectMslsName" parameterType="hashMap" resultType="String" >
+	<select id="selectMclsName" parameterType="hashMap" resultType="String" >
 		SELECT MCLS_NAME FROM RESTMCLS WHERE MCLS_ID = #{mcls}
 	</select>
 	
-	<select id="selectSslsName" parameterType="hashMap" resultType="String" >
+	<select id="selectSclsName" parameterType="hashMap" resultType="String" >
 		SELECT SCLS_NAME FROM RESTSCLS WHERE MCLS_ID = #{mcls} AND SCLS_ID = #{scls}
 	</select>
 	
 	<select id="selectMclsList" resultType="restVO" >
-		SELECT MCLS_NAME FROM RESTMCLS
+		SELECT MCLS_NAME mclsName, MCLS_ID mcls FROM RESTMCLS WHERE MCLS_YN = 'Y'
 	</select>
 	
-	<select id="selectSclsList" resultType="restVO" >
-		SELECT SCLS_NAME FROM RESTMCLS
+	<select id="selectSclsList" parameterType="String" resultType="restVO" >
+		SELECT SCLS_NAME sclsName, MCLS_ID mcls, SCLS_ID scls FROM RESTSCLS WHERE MCLS_ID = #{mcls} AND SCLS_YN = 'Y'
+	</select>
+	
+	<select id="selectSclsList2" resultType="restVO" >
+		SELECT SCLS_NAME sclsName, MCLS_ID mcls, SCLS_ID scls FROM RESTSCLS WHERE SCLS_YN = 'Y'
+	</select>
+	
+	<select id="selectRest" parameterType="String" resultType="restVO">
+	  SELECT REST_BIZNO restBizno, NAME, MCLS, MCLS_NAME mclsName, SCLS, SCLS_NAME sclsName, 
+	         ADDR_BASIC AddrBasic, LON, LAT, LIKE_COUNT likeCount, COALESCE(COUNT(REVIEW_NO),0) AS totalReview, 
+	         COALESCE(AVG(REVIEW_STAR), -1) AS avgReviewStar
+	  FROM RESTVIEW
+	  WHERE REST_BIZNO = #{restBizno}
+	  GROUP BY REST_BIZNO, NAME, MCLS, MCLS_NAME, SCLS, SCLS_NAME, ADDR_BASIC, LON, LAT, LIKE_COUNT
+	</select>
+	
+	<select id="selectRestReview" parameterType="String" resultType="restVO">
+	  	 SELECT REVIEW_NO reviewNo, 
+		       USERS_NO usersNo, 
+		       NICK_NAME nickName, 
+		       REVIEW_STAR reviewStar, 
+		       REVIEW_TEXT reviewText, 
+		       FILE_NO fileNo, 
+		       REVIEW_DATE reviewDate 
+		FROM (
+		    SELECT REVIEW_NO, 
+		           USERS_NO, 
+		           NICK_NAME, 
+		           REVIEW_STAR, 
+		           REVIEW_TEXT, 
+		           FILE_NO, 
+		           REVIEW_DATE, 
+		           ROWNUM AS RNUM
+		    FROM RESTVIEW
+		    WHERE REST_BIZNO = #{restBizno}
+		    AND REVIEW_NO IS NOT NULL
+		    ORDER BY REVIEW_DATE DESC
+		)
+		WHERE RNUM <![CDATA[<=]]> 2
+	</select>
+	
+	<select id="selectRestReviewAll" parameterType="hashMap" resultType="restVO">
+	  	SELECT REVIEW_NO reviewNo, USERS_NO usersNo, NICK_NAME nickName, REVIEW_STAR reviewStar, REVIEW_TEXT reviewText, FILE_NO fileNo, REVIEW_DATE reviewDate
+		FROM RESTVIEW
+		WHERE REST_BIZNO = #{restBizno}
+	    AND REVIEW_NO IS NOT NULL
+		<if test="order==null or order=='' or order=='letest'">
+			ORDER BY REVIEW_DATE DESC
+		</if>
+		<if test="order=='lste'">
+			ORDER BY REVIEW_DATE ASC
+		</if>
+		<if test="order=='starUp'">
+			ORDER BY REVIEW_STAR DESC 
+		</if>
+		<if test="order=='starDonw'">
+			ORDER BY REVIEW_STAR ASC 
+		</if>
 	</select>
 	
 	

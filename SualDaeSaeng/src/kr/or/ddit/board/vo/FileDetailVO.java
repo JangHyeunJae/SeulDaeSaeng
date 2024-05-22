@@ -8,11 +8,18 @@ public class FileDetailVO {
 	private String fileSavepath;
 	private String fileOgname;
 	private String fileSavednm;
-	private int fileSize;
+	private long fileSize;
 	private String fileExt;
 	private LocalDate fileDt;
+	private int fileLevel;
 	
 	
+	public int getFileLevel() {
+		return fileLevel;
+	}
+	public void setFileLevel(int fileLevel) {
+		this.fileLevel = fileLevel;
+	}
 	public int getFileNo() {
 		return fileNo;
 	}
@@ -37,10 +44,10 @@ public class FileDetailVO {
 	public void setFileSavednm(String fileSavednm) {
 		this.fileSavednm = fileSavednm;
 	}
-	public int getFileSize() {
+	public long getFileSize() {
 		return fileSize;
 	}
-	public void setFileSize(int fileSize) {
+	public void setFileSize(long fileSize) {
 		this.fileSize = fileSize;
 	}
 	public String getFileExt() {

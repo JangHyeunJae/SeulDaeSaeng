@@ -1,46 +1,63 @@
 package kr.or.ddit.board.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.board.vo.BoardVO;
+import kr.or.ddit.board.vo.HomeworkVO;
+import kr.or.ddit.member.vo.MemberVO;
 
-@WebServlet("/Homework/write.do")
+@WebServlet("/homework/write.do")
 public class InsertHomeworkController extends HttpServlet{
 
 	private IBoardService service = BoardServiceImpl.getInstance();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int levelChk = Integer.parseInt(req.getParameter("classNo"));
+		int levelChk = Integer.parseInt(req.getParameter("levelChk"));
 		req.setAttribute("levelChk", levelChk);
-		req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
+		req.getRequestDispatcher("/views/board/hwWrite.jsp").forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
+		HttpSession session = req.getSession();
+		MemberVO memDetail = (MemberVO) session.getAttribute("memDetail");
 		
+		int levelChk = Integer.parseInt(req.getParameter("levelChk"));
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
-		int level = Integer.parseInt(req.getParameter("levelChk"));
+		Date startDate = java.sql.Date.valueOf(req.getParameter("startDate"));
+		Date endDate = java.sql.Date.valueOf(req.getParameter("endDate"));
 
-		BoardVO boardVO = new BoardVO();
-		boardVO.setBoardTitle(title);
-		boardVO.setBoardCon(content);
-		boardVO.setUsersNo(1); // 세션에서 꺼내와야함
-		boardVO.setBoardLevel(level);
-		
-		int status = service.insertBoard(boardVO);
+	    Map<String,Object> parameter = new HashMap<>();
+	    parameter.put("hwTitle",title);
+	    parameter.put("hwCon",content);
+	    parameter.put("hwStart",startDate);
+	    parameter.put("hwEnd",endDate);
+	    parameter.put("hwClass",levelChk);
+	    parameter.put("usersNo",memDetail.getUsersNo());
+
+		int status = service.insertHomework(parameter);
+		List<HomeworkVO> hw = service.getHwList(levelChk);
+		HomeworkVO recentHw = hw.get(0);
+				
 		if(status > 0) { 	// 성공
-			resp.sendRedirect("/board/detail.do?boardNo=" + boardVO.getBoardNo());
+			resp.sendRedirect("/homework/detail.do?hwNo=" + recentHw.getHwNo() +"&levelChk=" + levelChk);
 		}else {				// 실패
 			req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
 		}

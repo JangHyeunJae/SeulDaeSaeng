@@ -5,6 +5,7 @@ import java.util.List;
 import kr.or.ddit.admin.dao.AdminDaoImpl;
 import kr.or.ddit.admin.dao.IAdmindao;
 import kr.or.ddit.admin.vo.MemberReqVO;
+import kr.or.ddit.contact.vo.ContactVO;
 
 public class AdminServiceImpl implements IAdminService {
 	
@@ -42,5 +43,10 @@ public class AdminServiceImpl implements IAdminService {
 	public MemberReqVO selectmember(String parameter) {
 		return dao.selectmember(parameter);
 	}
+	
+//	@Override
+//	public List<ContactVO> selectContactList() {
+//		return dao.selectContactList();
+//	}
 
 }

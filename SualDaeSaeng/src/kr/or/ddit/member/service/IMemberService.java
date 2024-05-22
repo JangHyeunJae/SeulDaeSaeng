@@ -49,6 +49,11 @@ public interface IMemberService {
 	public int pwModify(Map<String, String> pwModifyMap);
 
 	public List<BoardVO> memberBoardList(int usersNo);
+
+	public MemberVO getMemDetail(String usersId);
+
+	public UsersVO getUsersDetail(String usersId);
+
 	
 }
 

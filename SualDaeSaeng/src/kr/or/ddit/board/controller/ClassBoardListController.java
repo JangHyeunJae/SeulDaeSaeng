@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.service.IBoardService;
@@ -22,14 +23,13 @@ public class ClassBoardListController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		 
-		IBoardService boardService = BoardServiceImpl.getInstance();
-		 //세션에서 현재 로그인 정보 가져오기
-         //1-선생님, 2-학생 일때 구분해서 jsp다르게 보내기
-		 int usersNo = 3; 
-		 UsersVO uv = boardService.getUsersDetail(usersNo);
-         if(uv.getUsersRole()==1) {
+		 IBoardService service = BoardServiceImpl.getInstance();
+		 HttpSession session = req.getSession();
+		 int usersRole = (int)session.getAttribute("usersRole");
+		 
+         if(usersRole==1) {
 		     req.getRequestDispatcher("/views/board/classTeacherBoardIntro.jsp").forward(req, resp);
-         }else if(uv.getUsersRole()==2) {
+         }else if(usersRole==2) {
         	 req.getRequestDispatcher("/views/board/classBoard.jsp").forward(req, resp);
          }
 	}

@@ -5,35 +5,36 @@
 <%@page import="java.util.List"%>
 <%@page import="kr.or.ddit.board.vo.BoardVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 
 <%@include file="/header.jsp"%>
 <%
-	List<BoardVO> boardList = (List<BoardVO>)request.getAttribute("boardList");
+   List<BoardVO> boardList = (List<BoardVO>)request.getAttribute("boardList");
     int levelChk = (int)request.getAttribute("levelChk");
     
-    String msg = (String) request.getAttribute("msg");
-    if (msg != null) {
-        msg = msg.replace("\\", "\\\\").replace("\'", "\\\'").replace("\"", "\\\"");
-    }else{
-    	msg = "";
-    }
+    String msg = session.getAttribute("msg") == null ? "" : (String) session.getAttribute("msg");
+   session.removeAttribute("msg");
     
     String board = null;
+    String boardName = null;
     if(levelChk == 0){
-    	board = "allBoard";
+       board = "allBoard";
+       boardName = "전체게시판";
     }else if(levelChk == 1){
-    	board = "freeBoard";
+       board = "freeBoard";
+       boardName = "자유게시판";
     }else if(levelChk == 2){
-    	board = "studyBoard";
+       board = "studyBoard";
+       boardName = "공부게시판";
     }else if(levelChk == 3){
-    	board = "noticeBoard";
+       board = "noticeBoard";
+       boardName = "공지사항";
     }
     
     // 검색
     String option = null;
     if(request.getAttribute("searchOption") != null){
-    	option = (String)request.getAttribute("searchOption");
+       option = (String)request.getAttribute("searchOption");
     }
     
     //페이징 기능
@@ -46,148 +47,140 @@
    
 %>
 <main>
-	<!-- ======= End Page Header ======= -->
-	<div class="page-header d-flex align-items-center">
-		<div class="container position-relative">
-			<div class="row d-flex justify-content-center">
-				<div>
-					<h2>전체게시판</h2>
-					<p>
-						<a class="cta-btn" href="<%=request.getContextPath()%>/allBoard.do">전체게시판</a> 
-						<a class="cta-btn" href="<%=request.getContextPath()%>/freeBoard.do">자유게시판</a>
-						<a class="cta-btn" href="<%=request.getContextPath()%>/studyBoard.do">공부게시판</a> 
-						<a class="cta-btn" href="<%=request.getContextPath()%>/noticeBoard.do">공지사항</a>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- End Page Header -->
-	<section class="board mb-5">
-		<!-- End Page Header -->
-	<section class="board mb-5">
-		<div class="container" data-aos="fade-up">
-			<div
-				class="row mb-3 d-flex justify-content-between align-items-center">
-				<p class="col-3">
+   <!-- ======= End Page Header ======= -->
+   <div class="page-header d-flex align-items-center">
+      <div class="container position-relative">
+         <div class="row d-flex justify-content-center">
+            <div>
+               <h2><%=boardName %></h2>
+               <p>
+                  <a class="cta-btn" href="<%=request.getContextPath()%>/allBoard.do">전체게시판</a> 
+                  <a class="cta-btn" href="<%=request.getContextPath()%>/freeBoard.do">자유게시판</a>
+                  <a class="cta-btn" href="<%=request.getContextPath()%>/studyBoard.do">공부게시판</a> 
+                  <a class="cta-btn" href="<%=request.getContextPath()%>/noticeBoard.do">공지사항</a>
+               </p>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- End Page Header -->
+   <section class="board mb-5">
+      <!-- End Page Header -->
+   <section class="board mb-5">
+      <div class="container" data-aos="fade-up">
+         <div
+            class="row mb-3 d-flex justify-content-between align-items-center">
+            <p class="col-3">
                                총 <b><%= (boardList != null) ? boardList.size() : 0 %></b> 개
                 </p>
-				<div class="input-group input-group-sm col-4">
-					<%
-						if(option == null){
-					%>
-					<button class="btn dropdown-toggle" type="button"
-						data-bs-toggle="dropdown" aria-expanded="false">전체</button>
-					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=title">제목</a></li>
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=content">내용</a></li>
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=nickname">닉네임</a></li>
-					</ul>
-					<%
-						}else if(option.equals("title")){
-					%>
-					<button class="btn dropdown-toggle" type="button"
-						data-bs-toggle="dropdown" aria-expanded="false" value="title">제목</button>
-					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do">전체</a></li>
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=content">내용</a></li>
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=nickname">닉네임</a></li>
-					</ul>
-					<%
-						}else if(option.equals("content")){
-					%>
-					<button class="btn dropdown-toggle" type="button"
-						data-bs-toggle="dropdown" aria-expanded="false" value="content">내용</button>
-					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do">전체</a></li>
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=title">제목</a></li>
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=nickname">닉네임</a></li>
-					</ul>
-					<%
-						}else if(option.equals("nickname")){
-					%>
-					<button class="btn dropdown-toggle" type="button"
-						data-bs-toggle="dropdown" aria-expanded="false" value="nickname">닉네임</button>
-					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do">전체</a></li>
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=title">제목</a></li>
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=content">내용</a></li>
-					</ul>
-					<%
-						}
-					%>
-					<%
-						if(option == null){
-					%>
-						<form action="<%=request.getContextPath()%>/<%=board %>.do" method="post" role="form" id="searchForm">
-					<%
-						}else{
-					%>
-						<form action="<%=request.getContextPath()%>/<%=board %>.do?searchOption=<%=option %>" method="post" role="form" id="searchForm">
-					<%
-						}
-					%>
-						<input type="text" id="searchText" name="searchText" class="form-control"
-							aria-label="Text input with dropdown button" >
-<!-- 							onkeypress="search(event)" -->
-<!-- 						<button id="searchBtn" name="searchBtn" style="display: none;"></button> -->
-					</form>
-				</div>
-			</div>
-			<div class="list-group">
-				<%
-				if (boardList == null || boardList.isEmpty()) {
+            <div class="input-group input-group-sm col-4">
+               <%
+                  if(option == null){
+               %>
+               <button class="btn dropdown-toggle" type="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">전체</button>
+               <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=title">제목</a></li>
+                  <li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=content">내용</a></li>
+                  <li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=nickname">닉네임</a></li>
+               </ul>
+               <%
+                  }else if(option.equals("title")){
+               %>
+               <button class="btn dropdown-toggle" type="button"
+                  data-bs-toggle="dropdown" aria-expanded="false" value="title">제목</button>
+               <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do">전체</a></li>
+                  <li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=content">내용</a></li>
+                  <li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=nickname">닉네임</a></li>
+               </ul>
+               <%
+                  }else if(option.equals("content")){
+               %>
+               <button class="btn dropdown-toggle" type="button"
+                  data-bs-toggle="dropdown" aria-expanded="false" value="content">내용</button>
+               <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do">전체</a></li>
+                  <li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=title">제목</a></li>
+                  <li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=nickname">닉네임</a></li>
+               </ul>
+               <%
+                  }else if(option.equals("nickname")){
+               %>
+               <button class="btn dropdown-toggle" type="button"
+                  data-bs-toggle="dropdown" aria-expanded="false" value="nickname">닉네임</button>
+               <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do">전체</a></li>
+                  <li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=title">제목</a></li>
+                  <li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=content">내용</a></li>
+               </ul>
+               <%
+                  }
+               %>
+               <%
+                  if(option == null){
+               %>
+                  <form action="<%=request.getContextPath()%>/<%=board %>.do" method="post" role="form" id="searchForm">
+               <%
+                  }else{
+               %>
+                  <form action="<%=request.getContextPath()%>/<%=board %>.do?searchOption=<%=option %>" method="post" role="form" id="searchForm">
+               <%
+                  }
+               %>
+                  <input type="text" id="searchText" name="searchText" class="form-control"
+                     aria-label="Text input with dropdown button" >
+               </form>
+            </div>
+         </div>
+         <div class="list-group">
+            <%
+            if (boardList == null || boardList.isEmpty()) {
                 %>
-				<p>작성된 게시글이 없습니다</p>
-				<%
+            <p>작성된 게시글이 없습니다</p>
+            <%
                    }else{
 
-                	   int idx = (currentPage-1)*5;
+                      int idx = (currentPage-1)*5;
 
-                	   for (int i = startIndex; i < endIndex; i++) {
-                		   
-                		   //level별 이름지정
-                    	   BoardVO bv = boardList.get(i);
-                    	   int level2 = bv.getBoardLevel();
-                    	   String boardName = null;
-                    	      
-                           if(level2 == 1) boardName = "자유게시판";
-                           else if(level2 == 2) boardName = "공부게시판";
-                           else if(level2 == 3) boardName = "공지사항";
-                           else boardName = "전체게시판";
+                      for (int i = startIndex; i < endIndex; i++) {
+                         
+                         //level별 이름지정
+                          BoardVO bv = boardList.get(i);
+                          int level2 = bv.getBoardLevel();
                            
                            // html 제거
                            String ogText = bv.getBoardCon();
-    					   String regex = "<[^>]*>";
-    					   String pureText = ogText.replaceAll(regex, "");
+                      String regex = "<[^>]*>";
+                      String pureText = ogText.replaceAll(regex, "");
                            
                 %>
                 
-				  <a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>" class="list-group-item">
-					<div class="d-flex w-100 justify-content-between align-items-center">
-						<h5 class="mb-2 text-truncate">
-							<small class="attach"> <i class="bi bi-paperclip"></i>
-							</small>
-							<%=bv.getBoardTitle()%>
-						</h5>
-						<small class="badge bg-light">
-						<%=boardName %>
-						</small>
-					</div>
-					<p class="mb-2 text-truncate"><%=pureText %></p>
-					<div class="d-flex w-100 justify-content-between align-items-center">
-						<small class="days"><%=bv.getBoardAt() %></small> <small
-							class="look"> <i class="bi bi-eye"></i> <%=bv.getBoardHit() %>
-						</small>
-					</div>
-				</a>
-				
-				<%
-                		   idx++;
+              <a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>" class="list-group-item">
+               <div class="d-flex w-100 justify-content-between align-items-center">
+                  <h5 class="mb-2 text-truncate">
+                     <small class="attach"> <i class="bi bi-paperclip"></i>
+                     </small>
+                     <%=bv.getBoardTitle()%>
+                  </h5>
+                  <small class="badge bg-light">
+                  <%=boardName %>
+                  </small>
+               </div>
+               <p class="mb-2 text-truncate"><%=pureText %></p>
+               <div class="d-flex w-100 justify-content-between align-items-center">
+                  <small class="days"><%=bv.getBoardAt() %></small> <small
+                     class="look"> <i class="bi bi-eye"></i> <%=bv.getBoardHit() %>
+                  </small>
+               </div>
+            </a>
+            
+            <%
+                         idx++;
                        }
                    }
                 %>
-			</div>
+         </div>
 
 
     <!-- Pagination links -->
@@ -213,24 +206,23 @@
         </ul>
     </nav>
     
-			<div class="container d-flex align-items-center justify-content-end pb-5 gap-2 p-0">
-				<a href="<%=request.getContextPath()%>/board/write.do?levelChk=<%=levelChk %>&idx=0" type="button" class="btn btn-outline-warning">글쓰기</a>
-			</div>
-		</div>
-	</section>
-	</section>
+         <div class="container d-flex align-items-center justify-content-end pb-5 gap-2 p-0">
+            <a href="<%=request.getContextPath()%>/board/write.do?levelChk=<%=levelChk %>&idx=0" type="button" class="btn btn-outline-warning">글쓰기</a>
+         </div>
+      </div>
+   </section>
+   </section>
 </main>
 
 <script type="text/javascript">
 
-	window.onload = function() {
-		var msg = '<%= msg %>';
-		if(msg != null && msg != '') alert(msg);
-	
-	};
+   window.onload = function() {
+      var msg = '<%= msg %>';
+      if(msg != null && msg != '') alert(msg);
+   
+   };
 
     var buttons = document.querySelectorAll('.cta-btn');
-    var boardName = document.querySelector('h2');
 
     // 페이지 로드될 때 현재 URL을 확인하여 해당 버튼의 스타일을 변경
     var currentUrl = window.location.href;
@@ -238,7 +230,6 @@
         if (currentUrl.includes(button.getAttribute('href'))) {
             button.classList.remove('gray');
             button.classList.add('orange');
-            boardName.innerText = button.innerText;
         } else {
             button.classList.add('gray');
             button.classList.remove('orange');
@@ -247,8 +238,6 @@
 
     buttons.forEach(function (button) {
         button.addEventListener('click', function (event) {
-            var clickedText = event.target.innerText;
-            boardName.innerText = clickedText;
 
             buttons.forEach(function (btn) {
                 btn.classList.add('gray');
@@ -260,64 +249,7 @@
         });
     });
     
-//  	// Enter 키 누를 때 폼 제출 이벤트 처리
-//     $('#searchText').keypress(function(event) {
-//         if (event.key == 'Enter') {
-//             event.preventDefault(); // 기본 제출 동작 방지
-            
-//             var searchText = $('#searchText').val(); // 입력 필드 값
-//             var searchOption = option; // 선언한 option 변수의 값
-
-//             // 선택한 옵션에 따라 페이지 이동
-<%--             var contextPath = '<%= request.getContextPath() %>'; --%>
-<%--             var board = '<%= board %>'; --%>
-//             var url = contextPath + '/' + board + '.do';
-//             if (searchOption != null) {
-//                 url += '?searchOption=' + searchOption;
-//             }
-
-//             // 검색어가 입력되었다면 URL에 추가
-//             if (searchText.trim() != '') {
-//                 url += (searchOption != null ? '&' : '?') + 'searchText=' + encodeURIComponent(searchText);
-//             }
-
-//             window.location.href = url; // 페이지 이동
-//         }
-//     });
-// 		$(function(){
-			
-// 			var submitBtn = $("#submitBtn");
-// 			var insertForm = $("#insertForm");
-			
-// 			// 등록 버튼 클릭 시 이벤트
-// 			submitBtn.on("click", function(){
-		
-// 				var title = $("#title").val();
-// 				var content = $("#content").val();
-// 				var level = $(".btn-check").val();
-// 				var levelChk = $("#levelChk").val();
-// 				var idx = $("#idx").val();
-		
-// 				if(title == null || title==""){
-// 		            alert("제목을 입력해주세요!");
-// 		            return false;
-// 		        }
-// 		        if(content == null || content==""){
-// 		            alert("내용을 입력해주세요!");
-// 		            return false;
-// 		        }
-// 		        insertForm.submit();
-// 			});
-// 		});
-// 		function search(e){
-// 		    var searchText = document.getElementById("searchText").value;
-// 		    var code = e.code;
-		
-// 		    if(code == 'Enter'){
-// 		    	document.getElementById("searchForm").submit();
-// 		    }
-// 		 }
-	// Enter 키를 누를 때 폼 제출 이벤트 처리
+   // Enter 키를 누를 때 폼 제출 이벤트 처리
     document.getElementById("searchText").addEventListener("keypress", function(event) {
         if (event.key === "Enter") {
             event.preventDefault(); // 기본 제출 동작 방지

@@ -12,10 +12,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.board.vo.BoardVO;
+import kr.or.ddit.board.vo.FileDetailVO;
 import kr.or.ddit.board.vo.ReplyVO;
 import kr.or.ddit.member.vo.MemberVO;
 
@@ -28,6 +30,7 @@ public class BoardDetailController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		 
 		 int boardNo = Integer.parseInt(req.getParameter("boardNo"));
+		 String classBoardChk = req.getParameter("classBoardChk");
 		 BoardVO boardDetail = boardService.getBoardDetail(boardNo);
 		 int hit = boardService.updateHit(boardNo);
 		 int boardLevel = boardDetail.getBoardLevel();
@@ -55,9 +58,16 @@ public class BoardDetailController extends HttpServlet{
 		 req.setAttribute("levelChk", levelChk);
 		 req.setAttribute("editReply", editReply);
 		 
+		 if(classBoardChk!=null) {
+			 req.setAttribute("classBoardChk", Integer.parseInt(classBoardChk));
+		 }
+		 
 		 List<BoardVO> boardList = null;
 		 if(levelChk == 0) boardList = boardService.allBoardList();
 		 else boardList = boardService.selectBoardList(boardLevel);
+		 
+		 FileDetailVO file = boardService.getFile(boardNo); 
+		 req.setAttribute("file", file);
 		 
 		 req.setAttribute("boardList", boardList);
 		 req.getRequestDispatcher("/views/board/view.jsp").forward(req, resp);
@@ -66,6 +76,8 @@ public class BoardDetailController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
+		  HttpSession session = req.getSession();
+	      MemberVO memDetail = (MemberVO)session.getAttribute("memDetail");
 		  //댓글을 db로 넘겨주는 부분
 		  req.setCharacterEncoding("UTF-8");
 		  int idx = Integer.parseInt(req.getParameter("idx"));
@@ -73,8 +85,8 @@ public class BoardDetailController extends HttpServlet{
 		  
 		  String replyCon = req.getParameter("replyCon");
 		  int boardNo = Integer.parseInt(req.getParameter("boardNo"));
-		  int usersNo = 1;
-		  
+		  int usersNo = memDetail.getUsersNo();
+
 		  ReplyVO replyVO = new ReplyVO();
 		  replyVO.setReplyCon(replyCon);
 		  replyVO.setBoardNo(boardNo);

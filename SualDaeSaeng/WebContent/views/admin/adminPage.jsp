@@ -1,3 +1,4 @@
+<%@page import="kr.or.ddit.board.vo.BoardVO"%>
 <%@page import="kr.or.ddit.contact.vo.ContactVO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
@@ -17,6 +18,8 @@
 	List<MemberReqVO> memList = (List<MemberReqVO>)request.getAttribute("memberList");
 
 	List<ContactVO> conList = (List<ContactVO>)request.getAttribute("contactList");
+	
+	List<BoardVO> repList = (List<BoardVO>)request.getAttribute("reportList");
 	
 	 MemberReqVO memreqVO = (MemberReqVO) request.getAttribute("memreqVO"); 
 
@@ -45,26 +48,11 @@
 	        <p>등록일시: <span id="memRegdt"></span></p>
 	        <p>주소 번호: <span id="addrNo"></span></p>
 		    <div class="modal-footer">
-		    	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-		       
+		    	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>	       
 		    	<button type="submit" class="btn btn-primary" id="accept" name="accept">수락</button>
 		    </div>
- 		</form>
-  
-<%--         <p>이름: <%=memreqVO.getMemName() %></p> --%>
-<%--         <p>닉네임: <%=memreqVO.getMemNick()%></p> --%>
-<%-- <%--         <p>생년월일: <%=sdf.format(memreqVO.getMemBirth())%> </p> --%> 
-<%--         <p>생년월일: <%=memreqVO.getMemBirth() %> </p> --%>
-<%--         <p>이메일: <%=memreqVO.getMemEmail()%></p> --%>
-<%--         <p>전화번호: <%=memreqVO.getMemTel()%></p> --%>
-<%--         <p>분반: <%=memreqVO.getMemClass()%></p> --%>
-<%-- <%--         <p>등록일시:<%=sdf.format(memreqVO.getMemRegdt()) %></p> --%> 
-<%--         <p>등록일시:<%=memreqVO.getMemRegdt() %></p> --%>
-<%--         <p>주소 번호: <%=memreqVO.getAddrNo()%></p> --%>
-        
+ 		</form>   
         </div>
-   
-	
     </div>
   </div>
 </div>
@@ -84,8 +72,8 @@
             </p>
           </div>
           <div class="list-group d-flex justify-content-start align-items-center flex-row p-3 gap-3" id="listG">
-                 
-          
+                
+               
      <%
      	 if(memList != null && !memList.isEmpty()) {	
                    for(MemberReqVO member : memList) {
@@ -109,57 +97,52 @@
     	<%  
 	    	}
    	%>
-   
 
           </div>
         </div>
+        
+        
+        
           <div class="portfolio-description d-flex justify-content-between gap-5">
             <div class="col">
               <div class="section-header">
                 <h2>Request</h2>
                 <p class="d-flex justify-content-between align-items-center"> 신고된 게시글 
-                  <button type="button" class="btn btn-outline-warning btn-sm">더보기</button>
+                  <button type="button" class="btn btn-outline-warning btn-sm"><a href ="/views/reportAllList.do">더보기</a></button>
                 </p>
-              </div>
+              </div>              
               <div class="list-group">
-                <a href="#" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
+       
+  <%
+      if(repList != null && !repList.isEmpty()) {	
+    	  for(int i = 0; i<4 ; i++) {
+         	 BoardVO board = repList.get(i);	
+  %>              
+                <a href="<%=request.getContextPath() %>/views/reportDetail.do?boardNo=<%=board.getBoardNo()%>" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
                   <h6 class="mb-2 text-truncate">
-                    <small class="badge bg-light">자유</small>
+                    <small class="badge bg-light"><%=board.getBoardNo() %></small>
                     <small class="attach">
                       <i class="bi bi-paperclip"></i>
-                    </small> List group item heading
+                    </small> <%=board.getBoardTitle() %>
                   </h6>
-                  <small class="days">2024-05-03</small>
-                </a>
-                <a href="#" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
-                  <h6 class="mb-2 text-truncate">
-                    <small class="badge bg-light">자유</small>
-                    <small class="attach">
-                      <i class="bi bi-paperclip"></i>
-                    </small> List group item heading
-                  </h6>
-                  <small class="days">2024-05-03</small>
-                </a>
-                <a href="#" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
-                  <h6 class="mb-2 text-truncate">
-                    <small class="badge bg-light">자유</small>
-                    <small class="attach">
-                      <i class="bi bi-paperclip"></i>
-                    </small> List group item heading
-                  </h6>
-                  <small class="days">2024-05-03</small>
-                </a>
-                <a href="#" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
-                  <h6 class="mb-2 text-truncate">
-                    <small class="badge bg-light">자유</small>
-                    <small class="attach">
-                      <i class="bi bi-paperclip"></i>
-                    </small> List group item heading
-                  </h6>
-                  <small class="days">2024-05-03</small>
-                </a>
-              </div>
+                  <small class="days"><%=board.getBoardAt() %></small>
+                </a>    
+ 	<%
+    			 if(repList.size()-1 == i) break;
+     		}
+      	}
+     		else{
+  	%>    
+  	 	<div>신고 내역이 없습니다.</div>
+   <%  
+	    	}
+  	%>            
+             
+             </div>
             </div>
+          
+          
+  
             
             <div class="col">
               <div class="section-header">
@@ -174,14 +157,13 @@
          	if(conList != null && !conList.isEmpty()) {	
 //                 for(ContactVO contact : conList) {
                 for(int i = 0; i<4 ; i++) {
-                	 ContactVO contact = conList.get(i);	
-                
+                	 ContactVO contact = conList.get(i);	              
 	%>
 			
-	   <a href="<%=request.getContextPath() %>/views/contactDetail.do?no=<%=contact.getqNO()%>" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
+	   <a href="<%=request.getContextPath() %>/views/contactDetail.do?qNO=<%=contact.getqNO()%>" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
                   <h6 class="mb-2 text-truncate">                  
                     <small class="badge bg-light">
-                    	<%= "Y".equals(contact.getqYn()) ? "완료" : "미완료" %>
+                    	<%= "Y".equals(contact.getqYn().trim()) ? "완료" : "미완료" %>
                     </small>
                     <%=contact.getqTitle()%>
                  </h6>

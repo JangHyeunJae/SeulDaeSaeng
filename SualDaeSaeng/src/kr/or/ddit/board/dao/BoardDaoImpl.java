@@ -9,8 +9,11 @@ import org.apache.ibatis.session.SqlSession;
 
 import kr.or.ddit.board.vo.BoardVO;
 import kr.or.ddit.board.vo.FileDetailVO;
+import kr.or.ddit.board.vo.FileShareVO;
 import kr.or.ddit.board.vo.HomeworkVO;
+import kr.or.ddit.board.vo.HwSubmitVO;
 import kr.or.ddit.board.vo.ReplyVO;
+import kr.or.ddit.contact.vo.ContactVO;
 import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.member.vo.UsersVO;
 import kr.or.ddit.util.MyBatisUtil;
@@ -436,7 +439,7 @@ public class BoardDaoImpl implements IBoardDao {
 	}
 
 	@Override
-	public List<HomeworkVO> getHwList() {
+	public List<HomeworkVO> getHwList(int levelChk) {
 		
 		List<HomeworkVO> hwList = new ArrayList<HomeworkVO>();
 
@@ -445,7 +448,7 @@ public class BoardDaoImpl implements IBoardDao {
 		try {
 			session = MyBatisUtil.getSqlSession(true);
 
-			hwList = session.selectList("board.getHwList");
+			hwList = session.selectList("board.getHwList",levelChk);
 
 		} catch (PersistenceException ex) {
 			ex.printStackTrace();
@@ -532,7 +535,8 @@ public class BoardDaoImpl implements IBoardDao {
 		}
 		return fileList;
 	}
-
+    /*
+    
 	@Override
 	public int insertFileDetail(FileDetailVO fileDetail) {
 		
@@ -557,6 +561,7 @@ public class BoardDaoImpl implements IBoardDao {
 		
 		return status;
 	}
+	*/
 
 	@Override
 	public FileDetailVO getFileDetail(int fileNo) {
@@ -596,6 +601,156 @@ public class BoardDaoImpl implements IBoardDao {
 		}
 		
 		return boardList;
+	}
+
+	@Override
+	public int insertFileShare(FileShareVO fileShare) {
+		SqlSession session = null;
+		int status2 = 0;		
+		
+		try {
+			session = MyBatisUtil.getSqlSession();
+			status2 = session.insert("board.insertFileShare", fileShare);
+			
+			if(status2 > 0) {	// 성공
+				session.commit();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		
+		return status2;
+	}
+
+	@Override
+	public int insertBoardFile(FileDetailVO fileDetail) {
+		
+		SqlSession session = null;
+		int status = 0;		
+		
+		try {
+			session = MyBatisUtil.getSqlSession();
+			session.insert("board.saveFile", fileDetail);
+			status = session.insert("board.saveFileDetail", fileDetail);
+			
+			if(status > 0) {	// 성공
+				session.commit();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		
+		return status;
+	}
+
+	@Override
+	public FileDetailVO getFile(int boardNo) {
+		
+		FileDetailVO file = null;
+
+		SqlSession session = null;
+
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+            
+			file = session.selectOne("board.getFile",boardNo);
+
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return file;
+	}
+
+	@Override
+	public MemberVO getHwTeacher(int hwNo) {
+		
+		MemberVO mem = null;
+		SqlSession session = null;
+
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+            
+			mem = session.selectOne("board.getHwTeacher",hwNo);
+
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return mem;
+	}
+
+	@Override
+	public int studentSubmitHw(HwSubmitVO hwSubmit) {
+		
+		SqlSession session = null;
+		int status = 0;		
+		
+		try {
+			
+			session = MyBatisUtil.getSqlSession();
+			status = session.insert("board.studentSubmitHw", hwSubmit);
+			
+			if(status > 0) {	// 성공
+				session.commit();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		
+		return status;
+	}
+
+	@Override
+	public List<FileDetailVO> mySubmit(Map<String, Object> parameter2) {
+		
+		List<FileDetailVO> submit = null;
+		SqlSession session = null;
+
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+            
+			submit = session.selectList("board.mySubmit",parameter2);
+
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return submit;
+	}
+
+	@Override
+	public MemberVO writerDetail(int boardNo) {
+		SqlSession session = null;		// 디비와 연결하기 위한 생산품
+		MemberVO memberVO = null;	// 전체 목록 데이터를 받을 변수 
+		
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			memberVO = session.selectOne("board.writerDetail", boardNo);
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(session != null) { 
+				session.close();
+			}
+		}
+		return memberVO;
 	}
 
 }

@@ -1,8 +1,11 @@
 package kr.or.ddit.board.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.Part;
 
@@ -10,12 +13,16 @@ import kr.or.ddit.board.dao.BoardDaoImpl;
 import kr.or.ddit.board.dao.IBoardDao;
 import kr.or.ddit.board.vo.BoardVO;
 import kr.or.ddit.board.vo.FileDetailVO;
+import kr.or.ddit.board.vo.FileShareVO;
 import kr.or.ddit.board.vo.HomeworkVO;
+import kr.or.ddit.board.vo.HwSubmitVO;
 import kr.or.ddit.board.vo.ReplyVO;
 import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.member.vo.UsersVO;
 
 public class BoardServiceImpl implements IBoardService{
+	
+	private static final String UPLOAD_DIR = "upload_files";
 	
     private final IBoardDao boardDao;
 	
@@ -110,8 +117,8 @@ public class BoardServiceImpl implements IBoardService{
 	}
 
 	@Override
-	public List<HomeworkVO> getHwList() {
-		return boardDao.getHwList();
+	public List<HomeworkVO> getHwList(int levelChk) {
+		return boardDao.getHwList(levelChk);
 	}
 
 	@Override
@@ -125,18 +132,13 @@ public class BoardServiceImpl implements IBoardService{
 	}
 
 	@Override
-	public int saveFileDetail(FileDetailVO fileDetail) {
-		return boardDao.saveFileDetail(fileDetail);
-	}
-
-	@Override
 	public List<FileDetailVO> getFileList(int classNo) {
 		return boardDao.getFileList(classNo);
 	}
 
 	@Override
-	public int insertFileDetail(FileDetailVO fileDetail) {
-		return boardDao.insertFileDetail(fileDetail);
+	public int saveFileDetail(FileDetailVO fileDetail) {
+		return boardDao.saveFileDetail(fileDetail);
 	}
 
 	@Override
@@ -167,5 +169,76 @@ public class BoardServiceImpl implements IBoardService{
 	@Override
 	public List<BoardVO> searchClassBoardList(Map<String, Object> parameter) {
 		return boardDao.searchClassBoardList(parameter);
+	}
+
+	@Override
+	public int insertFileShare(FileShareVO fileShare) {
+		return boardDao.insertFileShare(fileShare);
+	}
+
+	@Override
+	public int insertBoardFile(Part filePart, int levelChk) {
+        
+		String uploadPath = "d:/D_Other/" + UPLOAD_DIR;
+        
+        File uploadDir = new File(uploadPath);
+        if(!uploadDir.exists()) {
+           uploadDir.mkdir();
+        }
+        FileDetailVO fileDetail = new FileDetailVO();
+
+        	String fileName = filePart.getSubmittedFileName();
+
+        	String orignFileName = fileName; //원본 파일명
+        	long fileSize = filePart.getSize(); //파일 크기
+        	String fileSavednm = ""; //저장 파읾명
+        	String fileSavepath = ""; //저장 파일경로
+        		
+        	fileSavednm = UUID.randomUUID().toString().replace("-", "");
+        		
+        	fileSavepath = uploadPath + "/" + fileSavednm;
+        	
+        	try {
+        		filePart.write(fileSavepath); //파일 업로드 처리
+			} catch (IOException e) {
+					e.printStackTrace();
+			}  
+        		
+        	//확장명 추출
+        	String fileExtension = orignFileName.lastIndexOf(".") < 0 ? 
+        				"" : orignFileName.substring(orignFileName.lastIndexOf(".") + 1);
+        		
+        	fileDetail.setFileLevel(levelChk);
+        	fileDetail.setFileExt(fileExtension);
+        	fileDetail.setFileOgname(orignFileName);
+        	fileDetail.setFileSavednm(fileSavednm);
+        	fileDetail.setFileSavepath(fileSavepath);
+        	fileDetail.setFileSize(fileSize);
+        return boardDao.insertBoardFile(fileDetail);
+     }
+
+	@Override
+	public FileDetailVO getFile(int boardNo) {
+		return boardDao.getFile(boardNo);
+	}
+
+	@Override
+	public MemberVO getHwTeacher(int hwNo) {
+		return boardDao.getHwTeacher(hwNo);
+	}
+
+	@Override
+	public int studentSubmitHw(HwSubmitVO hwSubmit) {
+		return boardDao.studentSubmitHw(hwSubmit);
+	}
+
+	@Override
+	public List<FileDetailVO> mySubmit(Map<String, Object> parameter2) {
+		return boardDao.mySubmit(parameter2);
+	}
+
+	@Override
+	public MemberVO writerDetail(int boardNo) {
+		return boardDao.writerDetail(boardNo);
 	}
 }

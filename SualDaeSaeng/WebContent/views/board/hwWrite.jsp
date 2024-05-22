@@ -13,7 +13,6 @@
     if(levelChk < 300){
 	   idx = (int)request.getAttribute("idx");
     }
-
  	String boardName = null;
  	String board = null;
  	// levelChk 0이면 버튼 선택해야함
@@ -38,7 +37,6 @@
   		boardName = "전체게시판";
   		board = "allBoard";
   	}
-
  %>
 <!--<main data-aos="fade" data-aos-delay="1500" >-->
 <main>
@@ -65,75 +63,28 @@
           <h2>
           <%=boardName %>
           </h2>
-          <%
-          if(levelChk<300){
-          %>
-        <form action="<%=request.getContextPath()%>/board/write.do" method="post" role="form" id="insertForm" class="php-email-form needs-validation" novalidate>
-      		<%
-      			if(levelChk == 0){
-      		%>
-          <div class="form-group d-flex align-items-center">
-                  <input type="radio" class="btn-check" name="level" id="freeBoard" value="1" autocomplete="off" checked>
-                  <label class="btn btn-outline-warning" for="freeBoard">자유게시판</label>
-                  
-                  <input type="radio" class="btn-check" name="level" id="studyBoard" value="2" autocomplete="off">
-                  <label class="btn btn-outline-warning" for="studyBoard">공부게시판</label>
-                  
-                  <input type="radio" class="btn-check" name="level" id="noticeBoard" value="3" autocomplete="off">
-                  <label class="btn btn-outline-warning" for="noticeBoard">공지사항</label>
-          </div>
-
-          <%
-      			}else{
-          %>
           <input type="hidden" class="btn-check" name="level" value=<%=levelChk %>>
-          <%
-      			}
-          }
-          %>
         </div>
       </div>
     </div>
   </div><!-- End Page Header -->
-        
+
   <div class="contact">
     <div class="container pb-3">
       <!-- {{changeDetected}} -->
-       <%
-          if(levelChk>300){
-        %>
-        <form action="<%=request.getContextPath()%>/homework/write.do" method="post" role="form" id="insertForm" class="php-email-form needs-validation" novalidate>
+        <form action="<%=request.getContextPath()%>/homework/write.do?levelChk=<%=levelChk %>" method="post" role="form" id="insertForm" class="php-email-form needs-validation" novalidate>
           <div class="form-group d-flex align-items-center pt-4">
            <p class="pe-2">기간 설정 : <p>
            <input type="date" class="form-control" name="startDate" id="startDate" value="" max="9999-12-31" style="width:180px; display:inline" required> ~ 
            <input type="date" class="form-control" name="endDate" id="endDate" value="" max="9999-12-31" style="width:180px;  display:inline" required>
           </div> 
-        <%
-          }else
-        %>
-       <form action="<%=request.getContextPath()%>/board/write.do" method="post" role="form" id="insertForm" class="php-email-form needs-validation" novalidate>
         <div class="form-group">
           <input type="text" class="form-control" name="title" id="title" placeholder="제목" required>
           <div class="invalid-feedback">제목을 작성해주세요.</div>
         </div>
         	<textarea class="form-control summernote" rows="5" id="content" name="content"></textarea>
         	<input type="hidden" id="levelChk" name="levelChk" value=<%=levelChk %>>
-        	<%
-        	if(levelChk<300){
-        	%>
-        	<input type="hidden" id="idx" name="idx" value=<%=idx %>>
-        	<%
-        	}
-        	%>
-        	
-        	<!-- 파일 input -->
-            
-            <form class="file-drop" method="post" action="/file/upload.do?classNo=<%=levelChk %>" enctype="multipart/form-data">
-              <input type="file" name="upload" id="upload-file" multiple>
-            </form>
-            
-            <!-- end 파일 input -->
-        	
+
         <div class="text-center mt-5 mb-5">
           <button type="submit" id="submitBtn">작성하기</button>
         </div>
@@ -142,9 +93,8 @@
   </div>
 
 </main>
-     
-<script type="text/javascript">
 
+<script type="text/javascript">
 $(function(){
 	
 	var submitBtn = $("#submitBtn");
@@ -152,7 +102,6 @@ $(function(){
 	
 	// 등록 버튼 클릭 시 이벤트
 	submitBtn.on("click", function(){
-
 		var startDate = $("#startDate").val();
 		var lastDate = $("#lastDate").val();
 		var title = $("#title").val();
@@ -160,7 +109,6 @@ $(function(){
 		var level = $(".btn-check").val();
 		var levelChk = $("#levelChk").val();
 		var idx = $("#idx").val();
-
 		if(title == null || title==""){
             alert("제목을 입력해주세요!");
             return false;
@@ -172,7 +120,6 @@ $(function(){
         insertForm.submit();
 	});
 });
-
 $(".summernote").summernote({
 	
     //에디터의 높이
@@ -185,7 +132,6 @@ $(".summernote").summernote({
     toolbar:[
        //글꼴지정
        ['fontname',['fontname']],
-
        //글자 크기 설정
        ['fontsize',['fontsize']],
        
@@ -212,6 +158,6 @@ $(".summernote").summernote({
        fontSizes:['8','9','10','11','12','13','14','15','20','30','40']
  });
 </script>
-     
+
 <!-- ======= Footer ======= -->
 <%@include file="/footer.jsp" %>

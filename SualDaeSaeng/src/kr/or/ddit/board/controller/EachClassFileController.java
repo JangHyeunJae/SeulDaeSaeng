@@ -22,10 +22,10 @@ public class EachClassFileController extends HttpServlet{
 		 
 		 IBoardService service = BoardServiceImpl.getInstance();
 		 
-		 int classNo = Integer.parseInt(req.getParameter("classNo"));
-		 List<FileDetailVO> fileList = service.getFileList(classNo);
+		 int levelChk = Integer.parseInt(req.getParameter("levelChk"));
+		 List<FileDetailVO> fileList = service.getFileList(levelChk);
          req.setAttribute("fileList", fileList);
-         req.setAttribute("classNo", classNo);
+         req.setAttribute("levelChk", levelChk);
 		 req.getRequestDispatcher("/views/board/fileList.jsp").forward(req, resp);
 	}
 	

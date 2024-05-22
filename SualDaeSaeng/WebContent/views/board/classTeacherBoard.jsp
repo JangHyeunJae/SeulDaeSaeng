@@ -23,7 +23,7 @@
     int levelChk = (int)request.getAttribute("levelChk");
     int usersNo = (int)request.getAttribute("usersNo");
     
-	List<HomeworkVO> hwList = service.getHwList();
+	List<HomeworkVO> hwList = service.getHwList(levelChk);
     
     LocalDate today = LocalDate.now();
     long daysDiff = ChronoUnit.DAYS.between(today,memDetail.getMemRegdt().plusDays(190));
@@ -48,7 +48,7 @@
                 <span><%=memDetail.getMemRegdt().plusDays(190) %> (d-<%=daysDiff %>)</span>
               </li>
               <li>
-                <a href="<%=request.getContextPath()%>/timetable.do" class="btn-visit align-self-start">수업 시간표 확인</a>
+                  <a href="<%=request.getContextPath() %>/file/download.do?fileNo=254" download class="btn-visit align-self-start">시간표 다운로드</a>
               </li>
             </ul>
           </div>
@@ -67,7 +67,7 @@
               <input type="file" name="upload" id="upload-file" multiple>
               <!-- 아래 label 내용 변경하지 마세요. js와 연동 -->
               <label for="upload-file">파일을 드레그하거나 클릭해서 등록</label>
-              <button type="submit" ><i class="bi bi-arrow-bar-up"></i></button>
+              <button type="submit"><i class="bi bi-arrow-bar-up"></i></button>
             </form>
             
             <!-- end 파일 input -->
@@ -80,16 +80,14 @@
             	fileSize=4;
             }
             %>
-            
              <%
               for(int i=0 ; i<fileSize ; i++){
             	  FileDetailVO fd = fileList.get(i);
-            	 
              %>
               <a href="<%=request.getContextPath() %>/file/download.do?fileNo=<%=fd.getFileNo() %>" class="list-group-item py-2 d-flex justify-content-between align-items-center">
                 <span>
                   <i class="bi bi-download px-2"></i> <%=fd.getFileOgname() %> </span>
-                <span> <%=fd.getFileSize() %></span>
+                <span> <%=fd.getFileDt() %></span>
               </a>
               <%
               }
@@ -130,7 +128,7 @@
             <div class="col">
               <div class="section-header">
                 <h2>board</h2>
-                <p class="d-flex justify-content-between align-items-center"> 공지사항 
+                <p class="d-flex justify-content-between align-items-center"> 공지사항
                 <button type="button" class="btn btn-outline-warning btn-sm" 
                 onclick="location.href='<%=request.getContextPath()%>/eachClassNotice.do?levelChk=<%=levelChk %>'">더보기</button>
                 </p>

@@ -12,11 +12,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.board.vo.BoardVO;
 import kr.or.ddit.board.vo.HomeworkVO;
+import kr.or.ddit.member.vo.MemberVO;
 
 @WebServlet("/homework/write.do")
 public class InsertHomeworkController extends HttpServlet{
@@ -25,14 +27,16 @@ public class InsertHomeworkController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int levelChk = Integer.parseInt(req.getParameter("classNo"));
+		int levelChk = Integer.parseInt(req.getParameter("levelChk"));
 		req.setAttribute("levelChk", levelChk);
-		req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
+		req.getRequestDispatcher("/views/board/hwWrite.jsp").forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
+		HttpSession session = req.getSession();
+		MemberVO memDetail = (MemberVO) session.getAttribute("memDetail");
 		
 		int levelChk = Integer.parseInt(req.getParameter("levelChk"));
 		String title = req.getParameter("title");
@@ -46,14 +50,14 @@ public class InsertHomeworkController extends HttpServlet{
 	    parameter.put("hwStart",startDate);
 	    parameter.put("hwEnd",endDate);
 	    parameter.put("hwClass",levelChk);
-	    parameter.put("usersNo",3);
+	    parameter.put("usersNo",memDetail.getUsersNo());
 
 		int status = service.insertHomework(parameter);
-		List<HomeworkVO> hw = service.getHwList();
+		List<HomeworkVO> hw = service.getHwList(levelChk);
 		HomeworkVO recentHw = hw.get(0);
 				
 		if(status > 0) { 	// 성공
-			resp.sendRedirect("/homework/detail.do?hwNo=" + recentHw.getHwNo());
+			resp.sendRedirect("/homework/detail.do?hwNo=" + recentHw.getHwNo() +"&levelChk=" + levelChk);
 		}else {				// 실패
 			req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
 		}

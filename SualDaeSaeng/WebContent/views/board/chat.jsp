@@ -28,9 +28,6 @@
     <link href="/css/main.css" rel="stylesheet">
 <title>채팅창</title>
 
-<style>
-
-</style>
 </head>
 <%
 	MemberVO memDetail = (MemberVO)session.getAttribute("memDetail");
@@ -46,7 +43,7 @@
 <section id="chat" class="gallery-single pb-5">
         <div class="container">
           <div class="chat">
-            <div class="card">
+            <div class="card" style="height: 65vh;">
               <div id="chatWindow" class="card-body msg_card_body">
 <!--               	메세지 출력 -->
               
@@ -66,8 +63,9 @@
           </div>
         </div>
 </section>
-        <button id="closeBtn" style="border:none; display: flex; 
-         justify-content: center; /* 버튼 내부 텍스트 가로 중앙 정렬 */"class="cta-btn" onclick="disconnect();" >채팅 종료</button>
+<div class="d-flex justify-content-center">
+	<button id="closeBtn" style="border:none; display: flex; justify-content: center; /* 버튼 내부 텍스트 가로 중앙 정렬 */"class="cta-btn" onclick="disconnect();" >채팅 종료</button>
+</div>
     
 <script>
 var classId = "<%=classId%>";
@@ -77,8 +75,8 @@ var webSocket = new WebSocket("ws://192.168.34.118:8888/ChatingServer/" + classI
 	// 채팅창이 열리면 대화창, 메시지 입력창, 아이디 표시란으로 사용할 DOM 객체 저장
 	// 윈도우가 로드되면 실행할 익명 함수
 	window.onload = function() {
-		chatWindow = document.getElementById("chatWindow"); // test
-		chatMessage = document.getElementById("chatMessage"); // test
+		chatWindow = document.getElementById("chatWindow"); // 
+		chatMessage = document.getElementById("chatMessage"); // 
 		chatId = '<%=chatId %>';
 	};
 	
@@ -91,11 +89,14 @@ var webSocket = new WebSocket("ws://192.168.34.118:8888/ChatingServer/" + classI
 	    hours = hours % 12;
 	    hours = hours ? hours : 12; // 0 시간은 12로 표시
 	    minutes = minutes < 10 ? '0' + minutes : minutes;
-	    var formattedTime = hours + ':' + minutes + ' ' + ampm;
+
+	    // 현재 요일 가져오기
+	    var days = ['일', '월', '화', '수', '목', '금', '토'];
+	    var dayOfWeek = days[currentTime.getDay()];
+
+	    var formattedTime = hours + ':' + minutes + ' ' + ampm + ', ' + dayOfWeek + '요일';
 	    return formattedTime;
 	}
-
-
 
 	// 메시지 전송
 	function sendMessage() {
@@ -105,14 +106,13 @@ var webSocket = new WebSocket("ws://192.168.34.118:8888/ChatingServer/" + classI
 		// 입력된 메시지가 비어 있지 않은 경우에만 메시지를 보냄
 	    if (messageContent !== "") {
 			// 대화창에 표시 
-			chatWindow.innerHTML += "<div class='d-flex justify-content-end mb-4'>"
+			chatWindow.innerHTML += "<div class='d-flex justify-content-end mb-4 masBox'>"
 										+"<div class='msg_cotainer_send'>" + chatMessage.value
 										+ "<div class='msg_time'>" + messageTime + "</div>"
 										+"</div></div>"; // test
 	
-			webSocket.send(chatId + '|' + chatMessage.value); // 서버로 전송 test
-			chatMessage.value = ""; //메시지 입력창 내용 지우기 test
-// 			chatWindow.scrollTop = chatWindow.scrollHeight; // 대화창 스크롤  test
+			webSocket.send(chatId + '|' + chatMessage.value); // 서버로 전송 
+			chatMessage.value = ""; //메시지 입력창 내용 지우기 
 	    }
 	}
 
@@ -135,11 +135,12 @@ var webSocket = new WebSocket("ws://192.168.34.118:8888/ChatingServer/" + classI
 	// 웹소켓이 닫혔을 때 실행
 	webSocket.onclose = function(event) {
 		chatWindow.innerHTML += "<div style='text-align: center;'>채팅을 종료합니다.</div>";
+		window.close(); // 창 닫기
 	}
 
 	webSocket.onerror = function(event) {
 		alert(event.data);
-		chatWindow.innerHTML += "<div style='text-align: center;'>채팅 중 에러가 발생하였습니다.</div>"; // test
+		chatWindow.innerHTML += "<div style='text-align: center;'>채팅 중 에러가 발생하였습니다.</div>"; 
 	}
 
 	// 메시지를 받았을 때 실행
@@ -153,23 +154,22 @@ var webSocket = new WebSocket("ws://192.168.34.118:8888/ChatingServer/" + classI
 			if (content.match("/")) { // 귓속말
 				if (content.match(("/" + chatId))) { // 나에게 보낸 메시지만 출력
 					var temp = content.replace(("/" + chatId), "[귓속말] ");
-					chatWindow.innerHTML += "<div class='msg_sender'style='margin-left: 50px; font-size: 0.9em;'>"+sender+"</div>" + "<div class='d-flex justify-content-start mb-4'>"
+					chatWindow.innerHTML += "<div class='msg_sender 'style='margin-left: 50px; font-size: 0.9em;'>"+sender+"</div>" + "<div class='d-flex justify-content-start mb-4 masBox'>"
 					+"<div class='img_cont_msg'>"
       				+"<img src='https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg' class='rounded-circle user_img_msg'>"
     				+"</div><div class='msg_cotainer'>"
 											 + "" + temp + "<div class='msg_time_send'>" + messageTime + "</div>"
-											+ "</div></div>"; // test
+											+ "</div></div>"; 
 				}
 			} else { // 일반 대화
-				chatWindow.innerHTML += "<div style='margin-left: 50px; font-size: 0.9em;'>"+sender+"</div>"+"<div class='d-flex justify-content-start mb-4'>"
+				chatWindow.innerHTML += "<div style='margin-left: 50px; font-size: 0.9em;'>"+sender+"</div>"+"<div class='d-flex justify-content-start mb-4 masBox'>"
 								+"<div class='img_cont_msg'>"
                   				+"<img src='https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg' class='rounded-circle user_img_msg'>"
                 				+"</div><div class='msg_cotainer'>"
 										+ content + "<div class='msg_time_send'>" + messageTime + "</div>"
-										+ "</div></div>"; // test
+										+ "</div></div>"; 
 			}
 		}
-// 		chatWindow.scrollTop = chatWindow.srollHeight; //test
 	};
 </script>
 </body>

@@ -39,10 +39,10 @@
 <%-- 									<small><%=sdf.format(member.getMemRegdt()) %>(<%=member.getMemClass()%>호)</small> --%>
 <!-- 								</span> -->
 <!-- 							</a>  -->
-				<a href="<%=request.getContextPath() %>/views/contactDetail.do?no=<%=contact.getqNO()%>" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
+				<a href="<%=request.getContextPath() %>/views/contactDetail.do?qNO=<%=contact.getqNO()%>" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
                   <h6 class="mb-2 text-truncate">
                   	<small class="badge bg-light">
-                  			<%= "Y".equals(contact.getqYn()) ? "완료" : "미완료" %>
+                  			<%= "Y".equals(contact.getqYn().trim()) ? "완료" : "미완료" %>
                   	</small>
                   	 <%= contact.getqTitle()%>
                   </h6>

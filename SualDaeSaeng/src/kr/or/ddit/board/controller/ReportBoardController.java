@@ -24,13 +24,21 @@ public class ReportBoardController extends HttpServlet {
 		int boardNo = Integer.parseInt(req.getParameter("boardNo"));
 		int levelChk = Integer.parseInt(req.getParameter("levelChk"));
 		int idx = Integer.parseInt(req.getParameter("idx"));
-
+		int classBoardChk = 0;
+		if(req.getParameter("classBoardChk")!=null) {
+			classBoardChk = Integer.parseInt(req.getParameter("classBoardChk"));
+		}
+		
 		int status = boardService.reportBoard(boardNo);
 		if (status > 0) { // 성공
 			String msg = "신고가 접수되었습니다.";
 			req.getSession().setAttribute("msg", msg);
-			resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx
-					+ "&levelChk=" + levelChk);
+			if(classBoardChk != 0) {
+				resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk
+						+ "&classBoardChk=" + classBoardChk);
+			}else {
+				resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk);
+			}
 		} else { // 실패
 			req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
 		}

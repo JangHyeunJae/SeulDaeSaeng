@@ -11,9 +11,10 @@
 <%
    List<BoardVO> boardList = (List<BoardVO>)request.getAttribute("boardList");
     int levelChk = (int)request.getAttribute("levelChk");
+    int usersRole = (int)session.getAttribute("usersRole");
     
     String msg = session.getAttribute("msg") == null ? "" : (String) session.getAttribute("msg");
-   session.removeAttribute("msg");
+    session.removeAttribute("msg");
     
     String board = null;
     String boardName = null;
@@ -31,10 +32,15 @@
        boardName = "공지사항";
     }
     
-    // 검색
+    // 검색 옵션 선택
     String option = null;
     if(request.getAttribute("searchOption") != null){
        option = (String)request.getAttribute("searchOption");
+    }
+    // 검색 텍스트
+    String searchTxt = null;
+    if(request.getAttribute("searchText") != null){
+    	searchTxt = (String)request.getAttribute("searchText");
     }
     
     //페이징 기능
@@ -120,16 +126,27 @@
                <%
                   if(option == null){
                %>
-                  <form action="<%=request.getContextPath()%>/<%=board %>.do" method="post" role="form" id="searchForm">
+                  <form action="<%=request.getContextPath()%>/<%=board %>.do" method="get" role="form" id="searchForm">
                <%
                   }else{
                %>
-                  <form action="<%=request.getContextPath()%>/<%=board %>.do?searchOption=<%=option %>" method="post" role="form" id="searchForm">
+                  <form action="<%=request.getContextPath()%>/<%=board %>.do?searchOption=<%=option %>" method="get" role="form" id="searchForm">
                <%
                   }
                %>
+               <%
+               	  if(searchTxt != null){
+               %>
+                  <input type="text" id="searchText" name="searchText" value=<%=searchTxt%> class="form-control"
+                     aria-label="Text input with dropdown button" >
+               <%
+               	  }else{
+               %>
                   <input type="text" id="searchText" name="searchText" class="form-control"
                      aria-label="Text input with dropdown button" >
+                <%
+               	  }
+                %>
                </form>
             </div>
          </div>
@@ -188,27 +205,63 @@
         <ul class="pagination">
             <% if (currentPage > 1) { %>
                 <li class="page-item">
+                <%
+               	  if(searchTxt != null){
+                %>
+                    <a class="page-link" href="<%= request.getContextPath() + "?page=" + (currentPage - 1) %>&searchText=<%=searchTxt %>">&laquo;</a>
+                <%
+               	  }else{
+                %>
                     <a class="page-link" href="<%= request.getContextPath() + "?page=" + (currentPage - 1) %>">&laquo;</a>
+                <%
+               	  }
+                %>
                 </li>
             <% } %>
             
             <% for (int i = 1; i <= totalPages; i++) { %>
                 <li class="page-item <%= (i == currentPage) ? "active" : "" %>">
-                    <a class="page-link" href="<%= request.getContextPath() + "?page=" + i %>"><%= i %></a>
+                <%
+               	  if(searchTxt != null){
+                %>
+                    <a class="page-link" href="<%= request.getContextPath() + "?page=" + i %>&searchText=<%=searchTxt %>"><%= i %></a>
+                <%
+               	  }else{
+                %>
+                	<a class="page-link" href="<%= request.getContextPath() + "?page=" + i %>"><%= i %></a>
+                <%
+               	  }
+                %>
                 </li>
             <% } %>
 
             <% if (currentPage < totalPages) { %>
                 <li class="page-item">
-                    <a class="page-link" href="<%= request.getContextPath() + "?page=" + (currentPage + 1) %>">&raquo;</a>
+                <%
+               	  if(searchTxt != null){
+                %>
+                    <a class="page-link" href="<%= request.getContextPath() + "?page=" + (currentPage + 1) %>&searchText=<%=searchTxt %>">&raquo;</a>
+                <%
+               	  }else{
+                %>
+                	<a class="page-link" href="<%= request.getContextPath() + "?page=" + (currentPage + 1) %>">&raquo;</a>
+                <%
+               	  }
+                %>
                 </li>
             <% } %>
         </ul>
     </nav>
-    
+    	
+    	<%
+    		if(levelChk != 3 || (levelChk == 3 && usersRole == 1)) {
+    	%>
          <div class="container d-flex align-items-center justify-content-end pb-5 gap-2 p-0">
-            <a href="<%=request.getContextPath()%>/board/write.do?levelChk=<%=levelChk %>&idx=0" type="button" class="btn btn-outline-warning">글쓰기</a>
+            <a href="<%=request.getContextPath()%>/board/write.do?levelChk=<%=levelChk %>" type="button" class="btn btn-outline-warning">글쓰기</a>
          </div>
+         <%
+    		}
+         %>
       </div>
    </section>
    </section>

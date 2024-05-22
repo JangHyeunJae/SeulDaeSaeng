@@ -13,7 +13,11 @@
 	int idx = (int)request.getAttribute("idx");
 	int boardNo = (int)request.getAttribute("boardNo");
 	BoardVO bv = (BoardVO)request.getAttribute("boardDetail");
- 	
+	int classBoardChk = 0;
+	if(request.getAttribute("classBoardChk")!=null){
+	   classBoardChk = (int)request.getAttribute("classBoardChk");
+	}
+	
 	int level = bv.getBoardLevel();
     String boardName = null;
     String board = null;
@@ -29,6 +33,16 @@
   		boardName = "공지사항";
   		board = "noticeBoard";
   	}
+
+    if(boardName==null){
+    	boardName = String.valueOf(levelChk) + "호";
+    }
+    
+    if(classBoardChk==1){
+  		board = "eachClassNotice";
+    }else if(classBoardChk==2){
+  		board = "eachClassBoard";
+    }
  %>
 <!--<main data-aos="fade" data-aos-delay="1500" >-->
 <main>
@@ -37,7 +51,15 @@
     <div class="container position-relative">
       <div class="row d-flex justify-content-center">
         <p class="mb-5 text-start">
+        <% if(levelChk > 300){ %>
+          <a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&classBoardChk=<%=classBoardChk %>">
+		<%
+        	}else{
+		%>			        
           <a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>">
+        <%
+			}
+        %>
             <i class="bi bi-chevron-left"></i> 뒤로가기
           </a>
         </p>
@@ -59,6 +81,13 @@
         </div>
         	<textarea class="form-control summernote" rows="5" id="content" name="content"><%=bv.getBoardCon() %></textarea>
         	<input type="hidden" id="levelChk" name="levelChk" value=<%=levelChk %>>
+        	<%
+        		if(classBoardChk != 0){
+        	%>
+        	<input type="hidden" id="classBoardChk" name="classBoardChk" value=<%=classBoardChk %>>
+			<%
+        		}
+			%>        	
         	<input type="hidden" id="idx" name="idx" value=<%=idx %>>
           	<input type="hidden" id="boardNo" name="boardNo" value=<%=boardNo %>>
         <div class="text-center mt-5 mb-5">

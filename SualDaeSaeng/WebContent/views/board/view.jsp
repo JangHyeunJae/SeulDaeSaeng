@@ -32,6 +32,7 @@
 	
 	String msg = session.getAttribute("msg") == null ? "" : (String) session.getAttribute("msg");
 	session.removeAttribute("msg");
+	
     int level = bv.getBoardLevel();
     String boardName = null;
     String board = null;
@@ -195,8 +196,8 @@
               		//세션에서 꺼내와야함.
                 	if(rv.getUsersNo()==memDetail.getUsersNo()){
                 %>
-                <a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&editReply=<%=rv.getReplyNo() %>" class="reply rounded">수정</a>
-                <a href="<%=request.getContextPath()%>/board/deleteReply.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&replyNo=<%=rv.getReplyNo() %>" 
+                <a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&classBoardChk=<%=classBoardChk %>&editReply=<%=rv.getReplyNo() %>" class="reply rounded">수정</a>
+                <a href="<%=request.getContextPath()%>/board/deleteReply.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&classBoardChk=<%=classBoardChk %>&replyNo=<%=rv.getReplyNo() %>" 
                 	onclick="return confirm('삭제하시겠습니까?');" class="reply rounded">삭제</a></p>
                 <%
                 	}
@@ -216,11 +217,11 @@
           <%
           	if(editReply == -1){
           %>
-            <form action="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>" method="post" role="form" id="insertForm" class="p-5">
+            <form action="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&classBoardChk=<%=classBoardChk %>" method="post" role="form" id="insertForm" class="p-5">
           <%
           	}else{
           %>
-            <form action="<%=request.getContextPath()%>/board/editReply.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>" method="post" role="form" id="insertForm" class="p-5">
+            <form action="<%=request.getContextPath()%>/board/editReply.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&classBoardChk=<%=classBoardChk %>" method="post" role="form" id="insertForm" class="p-5">
 		  <%
           	}
 		  %>
@@ -284,12 +285,12 @@
           if(bv.getUsersNo()==memDetail.getUsersNo()){
         	  
           %>
-          <a href="<%=request.getContextPath()%>/board/edit.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>" type="button" class="btn btn-secondary">수정하기</a>
-          <a href="<%=request.getContextPath()%>/board/delete.do?boardNo=<%=bv.getBoardNo() %>&levelChk=<%=levelChk %>" onclick="return confirm('삭제하시겠습니까?');" type="button" class="btn btn-secondary">삭제하기</a>
+          <a href="<%=request.getContextPath()%>/board/edit.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&classBoardChk=<%=classBoardChk %>" type="button" class="btn btn-secondary">수정하기</a>
+          <a href="<%=request.getContextPath()%>/board/delete.do?boardNo=<%=bv.getBoardNo() %>&levelChk=<%=levelChk %>&classBoardChk=<%=classBoardChk %>" onclick="return confirm('삭제하시겠습니까?');" type="button" class="btn btn-secondary">삭제하기</a>
           <%
           }else{
           %>
-          <a href="<%=request.getContextPath()%>/board/report.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&report=Y" onclick="return confirm('신고하시겠습니까?');" type="button" class="btn btn-secondary">신고하기</a>
+          <a href="<%=request.getContextPath()%>/board/report.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&report=Y&classBoardChk=<%=classBoardChk %>" onclick="return confirm('신고하시겠습니까?');" type="button" class="btn btn-secondary">신고하기</a>
           <%
           }
           %>

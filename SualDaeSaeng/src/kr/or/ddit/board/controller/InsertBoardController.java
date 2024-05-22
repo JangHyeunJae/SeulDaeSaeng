@@ -34,9 +34,11 @@ public class InsertBoardController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int levelChk = Integer.parseInt(req.getParameter("levelChk"));
-		int idx = Integer.parseInt(req.getParameter("idx"));
+		String classBoardChk = req.getParameter("classBoardChk");
+		if(classBoardChk!=null) {
+			 req.setAttribute("classBoardChk", Integer.parseInt(classBoardChk));
+		 }
 		req.setAttribute("levelChk", levelChk);
-		req.setAttribute("idx", idx);
 		req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
 	}
 
@@ -49,11 +51,16 @@ public class InsertBoardController extends HttpServlet {
 		MemberVO memDetail = (MemberVO) session.getAttribute("memDetail");
 
 		int levelChk = Integer.parseInt(req.getParameter("levelChk"));
+		int classBoardChk = 0;
+		if(req.getParameter("classBoardChk")!=null) {
+			classBoardChk = Integer.parseInt(req.getParameter("classBoardChk"));
+		}
 		int level = Integer.parseInt(req.getParameter("level"));
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		int idx = Integer.parseInt(req.getParameter("idx"));
 		Part filePart = req.getPart("file");
+		
 		
 		if(filePart != null && filePart.getSize() != 0) {
 			 int fileStatus = service.insertBoardFile(filePart,levelChk);
@@ -69,8 +76,13 @@ public class InsertBoardController extends HttpServlet {
 
 		int status = service.insertBoard(boardVO);
 		if (status > 0) { // 성공
-			resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardVO.getBoardNo() + "&idx=" + idx
-					+ "&levelChk=" + levelChk);
+			if(classBoardChk != 0) {
+				resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardVO.getBoardNo() + "&idx=" + idx
+						+ "&levelChk=" + levelChk + "&classBoardChk=" + classBoardChk);
+			}else {
+				resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardVO.getBoardNo() + "&idx=" + idx
+						+ "&levelChk=" + levelChk);
+			}
 		} else { // 실패
 			req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
 		}

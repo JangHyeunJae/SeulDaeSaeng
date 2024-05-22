@@ -32,6 +32,7 @@ public class AllBoardListController extends HttpServlet {
 			Map<String, Object> parameter = new HashMap<>();
 			parameter.put("searchText", searchText);
 			parameter.put("searchOption", searchOption);
+			req.setAttribute("searchText", searchText);
 			
 			boardList = boardService.searchAllBoardList(parameter);
 		}else {
@@ -40,7 +41,6 @@ public class AllBoardListController extends HttpServlet {
 
 		if (searchOption != null && searchOption != "") {
 			req.setAttribute("searchOption", searchOption);
-			req.setAttribute("searchText", searchText);
 		}
 		// levelChk는 detail 진입 전에 어느 목록에 있었는지 저장(전체, 자유 등)
 		req.setAttribute("levelChk", level);
@@ -51,25 +51,26 @@ public class AllBoardListController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		int level = 0;
-
-		String searchOption = req.getParameter("searchOption");
-		String searchText = req.getParameter("searchText");
-
-		Map<String, Object> parameter = new HashMap<>();
-		parameter.put("searchText", searchText);
-		parameter.put("searchOption", searchOption);
-		
-		List<BoardVO> boardList = boardService.searchAllBoardList(parameter);
-		
-		if (searchOption != null && searchOption != "") {
-			req.setAttribute("searchOption", searchOption);
-		}
-
-		req.setAttribute("levelChk", level);
-		req.setAttribute("boardList", boardList);
-		
-		resp.sendRedirect("/allBoard.do?searchText=" + searchText);
+		doGet(req, resp);
+//		int level = 0;
+//
+//		String searchOption = req.getParameter("searchOption");
+//		String searchText = req.getParameter("searchText");
+//
+//		Map<String, Object> parameter = new HashMap<>();
+//		parameter.put("searchText", searchText);
+//		parameter.put("searchOption", searchOption);
+//		
+//		List<BoardVO> boardList = boardService.searchAllBoardList(parameter);
+//		
+//		if (searchOption != null && searchOption != "") {
+//			req.setAttribute("searchOption", searchOption);
+//		}
+//
+//		req.setAttribute("levelChk", level);
+//		req.setAttribute("boardList", boardList);
+//		
+////		resp.sendRedirect("/views/board/allBoard.jsp?searchText=" + searchText);
+//		resp.sendRedirect("/allBoard.do?searchText=" + searchText);
 	}
 }

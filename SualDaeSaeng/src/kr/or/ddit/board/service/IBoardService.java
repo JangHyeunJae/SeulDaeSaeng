@@ -85,6 +85,8 @@ public interface IBoardService {
 
   public List<FileDetailVO> mySubmit(Map<String, Object> parameter2);
 
+  public List<BoardVO> selectClassBoardList(int levelChk);
+
   public int insertStory(StoryVO storyVO);
 
   public List<StoryVO> getStoryList(int usersNo);
@@ -93,6 +95,6 @@ public interface IBoardService {
   
   public StoryVO getStoryOne(int storyNo);
 
- public MemberVO writerDetail(int boardNo);
+  public MemberVO writerDetail(int boardNo);
 
 }

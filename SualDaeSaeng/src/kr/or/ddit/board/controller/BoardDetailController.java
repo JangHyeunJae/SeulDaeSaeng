@@ -30,7 +30,7 @@ public class BoardDetailController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		 
 		 int boardNo = Integer.parseInt(req.getParameter("boardNo"));
-		 String classBoardChk = req.getParameter("classBoardChk");
+		 String classBoardChk = null;
 		 BoardVO boardDetail = boardService.getBoardDetail(boardNo);
 		 int hit = boardService.updateHit(boardNo);
 		 int boardLevel = boardDetail.getBoardLevel();
@@ -58,8 +58,8 @@ public class BoardDetailController extends HttpServlet{
 		 req.setAttribute("levelChk", levelChk);
 		 req.setAttribute("editReply", editReply);
 		 
-		 if(classBoardChk!=null) {
-			 req.setAttribute("classBoardChk", Integer.parseInt(classBoardChk));
+		 if(req.getParameter("classBoardChk") != null) {
+			 req.setAttribute("classBoardChk", Integer.parseInt(req.getParameter("classBoardChk")));
 		 }
 		 
 		 List<BoardVO> boardList = null;
@@ -67,8 +67,9 @@ public class BoardDetailController extends HttpServlet{
 		 else boardList = boardService.selectBoardList(boardLevel);
 		 
 		 FileDetailVO file = boardService.getFile(boardNo); 
-		 req.setAttribute("file", file);
-		 
+		 if(file != null && file.getFileSize() > 0) {
+			 req.setAttribute("file", file);
+		 }
 		 req.setAttribute("boardList", boardList);
 		 req.getRequestDispatcher("/views/board/view.jsp").forward(req, resp);
 	}
@@ -82,6 +83,10 @@ public class BoardDetailController extends HttpServlet{
 		  req.setCharacterEncoding("UTF-8");
 		  int idx = Integer.parseInt(req.getParameter("idx"));
 		  int levelChk = Integer.parseInt(req.getParameter("levelChk"));
+		  int classBoardChk = 0;
+		  if(req.getParameter("classBoardChk")!=null) {
+		      classBoardChk = Integer.parseInt(req.getParameter("classBoardChk"));
+		  }
 		  
 		  String replyCon = req.getParameter("replyCon");
 		  int boardNo = Integer.parseInt(req.getParameter("boardNo"));
@@ -95,7 +100,12 @@ public class BoardDetailController extends HttpServlet{
 		  int status = boardService.insertReply(replyVO);
 
 		  if(status>0) {
-			  resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk);
+			  if(classBoardChk != 0) {
+				  	resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk
+							+ "&classBoardChk=" + classBoardChk);
+			  }else {
+					resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk);
+			  }
 		  }else {
 			  req.getRequestDispatcher("/views/board/view.jsp").forward(req, resp);
 		  }

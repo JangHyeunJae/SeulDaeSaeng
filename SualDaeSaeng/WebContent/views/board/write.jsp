@@ -10,10 +10,11 @@
 <%
 	int usersRole = (int)session.getAttribute("usersRole");
     int levelChk = (int)request.getAttribute("levelChk");
+    int classBoardChk = 0;
+	if(request.getAttribute("classBoardChk")!=null){
+	   classBoardChk = (int)request.getAttribute("classBoardChk");
+	}
     int idx = 0;
-    if(levelChk < 300){
-        idx = (int)request.getAttribute("idx");
-    }
 
     String boardName = null;
     String board = null;
@@ -27,9 +28,13 @@
         boardName = "공지사항";
         board = "noticeBoard";
     } else if(levelChk > 300){
-        boardName = Integer.toString(levelChk) + "호";
-        board = "classTeacherBoard";
-    } else {
+    	boardName = String.valueOf(levelChk) + "호";
+	    if(classBoardChk==1){
+	  		board = "eachClassNotice";
+	    }else if(classBoardChk==2){
+	  		board = "eachClassBoard";
+	    }
+    } else if(levelChk == 0){
         boardName = "전체게시판";
         board = "allBoard";
     }
@@ -40,8 +45,9 @@
         <div class="container position-relative">
             <div class="row d-flex justify-content-center">
                 <p class="mb-5 text-start">
+                
                     <% if(levelChk > 300){ %>
-                        <a href="<%=request.getContextPath() %>/classTeacherBoard.do?levelChk=<%=levelChk %>">
+                        <a href="<%=request.getContextPath() %>/<%=board %>.do?levelChk=<%=levelChk %>">
                     <% } else { %>
                         <a href="<%=request.getContextPath() %>/<%=board %>.do">
                     <% } %>
@@ -85,6 +91,13 @@
                         </div>
                         <textarea class="form-control summernote" rows="5" id="content" name="content"></textarea>
                         <input type="hidden" id="levelChk" name="levelChk" value="<%=levelChk %>">
+                        <%
+                        	if(classBoardChk != 0){
+                        %>
+                        <input type="hidden" id="classBoardChk" name="classBoardChk" value="<%=classBoardChk %>">
+                        <%
+                        	}
+                        %>
                         <input type="hidden" id="idx" name="idx" value="<%=idx %>">
                         
 		                <div class="form-group mt-2 d-flex gap-2 align-items-center">

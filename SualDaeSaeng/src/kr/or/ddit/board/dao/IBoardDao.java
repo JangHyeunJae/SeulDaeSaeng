@@ -86,6 +86,9 @@ public interface IBoardDao {
 
 	public List<FileDetailVO> mySubmit(Map<String, Object> parameter2);
 
+
+	public List<BoardVO> selectClassBoardList(int levelChk);
+
 	public int insertStory(StoryVO storyVO);
 
 	public List<StoryVO> getStoryList(int usersNo);

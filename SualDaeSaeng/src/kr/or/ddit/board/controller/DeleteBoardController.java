@@ -23,8 +23,10 @@ public class DeleteBoardController extends HttpServlet{
 		 
 		 int boardNo = Integer.parseInt(req.getParameter("boardNo"));
 		 int levelChk = Integer.parseInt(req.getParameter("levelChk"));
-		 
-		 
+		 int classBoardChk = 0;
+		 if(req.getParameter("classBoardChk")!=null) {
+				classBoardChk = Integer.parseInt(req.getParameter("classBoardChk"));
+		 }
 		 int cnt = boardService.deleteBoard(boardNo);
 	    
 		 // levelChk값에 따라 삭제 후 목록 이동
@@ -35,6 +37,13 @@ public class DeleteBoardController extends HttpServlet{
 			 else if(levelChk == 1) resp.sendRedirect(req.getContextPath() + "/freeBoard.do");
 			 else if(levelChk == 2) resp.sendRedirect(req.getContextPath() + "/studyBoard.do");
 			 else if(levelChk == 3) resp.sendRedirect(req.getContextPath() + "/noticeBoard.do");
+			 else if(levelChk > 300) {
+				 if(classBoardChk == 1) {
+					 resp.sendRedirect(req.getContextPath() + "/eachClassNotice.do?levelChk=" + levelChk);
+				 } else if(classBoardChk == 2) {
+					 resp.sendRedirect(req.getContextPath() + "/eachClassBoard.do?levelChk=" + levelChk);
+				 }
+			 }
 		 }else {
 			 req.getRequestDispatcher("/views/board/view.jsp").forward(req, resp);
 		 }

@@ -798,24 +798,26 @@ public class BoardDaoImpl implements IBoardDao {
 		return time;
 	}
 
-	@Override
-	public StoryVO getStoryOne(int storyNo) {
-		
-		StoryVO storyOne = null;
-		SqlSession session = null;
+    @Override
+   public StoryVO getStoryOne(int storyNo) {
+      
+      StoryVO storyOne = null;
+      SqlSession session = null;
 
-		try {
-			session = MyBatisUtil.getSqlSession(true);
+      try {
+         session = MyBatisUtil.getSqlSession(true);
             
-			storyOne = session.selectOne("board.getStoryOne",storyNo);
+         storyOne = session.selectOne("board.getStoryOne",storyNo);
 
-		} catch (PersistenceException ex) {
-			ex.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return storyOne;
-
+      } catch (PersistenceException ex) {
+         ex.printStackTrace();
+      } finally {
+         session.close();
+      }
+      return storyOne;
+   }
+  
+    @Override
 	public MemberVO writerDetail(int boardNo) {
 		SqlSession session = null;		// 디비와 연결하기 위한 생산품
 		MemberVO memberVO = null;	// 전체 목록 데이터를 받을 변수 
@@ -832,6 +834,25 @@ public class BoardDaoImpl implements IBoardDao {
 			}
 		}
 		return memberVO;
+	}
+  
+  @Override
+	public List<BoardVO> selectClassBoardList(int levelChk) {
+		
+		List<BoardVO> boardList = new ArrayList<BoardVO>();
+
+		SqlSession session = null;
+
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			boardList = session.selectList("board.selectClassBoardList", levelChk);
+
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return boardList;
 	}
 
 }

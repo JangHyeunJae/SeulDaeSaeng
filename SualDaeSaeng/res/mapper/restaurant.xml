@@ -151,5 +151,35 @@
 		</if>
 	</select>
 	
+	<select id="getFileList" parameterType="int" resultMap="fileMap">
+	      select *
+	        from file_detail
+	        where file_level = 5
+	        order by file_no desc
+	</select>
 	
+	<insert id="saveFile" parameterType="kr.or.ddit.board.vo.FileDetailVO" useGeneratedKeys="true">
+		<selectKey keyProperty="fileNo" resultType="int" order="BEFORE">
+			select seq_file.nextval from dual
+		</selectKey>
+		    insert into files(file_no,file_yn)
+	        values(#{fileNo},'Y')
+	</insert>
+	
+	<insert id="saveFileDetail" parameterType="kr.or.ddit.board.vo.FileDetailVO" useGeneratedKeys="true">
+	        insert into file_detail(file_no, file_savepath, file_ogname, file_savednm, file_size, file_ext, file_dt, file_level)
+	        values(#{fileNo}, #{fileSavepath}, #{fileOgname},#{fileOgname}, #{fileSize}, #{fileExt}, sysdate, #{fileLevel})
+	</insert>
+	
+
+	<insert id="insertReview" parameterType="reviewVO" useGeneratedKeys="true">
+		<selectKey keyProperty="reviewNo" resultType="int" order="BEFORE">
+			select seq_board.nextval from dual
+		</selectKey>
+		insert into board(
+			REVIEW_NO, USERS_NO, REST_BIZNO, REVIEW_STAR, REVIEW_TEXT, REVIEW_YN, FILE_NO, REVIEW_DATE
+		)values(
+			#{reviewNo}, #{usersNo}, #{restBizno}, #{reviewStar}, #{reviewText}, 'Y', #{fileNo}, SYSDATE
+		)
+	</insert>
 </mapper>

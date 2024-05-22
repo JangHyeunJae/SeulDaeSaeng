@@ -1,12 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/header.jsp" %>
 <%
-//	int usersRole = (int)session.getAttribute("usersRole");
-  //  int levelChk = (int)request.getAttribute("levelChk");
-    //int idx = 0;
-    //if(levelChk < 300){
-      //  idx = (int)request.getAttribute("idx");
-    //}
+	String restBizno = request.getParameter("restBizno");
 %>
 
 <main>
@@ -14,58 +9,69 @@
         <div class="container position-relative">
             <div class="row d-flex justify-content-center">
                 <p class="mb-5 text-start">
-                	<a href="<%=request.getContextPath() %>.do">
+                	<a href="<%=request.getContextPath() %>/restaurant/view.do?no=<%=restBizno %>">
                         <i class="bi bi-chevron-left"></i> 뒤로가기
                     </a>
                 </p>
                 <div>
                     <h2>리뷰작성</h2>
-                    <form action="<%=request.getContextPath()%>/board/write.do" method="post" enctype="multipart/form-data" role="form" id="insertForm" class="php-email-form needs-validation" novalidate>
+                    <form action="<%=request.getContextPath()%>/restaurant/reviewWrite.do" method="post" enctype="multipart/form-data" role="form" id="insertForm" class=" needs-validation" novalidate>
                         <div class="contact container px-0">
-                        	<div class="d-flex align-items-center mb-3 starBox gap-3">
-							  <input class="form-check-input d-none" type="radio" name="reviewStar" id="star5" value="10" checked="checked">
-							  <label class="form-check-label fs-4 text-warning" for="star5">
-							  	<i class="bi bi-star"></i>
-							  	<i class="bi bi-star-fill"></i>
-							  </label>
-							  
-							  <input class="form-check-input d-none" type="radio" name="reviewStar" id="star4" value="8">
-							  <label class="form-check-label fs-4 text-warning" for="star4">
-							  	<i class="bi bi-star"></i>
-							  	<i class="bi bi-star-fill"></i>
-							  </label>
-							  
-							  <input class="form-check-input d-none" type="radio" name="reviewStar" id="star3" value="6">
-							  <label class="form-check-label fs-4 text-warning" for="star3">
-							  	<i class="bi bi-star"></i>
-							  	<i class="bi bi-star-fill"></i>
-							  </label>
-							  
-							  <input class="form-check-input d-none" type="radio" name="reviewStar" id="star2" value="4">
-							  <label class="form-check-label fs-4 text-warning" for="star2">
-							  	<i class="bi bi-star"></i>
-							  	<i class="bi bi-star-fill"></i>
-							  </label>
-							  
-							  <input class="form-check-input d-none" type="radio" name="reviewStar" id="star1" value="2">
-							  <label class="form-check-label  fs-4 text-warning" for="star1">
-							  	<i class="bi bi-star"></i>
-							  	<i class="bi bi-star-fill"></i>
-							  </label>
-							  
-							  <p class="mb-0 pt-2">점수 </p>
-                        	</div>
+                       		<div class="d-flex align-items-center mb-3 starBox gap-3 is-valid">
+ 
+								<input class="form-check-input d-none" type="radio" name="reviewStar" id="star5" value="10">
+								<label class="form-check-label fs-4" for="star5">
+									<i class="bi bi-star"></i>
+									<i class="bi bi-star-fill"></i>
+								</label>
+								
+								<input class="form-check-input d-none" type="radio" name="reviewStar" id="star4" value="8">
+								<label class="form-check-label fs-4" for="star4">
+									<i class="bi bi-star"></i>
+									<i class="bi bi-star-fill"></i>
+								</label>
+								
+								<input class="form-check-input d-none" type="radio" name="reviewStar" id="star3" value="6">
+								<label class="form-check-label fs-4" for="star3">
+									<i class="bi bi-star"></i>
+									<i class="bi bi-star-fill"></i>
+								</label>
+								
+								<input class="form-check-input d-none" type="radio" name="reviewStar" id="star2" value="4">
+								<label class="form-check-label fs-4" for="star2">
+									<i class="bi bi-star"></i>
+									<i class="bi bi-star-fill"></i>
+								</label>
+								
+								<input class="form-check-input d-none" type="radio" name="reviewStar" id="star1" value="2">
+								<label class="form-check-label fs-4" for="star1">
+									<i class="bi bi-star"></i>
+									<i class="bi bi-star-fill"></i>
+								</label>
+								
+								<input class="form-check-input d-none" type="radio" name="reviewStar" id="star0" value="" checked="checked">
+
+								<p class="mb-0 pt-3">
+									점수
+									<span class="score score5">5점</span>
+									<span class="score score4">4점</span>
+									<span class="score score3">3점</span>
+									<span class="score score2">2점</span>
+									<span class="score score1">1점</span>
+									주기								 
+								</p>
+	                       	</div>
 	                        
 	                        <div class="form-group">
-	                            <textarea class="form-control" name="title" id="title" placeholder="제목" required></textarea>
-	                            <div class="invalid-feedback">제목을 작성해주세요.</div>
+	                            <textarea class="form-control" style="min-height: 200px;" name="review" id="review" placeholder="리뷰 내용을 작성해 주세요.(필수입니다)" required></textarea>
 	                        </div>
 			                <div class="form-group mt-2 d-flex gap-2 align-items-center">
-			                  <input class="form-control form-control-lg " type="file" name="file" id="file" />
+			                  <input class="form-control form-control-lg " type="file" name="file" id="file" required/>
 			                </div>
-	                        
+			                
+				          	<input type="hidden" id="restBizno" name="restBizno" value=<%=restBizno %>>
 	                         <div class="text-center mt-5 mb-5">
-	                            <button type="submit" id="submitBtn" name="submitBtn" style="background-color:orange;">작성하기</button>
+	                            <button type="button" id="submitBtn" name="submitBtn" >작성하기</button>
 	                         </div>
                         </div>
                     </form>
@@ -79,18 +85,41 @@
 $(function(){
     var submitBtn = $("#submitBtn");
     var insertForm = $("#insertForm");
+    
+     $(".form-check-label").on("click",function(){
+		$(".starBox").removeClass("is-invalid");
+		$(".starBox").addClass("is-valid");
+     });
 
     submitBtn.on("click", function(){
-        var title = $("#title").val();
-
-        if(title == null || title == ""){
-            alert("제목을 입력해주세요!");
-            return false;
-        }
-        insertForm.submit();
+    	var reviewStar = $(".form-check-input[type=radio]:checked").val();
+    	
+        var review = $("#review").val();
+        var file = $("#file").val();        
+        
+        if(reviewStar == null || reviewStar == 0 || reviewStar == ""){
+        	$(".starBox").addClass("is-invalid");
+        	$(".starBox").removeClass("is-valid");
+        } 
+        /*
+        if(file == null || file == ""){
+            $("#file").addClass("is-invalid");
+            $("#file").removeClass("is-valid");
+        }else {
+        	$("#file").addClass("is-valid");
+        	$("#file").removeClass("is-invalid");
+		}
+		*/
+        if(review == null || review == ""){
+            $("#review").addClass("is-invalid");
+            $("#review").removeClass("is-valid");
+        }else {
+        	$("#review").addClass("is-valid");
+        	$("#review").removeClass("is-invalid");
+        	insertForm.submit();
+		}
     });
 });
-
 </script>
 
 <%@include file="/footer.jsp" %>

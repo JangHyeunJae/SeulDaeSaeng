@@ -37,7 +37,7 @@ public class MyPageHome extends HttpServlet{
 		MemberUtil.boardLevelKr(memBoardList);
 		req.setAttribute("memBoardList", memBoardList);
 		
-		if(usersVo != null ) {
+		if(usersVo != null && addrVo != null & memberVo != null) {
 			req.getRequestDispatcher("/views/member/myPage.jsp").forward(req, resp);
 		}else resp.sendRedirect("/main.do");
 		

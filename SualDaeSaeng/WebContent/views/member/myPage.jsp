@@ -39,30 +39,89 @@
                 <h3 class="d-flex align-items-center">
                   <img src="img/testimonials/testimonials-2.jpg" class="testimonial-img me-2" alt="">
                   <p>
-                    <span><%=memberVo.getMemNick() %>(<%=memberVo.getMemName() %>)</span>
+                    <span><%if(memberVo.getMemNick() != null){ %>
+                    <%=memberVo.getMemNick() %>(<%=memberVo.getMemName() %>)
+                    <%
+                    	}else{
+                    %>
+                    	없음
+					<%
+                    	}
+					%>                    		
+                    </span>
                     <small><%=usersVo.getUsersId() %></small>
                   </p>
                 </h3>
                 <ul>
                   <li>
                     <strong>주소 </strong>
-                    <span><%=addrVo.getAddrBasic() %></span>
+                    <span>
+                    <%if(addrVo.getAddrBasic() != null){ %>
+                    <%=addrVo.getAddrBasic() %>
+                    <%
+                   		 }else{
+                    %>
+					없음
+					<% 
+                   		 }
+					%>
+                    </span>
                   </li>
                   <li>
                     <strong>전화번호</strong>
-                    <span><%=memberVo.getMemTel() %></span>
+                    <span>
+                    <%if(memberVo.getMemTel() != null){ %>
+                    <%=memberVo.getMemTel() %>
+                    <%
+                   		 }else{
+                    %>
+					없음
+					<% 
+                   		 }
+					%>
+                    </span>
                   </li>
                   <li>
                     <strong>이메일</strong>
-                    <span><%=memberVo.getMemEmail() %></span>
+                    <span>
+                    <%if(memberVo.getMemEmail() != null){ %>
+                    <%=memberVo.getMemEmail() %>
+                    <%
+                   		 }else{
+                    %>
+					없음
+					<% 
+                   		 }
+					%>
+                    </span>
                   </li>
                   <li>
                     <strong>생일</strong>
-                    <span><%=memberVo.getMemBirth() %></span>
+                    <span>
+                    <%if(memberVo.getMemBirth() != null){ %>
+                    <%=memberVo.getMemBirth() %>
+                    <%
+                   		 }else{
+                    %>
+					없음
+					<% 
+                   		 }
+					%>
+                    </span>
                   </li>
                   <li>
                     <strong>반</strong>
-                    <span><%=memberVo.getMemClass() %></span>
+                    <span>
+                    <%if(memberVo.getMemClass() != null){ %>
+                    <%=memberVo.getMemClass() %>
+                    <%
+                   		 }else{
+                    %>
+					없음
+					<% 
+                   		 }
+					%>
+                    </span>
                   </li>
                   <li>
                     <a href="<%=request.getContextPath() %>/member/pwCheck.do" class="btn-visit align-self-start">정보수정 / 탈퇴</a>

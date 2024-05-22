@@ -1,7 +1,21 @@
+<%@page import="kr.or.ddit.board.vo.BoardVO"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.or.ddit.member.vo.AddressVO"%>
+<%@page import="kr.or.ddit.member.vo.MemberVO"%>
+<%@page import="kr.or.ddit.member.vo.UsersVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 <%@include file="/header.jsp" %>
+
+<%
+
+	UsersVO usersVo = (UsersVO)request.getAttribute("usersVo");
+	MemberVO memberVo = (MemberVO)request.getAttribute("memberVo");
+	AddressVO addrVo = (AddressVO)request.getAttribute("addrVo");
+	List<BoardVO> memBoardList = (List<BoardVO>)request.getAttribute("memBoardList");
+
+%>
 
  <main class="myPage" data-aos="fade" data-aos-delay="1500">
       <section id="myPage" class="gallery-single ">
@@ -12,29 +26,33 @@
                 <h3 class="d-flex align-items-center">
                   <img src="img/testimonials/testimonials-2.jpg" class="testimonial-img me-2" alt="">
                   <p>
-                    <span>닉네임입당 (이름임)</span>
-                    <small>ID를작성함</small>
+                    <span><%=memberVo.getMemNick() %>(<%=memberVo.getMemName() %>)</span>
+                    <small><%=usersVo.getUsersId() %></small>
                   </p>
                 </h3>
                 <ul>
                   <li>
                     <strong>주소 </strong>
-                    <span>주소지 작성 주소지 작성 123-123</span>
+                    <span><%=addrVo.getAddrBasic() %></span>
                   </li>
                   <li>
                     <strong>전화번호</strong>
-                    <span>000-0000-0000</span>
+                    <span><%=memberVo.getMemTel() %></span>
                   </li>
                   <li>
                     <strong>이메일</strong>
-                    <span>qwer1234@naver.com</span>
+                    <span><%=memberVo.getMemEmail() %></span>
                   </li>
                   <li>
                     <strong>생일</strong>
-                    <span>1999.11.22</span>
+                    <span><%=memberVo.getMemBirth() %></span>
                   </li>
                   <li>
-                    <a href="#" class="btn-visit align-self-start">정보수정 / 탈퇴</a>
+                    <strong>반</strong>
+                    <span><%=memberVo.getMemClass() %></span>
+                  </li>
+                  <li>
+                    <a href="<%=request.getContextPath() %>/member/pwCheck.do" class="btn-visit align-self-start">정보수정 / 탈퇴</a>
                   </li>
                 </ul>
               </div>
@@ -110,11 +128,15 @@
                   <div class="section-header">
                     <h2>board</h2>
                     <p class="d-flex justify-content-between align-items-center"> 
-                      내가 작성한 게시글 
+                     	 내가 작성한 게시글 
                       <button type="button" class="btn btn-outline-warning btn-sm">더보기</button>
                     </p>
                   </div>
                   <div class="list-group">
+                  <%
+                  		for(BoardVO boardVo : memBoardList){
+                  			for(int i=0; i<4; i++){
+                  	%>			
                     <a href="#" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
                       <h6 class="mb-2 text-truncate">
                         <small class="badge bg-light">자유</small>
@@ -124,6 +146,10 @@
                       </h6>
                       <small class="days">2024-05-03</small>
                     </a>
+                  <%
+                  			}
+                  		}
+                  %>
                     <a href="#" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
                       <h6 class="mb-2 text-truncate">
                         <small class="badge bg-light">자유</small>

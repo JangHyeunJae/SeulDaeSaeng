@@ -1,11 +1,11 @@
 package kr.or.ddit.member.dao;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
+
 
 import kr.or.ddit.member.vo.AddressVO;
 import kr.or.ddit.member.vo.MemberVO;
@@ -15,7 +15,7 @@ import kr.or.ddit.util.MyBatisUtil;
 
 public class MemberDaoImpl implements IMemberDao {
 
-	private static IMemberDao instance;
+
 
 	private MemberDaoImpl() {
 	}
@@ -27,7 +27,6 @@ public class MemberDaoImpl implements IMemberDao {
 	}
 
 
-	public boolean loginCheck(MemberVO memberVO, boolean isMemberLogin) throws PersistenceException {
 
 		boolean isSuccess = false;
 		SqlSession session = MyBatisUtil.getSqlSession(true);
@@ -232,40 +231,21 @@ public class MemberDaoImpl implements IMemberDao {
 		return addrVo;
 	}
 
-	//추가_길도연
-	@Override
-	public MemberVO getMemDetail(String usersId) {
-		
-		SqlSession session = null;
-		MemberVO memDetail = null;
-		
-		try {
-			session = MyBatisUtil.getSqlSession(true);
-			memDetail = session.selectOne("member.getMemDetail", usersId);
-		} catch (PersistenceException ex) {
-			session.rollback();
-			ex.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return memDetail;
-	}
 
-	@Override
-	public UsersVO getUsersDetail(String usersId) {
-		
-		SqlSession session = null;
-		UsersVO usersDetail = null;
-		
-		try {
-			session = MyBatisUtil.getSqlSession(true);
-			usersDetail = session.selectOne("member.getUsersDetail", usersId);
 		} catch (PersistenceException ex) {
 			session.rollback();
 			ex.printStackTrace();
 		} finally {
 			session.close();
 		}
+
+		} catch (PersistenceException ex) {
+			session.rollback();
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+
 		return usersDetail;
 	}
 	
@@ -279,12 +259,12 @@ public class MemberDaoImpl implements IMemberDao {
 			session = MyBatisUtil.getSqlSession(true);
 			memberIdInfo = session.selectOne("member.checkFindId", memberVO);
 		} catch (PersistenceException ex) {
+
 			ex.printStackTrace();
 		} finally {
 			session.close();
 		}
-		return memberIdInfo;
-	}
+
   
 	@Override
 	public String checkFindPw(MemberVO memberVO) {

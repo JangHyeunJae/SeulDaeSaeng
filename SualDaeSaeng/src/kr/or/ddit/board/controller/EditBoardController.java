@@ -1,6 +1,7 @@
 package kr.or.ddit.board.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,8 +55,9 @@ public class EditBoardController extends HttpServlet{
 		
 		int status = service.updateBoard(parameter);
 		if(status > 0) { 	// 성공
-			resp.sendRedirect("/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk
-					+ "&editReply=-1");
+			String msg = "정상적으로 수정되었습니다.";
+			req.getSession().setAttribute("msg", msg);
+			resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk);
 		}else {				// 실패
 			req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
 		}

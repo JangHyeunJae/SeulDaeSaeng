@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
 
 <%@include file="/header.jsp" %>
-<main class="pb-5 mb-5" data-aos="fade" data-aos-delay="1500">
+<main>
       <!-- ======= End Page Header ======= -->
       <div class="page-header d-flex align-items-center">
         <div class="container position-relative">

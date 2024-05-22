@@ -14,9 +14,7 @@ import com.google.gson.JsonObject;
 import kr.or.ddit.member.service.IMemberService;
 import kr.or.ddit.member.service.MemberServiceImpl;
 import kr.or.ddit.member.vo.MemberVO;
-
-
-
+import kr.or.ddit.member.vo.UsersVO;
 
 @WebServlet("/login.do")
 public class LoginController extends HttpServlet {
@@ -24,7 +22,6 @@ public class LoginController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getRequestDispatcher("/views/member/login.jsp").forward(req,resp);
-		// req.getRequestDispatcher("/insert.do").forward(req, resp);
 	}
 
 	@Override
@@ -43,12 +40,18 @@ public class LoginController extends HttpServlet {
 
 		if (isSuccess) {
 			System.out.println("로그인성공");
-			req.getSession().setAttribute("usersId", usersId); // ���ǿ� ��� �ֱ�
-			resp.sendRedirect(req.getContextPath() + "/views/index.jsp");
+			MemberVO memDetail = loginService.getMemDetail(usersId);
+			UsersVO usersDetail = loginService.getUsersDetail(usersId);
+			req.getSession().setAttribute("usersId", usersId);
+			req.getSession().setAttribute("memDetail", memDetail);
+      req.getSession().setAttribute("usersPass", usersPass); 
+			req.getSession().setAttribute("usersRole", usersDetail.getUsersRole());
+			resp.sendRedirect(req.getContextPath() + "/main.do");
+
 		} else {
-			
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("isSuccess", "fail");
+			resp.sendRedirect("/views/member/login.jsp");
 		}
 	}
 }

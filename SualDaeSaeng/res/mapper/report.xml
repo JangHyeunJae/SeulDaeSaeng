@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="report">
+
+ <select id="selectReportList" resultMap="reportMap">
+ select
+ 	* from board 
+ 		where trim(REPORT_YN) ='Y'
+<!--  		and BOARD_YN ='Y' -->
+ </select>
+ 
+ <select id="selectallList" resultMap="reportMap">
+  select
+ 	* from board 
+ 		where trim(REPORT_YN) ='Y'
+<!--  		and BOARD_YN ='Y' -->
+ </select>
+   
+   
+
+	
+<resultMap type="kr.or.ddit.board.vo.BoardVO" id="reportMap"> <!-- 1 -->
+<result column="board_no" property="boardNo"/>
+<result column="board_level" property="boardLevel"/>
+<result column="board_title" property="boardTitle"/>
+<result column="board_con" property="boardCon"/>
+<result column="board_at" property="boardAt"/>
+<result column="board_yn" property="boardYn"/>
+<result column="board_hit" property="boardHit"/>
+<result column="file_no" property="fileNo"/>
+<result column="users_no" property="usersNo"/>
+</resultMap>
+		
+
+	
+  
+</mapper>

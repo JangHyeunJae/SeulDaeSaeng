@@ -1,7 +1,9 @@
 package kr.or.ddit.board.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,21 +19,48 @@ import kr.or.ddit.board.vo.BoardVO;
 public class StudyBoardListController extends HttpServlet{
 	
 	private static final long serialVersionUID = 1L;
+	IBoardService boardService = BoardServiceImpl.getInstance();
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		 
-		 int level = 2;
-		 IBoardService boardService = BoardServiceImpl.getInstance();
-		 List<BoardVO> boardList = boardService.selectBoardList(level);
+		int level = 2;
+		
+		String searchOption = req.getParameter("searchOption");
+		if (searchOption != null && searchOption != "") {
+			req.setAttribute("searchOption", searchOption);
+		}
+		
+		List<BoardVO> boardList = boardService.selectBoardList(level);
 
-		 req.setAttribute("boardList", boardList);
-		 req.setAttribute("levelChk", level);
-
-		 req.getRequestDispatcher("/views/board/allBoard.jsp").forward(req, resp);
+		req.setAttribute("levelChk", level);
+		req.setAttribute("boardList", boardList);
+		
+		req.getRequestDispatcher("/views/board/allBoard.jsp").forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		 doGet(req, resp);
+		
+		int level = 2;
+
+		String searchOption = req.getParameter("searchOption");
+		String searchText = req.getParameter("searchText");
+
+		Map<String, Object> parameter = new HashMap<>();
+		parameter.put("boardLevel", level);
+		parameter.put("searchText", searchText);
+		parameter.put("searchOption", searchOption);
+
+		List<BoardVO> boardList = boardService.searchSelectBoardList(parameter);
+
+		if (searchOption != null && searchOption != "") {
+			req.setAttribute("searchOption", searchOption);
+		}
+
+		req.setAttribute("levelChk", level);
+		req.setAttribute("boardList", boardList);
+
+		req.getRequestDispatcher("/views/board/allBoard.jsp").forward(req, resp);
 	}
 }

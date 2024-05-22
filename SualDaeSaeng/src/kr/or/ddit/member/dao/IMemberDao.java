@@ -2,15 +2,14 @@
 package kr.or.ddit.member.dao;
 
 import java.util.List;
+import java.util.Map;
 
-import org.apache.ibatis.exceptions.PersistenceException;
 
 import kr.or.ddit.member.vo.AddressVO;
 import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.member.vo.UsersVO;
 
 public interface IMemberDao {
-	
 
 	public boolean loginCheck(MemberVO memberVO, boolean isMemberLogin);
 
@@ -30,14 +29,17 @@ public interface IMemberDao {
 
 	public AddressVO selectAddr(int addrNo);
 
+
 	public MemberVO getMemDetail(String usersId);
 
 	public UsersVO getUsersDetail(String usersId);
+
 
 	public String checkFindId(MemberVO memberVO);
 	
 	public String checkFindPw(MemberVO memberVO);
 
 	public String checking(String memName);
+
 }
 

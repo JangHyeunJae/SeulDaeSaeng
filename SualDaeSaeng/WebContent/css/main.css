@@ -125,6 +125,21 @@ h5 {
   width: 50%;
 }
 
+.h-m-180{
+	height : 180px;
+	border-radius : 10px;
+}
+.h-m-180 img{
+	transition: transform .3s;
+}
+.h-m-180:hover img{
+	transform: scale(1.1);
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+    color: var(--color-gray-300);
+}
+
 @media (max-width:770px) {
   .glightbox-container .gslide-inner-content {
       width: 100%;
@@ -144,7 +159,9 @@ h5 {
   border-radius: 50px !important;
   width: 35px;
   height: 35px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .page-link {
@@ -931,7 +948,7 @@ font-family: "TTHakgyoansimMulgyeolR", "CWDangamAsac-Bold","Inter", sans-serif;;
 .about .content ul li {
   margin-bottom: 20px;
   display: flex;
-  align-items: center;
+  align-items: start;
 }
 
 .about .content ul strong {
@@ -1577,7 +1594,7 @@ font-family: var(--font-secondary);
   padding: 10px 12px;
 }
 
-.contact button[type=submit] {
+.contact button:is([type=submit],[type=button]){
   background: var(--color-orange-900);
   border: 0;
   padding: 10px 35px;
@@ -1586,7 +1603,7 @@ font-family: var(--font-secondary);
   border-radius: 8px;
 }
 
-.contact button[type=submit]:hover {
+.contact button:is([type=submit],[type=button]):hover {
   background: var(--color-orange-100)
 }
 
@@ -2272,6 +2289,14 @@ background:#DC143C;
   margin-right: 5px;
 }
 
+#join form label:not(.btn){
+	min-width: 75px;
+	color: var(--color-gray-700);
+	font-size: 14px;
+}
+#join :is(#addr1,#postAddr){
+	cursor: pointer;
+}
 /*--------------------------------------------------------------
 # login
 --------------------------------------------------------------*/
@@ -2550,18 +2575,38 @@ background:#DC143C;
 
 #chat .msg_time {
   position: absolute;
-  left: 0;
-  bottom: -23px;
-  color: var(--color-gray-600);
+  left: -83;
+  bottom: 0;
+  color: var(--color-gray-500);
   font-size: 11px;
+  width: 95px;
 }
 
 #chat .msg_time_send {
   position: absolute;
-  right: 0;
-  bottom: -23px;
-  color: var(--color-gray-600);
+  right: -100;
+  bottom: 0;
+  color: var(--color-gray-500);
   font-size: 11px;
+  width: 95px;
+}
+
+#chat .masBox {
+    max-width: 100%;
+}
+#chat .masBox > div {
+    max-width: calc(60% - 10px);
+}
+
+#chatWindow::-webkit-scrollbar{
+  width: 8px;
+}
+#chatWindow::-webkit-scrollbar-thumb{
+  background-color: rgba(255,255,255,0.4);
+  border-radius: 10px; 
+}
+#chatWindow::-webkit-scrollbar-track{
+  display: none;
 }
 
 /*--------------------------------------------------------------

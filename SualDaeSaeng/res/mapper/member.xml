@@ -17,22 +17,7 @@
 		<result column="mem_addr" property="memAddr" />
 		<result column="atch_file_id" property="atchFileId" />
 		<result column="reg_dt" property="regDt" />
-	</resultMap> 
-	
-	<resultMap type="kr.or.ddit.member.vo.MemberVO" id="memberMap"> <!-- 1 -->
-		<result column="USERS_NO" property="usersNo"/>
-		<result column="MEM_NAME" property="memName"/>
-		<result column="MEM_NICK" property="memNick"/>
-		<result column="MEM_BIRTH" property="memBirth"/>
-		<result column="MEM_EMAIL" property="memEmail"/>
-		<result column="MEM_TEL" property="memTel"/>
-		<result column="MEM_CLASS" property="memClass"/>
-		<result column="MEM_REGDT" property="memRegdt"/>
-		<result column="ADDR_NO" property="addrNo"/>
-	</resultMap>
-	
-	
-	<resultMap type="kr.or.ddit.member.vo.UsersVO" id="usersMap">
+
 		<result property="usersNo" column="USERS_NO"/>
 		<result property="usersRole" column="USERS_ROLE"/>
 		<result property="usersId" column="USERS_ID"/>
@@ -40,7 +25,7 @@
 		<result property="usersYn" column="USERS_YN"/>
 	</resultMap>
 	
-	<resultMap type="kr.or.ddit.member.vo.AddressVO" id="addrMap">
+
 		<result property="addrNo" column="ADDR_NO"/>
 		<result property="addrPost" column="ADDR_POST"/>
 		<result property="addrBasic" column="ADDR_BASIC"/>
@@ -51,7 +36,7 @@
 	</resultMap>
 
 	<select id="memberIdChk" parameterType="String" resultType="int">
-		select count(*) as cnt from users where USERS_ID = #{usersId}
+
 	</select>
 
 	<select id="loginCheck" resultMap="memMap" parameterType="memVO">
@@ -62,13 +47,14 @@
 		and users_yn = 'Y'
 	</select>
 
-	<insert id="usersJoin" parameterType="kr.or.ddit.member.vo.UsersVO">
+
 		<selectKey keyProperty="usersNo" resultType="int" order="BEFORE">
 			select SEQ_USERS_NO.nextval as usersNo from dual
 		</selectKey>
 		INSERT INTO USERS(USERS_NO, USERS_ROLE, USERS_ID, USERS_PASS, USERS_YN)
 		VALUES(#{usersNo}, #{usersRole}, #{usersId}, #{usersPass}, #{usersYn})
 	</insert>
+
 
 	<insert id="addrJoin" parameterType="kr.or.ddit.member.vo.AddressVO">
 		<selectKey keyProperty="addrNo" resultType="int" order="BEFORE">
@@ -116,6 +102,7 @@
 	
 	<select id="checking" parameterType="String" resultType="String">
 	    select member.mem_Name from member where mem_name=#{memName}
+
 	</select>
 
 </mapper>

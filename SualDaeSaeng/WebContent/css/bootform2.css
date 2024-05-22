@@ -2845,6 +2845,7 @@ select[multiple].input-lg {
   right: 15px;
 }
 @media (min-width: 768px) {
+	
   .form-horizontal .form-group-lg .control-label {
     padding-top: 14.333333px;
     font-size: 18px;
@@ -2856,7 +2857,7 @@ select[multiple].input-lg {
     font-size: 12px;
   }
 }
-.btn {
+.btn, .contact button:is([type=submit],[type=button]) {
   display: inline-block;
   margin-bottom: 0;
   font-weight: normal;
@@ -2875,7 +2876,11 @@ select[multiple].input-lg {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  color: rgb(51, 51, 51);
+  background-color: rgb(255, 255, 255);
+  
 }
+
 .btn:focus,
 .btn:active:focus,
 .btn.active:focus,
@@ -5893,6 +5898,17 @@ button.close {
 .visible-print-block {
   display: none !important;
 }
+
+/* #submitBtn 작업*/
+.contact #submitBtn{
+	background: var(--color-orange-900);
+    border: 0;
+    padding: 10px 35px;
+    color: var(--color-white);
+    transition: 0.4s;
+    border-radius: 8px;
+}
+
 @media print {
   .visible-print-block {
     display: block !important;
@@ -5920,3 +5936,5 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+

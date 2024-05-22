@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.or.ddit.admin.service.AdminServiceImpl;
 import kr.or.ddit.admin.service.IAdminService;
+import kr.or.ddit.contact.vo.ContactVO;
 
 
 @WebServlet("/views/adminaccept.do")
@@ -19,6 +20,14 @@ public class AdminAccept extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		/*
+		 * String no = req.getParameter("qNO"); ContactVO contactVO =
+		 * service.detailList(Integer.parseInt(no));
+		 * 
+		 * // 데이터를 전달하는 방법 req.setAttribute("contactVO", contactVO);
+		 * 
+		 * req.getRequestDispatcher("/views/contactDetail.jsp").forward(req, resp);	
+		 */
 	}
 	
 	@Override
@@ -30,7 +39,7 @@ public class AdminAccept extends HttpServlet {
 		
 		 int cnt = service.AdminAccept(usersNo);
 		  
-		  
+		 
 		  
 	}
 }

@@ -18,11 +18,20 @@
     List<ReplyVO> replyList = (List<ReplyVO>)request.getAttribute("replyList");
     MemberVO wd = (MemberVO)request.getAttribute("writerDetail");
 	BoardVO bv = (BoardVO)request.getAttribute("boardDetail");
+	FileDetailVO file = (FileDetailVO)request.getAttribute("file");
     
     int idx = (int) request.getAttribute("idx");
 	int levelChk = (int) request.getAttribute("levelChk");
 	int editReply = (int) request.getAttribute("editReply");
-    
+	MemberVO memDetail = (MemberVO)session.getAttribute("memDetail");
+	int classBoardChk = 0;
+	if(request.getAttribute("classBoardChk")!=null){
+	   classBoardChk = (int)request.getAttribute("classBoardChk");
+	}
+	
+	
+	String msg = session.getAttribute("msg") == null ? "" : (String) session.getAttribute("msg");
+	session.removeAttribute("msg");
     int level = bv.getBoardLevel();
     String boardName = null;
     String board = null;
@@ -38,6 +47,17 @@
   		boardName = "공지사항";
   		board = "noticeBoard";
   	}
+
+    if(boardName==null){
+    	boardName = String.valueOf(levelChk) + "호";
+    }
+    
+    if(classBoardChk==1){
+  		board = "eachClassNotice";
+    }else if(classBoardChk==2){
+  		board = "eachClassBoard";
+    }
+    
 %>
 
  <main>
@@ -52,9 +72,13 @@
               	%>
               	<a href="/allBoard.do"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
               	<%
-              		}else{
+              		}else if(levelChk!=0 && classBoardChk!=0){
               	%>
-                <a href="/<%=board %>.do"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
+                <a href="/<%=board %>.do?levelChk=<%=levelChk %>"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
+                <%
+              		}else{
+                %>
+                   <a href="/<%=board %>.do"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
                 <%
               		}
                 %>
@@ -95,7 +119,7 @@
                   BoardVO beforeBoardDetail = boardList.get(idx-1);
               %>
            <div class="prve col-md-6 col-12 ps-2">
-            <a href="/board/detail.do?boardNo=<%=beforeBoardDetail.getBoardNo() %>&idx=<%=idx-1 %>&levelChk=<%=levelChk %>&editReply=-1" class="d-block pt-4 pb-4">
+            <a href="/board/detail.do?boardNo=<%=beforeBoardDetail.getBoardNo() %>&idx=<%=idx-1 %>&levelChk=<%=levelChk %>" class="d-block pt-4 pb-4">
               <span class="d-inline-block pe-3">이전글 <i class="bi bi-chevron-up"></i></span> 
               <b><%=beforeBoardDetail.getBoardTitle() %></b>
             </a>
@@ -119,7 +143,7 @@
                   BoardVO nextBoardDetail =  boardList.get(idx+1); 
               %>
              <div class="next col-md-6 col-12 text-end pe-2">
-              <a href="/board/detail.do?boardNo=<%=nextBoardDetail.getBoardNo() %>&idx=<%=idx+1 %>&levelChk=<%=levelChk %>&editReply=-1" class="d-block pt-4 pb-4">
+              <a href="/board/detail.do?boardNo=<%=nextBoardDetail.getBoardNo() %>&idx=<%=idx+1 %>&levelChk=<%=levelChk %>" class="d-block pt-4 pb-4">
                 <b class="pe-3"><%=nextBoardDetail.getBoardTitle() %></b>
                 <span class="d-inline-block">다음글 <i class="bi bi-chevron-down"></i></span>
              </a>
@@ -136,10 +160,10 @@
           <%
           	if(bv.getFileNo() != 0){
           %>
-          <a href="file/01.수행계획서.odt" download class="attached-file d-flex justify-content-between align-items-center">
+          <a href="<%=request.getContextPath() %>/file/download.do?fileNo=<%=file.getFileNo() %>" download class="attached-file d-flex justify-content-between align-items-center">
             <span>
-              <i class="bi bi-download px-2"></i> 01.수행계획서.odt </span>
-            <span>23KB</span>
+              <i class="bi bi-download px-2"></i><%=file.getFileOgname() %> </span>
+            <span><%=file.getFileSize() %></span>
           </a>
           <%  
           }
@@ -169,15 +193,11 @@
                 <p><%=rv.getReplyCon() %></p>
                 <%
               		//세션에서 꺼내와야함.
-                	if(rv.getUsersNo()==1){
+                	if(rv.getUsersNo()==memDetail.getUsersNo()){
                 %>
-                <p><a href="#" class="reply rounded">대댓글</a>
                 <a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&editReply=<%=rv.getReplyNo() %>" class="reply rounded">수정</a>
-                <a href="#" class="reply rounded">삭제</a></p>
-                <%
-                	}else{
-                %>
-                <p><a href="#" class="reply rounded">대댓글</a></p>
+                <a href="<%=request.getContextPath()%>/board/deleteReply.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&replyNo=<%=rv.getReplyNo() %>" 
+                	onclick="return confirm('삭제하시겠습니까?');" class="reply rounded">삭제</a></p>
                 <%
                 	}
                 %>
@@ -196,17 +216,17 @@
           <%
           	if(editReply == -1){
           %>
-            <form action="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&editReply=-1" method="post" role="form" id="insertForm" class="p-5">
+            <form action="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>" method="post" role="form" id="insertForm" class="p-5">
           <%
           	}else{
           %>
-            <form action="<%=request.getContextPath()%>/board/editReply.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&editReply=-1" method="post" role="form" id="insertForm" class="p-5">
+            <form action="<%=request.getContextPath()%>/board/editReply.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>" method="post" role="form" id="insertForm" class="p-5">
 		  <%
           	}
 		  %>
               <div class="form-group">
                 <!-- 자동입력 -->
-                 <input type="text" class="form-control" id="replyNick" placeholder="<%=wd.getMemNick() %>" readonly> 
+                 <input type="text" class="form-control" id="replyNick" placeholder="<%=memDetail.getMemNick() %>" readonly> 
               </div>
               <%
               	if(editReply == -1){
@@ -227,7 +247,7 @@
               </div>
               <input type="hidden" id="replyNo" name="replyNo" value=<%=rv.getReplyNo() %>>
               <div class="form-group text-center">
-                <button type="submit" id="submitBtn">댓글 수정하기</button>
+                <button type="submit" id="submitBtn" onclick="return confirm('수정하시겠습니까?');">댓글 수정하기</button>
               </div>
               <%
                     	}
@@ -243,23 +263,33 @@
           <!-- START MENU -->
           
         <div class="btn-box container d-flex align-items-center justify-content-center pb-5 pt-5 gap-2">
-        	<%
-              if (levelChk == 0) {
-            %>
-          	<a href="<%=request.getContextPath()%>/allBoard.do" type="button" class="btn btn-secondary">목록으로</a>
-             <%
-              }else{
-             %>
-          	<a href="<%=request.getContextPath()%>/<%=board %>.do" type="button" class="btn btn-secondary">목록으로</a>
-             <%
-              }
-             %>
+                <%
+              		if (levelChk == 0) {
+              	%>
+              	<a href="<%=request.getContextPath()%>/allBoard.do"  type="button" class="btn btn-secondary"> 목록으로 </a>
+              	<%
+              		}else if(levelChk!=0 && classBoardChk!=0){
+              	%>
+                <a href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>"  type="button" class="btn btn-secondary"> 목록으로 </a>
+                <%
+              		}else{
+                %>
+                   <a href="<%=request.getContextPath()%>/<%=board %>.do"  type="button" class="btn btn-secondary"> 목록으로 </a>
+                <%
+              		}
+                %>
+     
           <%
           //세션에서 꺼내와야함. + 위에 댓글입력창 닉네임 또한 함께 수정 + 댓글 수정 삭제 보이는 부분도
-          if(bv.getUsersNo()==1){
+          if(bv.getUsersNo()==memDetail.getUsersNo()){
+        	  
           %>
           <a href="<%=request.getContextPath()%>/board/edit.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>" type="button" class="btn btn-secondary">수정하기</a>
-          <a href="<%=request.getContextPath()%>/board/delete.do?boardNo=<%=bv.getBoardNo() %>&levelChk=<%=levelChk %>" type="button" class="btn btn-secondary">삭제하기</a>
+          <a href="<%=request.getContextPath()%>/board/delete.do?boardNo=<%=bv.getBoardNo() %>&levelChk=<%=levelChk %>" onclick="return confirm('삭제하시겠습니까?');" type="button" class="btn btn-secondary">삭제하기</a>
+          <%
+          }else{
+          %>
+          <a href="<%=request.getContextPath()%>/board/report.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&report=Y" onclick="return confirm('신고하시겠습니까?');" type="button" class="btn btn-secondary">신고하기</a>
           <%
           }
           %>
@@ -269,6 +299,13 @@
       </section>
     </main>
     <script>
+    
+	    window.onload = function() {
+	    	var msg = '<%= msg %>';
+			if(msg != null && msg != '') alert(msg);
+	
+	   	};
+    	
 	   var submitBtn = $("#submitBtn");
 	   var insertForm = $("#insertForm");
 

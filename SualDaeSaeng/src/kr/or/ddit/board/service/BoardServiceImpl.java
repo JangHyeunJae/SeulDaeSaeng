@@ -257,5 +257,9 @@ public class BoardServiceImpl implements IBoardService{
 	@Override
 	public StoryVO getStoryOne(int storyNo) {
 		return boardDao.getStoryOne(storyNo);
+
+  @Override
+	public MemberVO writerDetail(int boardNo) {
+		return boardDao.writerDetail(boardNo);
 	}
 }

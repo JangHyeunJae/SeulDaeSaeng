@@ -94,4 +94,6 @@ public interface IBoardDao {
 
 	public StoryVO getStoryOne(int storyNo);
 
+	public MemberVO writerDetail(int boardNo);
+
 }

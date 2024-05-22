@@ -1,18 +1,20 @@
 package kr.or.ddit.member.service;
 
+import java.util.List;
+import java.util.Map;
+
+import kr.or.ddit.board.vo.BoardVO;
 import kr.or.ddit.member.dao.IMemberDao;
 import kr.or.ddit.member.dao.MemberDaoImpl;
 import kr.or.ddit.member.vo.AddressVO;
 import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.member.vo.UsersVO;
 
-import java.util.List;
-
-
 
 public class MemberServiceImpl implements IMemberService{
 	
 	public static IMemberService instance = null;
+
 	private MemberServiceImpl() {}
 	public static IMemberService getInstance() {
 		if(instance == null) instance = new MemberServiceImpl();
@@ -63,6 +65,39 @@ public class MemberServiceImpl implements IMemberService{
 	public AddressVO selectAddr(int addrNo) {
 		return memberDao.selectAddr(addrNo);
 	}
+
+	@Override
+	public String checkFindId(MemberVO memberVO) {
+		return memberDao.checkFindId(memberVO);
+	}
+	@Override
+	public String checkFindPw(MemberVO memberVO) {
+		return memberDao.checkFindPw(memberVO);
+	}
+	@Override
+	public String checking(String memName) {
+		return memberDao.checking(memName);
+	}	
+	@Override		
+	public int addrModify(AddressVO addrVo) {
+		return memberDao.addrModify(addrVo);
+	}
+	@Override
+	public int memberModify(MemberVO memberVo) {
+		return memberDao.memberModify(memberVo);
+	}
+	@Override
+	public int memberUnregister(String usersId) {
+		return memberDao.memberUnregister(usersId);
+	}
+	@Override
+	public int pwModify(Map<String, String> pwModifyMap) {
+		return memberDao.pwModify(pwModifyMap);
+	}
+	@Override
+	public List<BoardVO> memberBoardList(int usersNo) {
+		return memberDao.memberBoardList(usersNo);
+	}
 	@Override
 	public MemberVO getMemDetail(String usersId) {
 		return memberDao.getMemDetail(usersId);
@@ -70,7 +105,7 @@ public class MemberServiceImpl implements IMemberService{
 	@Override
 	public UsersVO getUsersDetail(String usersId) {
 		return memberDao.getUsersDetail(usersId);
+
 	}
-  
 }
 

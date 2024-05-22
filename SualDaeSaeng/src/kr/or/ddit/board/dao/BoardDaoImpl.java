@@ -16,6 +16,7 @@ import kr.or.ddit.board.vo.HomeworkVO;
 import kr.or.ddit.board.vo.HwSubmitVO;
 import kr.or.ddit.board.vo.ReplyVO;
 import kr.or.ddit.board.vo.StoryVO;
+import kr.or.ddit.contact.vo.ContactVO;
 import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.member.vo.UsersVO;
 import kr.or.ddit.util.MyBatisUtil;
@@ -814,6 +815,23 @@ public class BoardDaoImpl implements IBoardDao {
 			session.close();
 		}
 		return storyOne;
+
+	public MemberVO writerDetail(int boardNo) {
+		SqlSession session = null;		// 디비와 연결하기 위한 생산품
+		MemberVO memberVO = null;	// 전체 목록 데이터를 받을 변수 
+		
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			memberVO = session.selectOne("board.writerDetail", boardNo);
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(session != null) { 
+				session.close();
+			}
+		}
+		return memberVO;
 	}
 
 }

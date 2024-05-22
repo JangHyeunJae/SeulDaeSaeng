@@ -92,4 +92,7 @@ public interface IBoardService {
   public String getStoryTime(int storyNo);
   
   public StoryVO getStoryOne(int storyNo);
+
+ public MemberVO writerDetail(int boardNo);
+
 }

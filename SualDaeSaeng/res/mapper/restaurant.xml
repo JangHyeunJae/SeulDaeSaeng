@@ -132,6 +132,17 @@
 		WHERE RNUM <![CDATA[<=]]> 2
 	</select>
 	
+	<resultMap type="kr.or.ddit.board.vo.FileDetailVO" id="fileMap"> <!-- 1 -->
+		<result column="file_no" property="fileNo"/>
+		<result column="file_savepath" property="fileSavepath"/>
+		<result column="file_ogname" property="fileOgname"/>
+		<result column="file_savednm" property="fileSavednm"/>
+		<result column="file_size" property="fileSize"/>
+		<result column="file_ext" property="fileExt"/>
+		<result column="file_dt" property="fileDt"/>
+		<result column="file_level" property="fileLevel"/>
+	</resultMap>
+	
 	<select id="selectRestReviewAll" parameterType="hashMap" resultType="restVO">
 	  	SELECT REVIEW_NO reviewNo, USERS_NO usersNo, NICK_NAME nickName, REVIEW_STAR reviewStar, REVIEW_TEXT reviewText, FILE_NO fileNo, REVIEW_DATE reviewDate
 		FROM RESTVIEW

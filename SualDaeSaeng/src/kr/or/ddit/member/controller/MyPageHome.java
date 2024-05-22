@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import kr.or.ddit.board.vo.BoardVO;
 import kr.or.ddit.member.service.IMemberService;
@@ -35,6 +34,7 @@ public class MyPageHome extends HttpServlet{
 		MemberVO memberVo = (MemberVO)req.getAttribute("memberVo");
 		
 		List<BoardVO> memBoardList = service.memberBoardList(usersVo.getUsersNo());
+		MemberUtil.boardLevelKr(memBoardList);
 		req.setAttribute("memBoardList", memBoardList);
 		
 		if(usersVo != null && memberVo != null && addrVo != null ) {

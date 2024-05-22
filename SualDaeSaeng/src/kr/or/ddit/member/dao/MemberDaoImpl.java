@@ -415,11 +415,23 @@ public class MemberDaoImpl implements IMemberDao {
       return memDetail;
    }
 
-	@Override
-	public UsersVO getUsersDetail(String usersId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+   @Override
+   public UsersVO getUsersDetail(String usersId) {
+      
+      SqlSession session = null;
+      UsersVO usersDetail = null;
+      
+      try {
+         session = MyBatisUtil.getSqlSession(true);
+         usersDetail = session.selectOne("member.getUsersDetail", usersId);
+      } catch (PersistenceException ex) {
+         session.rollback();
+         ex.printStackTrace();
+      } finally {
+         session.close();
+      }
+      return usersDetail;
+   }
   
 }
 

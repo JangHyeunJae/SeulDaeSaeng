@@ -39,6 +39,7 @@ public class MainController extends HttpServlet{
 		req.setAttribute("restLikeList", restLikeList);
 		
 		req.getRequestDispatcher("/views/index.jsp").forward(req, resp);
+
 	}
 	
 	@Override

@@ -178,6 +178,7 @@ $(function() {
     document.getElementById('addr1').addEventListener('click', searchAddress);
 	document.getElementById('addrBtn').addEventListener('click', searchAddress);
 	
+
 	$('form button.submit').click(function(e) {
 	    e.preventDefault();  // 기본 서브밋 동작 방지
 

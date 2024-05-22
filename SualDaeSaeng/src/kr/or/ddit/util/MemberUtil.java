@@ -1,8 +1,13 @@
 package kr.or.ddit.util;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import kr.or.ddit.board.vo.BoardVO;
 import kr.or.ddit.member.service.IMemberService;
 import kr.or.ddit.member.service.MemberServiceImpl;
 import kr.or.ddit.member.vo.AddressVO;
@@ -13,6 +18,10 @@ public class MemberUtil {
 	
 	static IMemberService service = MemberServiceImpl.getInstance();
 
+	/**
+	 * 아이디, 회원정보, 주소 Vo를 request에 담아줌
+	 * @param req Vo를 담을 객체
+	 */
 	public static void memberSelectOne(HttpServletRequest req) {
 		HttpSession session = req.getSession();
 		
@@ -34,6 +43,25 @@ public class MemberUtil {
 		req.setAttribute("addrVo", addrVo);
 	}
 	
+	public static void memberMessage(HttpServletRequest req, HttpServletResponse resp, int cnt, String successMsg, String successUrl, String failMsg, String failUrl) throws ServletException, IOException {
+		if(cnt == 1) {
+			String msg = successMsg;
+			String url = successUrl;
+			req.setAttribute("msg", msg);
+			req.setAttribute("url", url);
+			req.getRequestDispatcher("/views/alert.jsp").forward(req, resp);
+		} else {
+			String msg = failMsg;
+			String url = failUrl;
+			req.setAttribute("msg", msg);
+			req.setAttribute("url", url);
+			req.getRequestDispatcher("/views/alert.jsp").forward(req, resp);
+		}
+		
+	}
 	
+	public static void boardGroup(BoardVO boardVo) {
+		
+	}
 	
 }

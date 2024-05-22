@@ -1,12 +1,12 @@
 package kr.or.ddit.member.dao;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 
+import kr.or.ddit.board.vo.BoardVO;
 import kr.or.ddit.member.vo.AddressVO;
 import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.member.vo.UsersVO;
@@ -26,11 +26,10 @@ public class MemberDaoImpl implements IMemberDao {
 		return instance;
 	}
 
-
 	public boolean loginCheck(MemberVO memberVO, boolean isMemberLogin) {
 
 		boolean isSuccess = false;
-		SqlSession session = MyBatisUtil.getSqlSession(true);
+		SqlSession session = kr.or.ddit.util.MyBatisUtil.getSqlSession();
 		MemberVO result = null;
 
 		try {
@@ -40,6 +39,7 @@ public class MemberDaoImpl implements IMemberDao {
 			} else if (isMemberLogin == false) {
 				result = session.selectOne("member.loginCheck", memberVO);
 			}
+
 			if (result != null) {
 				isSuccess = true;
 			}
@@ -63,7 +63,7 @@ public class MemberDaoImpl implements IMemberDao {
 	@Override
 	public String forgotPass(MemberVO memberVO) {
 
-		SqlSession session = MyBatisUtil.getSqlSession(true);
+		SqlSession session = MyBatisUtil.getSqlSession();
 
 		String usersPass = null;
 
@@ -232,42 +232,132 @@ public class MemberDaoImpl implements IMemberDao {
 		return addrVo;
 	}
 
-	//추가_길도연
 	@Override
-	public MemberVO getMemDetail(String usersId) {
-		
+	public int addrModify(AddressVO addrVo) {
 		SqlSession session = null;
-		MemberVO memDetail = null;
+		int addrCnt = -1;
 		
 		try {
-			session = MyBatisUtil.getSqlSession(true);
-			memDetail = session.selectOne("member.getMemDetail", usersId);
+			session = MyBatisUtil.getSqlSession();
+			addrCnt = session.update("member.addrModify", addrVo);
+			
+			if(addrCnt == 1) {
+				session.commit();
+			}
+
 		} catch (PersistenceException ex) {
 			session.rollback();
 			ex.printStackTrace();
 		} finally {
 			session.close();
 		}
-		return memDetail;
+		return addrCnt;
 	}
 
 	@Override
-	public UsersVO getUsersDetail(String usersId) {
-		
+	public int memberModify(MemberVO memberVo) {
 		SqlSession session = null;
-		UsersVO usersDetail = null;
+		int memberCnt = -1;
 		
 		try {
-			session = MyBatisUtil.getSqlSession(true);
-			usersDetail = session.selectOne("member.getUsersDetail", usersId);
+			session = MyBatisUtil.getSqlSession();
+			memberCnt = session.update("member.memberModify", memberVo);
+			
+			if(memberCnt == 1) {
+				session.commit();
+			}
+
 		} catch (PersistenceException ex) {
 			session.rollback();
 			ex.printStackTrace();
 		} finally {
 			session.close();
 		}
-		return usersDetail;
+		return memberCnt;
 	}
+
+	@Override
+	public int memberUnregister(String usersId) {
+		SqlSession session = null;
+		int memberCnt = -1;
+		
+		try {
+			session = MyBatisUtil.getSqlSession();
+			memberCnt = session.update("member.memberUnregister", usersId);
+			
+			if(memberCnt == 1) {
+				session.commit();
+			}
+
+		} catch (PersistenceException ex) {
+			session.rollback();
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return memberCnt;
+	}
+
+	@Override
+	public int pwModify(Map<String, String> pwModifyMap) {
+		SqlSession session = null;
+		int Cnt = -1;
+		
+		try {
+			session = MyBatisUtil.getSqlSession();
+			Cnt = session.update("member.pwModify", pwModifyMap);
+			
+			if(Cnt == 1) {
+				session.commit();
+			}
+
+		} catch (PersistenceException ex) {
+			session.rollback();
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return Cnt;
+	}
+
+	@Override
+	public List<BoardVO> memberBoardList(int usersNo) {
+		
+		SqlSession session = null;
+		List<BoardVO> memList = null ;
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			memList = session.selectList("member.memberBoardList", usersNo);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			if(session != null) {
+				session.close();
+			}
+		}
+		
+		return memList;
+	}
+	
+   //추가_길도연
+   @Override
+   public MemberVO getMemDetail(String usersId) {
+      
+      SqlSession session = null;
+      MemberVO memDetail = null;
+      
+      try {
+         session = MyBatisUtil.getSqlSession(true);
+         memDetail = session.selectOne("member.getMemDetail", usersId);
+      } catch (PersistenceException ex) {
+         session.rollback();
+         ex.printStackTrace();
+      } finally {
+         session.close();
+      }
+      return memDetail;
+   }
   
 }
 

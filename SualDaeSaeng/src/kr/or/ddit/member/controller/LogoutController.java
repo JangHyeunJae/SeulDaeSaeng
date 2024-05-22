@@ -22,7 +22,9 @@ public class LogoutController extends HttpServlet{
 		}
 		
 		session.invalidate();
+
 		resp.sendRedirect("/main.do");
+
 	}
 
 	@Override

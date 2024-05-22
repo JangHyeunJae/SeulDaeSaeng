@@ -78,8 +78,12 @@ public class MemberJoin extends HttpServlet{
 	
 		
 		if(usersCnt == 1 && addrCnt == 1 && memberCnt == 1) {
-			  System.out.println("join insert 모두 정상 응답"); 
-			  resp.sendRedirect(req.getContextPath() + "/main.do"); 
+			System.out.println("join insert 모두 정상 응답");
+			String msg = "회원가입이 완료되었습니다.";
+			String url = "/main.do";
+			req.setAttribute("msg", msg);
+			req.setAttribute("url", url);
+			req.getRequestDispatcher("/views/alert.jsp").forward(req, resp);
 		} else System.out.println("join insert 응답 실패");
 		
 //		System.out.println("classify => " + req.getParameter("classify"));

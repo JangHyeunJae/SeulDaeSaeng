@@ -309,6 +309,11 @@ public class BoardServiceImpl implements IBoardService{
 	@Override
 	public List<BoardVO> myBoardList(int usersNo) {
 		return boardDao.myBoardList(usersNo);
+  }
+  
+	@Override
+	public int deleteHomework(int hwNo) {
+		return boardDao.deleteHomework(hwNo);
 	}
   
 }

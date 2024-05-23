@@ -16,6 +16,10 @@
 <%
     IBoardService boardService = BoardServiceImpl.getInstance();
     
+	String msg = session.getAttribute("msg") == null ? "" : (String) session.getAttribute("msg");
+	session.removeAttribute("msg");
+
+	int usersNo = (int)session.getAttribute("usersNo");
     MemberVO wd = (MemberVO)request.getAttribute("writerDetail");
     HomeworkVO hw = (HomeworkVO)request.getAttribute("hwDetail");
     int levelChk = (int)request.getAttribute("levelChk");
@@ -120,8 +124,15 @@
           if(usersRole==1){
           %>
           <a href="<%=request.getContextPath()%>/classTeacherBoard.do?levelChk=<%=levelChk %>" type="button" class="btn btn-secondary">메인으로</a>
-          <a href="<%=request.getContextPath()%>/board/edit.do" type="button" class="btn btn-secondary">수정하기</a>
-          <a href="<%=request.getContextPath()%>/board/delete.do" type="button" class="btn btn-secondary">삭제하기</a>
+          	<%
+          		if(wd.getUsersNo() == usersNo){
+          	
+          	%>
+          	<a href="<%=request.getContextPath()%>/homework/edit.do" type="button" class="btn btn-secondary">수정하기</a>
+          	<a href="<%=request.getContextPath()%>/homework/delete.do?levelChk=<%=levelChk %>&hwNo=<%=hw.getHwNo() %>" onclick="return confirm('삭제하시겠습니까?');" type="button" class="btn btn-secondary">삭제하기</a>
+          	<%
+          		}
+          	%>
           <%
           }else if(usersRole==2){
           %>
@@ -139,5 +150,11 @@
         <!-- END MENU -->
       </section>
     </main>
-
+<script>
+	window.onload = function() {
+		var msg = '<%= msg %>';
+		if(msg != null && msg != '') alert(msg);
+	
+	};
+</script>
 <%@include file="/footer.jsp" %>

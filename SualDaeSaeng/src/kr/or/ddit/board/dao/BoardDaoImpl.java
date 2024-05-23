@@ -818,26 +818,6 @@ public class BoardDaoImpl implements IBoardDao {
 		return boardList;
 	}
 
-	@Override
-	public int deleteStory(int storyNo) {
-
-		SqlSession session = null;
-		int cnt = 0;
-		try {
-			session = MyBatisUtil.getSqlSession();
-
-			cnt = session.update("board.deleteStory", storyNo);
-
-			if (cnt > 0) {
-				session.commit();
-			}
-		} catch (PersistenceException ex) {
-			ex.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return cnt;
-	}
 
    @Override
    public List<StoryVO> allStoryList() {
@@ -1007,6 +987,48 @@ public class BoardDaoImpl implements IBoardDao {
 			session.close();
 		}
 		return myBoardList;
+  }
+
+	@Override
+	public int deleteHomework(int hwNo) {
+		SqlSession session = null;
+		int status = 0;
+
+		try {
+			session = MyBatisUtil.getSqlSession();
+			status = session.update("board.deleteHomework", hwNo);
+
+			if (status > 0) { // 성공
+				session.commit();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return status;
 	}
   
+  @Override
+	   public int deleteStory(int storyNo) {
+
+	      SqlSession session = null;
+	      int cnt = 0;
+	      try {
+	         session = MyBatisUtil.getSqlSession();
+
+	         cnt = session.update("board.deleteStory", storyNo);
+
+	         if (cnt > 0) {
+	            session.commit();
+	         }
+	      } catch (PersistenceException ex) {
+	         ex.printStackTrace();
+	      } finally {
+	         session.close();
+	      }
+	      return cnt;
+	   }
 }

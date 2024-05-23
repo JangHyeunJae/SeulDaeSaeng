@@ -273,7 +273,7 @@
 <select id="getHwList" parameterType="int" resultMap="hwMap">
 		select *
         from homework
-        where hw_class=#{hwClass}
+        where hw_class=#{hwClass} and hw_yn='Y'
         order by hw_no desc
 </select>
 
@@ -447,6 +447,12 @@
 	where USERS_NO = #{usersNo} AND BOARD_YN = 'Y'
 	order by BOARD_NO desc
 </select>
+
+<update id="deleteHomework" parameterType="int">
+	update homework
+	set hw_yn = 'N'
+	where hw_no = #{hwNo}
+</update>
 
 <!-- <select id="getFiles" resultMap="filesMap">
         select * from files order by file_no desc

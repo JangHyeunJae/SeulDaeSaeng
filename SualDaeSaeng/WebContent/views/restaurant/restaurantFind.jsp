@@ -9,6 +9,15 @@
 	String query = request.getQueryString();
 	
 	List<RestaurantVO> restList = (List<RestaurantVO>) request.getAttribute("restList");
+
+  	MemberVO memDetail = (MemberVO) session.getAttribute("memDetail") != null ? (MemberVO) session.getAttribute("memDetail") : new MemberVO();
+  	UsersVO usersDetail = (UsersVO) session.getAttribute("usersDetail") != null ? (UsersVO) session.getAttribute("usersDetail") : new UsersVO();
+	
+  	for (int i = 0; i < restList.size(); i++) {
+  		RestaurantVO restVo = restList.get(i);
+  		
+  		
+  	}
 		
 	int totalpost = (int) request.getAttribute("totalpost");
 	int totalpage = (int) request.getAttribute("totalpage");
@@ -38,7 +47,7 @@
 	List<RestaurantVO> menuList = !mclsId.equals("") && !mclsId.equals("all") ? 
             (List<RestaurantVO>) request.getAttribute("sclsList") : 
             (List<RestaurantVO>) request.getAttribute("mclsList");
-	
+
 
 %>
 
@@ -107,12 +116,11 @@
 	<!-- End Page Header -->
 	<section id="restaurantFind" class="board mb-5">
 		<div class="container" data-aos="fade-up">
-			<div
-				class="row mb-3 d-flex justify-content-between align-items-center">
+			<div class="row mb-3 d-flex justify-content-between align-items-center">
 				<p class="col-md-3 col-12 mb-0 pe-2">
 					총 <b><%=totalpost%></b>개 <span class="px-2">|</span> <b><%=nowPage%></b> / <b><%=totalpage %></b> page
 				</p>
-				<div class=" col-md-4 col-12 text-end flex-wrap">
+				<div class=" col-md-4 col-12 text-end flex-wrap d-flex justify-content-end">
 					<button class="btn filter" type="button" data-bs-toggle="dropdown"
 						aria-expanded="false">
 						<i class="bi bi-funnel-fill"></i> 

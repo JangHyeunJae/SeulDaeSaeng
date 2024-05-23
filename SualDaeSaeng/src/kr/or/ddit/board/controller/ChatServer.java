@@ -27,7 +27,7 @@ public class ChatServer {
         System.out.println("웹소켓 연결: " + session.getId() + " in room " + classId);
         
      // 새로운 사용자가 입장했음을 알리기 위한 메시지 전송
-        String joinMessage = chatId + "님이 입장했습니다";
+        String joinMessage = chatId + "님이 입장했습니다.";
         synchronized (roomSessions.get(classId)) {
             for (Session client : roomSessions.get(classId)) {
                 try {
@@ -57,7 +57,7 @@ public class ChatServer {
         Set<Session> sessions = roomSessions.get(classId);
         sessions.remove(session);
         String chatId = (String) session.getUserProperties().get("chatId");
-        String leaveMessage = chatId + "님이 퇴장했습니다";
+        String leaveMessage = chatId + "님이 퇴장했습니다.";
         synchronized (roomSessions.get(classId)) {
             for (Session client : roomSessions.get(classId)) {
                 try {

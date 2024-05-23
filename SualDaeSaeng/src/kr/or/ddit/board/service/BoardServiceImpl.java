@@ -244,9 +244,9 @@ public class BoardServiceImpl implements IBoardService{
 	@Override
 	public List<BoardVO> selectClassBoardList(int levelChk) {
 		return boardDao.selectClassBoardList(levelChk);
-  }
+	}
   
-  @Override
+	@Override
 	public int insertStory(StoryVO storyVO) {
 		return boardDao.insertStory(storyVO);
 	}
@@ -281,29 +281,34 @@ public class BoardServiceImpl implements IBoardService{
 	return boardDao.allStoryList();
   }
 
-@Override
-public List<FileDetailVO> getHwFileList(int hwNo) {
-	return boardDao.getHwFileList(hwNo);
-}
-
-@Override
-public MemberVO getHwSubmitMem(int fileNo) {
-	return boardDao.getHwSubmitMem(fileNo);
-}
-
-@Override
-public int insertFiles() {
-	return boardDao.insertFiles();
-}
-
-@Override
-public List<FilesVO> getFiles() {
-	return boardDao.getFiles();
-}
+	@Override
+	public List<FileDetailVO> getHwFileList(int hwNo) {
+		return boardDao.getHwFileList(hwNo);
+	}
+	
+	@Override
+	public MemberVO getHwSubmitMem(int fileNo) {
+		return boardDao.getHwSubmitMem(fileNo);
+	}
+	
+	@Override
+	public int insertFiles() {
+		return boardDao.insertFiles();
+	}
+	
+	@Override
+	public List<FilesVO> getFiles() {
+		return boardDao.getFiles();
+	}
 
 	@Override
 	public List<BoardVO> getMemberBoardReply(int usersNo) {
 		return boardDao.getMemberBoardReply(usersNo);
+	}
+
+	@Override
+	public List<BoardVO> myBoardList(int usersNo) {
+		return boardDao.myBoardList(usersNo);
 	}
   
 }

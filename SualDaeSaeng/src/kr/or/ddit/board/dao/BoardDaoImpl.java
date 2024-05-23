@@ -990,5 +990,23 @@ public class BoardDaoImpl implements IBoardDao {
 
 		return status;
 	}
+
+	@Override
+	public List<BoardVO> myBoardList(int usersNo) {
+		List<BoardVO> myBoardList = null;
+		SqlSession session = null;
+
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+
+			myBoardList = session.selectList("board.myBoardList", usersNo);
+
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return myBoardList;
+	}
   
 }

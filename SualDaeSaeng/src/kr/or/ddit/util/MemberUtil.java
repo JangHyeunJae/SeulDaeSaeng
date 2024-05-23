@@ -61,6 +61,12 @@ public class MemberUtil {
 		
 	}
 	
+	public static void memberMessage(HttpServletRequest req, HttpServletResponse resp, String msg, String url) throws ServletException, IOException {
+			req.setAttribute("msg", msg);
+			req.setAttribute("url", url);
+			req.getRequestDispatcher("/views/alert.jsp").forward(req, resp);
+	}
+	
 	public static void boardLevelKr(BoardVO boardVo) {
 		
 		int level = boardVo.getBoardLevel();

@@ -442,6 +442,11 @@
         values(#{fileNo}, #{fileSavepath}, #{fileOgname},#{fileOgname}, #{fileSize}, #{fileExt}, sysdate, #{fileLevel})
 </insert>
 
+<select id="myBoardList" parameterType="int" resultMap="boardMap">
+	select * from BOARD
+	where USERS_NO = #{usersNo} AND BOARD_YN = 'Y'
+	order by BOARD_NO desc
+</select>
 
 <!-- <select id="getFiles" resultMap="filesMap">
         select * from files order by file_no desc

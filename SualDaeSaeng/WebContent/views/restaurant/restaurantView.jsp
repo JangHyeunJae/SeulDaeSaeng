@@ -295,8 +295,8 @@
           %>
           <div class="d-flex justify-content-between align-items-center py-3 mb-3 food-list new-review">
             <p class="mb-0 d-flex align-items-center gap-3">
-              <img src="/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-              <span> <%=memDetail.getMemNick() %>님 아직 리뷰를 작성하지 않으셨군요! 당신의 리뷰를 기다리고 있습니다. <br> ※홍보 및 비방 등 부적절한 평가는 평점 산정에서 제외 될 수 있습니다. </span>
+              <!-- <img src="/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt=""> -->
+              <span> <b><%=memDetail.getMemNick() %></b>님 아직 리뷰를 작성하지 않으셨군요! 당신의 리뷰를 기다리고 있습니다. <br> ※홍보 및 비방 등 부적절한 평가는 평점 산정에서 제외 될 수 있습니다. </span>
             </p>
             <a href="<%=request.getContextPath() %>/restaurant/reviewWrite.do?no=<%=restDetails.getRestBizno() %>" class="btn btn-outline-warning">리뷰쓰기</a>
           </div>
@@ -311,7 +311,7 @@
 				for (int i = 0; i < restReviewList.size(); i++) {
 				  		RestaurantVO restVo = restReviewList.get(i);
 		          	%>
-		            <div class="col-lg-4">
+		            <div class="col-xxl-4 col-lg-6">
 		              <div class="food-list ">
 		                <h6 class="mb-3 d-flex justify-content-between align-items-center">
 		                  <span>
@@ -356,7 +356,7 @@
 		                %>
 		                <div class="d-flex justify-content-between overflow-x-scroll">
 		                  <div class="col p-1">
-		                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
+		                    <img src="<%=restVo.getFileSavepath() %>" class="img-fluid" alt="<%=restVo.getNickName() %>의 <%=restDetails.getName()%> 대한 리뷰" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
 		                  </div>
 		                </div>
 		                <% } %>
@@ -399,7 +399,7 @@
                      String postdate = itemElement.getElementsByTagName("postdate").item(0).getTextContent();
                      String bloggername = itemElement.getElementsByTagName("bloggername").item(0).getTextContent();
                  %>
-                 <a href="<%=link %>">
+                 <a href="<%=link %>" target="_blank" >
                    <div class="card-body">
                      <small class="badge bg-body-secondary mb-1">작성일 :<%=postdate %></small>
                      <small class="badge bg-body-secondary mb-1">작성자 :<%=bloggername %></small>
@@ -431,7 +431,7 @@
 	               %>
 	               <div class="h-m-180 overflow-hidden" title="<%=title%>">
 	                  <a href="<%=link%>" target="_blank" class="w-100 h-100 d-flex" >
-                  		<img src="<%=link%>" class="card-img" alt="<%=title%>" onError="this.src='<%=thumbnail%>';" />
+                  		<img src="<%=link%>" class="card-img" alt="<%=title%>" onError="this.src='<%=thumbnail%>';" />                  		
 	                 </a>
 	               </div>
 	             </div>

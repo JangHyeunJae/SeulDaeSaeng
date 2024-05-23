@@ -9,6 +9,8 @@
 
 String uri = request.getRequestURI();
 String id = (String) session.getAttribute("usersId");
+MemberVO memInfo = (MemberVO) session.getAttribute("memDetail") != null ? (MemberVO) session.getAttribute("memDetail") : new MemberVO();
+String memNick = memInfo.getMemNick();
 int usersRole = (int) session.getAttribute("usersRole");
 
 %>
@@ -42,7 +44,7 @@ int usersRole = (int) session.getAttribute("usersRole");
       	<link href="/css/index.css" rel="stylesheet">
     <% }else if(request.getRequestURI().contains("timetable")){ %>
       	<link href="/css/timetable.css" rel="stylesheet">
-    <% }else if(request.getRequestURI().contains("write") || request.getRequestURI().contains("edit") || request.getRequestURI().contains("Write")){ %>
+    <% }else if(request.getRequestURI().contains("write") || request.getRequestURI().contains("edit") || request.getRequestURI().contains("Write") || request.getRequestURI().contains("Edit")){ %>
     	<link rel="stylesheet" href="/css/bootform2.css">  
     <% } else if(request.getRequestURI().contains("restaurantUpDate")){%>
        <link href="/css/restaurantUpDate.css" rel="stylesheet">

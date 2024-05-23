@@ -75,7 +75,7 @@
               	<%
               		}else if(levelChk!=0 && classBoardChk!=0){
               	%>
-                <a href="/<%=board %>.do?levelChk=<%=levelChk %>"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
+                <a href="/<%=board %>.do?levelChk=<%=levelChk %>&classBoardChk=<%=classBoardChk %>"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
                 <%
               		}else{
                 %>
@@ -186,7 +186,7 @@
           %>
              <li class="comment">
               <div class="vcard">
-                <img src="../img/testimonials/testimonials-1.jpg" alt="Image placeholder">
+                <img src="../img/testimonials/testimonials-1.jpg" alt="Image placeholder" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
               </div>
               <div class="comment-body">
               <h3><%=replyWriterDetail.getMemNick() %></h3>

@@ -117,7 +117,10 @@ public interface IBoardDao {
 
 	public List<BoardVO> myBoardList(int usersNo);
 
-  public int deleteHomework(int hwNo);
+	public int deleteHomework(int hwNo);
 
+	public int updateStory(int storyNo);
+
+	public int editHomework(Map<String, Object> parameter);
 
 }

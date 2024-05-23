@@ -48,8 +48,8 @@ public class InsertBoardController extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		BoardVO boardVO = new BoardVO();
 		HttpSession session = req.getSession();
-		MemberVO memDetail = (MemberVO) session.getAttribute("memDetail");
-
+		int usersNo = (int) session.getAttribute("usersNo");
+		
 		int levelChk = Integer.parseInt(req.getParameter("levelChk"));
 		int classBoardChk = 0;
 		if(req.getParameter("classBoardChk")!=null) {
@@ -71,7 +71,7 @@ public class InsertBoardController extends HttpServlet {
 		
 		boardVO.setBoardTitle(title);
 		boardVO.setBoardCon(content);
-		boardVO.setUsersNo(memDetail.getUsersNo());
+		boardVO.setUsersNo(usersNo);
 		boardVO.setBoardLevel(level);
 
 		int status = service.insertBoard(boardVO);

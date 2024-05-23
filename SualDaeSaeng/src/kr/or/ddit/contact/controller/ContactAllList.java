@@ -21,6 +21,7 @@ import kr.or.ddit.util.MyBatisUtil;
 @WebServlet("/views/contactList.do")
 public class ContactAllList extends HttpServlet {
 	
+	private static final long serialVersionUID = 1L;
 	IContactService service = ContactServiceImpl.getInstance();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -38,33 +39,33 @@ public class ContactAllList extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		
-		   // 메일 전송
-				String title = req.getParameter("title");  // 제목
-				String body = req.getParameter("body");   // 내용
-				String memEmail = req.getParameter("memEmail");  // 주소
-			
-		        MemberVO memberVO = new MemberVO();
-		        memberVO.setMemEmail(memEmail);
-		        
-				MailUtil mailutil = new MailUtil();
-//				mailutil.sendMail(title, body, address);
-				
-				resp.setContentType("text/html;charset=UTF-8");
-				resp.setCharacterEncoding("UTF-8");
-//			    resp.getWriter().write("메일이 성공적으로 전송되었습니다.");
-				SqlSession session = MyBatisUtil.getSqlSession();
-				
-//				  try {
-//			            // 매퍼를 호출하여 쿼리 실행
-//			            int qNO = Integer.parseInt(req.getParameter("qNO"));
-//			            session.update("contactup", qNO);
-//			            session.commit(); // 커밋
-//			           
-//			        } finally {
-//			        	session.close(); // 세션 닫기
-//			        }
+		// 메일 전송
+		String title = req.getParameter("title");  // 제목
+		String body = req.getParameter("body");   // 내용
+		String memEmail = req.getParameter("memEmail");  // 주소
+	
+		MemberVO memberVO = new MemberVO();
+		memberVO.setMemEmail(memEmail);
+		    
+		MailUtil mailutil = new MailUtil();
+		mailutil.sendMail(title, body, memEmail);
+		
+		resp.setContentType("text/html;charset=UTF-8");
+		resp.setCharacterEncoding("UTF-8");
+//	    resp.getWriter().write("메일이 성공적으로 전송되었습니다.");
+		SqlSession session = MyBatisUtil.getSqlSession();
+		
+//		  try {
+//	            // 매퍼를 호출하여 쿼리 실행
+//	            int qNO = Integer.parseInt(req.getParameter("qNO"));
+//	            session.update("contactup", qNO);
+//	            session.commit(); // 커밋
+//	           
+//	        } finally {
+//	        	session.close(); // 세션 닫기
+//	        }
 
-			    resp.sendRedirect(req.getContextPath() + "/views/contactList.do");
+	    resp.sendRedirect(req.getContextPath() + "/views/contactList.do");
 			    
 	}
 	

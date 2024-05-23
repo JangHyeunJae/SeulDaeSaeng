@@ -9,9 +9,10 @@
 
 String uri = request.getRequestURI();
 String id = (String) session.getAttribute("usersId");
-/* MemberVO memInfo = (MemberVO) session.getAttribute("memDetail") != null ? (MemberVO) session.getAttribute("memDetail") : new MemberVO();
-String memNick = memInfo.getMemNick();
-int usersRole = (int) session.getAttribute("usersRole"); */
+
+String isAdminOk = (String) session.getAttribute("isAdminOk");
+
+
 
 %>
 
@@ -133,15 +134,43 @@ int usersRole = (int) session.getAttribute("usersRole"); */
               </button>
               <ul class="dropdown-menu">
 
-                <%
+
+            <%
                if(id == null) {
-            %>
+           	%>
+
                    <li>
                         <a class="dropdown-item" href="<%=request.getContextPath() %>/member/join.do">회원가입</a>
                    </li>
                    <li>
                     <a class="dropdown-item" href="<%=request.getContextPath() %>/login.do">로그인</a>
                </li>
+
+
+            <% 
+               }else{
+            %>
+                   <li>
+                      <%
+                         if(isAdminOk == null){
+                      %>
+                        <a class="dropdown-item" href="<%=request.getContextPath() %>/member/myPageHome.do">마이페이지</a>
+                      <%      
+                         }else{
+                      %>
+                        <a class="dropdown-item" href="<%=request.getContextPath() %>/views/adminPage.do">관리자 페이지</a>
+                      <%   
+                         }
+                      %>
+                   </li>
+               <li>
+                  <a class="dropdown-item" href="<%=request.getContextPath() %>/logout.do">로그아웃</a>
+               </li>
+            <% 
+               }
+            %>
+               
+
 
             <% 
                }else{

@@ -1031,4 +1031,24 @@ public class BoardDaoImpl implements IBoardDao {
 	      }
 	      return cnt;
 	   }
+
+@Override
+public int updateStory(int storyNo) {
+	SqlSession session = null;
+	int status = 0;
+	try {
+		session = MyBatisUtil.getSqlSession();
+
+		status = session.update("board.updateStory", storyNo);
+
+		if (status > 0) {
+			session.commit();
+		}
+	} catch (PersistenceException ex) {
+		ex.printStackTrace();
+	} finally {
+		session.close();
+	}
+	return status;
+}
 }

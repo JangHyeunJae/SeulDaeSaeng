@@ -454,8 +454,10 @@
 	where hw_no = #{hwNo}
 </update>
 
-<!-- <select id="getFiles" resultMap="filesMap">
-        select * from files order by file_no desc
-</select> -->
+<update id="updateStory" parameterType="int">
+		update story
+		set story_yn='N'
+		where story_no = #{storyNo}
+</update>
 
 </mapper>

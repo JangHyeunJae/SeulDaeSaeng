@@ -317,6 +317,11 @@ public class BoardServiceImpl implements IBoardService{
 	}
 
 	@Override
+	public int editHomework(Map<String, Object> parameter) {
+		return boardDao.editHomework(parameter);
+  }
+  
+  @Override
 	public int updateStory(int storyNo) {
 		return boardDao.updateStory(storyNo);
 	}

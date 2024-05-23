@@ -55,7 +55,7 @@
                 </small>
               </p>
               <h3><%=hw.getHwTitle() %></h3>
-              <small>숙제기한 : <%=hw.getHwStart() %> ~ <%=hw.getHwStart() %></small><br>
+              <small>숙제기한 : <%=hw.getHwStart() %> ~ <%=hw.getHwEnd() %></small><br>
               <small>작성자 : <%=wd.getMemNick() %></small>
             </div>
           </div>
@@ -141,7 +141,7 @@
           		if(wd.getUsersNo() == usersNo){
           	
           	%>
-          	<a href="<%=request.getContextPath()%>/homework/edit.do" type="button" class="btn btn-secondary">수정하기</a>
+          	<a href="<%=request.getContextPath()%>/homework/edit.do?levelChk=<%=levelChk %>&hwNo=<%=hw.getHwNo() %>" type="button" class="btn btn-secondary">수정하기</a>
           	<a href="<%=request.getContextPath()%>/homework/delete.do?levelChk=<%=levelChk %>&hwNo=<%=hw.getHwNo() %>" onclick="return confirm('삭제하시겠습니까?');" type="button" class="btn btn-secondary">삭제하기</a>
           	<%
           		}

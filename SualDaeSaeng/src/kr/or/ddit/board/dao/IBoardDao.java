@@ -122,4 +122,6 @@ public interface IBoardDao {
 
 	public int updateStory(int storyNo);
 
+	public int editHomework(Map<String, Object> parameter);
+
 }

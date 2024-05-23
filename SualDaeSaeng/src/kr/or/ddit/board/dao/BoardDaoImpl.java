@@ -1012,25 +1012,49 @@ public class BoardDaoImpl implements IBoardDao {
 	}
   
   @Override
-	   public int deleteStory(int storyNo) {
+  public int deleteStory(int storyNo) {
 
-	      SqlSession session = null;
-	      int cnt = 0;
-	      try {
-	         session = MyBatisUtil.getSqlSession();
+	  SqlSession session = null;
+	  int cnt = 0;
+	  try {
+		  session = MyBatisUtil.getSqlSession();
 
-	         cnt = session.update("board.deleteStory", storyNo);
+		  cnt = session.update("board.deleteStory", storyNo);
 
-	         if (cnt > 0) {
-	            session.commit();
-	         }
-	      } catch (PersistenceException ex) {
-	         ex.printStackTrace();
-	      } finally {
-	         session.close();
-	      }
-	      return cnt;
-	   }
+		  if (cnt > 0) {
+			  session.commit();
+		  }
+	  } catch (PersistenceException ex) {
+		  ex.printStackTrace();
+	  } finally {
+		  session.close();
+	  }
+	  return cnt;
+  }
+
+	@Override
+	public int editHomework(Map<String, Object> parameter) {
+	
+		SqlSession session = null;
+		int status = 0;
+	
+		try {
+			session = MyBatisUtil.getSqlSession();
+			status = session.update("board.editHomework", parameter);
+	
+			if (status > 0) { // 성공
+				session.commit();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+	
+		return status;
+	}
 
 @Override
 public int updateStory(int storyNo) {

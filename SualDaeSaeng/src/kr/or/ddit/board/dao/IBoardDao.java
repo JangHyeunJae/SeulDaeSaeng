@@ -117,9 +117,7 @@ public interface IBoardDao {
 
 	public List<BoardVO> myBoardList(int usersNo);
 
-  public List<BoardVO> getMemberBoardReply(int usersNo);
-
-  public int deleteHomework(int hwNo);
+	public int deleteHomework(int hwNo);
 
 
 }

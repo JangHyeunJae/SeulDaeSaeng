@@ -41,9 +41,16 @@ public class MyPageHome extends HttpServlet{
 		MemberUtil.boardLevelKr(memBoardList);
 		req.setAttribute("memBoardList", memBoardList);
 		
-		List<BoardVO> memberBoardReplyList = new ArrayList<BoardVO>();
-		memberBoardReplyList = boardService.getMemberBoardReply((int)req.getSession().getAttribute("usersNo"));
-		req.setAttribute("memberBoardList", memberBoardReplyList);
+		
+		List<BoardVO> memberBoardReplyList = boardService.getMemberBoardReply((int)req.getSession().getAttribute("usersNo"));
+		if(memberBoardReplyList != null) {
+			MemberUtil.boardLevelKr(memberBoardReplyList);
+			req.setAttribute("memberBoardReplyList", memberBoardReplyList);
+		}
+		
+		for(BoardVO vo : memberBoardReplyList) {
+			System.out.println(vo.toString());
+		}
 		
 		if(usersVo != null && addrVo != null & memberVo != null) {
 			req.getRequestDispatcher("/views/member/myPage.jsp").forward(req, resp);

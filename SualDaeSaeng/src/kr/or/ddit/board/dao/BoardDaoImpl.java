@@ -897,16 +897,21 @@ public class BoardDaoImpl implements IBoardDao {
   @Override
 	public List<BoardVO> getMemberBoardReply(int usersNo) {
 		
-		List<Integer> boardNoList = null;
+		List<Integer> boardNoList = new ArrayList<Integer>();
 		List<BoardVO> boardList = new ArrayList<BoardVO>();
 		int cnt = 0;
+		BoardVO vo = null;
 		SqlSession session = null;
 
 		try {
 			session = MyBatisUtil.getSqlSession(true);
 			boardNoList = session.selectList("board.getMemberBoardReply", usersNo);
-			for(int boardNo : boardNoList) {
-				boardList.set(cnt++, session.selectOne("board.getMemberBoardOne", boardNo));
+			for(Integer boardNo : boardNoList) {
+				vo = session.selectOne("board.getMemberBoardOne", boardNo);
+				if(vo != null) {
+					boardList.add(vo);
+					vo = null;
+				}
 			}
 			
 		} catch (PersistenceException ex) {

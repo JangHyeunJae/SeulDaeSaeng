@@ -38,7 +38,6 @@ public class ContactAllList extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		
 		// 메일 전송
 		String title = req.getParameter("title");  // 제목
 		String body = req.getParameter("body");   // 내용

@@ -12,8 +12,6 @@ String id = (String) session.getAttribute("usersId");
 
 String isAdminOk = (String) session.getAttribute("isAdminOk");
 
-
-
 %>
 
 
@@ -133,7 +131,6 @@ String isAdminOk = (String) session.getAttribute("isAdminOk");
                 <!-- <img src="img/testimonials/testimonials-2.jpg" class="testimonial-img" alt=""> -->
               </button>
               <ul class="dropdown-menu">
-
 
             <%
                if(id == null) {

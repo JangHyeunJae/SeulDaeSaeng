@@ -9,34 +9,9 @@
 <!-- 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
 <%
  	int levelChk = (int)request.getAttribute("levelChk");
-    int idx = 0;
-    if(levelChk < 300){
-	   idx = (int)request.getAttribute("idx");
-    }
- 	String boardName = null;
- 	String board = null;
- 	// levelChk 0이면 버튼 선택해야함
-  	if(levelChk == 1) {
-  		boardName = "자유게시판";
-  		board = "freeBoard";
-  	}
-  	else if(levelChk == 2) {
-  		boardName = "공부게시판";
-  		board = "studyBoard";
-  	}
-  	else if(levelChk == 3) {
-  		boardName = "공지사항";
-  		board = "noticeBoard";
-  	}
-  	else if(levelChk > 300){
-  		boardName = "숙제 작성하기";
-  		//학생일때랑 선생님일때랑 다르게 보내줘야함.
-  		board = "classTeacherBoard";
-  	}
-  	else {
-  		boardName = "전체게시판";
-  		board = "allBoard";
-  	}
+
+ 	String boardName = "숙제 작성하기";
+ 	String board = "classTeacherBoard";
  %>
 <main data-aos="fade" data-aos-delay="700" >
 <!-- <main> -->
@@ -45,17 +20,8 @@
     <div class="container position-relative">
       <div class="row d-flex justify-content-center">
         <p class="mb-5 text-start">
-          <%
-          if(levelChk>300){
-          %>
-          <a href="<%=request.getContextPath() %>/classTeacherBoard.do?classNo=<%=levelChk %>">
-          <%
-          }else{
-          %>
-          <a href="<%=request.getContextPath() %>/<%=board %>.do">
-          <%
-          }
-          %>
+        
+          <a href="<%=request.getContextPath() %>/classTeacherBoard.do?levelChk=<%=levelChk %>">
             <i class="bi bi-chevron-left"></i> 뒤로가기
           </a>
         </p>
@@ -90,21 +56,32 @@
 
 <script type="text/javascript">
 $(function(){
+	// 오늘 날짜를 yyyy-mm-dd 형식으로 포맷팅
+    var today = new Date();
+    var day = ("0" + today.getDate()).slice(-2);
+    var month = ("0" + (today.getMonth() + 1)).slice(-2);
+    var todayFormatted = today.getFullYear() + "-" + month + "-" + day;
+    
+    // startDate 입력 필드에 오늘 날짜 설정
+    $("#startDate").val(todayFormatted);
+	
     var submitBtn = $("#submitBtn");
     var insertForm = $("#insertForm");
 
     submitBtn.on("click", function(){
         var title = $("#title").val();
         var content = $("#content").val();
-
+        var endDate = $("#endDate").val();
+        
         if(title == null || title == ""){
             alert("제목을 입력해주세요!");
             return false;
         }
-        if(content == null || content == ""){
-            alert("내용을 입력해주세요!");
-            return false;
+        if(endDate == null || endDate == ""){
+        	alert("과제 마감일을 선택해주세요!");
+        	return false;
         }
+        
         insertForm.submit();
     });
 });

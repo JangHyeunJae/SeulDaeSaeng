@@ -11,9 +11,11 @@ public interface IAdmindao {
 
 	public List<MemberReqVO> selectmemList();
 
-	public int AdminAccept(int usersNo);
+//	public int AdminAccept(int usersNo);
 
 	public List<MemberReqVO> selectallList();
+
+	public int adminMemberYN(int usersNoParam);
 
 //	public List<ContactVO> selectContactList();
 

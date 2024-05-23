@@ -59,25 +59,6 @@ public class FreeBoardListController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doGet(req, resp);
-//		int level = 1;
-//
-//		String searchOption = req.getParameter("searchOption");
-//		String searchText = req.getParameter("searchText");
-//
-//		Map<String, Object> parameter = new HashMap<>();
-//		parameter.put("boardLevel", level);
-//		parameter.put("searchText", searchText);
-//		parameter.put("searchOption", searchOption);
-//
-//		List<BoardVO> boardList = boardService.searchSelectBoardList(parameter);
-//
-//		if (searchOption != null && searchOption != "") {
-//			req.setAttribute("searchOption", searchOption);
-//		}
-//		req.setAttribute("levelChk", level);
-//		req.setAttribute("boardList", boardList);
-//
-//		resp.sendRedirect("/freeBoard.do?searchText=" + searchText);
-////		req.getRequestDispatcher("/views/board/allBoard.jsp").forward(req, resp);
+
 	}
 }

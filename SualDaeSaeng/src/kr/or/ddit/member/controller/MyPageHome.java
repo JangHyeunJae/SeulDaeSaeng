@@ -48,9 +48,6 @@ public class MyPageHome extends HttpServlet{
 			req.setAttribute("memberBoardReplyList", memberBoardReplyList);
 		}
 		
-		for(BoardVO vo : memberBoardReplyList) {
-			System.out.println(vo.toString());
-		}
 		
 		if(usersVo != null && addrVo != null & memberVo != null) {
 			req.getRequestDispatcher("/views/member/myPage.jsp").forward(req, resp);

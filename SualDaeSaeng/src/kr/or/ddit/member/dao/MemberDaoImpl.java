@@ -433,6 +433,7 @@ public class MemberDaoImpl implements IMemberDao {
       return usersDetail;
    }
 
+
 @Override
 public List<restLikeVO> selectLikeRest(int addrNo) {
 	 SqlSession session = null;
@@ -450,6 +451,7 @@ public List<restLikeVO> selectLikeRest(int addrNo) {
      }
      return restLikeList;
 }
+
   
 }
 

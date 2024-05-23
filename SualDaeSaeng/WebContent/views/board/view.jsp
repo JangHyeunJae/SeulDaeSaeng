@@ -75,7 +75,7 @@
               	<%
               		}else if(levelChk!=0 && classBoardChk!=0){
               	%>
-                <a href="/<%=board %>.do?levelChk=<%=levelChk %>"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
+                <a href="/<%=board %>.do?levelChk=<%=levelChk %>&classBoardChk=<%=classBoardChk %>"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
                 <%
               		}else{
                 %>
@@ -186,7 +186,7 @@
           %>
              <li class="comment">
               <div class="vcard">
-                <img src="../img/testimonials/testimonials-1.jpg" alt="Image placeholder">
+                <img src="../img/testimonials/testimonials-1.jpg" alt="Image placeholder" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
               </div>
               <div class="comment-body">
               <h3><%=replyWriterDetail.getMemNick() %></h3>
@@ -290,7 +290,15 @@
           <%
           }else{
           %>
-          <a href="<%=request.getContextPath()%>/board/report.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&report=Y&classBoardChk=<%=classBoardChk %>" onclick="return confirm('신고하시겠습니까?');" type="button" class="btn btn-secondary">신고하기</a>
+<%--           <a href="<%=request.getContextPath()%>/board/report.do?boardNo=<%=bv.getBoardNo() %>&idx=<%=idx %>&levelChk=<%=levelChk %>&report=Y&classBoardChk=<%=classBoardChk %>" onclick="return confirm('신고하시겠습니까?');" type="button" class="btn btn-secondary">신고하기</a> --%>
+         	<form action="<%=request.getContextPath()%>/board/report.do" method="get">
+			    <input type="hidden" name="boardNo" value="<%=bv.getBoardNo() %>">
+			    <input type="hidden" name="idx" value="<%=idx %>">
+			    <input type="hidden" name="levelChk" value="<%=levelChk %>">
+			    <input type="hidden" name="report" value="Y">
+			    <input type="hidden" name="classBoardChk" value="<%=classBoardChk %>">
+			    <input type="submit" value="신고하기" onclick="return confirm('신고하시겠습니까?');" class="btn btn-secondary">
+			</form>
           <%
           }
           %>

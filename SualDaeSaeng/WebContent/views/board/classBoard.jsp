@@ -57,7 +57,7 @@
                   </li>
                   <li class="pb-0">
                     <a onclick="chatWinOpen();" class="btn-visit align-self-start">
-                      <span>304</span>호 채팅입장 </a>
+                      <span><%=memDetail.getMemClass() %></span>호 채팅입장 </a>
                   </li>
                 </ul>
               </div>

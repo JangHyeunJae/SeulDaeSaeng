@@ -113,10 +113,14 @@ public interface IBoardDao {
 
 	public List<FilesVO> getFiles();
 
-    public List<BoardVO> getMemberBoardReply(int usersNo);
+	public List<BoardVO> getMemberBoardReply(int usersNo);
 
-    public int deleteHomework(int hwNo);
+	public List<BoardVO> myBoardList(int usersNo);
+
+	public int deleteHomework(int hwNo);
 
 	public int updateStory(int storyNo);
+
+	public int editHomework(Map<String, Object> parameter);
 
 }

@@ -38,7 +38,7 @@
             <div class="col-lg-3">
               <div class="portfolio-info sticky-top">
                 <h3 class="d-flex align-items-center">
-                  <img src="img/testimonials/testimonials-2.jpg" class="testimonial-img me-2" alt="">
+                  <img src="img/testimonials/testimonials-2.jpg" class="testimonial-img me-2" alt="" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                   <p>
                     <span><%if(memberVo.getMemNick() != null){ %>
                     <%=memberVo.getMemNick() %>(<%=memberVo.getMemName() %>)
@@ -231,7 +231,7 @@
                     <h2>board</h2>
                     <p class="d-flex justify-content-between align-items-center"> 
                      	 내가 작성한 게시글 
-                      <button type="button" class="btn btn-outline-warning btn-sm">더보기</button>
+                      <button type="button" class="btn btn-outline-warning btn-sm" onclick="location.href='/member/memberMyBoardList.do'">더보기</button>
                     </p>
                   </div>
                   <div class="list-group">

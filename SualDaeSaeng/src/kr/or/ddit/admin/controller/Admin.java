@@ -22,6 +22,7 @@ import kr.or.ddit.contact.service.IContactService;
 import kr.or.ddit.contact.vo.ContactVO;
 import kr.or.ddit.report.service.IReportService;
 import kr.or.ddit.report.service.ReportServiceImpl;
+import kr.or.ddit.util.MailUtil;
 
 @WebServlet("/views/adminPage.do")
 public class Admin extends HttpServlet {
@@ -53,8 +54,6 @@ public class Admin extends HttpServlet {
 		List<MemberReqVO> reportmember = reportservice.reportmemberList();  // 신고당한 회원 리스트 
 		req.setAttribute("reportmember", reportmember);
 		
-		
-		
 	   req.getRequestDispatcher("/views/admin/adminPage.jsp").forward(req, resp);
    }
    
@@ -77,7 +76,10 @@ public class Admin extends HttpServlet {
 	   PrintWriter wrt = resp.getWriter();
 	   wrt.print(json);
 	   
-
+	   
+	   
+		
+	}
     
    }
-}
+

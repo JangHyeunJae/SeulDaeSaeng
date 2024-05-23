@@ -47,7 +47,7 @@
 	        <p>전화번호: <span id="memTel"></span></p>
 	        <p>분반: <span id="memClass"></span></p>
 	        <p>등록일시: <span id="memRegdt"></span></p>
-	        <p>주소 번호: <span id="addrNo"></span></p>
+	        <p>주소 : <span id="addrNo"></span></p>
 		    <div class="modal-footer">
 		    	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>	       
 		    	<button type="submit" class="btn btn-primary" id="accept">수락</button>
@@ -252,7 +252,7 @@
 //         $.ajax({
 //             type: 'POST',
 //             url: '/views/adminaccept.do',
-//             data: { usersNo: '${usersNo}'},
+//             data: { usersNo: {usersNo},
 //             success: function (response) {
 //                 console.log(response);
 //                 $('.modal').modal('hide');

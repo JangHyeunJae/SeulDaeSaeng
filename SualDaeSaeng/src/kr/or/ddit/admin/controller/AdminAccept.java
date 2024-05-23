@@ -36,25 +36,47 @@ public class AdminAccept extends HttpServlet {
 		req.setAttribute("memreqVO", memreqVO);
 		
 
-		
-//		 int cnt = service.AdminAccept(usersNo);
+	    // 사용자로부터 입력된 사용자 번호를 가져옴
+	    String usersNoParam = req.getParameter("usersNo");
 		
 	
-			SqlSession session = MyBatisUtil.getSqlSession();
-			
-			  try {
-		            // 매퍼를 호출하여 쿼리 실행
-		            int usersno = Integer.parseInt(req.getParameter("usersNo"));
-		            session.update("adminAccept", usersno);
-		            session.commit(); // 커밋
-		           
-		            resp.sendRedirect(req.getContextPath() + "/views/adminPage.do");
-		        } finally {
-		        	session.close(); // 세션 닫기
-		        }
-		    }
-		
-		 
-		  
+	    if (usersNoParam != null && !usersNoParam.isEmpty()) { // null 또는 빈 문자열인지 검사
+	        try {
+	            int usersNo = Integer.parseInt(usersNoParam); // 숫자로 변환
+	            SqlSession session = MyBatisUtil.getSqlSession();
+	            try {
+	            	  // 매퍼를 호출하여 쿼리 실행
+	                MemberReqVO adminAccept = session.selectOne("adminAccept", usersNo);
+	                if (adminAccept != null) {
+	                    // 회원 정보를 세션에 저장하거나 필요한 작업을 수행
+	                    session.commit(); // 커밋
+	                    resp.sendRedirect(req.getContextPath() + "/adminPage.do");
+	                } else {
+	                    // 선택한 회원이 없는 경우에 대한 처리
+	                    resp.sendRedirect(req.getContextPath() + "/errorPage.jsp");
+	                }
+	            } finally {
+	                session.close(); // 세션 닫기
+	            }
+	        } catch (NumberFormatException e) {
+	            // 숫자로 변환할 수 없는 경우 예외 처리
+	            resp.sendRedirect(req.getContextPath() + "/errorPage.jsp");
+	        }
+	    
+	    }
+
+
+	    
 	}
+	    
+	}
+
+
+
+
+
+
+
+
+
 

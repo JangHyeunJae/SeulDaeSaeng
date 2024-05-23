@@ -117,4 +117,6 @@ public interface IBoardDao {
 
     public int deleteHomework(int hwNo);
 
+	public int updateStory(int storyNo);
+
 }

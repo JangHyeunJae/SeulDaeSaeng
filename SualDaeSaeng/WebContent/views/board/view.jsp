@@ -186,7 +186,7 @@
           %>
              <li class="comment">
               <div class="vcard">
-                <img src="../img/testimonials/testimonials-1.jpg" alt="Image placeholder">
+                <img src="../img/testimonials/testimonials-1.jpg" alt="Image placeholder" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
               </div>
               <div class="comment-body">
               <h3><%=replyWriterDetail.getMemNick() %></h3>

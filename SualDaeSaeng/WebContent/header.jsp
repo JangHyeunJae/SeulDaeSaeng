@@ -9,6 +9,8 @@
 
 String uri = request.getRequestURI();
 String id = (String) session.getAttribute("usersId");
+MemberVO memInfo = (MemberVO) session.getAttribute("memDetail") != null ? (MemberVO) session.getAttribute("memDetail") : new MemberVO();
+String memNick = memInfo.getMemNick();
 
 %>
 

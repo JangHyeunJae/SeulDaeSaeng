@@ -20,7 +20,7 @@
               <div class="card-body msg_card_body">
                 <div class="d-flex justify-content-start mb-4">
                   <div class="img_cont_msg">
-                    <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                    <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                   </div>
                   <div class="msg_cotainer"> Hi, how are you Samim? <span class="msg_time">8:40 AM, Today</span>
                   </div>
@@ -29,7 +29,7 @@
                   <div class="msg_cotainer_send"> Ok, thank you have a good day <span class="msg_time_send">9:10 AM, Today</span>
                   </div>
                   <div class="img_cont_msg">
-                    <img src="img/testimonials/testimonials-2.jpg" class="rounded-circle user_img_msg">
+                    <img src="img/testimonials/testimonials-2.jpg" class="rounded-circle user_img_msg" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                   </div>
                 </div>
                 <!-- Other message cards go here -->

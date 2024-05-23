@@ -106,6 +106,7 @@
 		       REVIEW_STAR reviewStar, 
 		       REVIEW_TEXT reviewText, 
 		       FILE_NO fileNo, 
+		       FILE_SAVEPATH fileSavepath, 
 		       REVIEW_DATE reviewDate 
 		FROM (
 		    SELECT REVIEW_NO, 
@@ -114,6 +115,7 @@
 		           REVIEW_STAR, 
 		           REVIEW_TEXT, 
 		           FILE_NO, 
+		       	   FILE_SAVEPATH, 
 		           REVIEW_DATE, 
 		           ROWNUM AS RNUM
 		    FROM RESTVIEW

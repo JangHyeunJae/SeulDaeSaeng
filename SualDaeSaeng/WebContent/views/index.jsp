@@ -62,7 +62,7 @@
 				  		RestaurantVO restVo = menuList.get(i);
                %>
                 <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls=<%=restVo.getMcls() %>&scls=<%=restVo.getScls()%>" class="swiper-slide">
-                  <img src="/img/icon/<%=restVo.getScls()%>.png" alt="<%=restVo.getSclsName()%> 이미지">
+                  <img src="/img/icon/<%=restVo.getScls()%>.png" alt="<%=restVo.getSclsName()%> 이미지" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                   <p><%=restVo.getSclsName()%></p>
                 </a>
                 <% } %>
@@ -94,7 +94,7 @@
             	  FileDetailVO img = boardService.getFileDetail(story.getFileNo());
               %>
                 <div class="swiper-slide">
-                  <img src="<%= request.getContextPath() %>/file/download.do?fileNo=<%=img.getFileNo() %>" class="img-fluid" alt="">
+                  <img src="<%= request.getContextPath() %>/file/download.do?fileNo=<%=img.getFileNo() %>" class="img-fluid" alt="" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                   <p><%=story.getStoryCon() %></p>
                 </div>
               <%
@@ -305,7 +305,7 @@
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -325,7 +325,7 @@
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -345,7 +345,7 @@
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -376,7 +376,7 @@
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -396,7 +396,7 @@
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -416,7 +416,7 @@
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -447,7 +447,7 @@
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -467,7 +467,7 @@
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -487,7 +487,7 @@
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지">
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>

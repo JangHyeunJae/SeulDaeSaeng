@@ -38,7 +38,7 @@
             <div class="col-lg-3">
               <div class="portfolio-info sticky-top">
                 <h3 class="d-flex align-items-center">
-                  <img src="img/testimonials/testimonials-2.jpg" class="testimonial-img me-2" alt="">
+                  <img src="img/testimonials/testimonials-2.jpg" class="testimonial-img me-2" alt="" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                   <p>
                     <span><%if(memberVo.getMemNick() != null){ %>
                     <%=memberVo.getMemNick() %>(<%=memberVo.getMemName() %>)

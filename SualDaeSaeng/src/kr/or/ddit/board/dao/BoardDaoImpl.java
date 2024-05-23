@@ -854,44 +854,67 @@ public class BoardDaoImpl implements IBoardDao {
 		return boardList;
 	}
 
-   @Override
+     @Override
    public int deleteStory(int storyNo) {
-	   
-        SqlSession session = null;
-		int cnt = 0;
-		try {
-			session = MyBatisUtil.getSqlSession();
-			
-			cnt = session.update("board.deleteStory", storyNo);
-			
-			if(cnt > 0) {
-				session.commit();
-			}
-		} catch (PersistenceException ex) {
-			ex.printStackTrace();
-		}finally {
-			session.close();
-		}
-		return cnt;
+
+      SqlSession session = null;
+      int cnt = 0;
+      try {
+         session = MyBatisUtil.getSqlSession();
+
+         cnt = session.update("board.deleteStory", storyNo);
+
+         if (cnt > 0) {
+            session.commit();
+         }
+      } catch (PersistenceException ex) {
+         ex.printStackTrace();
+      } finally {
+         session.close();
+      }
+      return cnt;
    }
 
    @Override
    public List<StoryVO> allStoryList() {
-	   
-		List<StoryVO> allStoryList = new ArrayList<StoryVO>();
 
+      List<StoryVO> allStoryList = new ArrayList<StoryVO>();
+
+      SqlSession session = null;
+
+      try {
+         session = MyBatisUtil.getSqlSession(true);
+         allStoryList = session.selectList("board.allStoryList");
+
+      } catch (PersistenceException ex) {
+         ex.printStackTrace();
+      } finally {
+         session.close();
+      }
+      return allStoryList;
+   }
+  
+  @Override
+	public List<BoardVO> getMemberBoardReply(int usersNo) {
+		
+		List<Integer> boardNoList = null;
+		List<BoardVO> boardList = new ArrayList<BoardVO>();
+		int cnt = 0;
 		SqlSession session = null;
 
 		try {
 			session = MyBatisUtil.getSqlSession(true);
-			allStoryList = session.selectList("board.allStoryList");
-
+			boardNoList = session.selectList("board.getMemberBoardReply", usersNo);
+			for(int boardNo : boardNoList) {
+				boardList.set(cnt++, session.selectOne("board.getMemberBoardOne", boardNo));
+			}
+			
 		} catch (PersistenceException ex) {
 			ex.printStackTrace();
 		} finally {
 			session.close();
 		}
-		return allStoryList;
-   }
-
+		return boardList;
+	}
+  
 }

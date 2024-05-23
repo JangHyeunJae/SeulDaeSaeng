@@ -104,4 +104,6 @@ public interface IBoardDao {
 
 	public List<StoryVO> allStoryList();
 
+  public List<BoardVO> getMemberBoardReply(int usersNo);
+
 }

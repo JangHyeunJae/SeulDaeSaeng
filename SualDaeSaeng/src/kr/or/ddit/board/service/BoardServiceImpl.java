@@ -278,4 +278,10 @@ public class BoardServiceImpl implements IBoardService{
   public List<StoryVO> allStoryList() {
 	return boardDao.allStoryList();
   }
+
+	@Override
+	public List<BoardVO> getMemberBoardReply(int usersNo) {
+		return boardDao.getMemberBoardReply(usersNo);
+	}
+  
 }

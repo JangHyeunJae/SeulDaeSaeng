@@ -26,7 +26,7 @@
 	List<RestaurantVO> restLikeList = (List<RestaurantVO>) request.getAttribute("restLikeList"); 
 	List<BoardVO> boardList = (List<BoardVO>)boardService.allBoardList();
 	List<BoardVO> noticeList = (List<BoardVO>)boardService.selectBoardList(3);
-  List<StoryVO> storyList = (List<StoryVO>)request.getAttribute("storyList"); 
+  	List<StoryVO> storyList = (List<StoryVO>)request.getAttribute("storyList"); 
 %>
 
     <main data-aos="fade" data-aos-delay="700">

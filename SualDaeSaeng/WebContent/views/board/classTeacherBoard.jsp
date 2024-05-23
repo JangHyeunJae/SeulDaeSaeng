@@ -61,6 +61,7 @@
                 <button type="button" class="btn btn-outline-warning btn-sm" onclick="location.href='<%=request.getContextPath() %>/file/fileList.do?levelChk=<%=levelChk %>'">이전 파일 더보기</button>
               </p>
             </div>
+            
             <!-- 파일 input -->
             
             <form class="file-drop" method="post" action="/file/upload.do?levelChk=<%=levelChk %>" enctype="multipart/form-data">
@@ -106,14 +107,28 @@
               <%
               for(int i=0;i<hwList.size();i++){
             	  HomeworkVO hw = hwList.get(i);
+            	  List<FileDetailVO> files = service.getHwFileList(hw.getHwNo());
               %>
               <a href="<%=request.getContextPath() %>/homework/detail.do?hwNo=<%=hw.getHwNo() %>&levelChk=<%=levelChk %>" class="card">
                 <div class="card-body">
                   <div class="d-flex justify-content-between align-items-center">
                     <h5 class="card-title text-truncate"><%=hw.getHwTitle() %></h5>
                   </div>
-                  <small>제출인원(5)</small>
+                  <small>제출인원(<%=files.size() %>)</small>
                   <p class="card-text "> <%=hw.getHwEnd() %>까지</p>
+                  <%
+                  LocalDate now = LocalDate.now();
+                  LocalDate finalDt = hw.getHwEnd();
+                  if(now.isAfter(finalDt)){
+                  %>
+                   <small class="badge bg-body-secondary me-2">종료</small>
+                  <%
+                  }else{
+                  %>
+                   <small class="badge text-bg-warning me-2">진행중</small>
+                  <%
+                  }
+                  %>
                 </div>
               </a>
               <%

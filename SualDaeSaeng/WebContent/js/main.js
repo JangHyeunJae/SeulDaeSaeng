@@ -278,6 +278,52 @@ document.addEventListener('DOMContentLoaded', () => {
 $(document).ready(function() {
     var obj = $(".file-drop");
     var label = obj.find('label');
+    var uploadInput = $('#upload-file');
+
+    obj.on('dragenter', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        $(this).css('border', '2px solid var(--color-orange-900)');
+    });
+
+    obj.on('dragover', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        $(this).css('border', '2px solid var(--color-orange-900)');
+    });
+
+    obj.on('drop', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        $(this).css('border', '2px dotted var(--color-orange-900)');
+        var files = e.originalEvent.dataTransfer.files;
+        handleFiles(files);
+    });
+
+    uploadInput.on('change', function(e) {
+        var files = e.target.files;
+        handleFiles(files);
+    });
+
+    function handleFiles(files) {
+        var fileNames = [];
+        for (var i = 0; i < files.length; i++) {
+            fileNames.push(files[i].name);
+            label.css('color', 'black'); 
+        }
+        label.text(fileNames.join(', ')); // 파일 이름들을 라벨에 표시
+        var dataTransfer = new DataTransfer();
+        for (var i = 0; i < files.length; i++) {
+            dataTransfer.items.add(files[i]);
+        }
+        uploadInput[0].files = dataTransfer.files;
+    }
+});
+
+
+/*$(document).ready(function() {
+    var obj = $(".file-drop");
+    var label = obj.find('label');
     var statusBarContainer = $('<div id="statusBarContainer"></div>');
 
     obj.on('dragenter', function(e) {
@@ -358,5 +404,5 @@ $(document).ready(function() {
             this.size.html(sizeStr);
         }
     }
-});
+});*/
 });

@@ -1,5 +1,6 @@
 package kr.or.ddit.board.service;
 
+import java.nio.file.Files;
 import java.time.LocalTime;
 import java.util.Collection;
 import java.util.List;
@@ -10,6 +11,7 @@ import javax.servlet.http.Part;
 import kr.or.ddit.board.vo.BoardVO;
 import kr.or.ddit.board.vo.FileDetailVO;
 import kr.or.ddit.board.vo.FileShareVO;
+import kr.or.ddit.board.vo.FilesVO;
 import kr.or.ddit.board.vo.HomeworkVO;
 import kr.or.ddit.board.vo.HwSubmitVO;
 import kr.or.ddit.board.vo.ReplyVO;
@@ -101,4 +103,11 @@ public interface IBoardService {
 
   public List<StoryVO> allStoryList();
 
+  public List<FileDetailVO> getHwFileList(int hwNo);
+
+  public MemberVO getHwSubmitMem(int fileNo);
+
+  public int insertFiles();
+
+  public List<FilesVO> getFiles();
 }

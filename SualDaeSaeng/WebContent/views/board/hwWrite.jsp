@@ -59,29 +59,22 @@
             <i class="bi bi-chevron-left"></i> 뒤로가기
           </a>
         </p>
-        <div>
-          <h2>
-          <%=boardName %>
-          </h2>
-          <input type="hidden" class="btn-check" name="level" value=<%=levelChk %>>
-        </div>
-      </div>
-    </div>
-  </div><!-- End Page Header -->
-
-  <div class="contact">
-    <div class="container pb-3">
-      <!-- {{changeDetected}} -->
-        <form action="<%=request.getContextPath()%>/homework/write.do?levelChk=<%=levelChk %>" method="post" role="form" id="insertForm" class="php-email-form needs-validation" novalidate>
+   <div>
+          <h2><%=boardName %></h2>
+          <!-- {{changeDetected}} -->
+          <form action="<%=request.getContextPath()%>/homework/write.do?levelChk=<%=levelChk %>" method="post" role="form" id="insertForm" class="php-email-form needs-validation" novalidate>
+            <div class="contact">
+             <div class="container pb-3">
+              <input type="hidden" class="btn-check" name="level" value=<%=levelChk %>>
           <div class="form-group d-flex align-items-center pt-4">
-           <p class="pe-2">기간 설정 : <p>
+           <p class="pe-2 pt-2">기간 설정 : <p>
            <input type="date" class="form-control" name="startDate" id="startDate" value="" max="9999-12-31" style="width:180px; display:inline" required> ~ 
            <input type="date" class="form-control" name="endDate" id="endDate" value="" max="9999-12-31" style="width:180px;  display:inline" required>
           </div> 
-        <div class="form-group">
-          <input type="text" class="form-control" name="title" id="title" placeholder="제목" required>
-          <div class="invalid-feedback">제목을 작성해주세요.</div>
-        </div>
+          <div class="form-group">
+               <input type="text" class="form-control" name="title" id="title" placeholder="제목" required>
+               <div class="invalid-feedback">제목을 작성해주세요.</div>
+          </div>
         	<textarea class="form-control summernote" rows="5" id="content" name="content"></textarea>
         	<input type="hidden" id="levelChk" name="levelChk" value=<%=levelChk %>>
 
@@ -89,9 +82,10 @@
           <button type="submit" id="submitBtn">작성하기</button>
         </div>
       </form>
+       </div>
+       </div>
+      </div>
     </div>
-  </div>
-
 </main>
 
 <script type="text/javascript">

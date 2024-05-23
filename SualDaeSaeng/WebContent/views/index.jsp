@@ -58,7 +58,7 @@
               <div class="swiper-wrapper align-items-center">
               <%
               	List<RestaurantVO> menuList = (List<RestaurantVO>) request.getAttribute("sclsList");
-	              for (int i = 0; i < menuList.size(); i++) {
+                 for (int i = 0; i < menuList.size(); i++) {
 				  		RestaurantVO restVo = menuList.get(i);
                %>
                 <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls=<%=restVo.getMcls() %>&scls=<%=restVo.getScls()%>" class="swiper-slide">

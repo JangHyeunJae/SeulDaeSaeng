@@ -21,6 +21,7 @@
     int levelChk = (int)request.getAttribute("levelChk");
 	int usersRole = (int)session.getAttribute("usersRole");
 	List<FileDetailVO> mySubmit = (List<FileDetailVO>)request.getAttribute("mySubmit");
+	List<FileDetailVO> fileList = boardService.getHwFileList(hw.getHwNo());
     
     int classNo = hw.getHwClass();
 %>
@@ -71,7 +72,7 @@
          </form>
          <%
          if(mySubmit!=null){
-          %>
+         %>
                      <div class="list-group">
              <%
               for(int i=0 ; i<mySubmit.size() ; i++){
@@ -90,9 +91,29 @@
          }
          %>
          <%
+         }else if(usersRole==1){
+            if(fileList != null && fileList.size()!=0){
+        	 for(FileDetailVO file : fileList){
+        		 MemberVO mem = boardService.getHwSubmitMem(file.getFileNo());
+         %>
+   
+         <div class="container" data-aos="fade-up" style="border-top:none;">
+          <a href="<%=request.getContextPath() %>/file/download.do?fileNo=<%=file.getFileNo() %>" download 
+          class="attached-file d-flex justify-content-between align-items-center" style="margin-bottom: 10px;">
+            <span><i class="bi bi-download px-2"></i><%=file.getFileOgname() %> </span>
+            <span>제출자 : <%=mem.getMemName() %></span>
+          </a>
+         </div>
+         
+         <%
+           }
+          }else{
+          %>
+          <p> 업로드된 숙제 제출이 없습니다. <P>
+         <% 
+          }
          }
          %>
-         </div>
          <div class="btn-box container d-flex align-items-center justify-content-center pb-5 pt-5 gap-2">
           <%
           //세션에서 꺼내와야함. + 위에 댓글입력창 닉네임 또한 함께 수정 + 댓글 수정 삭제 보이는 부분도users에서 역할role로 비교해야함!!!!!1

@@ -120,7 +120,7 @@
                   BoardVO beforeBoardDetail = boardList.get(idx-1);
               %>
            <div class="prve col-md-6 col-12 ps-2">
-            <a href="/board/detail.do?boardNo=<%=beforeBoardDetail.getBoardNo() %>&idx=<%=idx-1 %>&levelChk=<%=levelChk %>" class="d-block pt-4 pb-4">
+            <a href="/board/detail.do?boardNo=<%=beforeBoardDetail.getBoardNo() %>&idx=<%=idx-1 %>&levelChk=<%=levelChk %>&classBoardChk=<%=classBoardChk %>" class="d-block pt-4 pb-4">
               <span class="d-inline-block pe-3">이전글 <i class="bi bi-chevron-up"></i></span> 
               <b><%=beforeBoardDetail.getBoardTitle() %></b>
             </a>
@@ -144,7 +144,7 @@
                   BoardVO nextBoardDetail =  boardList.get(idx+1); 
               %>
              <div class="next col-md-6 col-12 text-end pe-2">
-              <a href="/board/detail.do?boardNo=<%=nextBoardDetail.getBoardNo() %>&idx=<%=idx+1 %>&levelChk=<%=levelChk %>" class="d-block pt-4 pb-4">
+              <a href="/board/detail.do?boardNo=<%=nextBoardDetail.getBoardNo() %>&idx=<%=idx+1 %>&levelChk=<%=levelChk %>&classBoardChk=<%=classBoardChk %>" class="d-block pt-4 pb-4">
                 <b class="pe-3"><%=nextBoardDetail.getBoardTitle() %></b>
                 <span class="d-inline-block">다음글 <i class="bi bi-chevron-down"></i></span>
              </a>
@@ -271,7 +271,7 @@
               	<%
               		}else if(levelChk!=0 && classBoardChk!=0){
               	%>
-                <a href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>"  type="button" class="btn btn-secondary"> 목록으로 </a>
+                <a href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&classBoardChk=<%=classBoardChk %>"  type="button" class="btn btn-secondary"> 목록으로 </a>
                 <%
               		}else{
                 %>

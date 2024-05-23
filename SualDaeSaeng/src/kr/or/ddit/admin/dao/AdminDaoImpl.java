@@ -42,26 +42,26 @@ public class AdminDaoImpl implements IAdmindao {
 	
 	
 	
-	@Override
-	public int AdminAccept(int usersNo) {
-		SqlSession session = null;
-		int cnt=-1;
-		
-		try {
-			session = MyBatisUtil.getSqlSession();	
-			 cnt = session.update("admin.adminAccept", usersNo);   // xml 
-			 
-			 if(cnt>0) session.commit();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			if(session != null) {
-				session.close();
-			}
-		}
-		return cnt;
-	}
+//	@Override
+//	public int AdminAccept(int usersNo) {
+//		SqlSession session = null;
+//		int cnt=-1;
+//		
+//		try {
+//			session = MyBatisUtil.getSqlSession();	
+//			 cnt = session.update("admin.adminAccept", usersNo);   // xml 
+//			 
+//			 if(cnt>0) session.commit();
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}finally {
+//			if(session != null) {
+//				session.close();
+//			}
+//		}
+//		return cnt;
+//	}
 	
 	
 	
@@ -108,6 +108,27 @@ public class AdminDaoImpl implements IAdmindao {
 		return memberReqVo;
 
 
+	}
+	@Override
+	public int adminMemberYN(int usersNoParam) {
+		
+	    SqlSession session = MyBatisUtil.getSqlSession();
+	    int cnt = 0;
+	    
+	    try {
+	        cnt = session.update("adminAccept", usersNoParam);
+	        
+	        if(cnt == 1) {
+	        	session.commit(); // 커밋
+	        }
+	        
+	    }catch (Exception e) {
+	    	e.printStackTrace();
+	    }finally {
+	        session.close(); // 세션 닫기
+	    }
+	    
+		return cnt;
 	}
 	
 

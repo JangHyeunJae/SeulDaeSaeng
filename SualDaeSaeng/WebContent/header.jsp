@@ -11,6 +11,7 @@ String uri = request.getRequestURI();
 String id = (String) session.getAttribute("usersId");
 MemberVO memInfo = (MemberVO) session.getAttribute("memDetail") != null ? (MemberVO) session.getAttribute("memDetail") : new MemberVO();
 String memNick = memInfo.getMemNick();
+int usersRole = (int) session.getAttribute("usersRole");
 
 %>
 
@@ -146,7 +147,17 @@ String memNick = memInfo.getMemNick();
 					}else{
 				%>
                 	<li>
+                		<%
+                			if(usersRole == 3){
+                		%>
+                  		<a class="dropdown-item" href="<%=request.getContextPath() %>/views/adminPage.do">관리자 페이지</a>
+                		<%		
+                			}else{
+                		%>
                   		<a class="dropdown-item" href="<%=request.getContextPath() %>/member/myPageHome.do">마이페이지</a>
+                		<%	
+                			}
+                		%>
                 	</li>
 					<li>
 						<a class="dropdown-item" href="<%=request.getContextPath() %>/logout.do">로그아웃</a>

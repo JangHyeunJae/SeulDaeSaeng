@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import kr.or.ddit.admin.vo.MemberReqVO;
 import kr.or.ddit.board.vo.BoardVO;
 import kr.or.ddit.util.MyBatisUtil;
 
@@ -61,4 +62,27 @@ public class ReportDaoImpl implements IReportDao {
 	
 	
 	}
+	@Override
+	public List<MemberReqVO> reportmemberList() {
+		SqlSession session = null;
+		List<MemberReqVO> reportmemtList = null;
+		
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			reportmemtList = session.selectList("report.reportmemberList");   // xml 
+			for(MemberReqVO vo : reportmemtList) {
+				System.out.println(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return reportmemtList;
+	}
+	
+	
+	
 }

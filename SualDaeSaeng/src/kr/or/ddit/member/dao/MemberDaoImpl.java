@@ -432,24 +432,6 @@ public class MemberDaoImpl implements IMemberDao {
       }
       return usersDetail;
    }
-
-@Override
-public List<restLikeVO> selectLikeRest(int addrNo) {
-	 SqlSession session = null;
-	 List<restLikeVO> restLikeList = null;
-     
-     try {
-        session = MyBatisUtil.getSqlSession(true);
-        restLikeList = session.selectList("member.selectLikeRest", addrNo);
-
-     } catch (PersistenceException ex) {
-        session.rollback();
-        ex.printStackTrace();
-     } finally {
-        session.close();
-     }
-     return restLikeList;
-}
   
 }
 

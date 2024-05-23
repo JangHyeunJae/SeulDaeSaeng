@@ -57,10 +57,6 @@ public class LoginController extends HttpServlet {
 
 			 HttpSession session = req.getSession();
 			 session.setMaxInactiveInterval(0);
-			 
-			List<restLikeVO> restLikeList = loginService.getLikeRest(memDetail.getUsersNo());
-			
-			req.getSession().setAttribute("restLikeList", restLikeList);
 			
 			resp.sendRedirect(req.getContextPath() + "/main.do");
 

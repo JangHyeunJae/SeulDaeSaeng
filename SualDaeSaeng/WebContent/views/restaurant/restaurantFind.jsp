@@ -173,9 +173,9 @@
 
 							  	// 파일 존재 여부 확인
 							  	if (file.exists()) { %>
-							  		<img src="<%=fileUrl%>.jpg" class="card-img-top" alt="<%=restVo.getName()%> 이미지" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
+							  		<img src="<%=fileUrl%>.jpg" class="card-img-top" alt="<%=restVo.getName()%> 이미지" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
 							    <% } else if (file2.exists()) { %>
-							  		<img src="<%=fileUrl%>.png" class="card-img-top" alt="<%=restVo.getName()%> 이미지" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
+							  		<img src="<%=fileUrl%>.png" class="card-img-top" alt="<%=restVo.getName()%> 이미지" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
 							    <% }else { %>
 							  		<img src="/img/no-image.jpg" class="card-img-top" alt="<%=restVo.getName()%> 이미지" >
 							    <% } %>

@@ -12,6 +12,7 @@ import kr.or.ddit.board.dao.IBoardDao;
 import kr.or.ddit.board.vo.FileDetailVO;
 import kr.or.ddit.restaurant.vo.RestaurantVO;
 import kr.or.ddit.restaurant.vo.ReviewVO;
+import kr.or.ddit.restaurant.vo.restLikeVO;
 import kr.or.ddit.util.MyBatisUtil;
 
 public class RestaurantDAOImpl implements IRestaurantDAO{
@@ -331,5 +332,35 @@ public class RestaurantDAOImpl implements IRestaurantDAO{
 		}
 		
 		return status;
+	}
+
+	@Override
+	public List<restLikeVO> restLikeList(String restBizno) {
+		List<restLikeVO> restLikeList = new ArrayList<restLikeVO>();
+		SqlSession session = null;
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			restLikeList = session.selectList("restaurant.selectLikeRest",restBizno);
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return restLikeList;
+	}
+
+	@Override
+	public List<RestaurantVO> restReviewList() {
+		List<RestaurantVO> restReviewList = new ArrayList<RestaurantVO>();
+		SqlSession session = null;
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			restReviewList = session.selectList("restaurant.mainRestReview");
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return restReviewList;
 	}
 }

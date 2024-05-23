@@ -23,10 +23,22 @@ public class restaurantLikeController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String bizNo = request.getParameter("bizNo");
+		System.out.println(bizNo);
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		System.out.println(userNo);
 		String insertYN = request.getParameter("insertYN");
-		
+		System.out.println(insertYN);
+		String myLike = "";
+
 		Map<String, Object> likeInfo = new HashMap<String, Object>();
+		if(request.getParameter("myLike").equals("checked")) {
+			myLike = "N";
+			likeInfo.put("myLike", myLike);
+		}else if(request.getParameter("myLike").equals("")) {
+			myLike = "Y";
+			likeInfo.put("myLike", myLike);
+		}else if(request.getParameter("myLike")==null ||request.getParameter("myLike").isEmpty()) {} 
+		System.out.println(myLike);
 
 		likeInfo.put("restBizno", bizNo);
 		likeInfo.put("userNo", userNo);
@@ -46,6 +58,7 @@ public class restaurantLikeController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/restaurant/view.do?no=" + bizNo);
 
 		}else {				// 실패
+			request.setAttribute("no", bizNo);
 			request.getRequestDispatcher("/views/restaurant/restaurantView.jsp").forward(request, response);
 		}
 

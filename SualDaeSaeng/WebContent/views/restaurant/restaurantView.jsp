@@ -1,3 +1,4 @@
+<%@page import="java.io.Console"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="kr.or.ddit.restaurant.vo.RestaurantVO"%>
 <%@page import="kr.or.ddit.restaurant.vo.restLikeVO"%>
@@ -16,20 +17,24 @@
 	MemberVO memDetail = (MemberVO) session.getAttribute("memDetail") != null ? (MemberVO) session.getAttribute("memDetail") : new MemberVO();
   	UsersVO usersDetail = (UsersVO) session.getAttribute("usersDetail") != null ? (UsersVO) session.getAttribute("usersDetail") : new UsersVO();
   	
-  	List<restLikeVO> restLikeList = (List<restLikeVO>) session.getAttribute("restLikeList")!= null ? (List<restLikeVO>) session.getAttribute("restLikeList") : new ArrayList<restLikeVO>();
+  	List<restLikeVO> restLikeList = (List<restLikeVO>) request.getAttribute("restLikeList")!= null ? (List<restLikeVO>) request.getAttribute("restLikeList") : new ArrayList<restLikeVO>();
 	String insertYN = "insert";
   	String myLike = "";
 	String myLikeBtn = "outline-";
+	
 
-	System.out.println(restLikeList);
+	System.out.println(restLikeList.size());
+	System.out.println(usersDetail.getUsersNo());
 	
   	for (int i = 0; i < restLikeList.size(); i++) {
-  		System.out.println(00);
+  		restLikeVO likeVo = (restLikeVO) restLikeList.get(i);
+  		int likeUserNo = (int) likeVo.getUserNo();
   		
-  		restLikeVO likeVo = restLikeList.get(i);
-  		String likeRestNo = (String)likeVo.getRestBizno();
+  		System.out.println(likeUserNo);
   		
-  		if(likeRestNo.equals(restDetails.getRestBizno())){
+  		if(likeUserNo == usersDetail.getUsersNo()){
+  	  		System.out.println(likeUserNo);
+  	  		System.out.println(usersDetail.getUsersNo());
   			insertYN = "update";
   			if(likeVo.getLikeYn().equals("Y")){
   	  	  		System.out.println(0000);
@@ -38,15 +43,6 @@
   				myLikeBtn="";
   			}
   		}
-       if(likeRestNo.equals(restDetails.getRestBizno())){
-           insertYN = "update";
-           if(likeVo.getLikeYn().equals("Y")){
-               System.out.println(0000);
-  	  	  		
-  				myLike="checked";
-  				myLikeBtn="";
-           }
-       }
   	}
 
 	String responseBlog = (String) request.getAttribute("responseBlog");
@@ -187,9 +183,9 @@
                   <span style="color: var(--bs-red)">
                     <i class="bi bi-heart-fill"></i> <%=restDetails.getLikeCount() %>명 좋아하는 중 
                   </span>
-                  <% if(id!=null && !id.isEmpty()){ %>                	  
+                  <% if(id!=null && !id.isEmpty() && usersDetail != null && usersDetail.getUsersNo()!=0){ %>                	  
                   <input type="checkbox" id="likeBtn" <%=myLike%>>
-                  <a href="<%=request.getContextPath() %>/restaurant/like.do?bizNo=<%=restDetails.getRestBizno()%>&userNo=<%=usersDetail.getUsersNo()%>&insertYN=<%=insertYN%>" class="btn btn-<%=myLikeBtn%>danger d-flex align-items-center gap-2" for="btn-check">
+                  <a href="<%=request.getContextPath() %>/restaurant/like.do?bizNo=<%=restDetails.getRestBizno()%>&userNo=<%=usersDetail.getUsersNo()%>&insertYN=<%=insertYN%>&myLike=<%=myLike %>" class="btn btn-<%=myLikeBtn%>danger d-flex align-items-center gap-2" for="btn-check">
                     <span class="true"> <i class="bi bi-heart-fill"></i> 좋아요 </span>
                     <span class="false"> <i class="bi bi-heart"></i> 취소 </span>
                   </a>
@@ -404,7 +400,7 @@
 		                %>
 		                <div class="d-flex justify-content-between overflow-x-scroll">
 		                  <div class="col p-1">
-		                    <img src="<%=restVo.getFileSavepath() %>" class="img-fluid" alt="<%=restVo.getNickName() %>의 <%=restDetails.getName()%> 대한 리뷰" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
+		                    <img src="<%=restVo.getFileSavepath() %>" class="img-fluid" alt="<%=restVo.getNickName() %>의 <%=restDetails.getName()%> 대한 리뷰" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
 		                  </div>
 		                </div>
 		                <% } %>
@@ -479,7 +475,7 @@
 	               %>
 	               <div class="h-m-180 overflow-hidden" title="<%=title%>">
 	                  <a href="<%=link%>" target="_blank" class="w-100 h-100 d-flex" >
-                  		<img src="<%=link%>" class="card-img" alt="<%=title%>" onError="this.src='<%=thumbnail%>';" />                  		
+                  		<img src="<%=link%>" class="card-img" alt="<%=title%>" onError="this.onerror=null; this.src='<%=thumbnail%>';" />                  		
 	                 </a>
 	               </div>
 	             </div>

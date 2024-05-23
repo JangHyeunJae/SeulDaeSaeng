@@ -50,6 +50,8 @@ MemberVO memInfo = (MemberVO) session.getAttribute("memDetail") != null ? (Membe
        <link href="/css/restaurantUpDate.css" rel="stylesheet">
    	<% } else if(request.getRequestURI().contains("restaurantView")){ %>
    		<link href="/css/restaurantView.css" rel="stylesheet">
+   	<% } else if(request.getRequestURI().contains("404")){ %>
+   		<link href="/css/404.css" rel="stylesheet">
    	<% } %>
    	
   </head>

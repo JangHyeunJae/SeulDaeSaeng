@@ -3,7 +3,10 @@ package kr.or.ddit.restaurant.controller;
 import java.io.*;
 
 import javax.lang.model.util.Elements;
+import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +20,7 @@ import org.w3c.dom.NodeList;
 import kr.or.ddit.restaurant.service.IRestaurantService;
 import kr.or.ddit.restaurant.service.RestaurantServiceImpl;
 import kr.or.ddit.restaurant.vo.RestaurantVO;
+import kr.or.ddit.restaurant.vo.restLikeVO;
 
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -40,6 +44,9 @@ public class restaurantViewController extends HttpServlet {
 		
 		RestaurantVO restDetails = service.selectRest(restBizno);
 		List<RestaurantVO> restReviewList = service.selectRestReview(restBizno);
+		
+		List<restLikeVO> restLikeList = service.restLikeList(restBizno);
+		request.setAttribute("restLikeList", restLikeList);
 		
 		request.setAttribute("restDetails", restDetails);
 		request.setAttribute("restReviewList", restReviewList);
@@ -165,7 +172,7 @@ public class restaurantViewController extends HttpServlet {
             		String restAddInfo = addInfo.get(0)!=null ? addInfo.get(0).text() : "";
     	    		request.setAttribute("restAddInfo", restAddInfo);     
             	}
-        	}
+        	} 
         	
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -202,6 +209,9 @@ public class restaurantViewController extends HttpServlet {
     private static HttpURLConnection connect(String apiUrl){
         try {
             URL url = new URL(apiUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setConnectTimeout(5000); // 5초 타임아웃 설정
+            connection.setReadTimeout(5000); // 5초 타임아웃 설정
             return (HttpURLConnection)url.openConnection();
         } catch (MalformedURLException e) {
             throw new RuntimeException("API URL이 잘못되었습니다. : " + apiUrl, e);

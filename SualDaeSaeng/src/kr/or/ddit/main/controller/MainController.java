@@ -18,6 +18,7 @@ import kr.or.ddit.board.vo.StoryVO;
 import kr.or.ddit.restaurant.service.IRestaurantService;
 import kr.or.ddit.restaurant.service.RestaurantServiceImpl;
 import kr.or.ddit.restaurant.vo.RestaurantVO;
+import kr.or.ddit.restaurant.vo.ReviewVO;
 
 @WebServlet("/main.do")
 public class MainController extends HttpServlet{
@@ -38,6 +39,9 @@ public class MainController extends HttpServlet{
 		cls.put("postperpage", 4);
 		List<RestaurantVO> restLikeList = restService.selectRestaurantType(cls);
 		req.setAttribute("restLikeList", restLikeList);
+		
+		List<RestaurantVO> restReviewList = restService.restReviewList();
+		req.setAttribute("restReviewList", restReviewList);
 		
 	    List<StoryVO> storyList = boardService.allStoryList();
 	    req.setAttribute("storyList", storyList);

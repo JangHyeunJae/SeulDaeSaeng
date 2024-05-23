@@ -118,9 +118,5 @@ public class MemberServiceImpl implements IMemberService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	@Override
-	public List<restLikeVO> getLikeRest(int addrNo) {
-		return memberDao.selectLikeRest(addrNo);
-	}
 }
 

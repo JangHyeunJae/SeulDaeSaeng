@@ -126,8 +126,36 @@
 		WHERE RNUM <![CDATA[<=]]> 3
 	</select>
 	
+	<select id="mainRestReview" resultType="restVO">
+	  	SELECT REVIEW_NO reviewNo, 
+		       USERS_NO usersNo, 
+		       REST_BIZNO restBizno,
+		       NICK_NAME nickName, 
+		       REVIEW_STAR reviewStar, 
+		       REVIEW_TEXT reviewText, 
+		       FILE_NO fileNo, 
+		       FILE_SAVEPATH fileSavepath, 
+		       REVIEW_DATE reviewDate 
+		FROM (
+		    SELECT REVIEW_NO, 
+		           USERS_NO, 
+		           REST_BIZNO,
+		           NICK_NAME, 
+		           REVIEW_STAR, 
+		           REVIEW_TEXT, 
+		           FILE_NO, 
+		           FILE_SAVEPATH, 
+		           REVIEW_DATE, 
+		           ROWNUM AS RNUM
+		    FROM RESTVIEW
+		    WHERE REVIEW_NO IS NOT NULL
+		    ORDER BY REVIEW_DATE DESC
+		)
+		WHERE RNUM <![CDATA[<=]]> 5
+	</select>
+	
 	<select id="selectRestReviewAll" parameterType="hashMap" resultType="restVO">
-	  	SELECT REVIEW_NO reviewNo, USERS_NO usersNo, NICK_NAME nickName, REVIEW_STAR reviewStar, REVIEW_TEXT reviewText, FILE_NO fileNo, REVIEW_DATE reviewDate
+	  	SELECT REVIEW_NO reviewNo, USERS_NO usersNo, NICK_NAME nickName, REVIEW_STAR reviewStar, REVIEW_TEXT reviewText, FILE_NO fileNo, FILE_SAVEPATH fileSavepath, REVIEW_DATE reviewDate
 		FROM RESTVIEW
 		WHERE REST_BIZNO = #{restBizno}
 	    AND REVIEW_NO IS NOT NULL
@@ -150,6 +178,16 @@
 	        from file_detail
 	        where file_level = 5
 	        order by file_no desc
+	</select>
+   
+   <resultMap type="restLikeVO" id="likeRestMap">
+		<result property="restBizno" column="REST_BIZNO"/>
+		<result property="userNo" column="USERS_NO"/>
+		<result property="likeYn" column="LIKE_YN"/>
+	</resultMap>
+	
+	<select id="selectLikeRest" parameterType="string" resultMap="likeRestMap">
+		select * from LIKES WHERE REST_BIZNO = #{restBizno}
 	</select>
 	
 	<insert id="saveFile" parameterType="kr.or.ddit.board.vo.FileDetailVO" useGeneratedKeys="true">
@@ -188,11 +226,11 @@
 	</insert>
 	
 	<update id="deleteReview" parameterType="int">
-	        update REVIEW set REVIEW_YN = 'N' where REVIEW_NO =#{reviewNo}
+	    update REVIEW set REVIEW_YN = 'N' where REVIEW_NO =#{reviewNo}
 	</update>
 	
 	<update id="updateMyLike" parameterType="restLikeVO">
-		UPDATE LIKES SET LIKE_YN WHERE REST_BIZNO = #{restBizno} AND USERS_NO = ##{userNo};
+		UPDATE LIKES SET LIKE_YN = #{myLike} WHERE REST_BIZNO = #{restBizno} AND USERS_NO = #{userNo}
 	</update>
 	
 </mapper>

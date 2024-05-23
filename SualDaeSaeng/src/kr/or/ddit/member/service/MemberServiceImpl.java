@@ -9,6 +9,7 @@ import kr.or.ddit.member.dao.MemberDaoImpl;
 import kr.or.ddit.member.vo.AddressVO;
 import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.member.vo.UsersVO;
+import kr.or.ddit.restaurant.vo.restLikeVO;
 
 
 public class MemberServiceImpl implements IMemberService{
@@ -116,6 +117,10 @@ public class MemberServiceImpl implements IMemberService{
 	public MemberVO selectOne(String usersId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public List<restLikeVO> getLikeRest(int addrNo) {
+		return memberDao.selectLikeRest(addrNo);
 	}
 }
 

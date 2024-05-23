@@ -3,7 +3,7 @@
 <%@include file="/header.jsp" %>
 <%
 	String restBizno = request.getParameter("no");
-	String fileString = request.getRealPath("/")+"img/";
+	String fileString = request.getSession().getServletContext().getRealPath("/");	
 %>
 
 <main data-aos="fade" data-aos-delay="700">

@@ -21,7 +21,7 @@ public interface IRestaurantService {
 	public List<RestaurantVO> selectRestReview(String restBizno);
 	public List<RestaurantVO> selectRestReviewAll(Map<String, Object> cls);
 	public List<FileDetailVO> getFileList();
-	public int insertFile(Part filePart, String fileString);
+	public int insertFile(Part filePart);
 	public int insertReview(ReviewVO reviewVO);
 	public int deleteReview(int reviewNo);
 }

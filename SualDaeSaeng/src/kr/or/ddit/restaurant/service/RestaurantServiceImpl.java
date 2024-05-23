@@ -91,9 +91,10 @@ public class RestaurantServiceImpl implements IRestaurantService {
 	}
 	
 	@Override
-	public int insertFile(Part filePart, String fileString) {
+	public int insertFile(Part filePart) {
         
-		String uploadPath = fileString + UPLOAD_DIR;
+//		String uploadPath = "d:/D_Other/" + UPLOAD_DIR;
+		String uploadPath = "D:/A_TeachingMaterial/999_project/SeulDaeSaeng/SualDaeSaeng/WebContent/img/upload_files";
         
         File uploadDir = new File(uploadPath);
         if(!uploadDir.exists()) {
@@ -101,33 +102,36 @@ public class RestaurantServiceImpl implements IRestaurantService {
         }
         FileDetailVO fileDetail = new FileDetailVO();
 
-        	String fileName = filePart.getSubmittedFileName();
+    	String fileName = filePart.getSubmittedFileName();
 
-        	String orignFileName = fileName; //원본 파일명
-        	long fileSize = filePart.getSize(); //파일 크기
-        	String fileSavednm = ""; //저장 파읾명
-        	String fileSavepath = ""; //저장 파일경로
-        		
-        	fileSavednm = UUID.randomUUID().toString().replace("-", "");
-        		
-        	fileSavepath = uploadPath + "/" + fileSavednm;
+    	String orignFileName = fileName; //원본 파일명
+    	long fileSize = filePart.getSize(); //파일 크기
+    	String fileSavednm = ""; //저장 파읾명
+    	String fileSavepath = ""; //저장 파일경로
+    		
+    	fileSavednm = UUID.randomUUID().toString().replace("-", "");
+    		
+
+    	//확장명 추출
+    	String fileExtension = orignFileName.lastIndexOf(".") < 0 ? 
+    				"" : orignFileName.substring(orignFileName.lastIndexOf(".") + 1);
+    	
+    	fileSavepath = uploadPath + "/" + fileSavednm+"."+fileExtension;
+    	
+    	try {
+    		filePart.write(fileSavepath); //파일 업로드 처리
+		} catch (IOException e) {
+				e.printStackTrace();
+		}  
+    		
+    		
+    	fileDetail.setFileLevel(5);
+    	fileDetail.setFileExt(fileExtension);
+    	fileDetail.setFileOgname(orignFileName);
+    	fileDetail.setFileSavednm(fileSavednm);
+    	fileDetail.setFileSavepath("/img/upload_files/"+fileSavednm+"."+fileExtension);
+    	fileDetail.setFileSize(fileSize);
         	
-        	try {
-        		filePart.write(fileSavepath); //파일 업로드 처리
-			} catch (IOException e) {
-					e.printStackTrace();
-			}  
-        		
-        	//확장명 추출
-        	String fileExtension = orignFileName.lastIndexOf(".") < 0 ? 
-        				"" : orignFileName.substring(orignFileName.lastIndexOf(".") + 1);
-        		
-        	fileDetail.setFileLevel(5);
-        	fileDetail.setFileExt(fileExtension);
-        	fileDetail.setFileOgname(orignFileName);
-        	fileDetail.setFileSavednm(fileSavednm);
-        	fileDetail.setFileSavepath(fileSavepath);
-        	fileDetail.setFileSize(fileSize);
         return dao.insertFile(fileDetail);
      }
 

@@ -27,3 +27,13 @@
 [class$=api-load-alpha-banner] {
   display: none;
 }
+
+#likeBtn + a .true,
+#likeBtn + a .false{
+	display: block;
+}
+#likeBtn,
+#likeBtn:checked + a .true,
+#likeBtn:checked + label .false{
+	display: none;
+}

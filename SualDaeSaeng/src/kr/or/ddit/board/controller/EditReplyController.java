@@ -47,8 +47,7 @@ public class EditReplyController extends HttpServlet{
 			String msg = "정상적으로 수정되었습니다.";
 			req.getSession().setAttribute("msg", msg);
 			if(classBoardChk != 0) {
-				resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk
-						+ "&classBoardChk=" + classBoardChk);
+				resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk + "&classBoardChk=" + classBoardChk);
 			}else {
 				resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk);
 			}

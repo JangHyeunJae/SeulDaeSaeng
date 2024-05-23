@@ -1,0 +1,57 @@
+package kr.or.ddit.restaurant.controller;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import kr.or.ddit.restaurant.service.IRestaurantService;
+import kr.or.ddit.restaurant.service.RestaurantServiceImpl;
+
+
+@WebServlet("/restaurant/like.do")
+public class restaurantLikeController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
+	private IRestaurantService service = RestaurantServiceImpl.getInstance();
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String bizNo = request.getParameter("bizNo");
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		String insertYN = request.getParameter("insertYN");
+		
+		Map<String, Object> likeInfo = new HashMap<String, Object>();
+
+		likeInfo.put("restBizno", bizNo);
+		likeInfo.put("userNo", userNo);
+		
+		int status = -1;
+
+		if(insertYN.equals("insert")) {			
+			status = service.insertMyLike(likeInfo);
+		}else if(insertYN.equals("update")) {
+			status = service.updateMyLike(likeInfo);
+		}
+		
+		if(status > 0) { 	// 성공
+			String msg = "정상적으로 수정되었습니다.";
+			
+			request.getSession().setAttribute("msg", msg);
+			response.sendRedirect(request.getContextPath()+"/restaurant/view.do?no=" + bizNo);
+
+		}else {				// 실패
+			request.getRequestDispatcher("/views/restaurant/restaurantView.jsp").forward(request, response);
+		}
+
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	}
+
+}

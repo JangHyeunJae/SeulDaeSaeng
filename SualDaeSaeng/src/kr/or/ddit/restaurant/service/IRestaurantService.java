@@ -24,4 +24,6 @@ public interface IRestaurantService {
 	public int insertFile(Part filePart);
 	public int insertReview(ReviewVO reviewVO);
 	public int deleteReview(int reviewNo);
+	public int insertMyLike(Map<String, Object> likeInfo);
+	public int updateMyLike(Map<String, Object> likeInfo);
 }

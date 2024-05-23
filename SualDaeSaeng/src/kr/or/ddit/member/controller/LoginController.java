@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionEvent;
 
 import com.google.gson.JsonObject;
 
@@ -53,6 +54,9 @@ public class LoginController extends HttpServlet {
 			 req.getSession().setAttribute("usersDetail", usersDetail);
 			 req.getSession().setAttribute("usersRole", usersDetail.getUsersRole());
 			 req.getSession().setAttribute("usersNo", usersDetail.getUsersNo());
+
+			 HttpSession session = req.getSession();
+			 session.setMaxInactiveInterval(0);
 			 
 			List<restLikeVO> restLikeList = loginService.getLikeRest(memDetail.getUsersNo());
 			

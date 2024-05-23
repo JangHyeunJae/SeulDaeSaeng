@@ -22,4 +22,6 @@ public interface IRestaurantDAO {
 	public int insertFile(FileDetailVO fileDetail);
 	public int insertReview(ReviewVO reviewVO);
 	public int deleteReview(int reviewNo);
+	public int insertMyLike(Map<String, Object> likeInfo);
+	public int updateMyLike(Map<String, Object> likeInfo);
 }

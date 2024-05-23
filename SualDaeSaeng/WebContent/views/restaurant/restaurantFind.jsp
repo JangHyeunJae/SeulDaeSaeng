@@ -1,6 +1,7 @@
 <%@page import="java.util.List"%>
 <%@page import="java.io.File" %>
 <%@page import="kr.or.ddit.restaurant.vo.RestaurantVO"%>
+<%@page import="kr.or.ddit.restaurant.vo.restLikeVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@include file="/header.jsp"%>
@@ -10,14 +11,6 @@
 	
 	List<RestaurantVO> restList = (List<RestaurantVO>) request.getAttribute("restList");
 
-  	MemberVO memDetail = (MemberVO) session.getAttribute("memDetail") != null ? (MemberVO) session.getAttribute("memDetail") : new MemberVO();
-  	UsersVO usersDetail = (UsersVO) session.getAttribute("usersDetail") != null ? (UsersVO) session.getAttribute("usersDetail") : new UsersVO();
-	
-  	for (int i = 0; i < restList.size(); i++) {
-  		RestaurantVO restVo = restList.get(i);
-  		
-  		
-  	}
 		
 	int totalpost = (int) request.getAttribute("totalpost");
 	int totalpage = (int) request.getAttribute("totalpage");

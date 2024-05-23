@@ -176,8 +176,23 @@
 		)
 	</insert>
 	
+	<insert id="insertMyLike" parameterType="restLikeVO" useGeneratedKeys="true">
+		<selectKey keyProperty="reviewNo" resultType="int" order="BEFORE">
+			select SEQ_RESTLIKE.nextval from dual
+		</selectKey>
+		insert into LIKES(
+			REST_BIZNO, USERS_NO, LIKE_YN
+		)values(
+			#{restBizno}, #{userNo}, 'Y'
+		)
+	</insert>
+	
 	<update id="deleteReview" parameterType="int">
 	        update REVIEW set REVIEW_YN = 'N' where REVIEW_NO =#{reviewNo}
+	</update>
+	
+	<update id="updateMyLike" parameterType="restLikeVO">
+		UPDATE LIKES SET LIKE_YN WHERE REST_BIZNO = #{restBizno} AND USERS_NO = ##{userNo};
 	</update>
 	
 </mapper>

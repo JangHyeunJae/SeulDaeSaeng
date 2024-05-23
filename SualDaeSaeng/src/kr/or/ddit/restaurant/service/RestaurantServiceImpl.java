@@ -144,5 +144,15 @@ public class RestaurantServiceImpl implements IRestaurantService {
 	public int deleteReview(int reviewNo) {
 		return dao.deleteReview(reviewNo);
 	}
+
+	@Override
+	public int insertMyLike(Map<String, Object> likeInfo) {
+		return dao.insertMyLike(likeInfo);		
+	}
+
+	@Override
+	public int updateMyLike(Map<String, Object> likeInfo) {
+		return dao.updateMyLike(likeInfo);				
+	}
 	
 }

@@ -287,4 +287,49 @@ public class RestaurantDAOImpl implements IRestaurantDAO{
 		return cnt;
 	}
 
+	@Override
+	public int insertMyLike(Map<String, Object> likeInfo ) {
+		SqlSession session = null;
+		int status = 0;		
+		
+		try {
+			session = MyBatisUtil.getSqlSession();
+			status = session.insert("restaurant.insertMyLike", likeInfo);
+			
+			if(status > 0) {	// 성공
+				session.commit();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		
+		return status;
+	}
+
+	@Override
+	public int updateMyLike(Map<String, Object> likeInfo) {
+		SqlSession session = null;
+		int status = 0;		
+		
+		try {
+			session = MyBatisUtil.getSqlSession();
+			status = session.insert("restaurant.updateMyLike", likeInfo);
+			
+			if(status > 0) {	// 성공
+				session.commit();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		
+		return status;
+	}
 }

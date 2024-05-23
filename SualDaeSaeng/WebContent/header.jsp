@@ -9,9 +9,7 @@
 
 String uri = request.getRequestURI();
 String id = (String) session.getAttribute("usersId");
-MemberVO memInfo = (MemberVO) session.getAttribute("memDetail") != null ? (MemberVO) session.getAttribute("memDetail") : new MemberVO();
-String memNick = memInfo.getMemNick();
-int usersRole = (int) session.getAttribute("usersRole");
+String isAdminOk = (String) session.getAttribute("isAdminOk");
 
 %>
 
@@ -41,19 +39,19 @@ int usersRole = (int) session.getAttribute("usersRole");
     <link href="/css/main.css" rel="stylesheet">
     
     <% if(request.getRequestURI().contains("index")){ %>
-      	<link href="/css/index.css" rel="stylesheet">
+         <link href="/css/index.css" rel="stylesheet">
     <% }else if(request.getRequestURI().contains("timetable")){ %>
-      	<link href="/css/timetable.css" rel="stylesheet">
+         <link href="/css/timetable.css" rel="stylesheet">
     <% }else if(request.getRequestURI().contains("write") || request.getRequestURI().contains("edit") || request.getRequestURI().contains("Write") || request.getRequestURI().contains("Edit")){ %>
-    	<link rel="stylesheet" href="/css/bootform2.css">  
+       <link rel="stylesheet" href="/css/bootform2.css">  
     <% } else if(request.getRequestURI().contains("restaurantUpDate")){%>
        <link href="/css/restaurantUpDate.css" rel="stylesheet">
-   	<% } else if(request.getRequestURI().contains("restaurantView")){ %>
-   		<link href="/css/restaurantView.css" rel="stylesheet">
-   	<% } else if(request.getRequestURI().contains("reviewWrite")){ %>
-		<link href="/css/reviewWrite.css" rel="stylesheet">
-	<% } %>
-   	
+      <% } else if(request.getRequestURI().contains("restaurantView")){ %>
+         <link href="/css/restaurantView.css" rel="stylesheet">
+      <% } else if(request.getRequestURI().contains("reviewWrite")){ %>
+      <link href="/css/reviewWrite.css" rel="stylesheet">
+   <% } %>
+      
   </head>
   <body>
     <!-- ======= Header ======= -->
@@ -64,60 +62,60 @@ int usersRole = (int) session.getAttribute("usersRole");
         </a>
         <nav id="navbar" class="navbar">
           <ul>
-          	<% if(id!=null && !id.isEmpty()){ %>
-	            <li>
-	              <a href="<%=request.getContextPath()%>/classBoard.do">반별게시판</a>
-	            </li>
-	            <li class="dropdown">
-	              <a href="<%=request.getContextPath()%>/allBoard.do">
-	                <span>전체게시판</span>
-	                <i class="bi-caret-down-fill"></i>
-	              </a>
-	              <ul>
-	                <li>
-	                  <a href="<%=request.getContextPath()%>/freeBoard.do">자유게시판</a>
-	                </li>
-	                <li>
-	                  <a href="<%=request.getContextPath()%>/studyBoard.do">공부게시판</a>
-	                </li>
-	                <li>
-	                  <a href="<%=request.getContextPath()%>/noticeBoard.do">공지게시판</a>
-	                </li>
-	              </ul>
-	            </li>
-          	<% } %>
-			<li class="dropdown">
-				<a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=all'>
-				  <span>식당찾기</span>
-				  <i class="bi-caret-down-fill"></i>
-				</a>
-				<ul>
-					<li>
-					    <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I201'>한식</a>
-					</li>
-					<li>
-					  <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I202'>중식</a>
-					</li>
-					<li>
-					  <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I203'>일식</a>
-					</li>
-					<li>
-					  <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I204'>서양식</a>
-					</li>
-					<li>
-					  <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I205'>동남아식</a>
-					</li>
-					<li>
-					  <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I210'>간이식</a>
-					</li>
-					<li>
-					  <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I211'>주점</a>
-				    </li>
-					<li>
-					  <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I212'>카페</a>
-				    </li>
-				</ul>
-			</li>
+             <% if(id!=null && !id.isEmpty()){ %>
+               <li>
+                 <a href="<%=request.getContextPath()%>/classBoard.do">반별게시판</a>
+               </li>
+               <li class="dropdown">
+                 <a href="<%=request.getContextPath()%>/allBoard.do">
+                   <span>전체게시판</span>
+                   <i class="bi-caret-down-fill"></i>
+                 </a>
+                 <ul>
+                   <li>
+                     <a href="<%=request.getContextPath()%>/freeBoard.do">자유게시판</a>
+                   </li>
+                   <li>
+                     <a href="<%=request.getContextPath()%>/studyBoard.do">공부게시판</a>
+                   </li>
+                   <li>
+                     <a href="<%=request.getContextPath()%>/noticeBoard.do">공지게시판</a>
+                   </li>
+                 </ul>
+               </li>
+             <% } %>
+         <li class="dropdown">
+            <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=all'>
+              <span>식당찾기</span>
+              <i class="bi-caret-down-fill"></i>
+            </a>
+            <ul>
+               <li>
+                   <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I201'>한식</a>
+               </li>
+               <li>
+                 <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I202'>중식</a>
+               </li>
+               <li>
+                 <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I203'>일식</a>
+               </li>
+               <li>
+                 <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I204'>서양식</a>
+               </li>
+               <li>
+                 <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I205'>동남아식</a>
+               </li>
+               <li>
+                 <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I210'>간이식</a>
+               </li>
+               <li>
+                 <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I211'>주점</a>
+                </li>
+               <li>
+                 <a href='<%=request.getContextPath() %>/restaurant/find.do?mcls=I212'>카페</a>
+                </li>
+            </ul>
+         </li>
             <li>
               <a href="/views/foodLikeList.jsp">미식인의 추천맛집</a>
             </li>
@@ -133,38 +131,38 @@ int usersRole = (int) session.getAttribute("usersRole");
               </button>
               <ul class="dropdown-menu">
 
-                <%
-					if(id == null) {
-				%>
-                	<li>
-                  		<a class="dropdown-item" href="<%=request.getContextPath() %>/member/join.do">회원가입</a>
-                	</li>
-                	<li>
-				  		<a class="dropdown-item" href="<%=request.getContextPath() %>/login.do">로그인</a>
-					</li>
+            <%
+               if(id == null) {
+           	%>
+                   <li>
+                        <a class="dropdown-item" href="<%=request.getContextPath() %>/member/join.do">회원가입</a>
+                   </li>
+                   <li>
+                    <a class="dropdown-item" href="<%=request.getContextPath() %>/login.do">로그인</a>
+               </li>
 
-				<% 
-					}else{
-				%>
-                	<li>
-                		<%
-                			if(usersRole == 3){
-                		%>
-                  		<a class="dropdown-item" href="<%=request.getContextPath() %>/views/adminPage.do">관리자 페이지</a>
-                		<%		
-                			}else{
-                		%>
-                  		<a class="dropdown-item" href="<%=request.getContextPath() %>/member/myPageHome.do">마이페이지</a>
-                		<%	
-                			}
-                		%>
-                	</li>
-					<li>
-						<a class="dropdown-item" href="<%=request.getContextPath() %>/logout.do">로그아웃</a>
-					</li>
-				<% 
-					}
-				%>
+            <% 
+               }else{
+            %>
+                   <li>
+                      <%
+                         if(isAdminOk == null){
+                      %>
+                        <a class="dropdown-item" href="<%=request.getContextPath() %>/member/myPageHome.do">마이페이지</a>
+                      <%      
+                         }else{
+                      %>
+                        <a class="dropdown-item" href="<%=request.getContextPath() %>/views/adminPage.do">관리자 페이지</a>
+                      <%   
+                         }
+                      %>
+                   </li>
+               <li>
+                  <a class="dropdown-item" href="<%=request.getContextPath() %>/logout.do">로그아웃</a>
+               </li>
+            <% 
+               }
+            %>
                
 
                 <!-- <li><a class="dropdown-item" href="logout.html">로그아웃</a></li><li><a class="dropdown-item" href="myPage.html"><span>정윤지</span>페이지</a></li>-->

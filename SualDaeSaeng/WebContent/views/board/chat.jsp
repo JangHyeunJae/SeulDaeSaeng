@@ -69,7 +69,8 @@
     
 <script>
 var classId = "<%=classId%>";
-var webSocket = new WebSocket("ws://192.168.34.118:8888/ChatingServer/" + classId);
+var chatId = "<%=chatId%>";
+var webSocket = new WebSocket("ws://localhost:8888/ChatingServer/" + classId + "/" + chatId);
 	var chatWindow, chatMessage, chatId;
 	
 	// 채팅창이 열리면 대화창, 메시지 입력창, 아이디 표시란으로 사용할 DOM 객체 저장
@@ -149,7 +150,9 @@ var webSocket = new WebSocket("ws://192.168.34.118:8888/ChatingServer/" + classI
 		var sender = message[0];
 		var content = message[1];
 		var messageTime = getCurrentTime();
-		
+		if (sender === "SYSTEM") {
+	        chatWindow.innerHTML += "<div style='text-align: center;'>" + content + "</div>";
+	    }else{
 		if (content != "") {
 			if (content.match("/")) { // 귓속말
 				if (content.match(("/" + chatId))) { // 나에게 보낸 메시지만 출력
@@ -170,6 +173,7 @@ var webSocket = new WebSocket("ws://192.168.34.118:8888/ChatingServer/" + classI
 										+ "</div></div>"; 
 			}
 		}
+	    }
 	};
 </script>
 </body>

@@ -21,4 +21,5 @@ public interface IRestaurantDAO {
 	public List<FileDetailVO> getFileList();
 	public int insertFile(FileDetailVO fileDetail);
 	public int insertReview(ReviewVO reviewVO);
+	public int deleteReview(int reviewNo);
 }

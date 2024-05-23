@@ -89,7 +89,6 @@ public interface IBoardDao {
 
 	public List<FileDetailVO> mySubmit(Map<String, Object> parameter2);
 
-
 	public List<BoardVO> selectClassBoardList(int levelChk);
 
 	public int insertStory(StoryVO storyVO);
@@ -113,5 +112,7 @@ public interface IBoardDao {
 	public int insertFiles();
 
 	public List<FilesVO> getFiles();
+
+  public List<BoardVO> getMemberBoardReply(int usersNo);
 
 }

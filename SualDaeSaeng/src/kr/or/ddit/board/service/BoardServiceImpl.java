@@ -300,4 +300,10 @@ public int insertFiles() {
 public List<FilesVO> getFiles() {
 	return boardDao.getFiles();
 }
+
+	@Override
+	public List<BoardVO> getMemberBoardReply(int usersNo) {
+		return boardDao.getMemberBoardReply(usersNo);
+	}
+  
 }

@@ -24,11 +24,10 @@
       <i class="bi bi-arrow-up-short"></i>
     </a>
     
-    <!--  
+ 
     <div id="preloader">
       <div class="line"></div>
     </div>
-    -->
     
     <!-- Vendor JS Files -->
 

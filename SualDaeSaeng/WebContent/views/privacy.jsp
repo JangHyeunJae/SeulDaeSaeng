@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@include file="../header.jsp" %>
+<%@include file="/header.jsp" %>
 
-  <main data-aos="fade" data-aos-delay="1500">
+  <main data-aos="fade" data-aos-delay="700">
 
     <!-- ======= End Page Header ======= -->
     <div class="page-header d-flex align-items-center">
@@ -168,4 +168,4 @@
 
   </main>
 
-<%@include file="../footer.jsp" %>
+<%@include file="/footer.jsp" %>

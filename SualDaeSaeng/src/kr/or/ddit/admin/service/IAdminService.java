@@ -9,7 +9,7 @@ public interface IAdminService {
 
 	public List<MemberReqVO> selectmemList();
 
-	public int AdminAccept(int usersNo);
+//	public int AdminAccept(int usersNo);
 
 	public List<MemberReqVO> selectallList();   // 회원가입된 회원 전체조회 
 

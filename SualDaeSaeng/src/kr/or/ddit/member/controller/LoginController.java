@@ -58,6 +58,7 @@ public class LoginController extends HttpServlet {
 			
 			resp.sendRedirect(req.getContextPath() + "/main.do");
 
+
 		} else {
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("isSuccess", "fail");

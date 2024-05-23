@@ -165,6 +165,8 @@
                          String timeRemaining;
                          if (duration.isNegative() || duration.isZero()) {
                                timeRemaining = "만료됨";
+                               int status = service.updateStory(story.getStoryNo());
+                              
                          } else {
                                long hours = duration.toHours();
                                long minutes = duration.toMinutes() % 60;
@@ -176,11 +178,12 @@
                                 } else {
                                     timeRemaining = "곧";
                                 }
+                                timeRemaining += "후에 지워짐";
                          }
                 %>
                   <a href="<%=request.getContextPath() %>/story/detail.do?storyNo=<%=story.getStoryNo() %>" class="list-group-item py-2 d-flex justify-content-between align-items-center" >
                     <span><i class="bi bi-clock-history px-2"></i> <%=story.getStoryCon() %> </span>
-                    <small><%=timeRemaining  %>후에 지워짐</small>
+                    <small><%=timeRemaining  %></small>
                   </a>
                 <%
                   }
@@ -228,7 +231,7 @@
                     <h2>board</h2>
                     <p class="d-flex justify-content-between align-items-center"> 
                      	 내가 작성한 게시글 
-                      <button type="button" class="btn btn-outline-warning btn-sm">더보기</button>
+                      <button type="button" class="btn btn-outline-warning btn-sm" onclick="location.href='/member/memberMyBoardList.do'">더보기</button>
                     </p>
                   </div>
                   <div class="list-group">

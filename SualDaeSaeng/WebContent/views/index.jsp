@@ -90,6 +90,7 @@
               <div class="swiper-wrapper align-items-center gallery">
               <%
               for(StoryVO story : storyList){
+            	  if(story.getStoryYn().equals("Y")){
             	  FileDetailVO img = boardService.getFileDetail(story.getFileNo());
               %>
                 <div class="swiper-slide">
@@ -97,6 +98,7 @@
                   <p><%=story.getStoryCon() %></p>
                 </div>
               <%
+            	  }
                }
               %>
               </div>

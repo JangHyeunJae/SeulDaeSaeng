@@ -192,7 +192,7 @@
                 </p>
               </div>
               <div class="list-group">
-              <%
+                <%
 				if (classBoardList == null || classBoardList.isEmpty()) {
 			    %>
 			    <p>    작성된 게시글이 없습니다</p>
@@ -232,5 +232,7 @@
 		if(msg != null && msg != '') alert(msg);
 	
 	};
+	
+	
 </script>
 <%@include file="/footer.jsp" %>

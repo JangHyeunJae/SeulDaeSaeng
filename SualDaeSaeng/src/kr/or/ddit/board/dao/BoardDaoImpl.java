@@ -972,6 +972,24 @@ public class BoardDaoImpl implements IBoardDao {
 	}
 
 	@Override
+	public List<BoardVO> myBoardList(int usersNo) {
+		List<BoardVO> myBoardList = null;
+		SqlSession session = null;
+
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+
+			myBoardList = session.selectList("board.myBoardList", usersNo);
+
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return myBoardList;
+  }
+
+	@Override
 	public int deleteHomework(int hwNo) {
 		SqlSession session = null;
 		int status = 0;
@@ -990,7 +1008,6 @@ public class BoardDaoImpl implements IBoardDao {
 				session.close();
 			}
 		}
-
 		return status;
 	}
   
@@ -1038,4 +1055,24 @@ public class BoardDaoImpl implements IBoardDao {
 	
 		return status;
 	}
+
+@Override
+public int updateStory(int storyNo) {
+	SqlSession session = null;
+	int status = 0;
+	try {
+		session = MyBatisUtil.getSqlSession();
+
+		status = session.update("board.updateStory", storyNo);
+
+		if (status > 0) {
+			session.commit();
+		}
+	} catch (PersistenceException ex) {
+		ex.printStackTrace();
+	} finally {
+		session.close();
+	}
+	return status;
+}
 }

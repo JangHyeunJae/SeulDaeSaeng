@@ -442,6 +442,12 @@
         values(#{fileNo}, #{fileSavepath}, #{fileOgname},#{fileOgname}, #{fileSize}, #{fileExt}, sysdate, #{fileLevel})
 </insert>
 
+<select id="myBoardList" parameterType="int" resultMap="boardMap">
+	select * from BOARD
+	where USERS_NO = #{usersNo} AND BOARD_YN = 'Y'
+	order by BOARD_NO desc
+</select>
+
 <update id="deleteHomework" parameterType="int">
 	update homework
 	set hw_yn = 'N'
@@ -454,8 +460,10 @@
 	where hw_no=#{hwNo}
 </update>
 
-<!-- <select id="getFiles" resultMap="filesMap">
-        select * from files order by file_no desc
-</select> -->
+<update id="updateStory" parameterType="int">
+		update story
+		set story_yn='N'
+		where story_no = #{storyNo}
+</update>
 
 </mapper>

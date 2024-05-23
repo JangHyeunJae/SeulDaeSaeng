@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
  
 <%@include file="/header.jsp" %>
-    <main>
+    <main data-aos="fade" data-aos-delay="700">
     <!-- ======= End Page Header ======= -->
       <div class="page-header pb-4">
         <div class="container text-center">

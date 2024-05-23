@@ -1,17 +1,26 @@
 package kr.or.ddit.restaurant.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+
+import javax.servlet.http.Part;
 
 import org.apache.logging.log4j.CloseableThreadContext.Instance;
 import org.apache.logging.log4j.core.net.DatagramOutputStream;
 
 import kr.or.ddit.board.service.BoardServiceImpl;
+import kr.or.ddit.board.vo.FileDetailVO;
 import kr.or.ddit.restaurant.dao.IRestaurantDAO;
 import kr.or.ddit.restaurant.dao.RestaurantDAOImpl;
 import kr.or.ddit.restaurant.vo.RestaurantVO;
+import kr.or.ddit.restaurant.vo.ReviewVO;
 
 public class RestaurantServiceImpl implements IRestaurantService {
+	
+	private static final String UPLOAD_DIR = "upload_files";
 	
 	private static RestaurantServiceImpl instance = null;
 	
@@ -76,5 +85,55 @@ public class RestaurantServiceImpl implements IRestaurantService {
 		return dao.selectRestReviewAll(cls);
 	}
 
+	@Override
+	public List<FileDetailVO> getFileList() {
+		return dao.getFileList();
+	}
+	
+	@Override
+	public int insertFile(Part filePart) {
+        
+		String uploadPath = "d:/D_Other/" + UPLOAD_DIR;
+        
+        File uploadDir = new File(uploadPath);
+        if(!uploadDir.exists()) {
+           uploadDir.mkdir();
+        }
+        FileDetailVO fileDetail = new FileDetailVO();
+
+        	String fileName = filePart.getSubmittedFileName();
+
+        	String orignFileName = fileName; //원본 파일명
+        	long fileSize = filePart.getSize(); //파일 크기
+        	String fileSavednm = ""; //저장 파읾명
+        	String fileSavepath = ""; //저장 파일경로
+        		
+        	fileSavednm = UUID.randomUUID().toString().replace("-", "");
+        		
+        	fileSavepath = uploadPath + "/" + fileSavednm;
+        	
+        	try {
+        		filePart.write(fileSavepath); //파일 업로드 처리
+			} catch (IOException e) {
+					e.printStackTrace();
+			}  
+        		
+        	//확장명 추출
+        	String fileExtension = orignFileName.lastIndexOf(".") < 0 ? 
+        				"" : orignFileName.substring(orignFileName.lastIndexOf(".") + 1);
+        		
+        	fileDetail.setFileLevel(5);
+        	fileDetail.setFileExt(fileExtension);
+        	fileDetail.setFileOgname(orignFileName);
+        	fileDetail.setFileSavednm(fileSavednm);
+        	fileDetail.setFileSavepath(fileSavepath);
+        	fileDetail.setFileSize(fileSize);
+        return dao.insertFile(fileDetail);
+     }
+
+	@Override
+	public int insertReview(ReviewVO reviewVO) {
+		return dao.insertReview(reviewVO);
+	}
 	
 }

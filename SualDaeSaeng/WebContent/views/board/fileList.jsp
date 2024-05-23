@@ -22,7 +22,7 @@
     int endIndex = Math.min(startIndex + itemsPerPage, totalItems);
    
 %>
-<main>
+<main data-aos="fade" data-aos-delay="700">
 	<!-- ======= End Page Header ======= -->
 	<div class="page-header d-flex align-items-center">
 		<div class="container position-relative">
@@ -30,11 +30,11 @@
 			<%
 			if(usersRole==1){
 			%>
-			   <a href="<%=request.getContextPath()%>/classTeacherBoard.do?levelChk=<%=levelChk%>" class="pb-4"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
+			   <a href="<%=request.getContextPath()%>/classTeacherBoard.do?levelChk=<%=levelChk%>" class="pb-4 backbtn"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
 			<%
 			}else{
 			%>
-			   <a href="<%=request.getContextPath()%>/classBoard.do?levelChk=<%=levelChk%>" class="pb-4"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
+			   <a href="<%=request.getContextPath()%>/classBoard.do?levelChk=<%=levelChk%>" class="pb-4 backbtn"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
 			<%
 			}
 			%>

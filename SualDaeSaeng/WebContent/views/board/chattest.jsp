@@ -3,8 +3,8 @@
 
 <%@include file="/header.jsp" %>
 
-    <!--<main data-aos="fade" data-aos-delay="1500" >-->
-    <main>
+    <main data-aos="fade" data-aos-delay="700" >
+    <!-- <main> -->
       <!-- ======= End Page Header ======= -->
       <div class="page-header pb-4">
         <div class="container text-center">

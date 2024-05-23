@@ -96,6 +96,10 @@ public interface IBoardService {
   public StoryVO getStoryOne(int storyNo);
 
   public MemberVO writerDetail(int boardNo);
+  
+  public int deleteStory(int storyNo);
+
+  public List<StoryVO> allStoryList();
 
   public List<BoardVO> getMemberBoardReply(int usersNo);
 

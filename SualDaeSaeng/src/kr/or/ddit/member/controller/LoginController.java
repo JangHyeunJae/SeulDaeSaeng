@@ -45,6 +45,7 @@ public class LoginController extends HttpServlet {
 			req.getSession().setAttribute("usersId", usersId);
 			req.getSession().setAttribute("memDetail", memDetail);
 			req.getSession().setAttribute("usersPass", usersPass); 
+			req.getSession().setAttribute("usersDetail", usersDetail);
 			req.getSession().setAttribute("usersRole", usersDetail.getUsersRole());
 			req.getSession().setAttribute("usersNo", usersDetail.getUsersNo());
 			resp.sendRedirect(req.getContextPath() + "/main.do");

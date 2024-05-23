@@ -41,7 +41,7 @@
 				</if>
 		        GROUP BY ADDR_NO, REST_BIZNO, NAME, MCLS, MCLS_NAME, SCLS, SCLS_NAME, ADDR_BASIC, LIKE_COUNT, DISTANCE
 		        <if test="order==null or order==''">
-					ORDER BY LIKE_COUNT DESC, AVG_REVIEW_STAR DESC, DISTANCE ASC
+					ORDER BY DISTANCE ASC
 				</if>
 				<if test="order=='distanceUp'">
 					ORDER BY DISTANCE ASC
@@ -108,7 +108,7 @@
 	</select>
 	
 	<select id="selectRestReview" parameterType="String" resultType="restVO">
-	  	 SELECT REVIEW_NO reviewNo, 
+	  	SELECT REVIEW_NO reviewNo, 
 		       USERS_NO usersNo, 
 		       NICK_NAME nickName, 
 		       REVIEW_STAR reviewStar, 
@@ -129,8 +129,19 @@
 		    AND REVIEW_NO IS NOT NULL
 		    ORDER BY REVIEW_DATE DESC
 		)
-		WHERE RNUM <![CDATA[<=]]> 2
+		WHERE RNUM <![CDATA[<=]]> 3
 	</select>
+	
+	<resultMap type="kr.or.ddit.board.vo.FileDetailVO" id="fileMap"> <!-- 1 -->
+		<result column="file_no" property="fileNo"/>
+		<result column="file_savepath" property="fileSavepath"/>
+		<result column="file_ogname" property="fileOgname"/>
+		<result column="file_savednm" property="fileSavednm"/>
+		<result column="file_size" property="fileSize"/>
+		<result column="file_ext" property="fileExt"/>
+		<result column="file_dt" property="fileDt"/>
+		<result column="file_level" property="fileLevel"/>
+	</resultMap>
 	
 	<select id="selectRestReviewAll" parameterType="hashMap" resultType="restVO">
 	  	SELECT REVIEW_NO reviewNo, USERS_NO usersNo, NICK_NAME nickName, REVIEW_STAR reviewStar, REVIEW_TEXT reviewText, FILE_NO fileNo, REVIEW_DATE reviewDate
@@ -151,5 +162,35 @@
 		</if>
 	</select>
 	
+	<select id="getFileList" parameterType="int" resultMap="fileMap">
+	      select *
+	        from file_detail
+	        where file_level = 5
+	        order by file_no desc
+	</select>
 	
+	<insert id="saveFile" parameterType="kr.or.ddit.board.vo.FileDetailVO" useGeneratedKeys="true">
+		<selectKey keyProperty="fileNo" resultType="int" order="BEFORE">
+			select seq_file.nextval from dual
+		</selectKey>
+		    insert into files(file_no,file_yn)
+	        values(#{fileNo},'Y')
+	</insert>
+	
+	<insert id="saveFileDetail" parameterType="kr.or.ddit.board.vo.FileDetailVO" useGeneratedKeys="true">
+	        insert into file_detail(file_no, file_savepath, file_ogname, file_savednm, file_size, file_ext, file_dt, file_level)
+	        values(#{fileNo}, #{fileSavepath}, #{fileOgname},#{fileOgname}, #{fileSize}, #{fileExt}, sysdate, #{fileLevel})
+	</insert>
+	
+
+	<insert id="insertReview" parameterType="reviewVO" useGeneratedKeys="true">
+		<selectKey keyProperty="reviewNo" resultType="int" order="BEFORE">
+			select seq_board.nextval from dual
+		</selectKey>
+		insert into REVIEW(
+			REVIEW_NO, USERS_NO, REST_BIZNO, REVIEW_STAR, REVIEW_TEXT, REVIEW_YN, FILE_NO, REVIEW_DATE
+		)values(
+			#{reviewNo}, #{usersNo}, #{restBizno}, #{reviewStar}, #{reviewText}, 'Y', #{fileNo}, SYSDATE
+		)
+	</insert>
 </mapper>

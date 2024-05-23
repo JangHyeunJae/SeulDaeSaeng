@@ -31,7 +31,7 @@
 								? new ArrayList() : (List<BoardVO>)request.getAttribute("memberBoardReplyList");
 %>
 
- <main class="myPage" data-aos="fade" data-aos-delay="1500">
+ <main class="myPage" data-aos="fade" data-aos-delay="700">
       <section id="myPage" class="gallery-single ">
         <div class="container-xl">
           <div class="row justify-content-between gy-4">

@@ -269,8 +269,19 @@ public class BoardServiceImpl implements IBoardService{
 		return boardDao.writerDetail(boardNo);
 	}
 
+  @Override
+   public int deleteStory(int storyNo) {
+	 return boardDao.deleteStory(storyNo);
+   }
+
+  @Override
+  public List<StoryVO> allStoryList() {
+	return boardDao.allStoryList();
+  }
+
 	@Override
 	public List<BoardVO> getMemberBoardReply(int usersNo) {
 		return boardDao.getMemberBoardReply(usersNo);
 	}
+  
 }

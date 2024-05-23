@@ -7,6 +7,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.google.gson.JsonObject;
 
 import kr.or.ddit.member.service.IMemberService;
@@ -42,12 +44,29 @@ public class LoginController extends HttpServlet {
 			System.out.println("로그인성공");
 			MemberVO memDetail = loginService.getMemDetail(usersId);
 			UsersVO usersDetail = loginService.getUsersDetail(usersId);
+
+			HttpSession session = null;
+			session.setAttribute("usersId", usersId);
+			session.setAttribute("memDetail", memDetail);
+			session.setAttribute("usersPass", usersPass);
+      session.setAttribute("usersDetail", usersDetail);
+      session.setAttribute("usersRole", usersDetail.getUsersRole());
+			session.setAttribute("usersNo", usersDetail.getUsersNo());
+			/*
+			 * req.getSession().setAttribute("usersId", usersId);
+			 * req.getSession().setAttribute("memDetail", memDetail);
+			 * req.getSession().setAttribute("usersPass", usersPass);
+			 * req.getSession().setAttribute("usersRole", usersDetail.getUsersRole());
+			 */
+
+     /*
 			req.getSession().setAttribute("usersId", usersId);
 			req.getSession().setAttribute("memDetail", memDetail);
 			req.getSession().setAttribute("usersPass", usersPass); 
 			req.getSession().setAttribute("usersDetail", usersDetail);
 			req.getSession().setAttribute("usersRole", usersDetail.getUsersRole());
 			req.getSession().setAttribute("usersNo", usersDetail.getUsersNo());
+      */
 			resp.sendRedirect(req.getContextPath() + "/main.do");
 
 		} else {

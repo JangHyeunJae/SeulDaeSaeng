@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import kr.or.ddit.board.vo.BoardVO;
 import kr.or.ddit.board.vo.FileDetailVO;
 import kr.or.ddit.board.vo.FileShareVO;
+import kr.or.ddit.board.vo.FilesVO;
 import kr.or.ddit.board.vo.HomeworkVO;
 import kr.or.ddit.board.vo.HwSubmitVO;
 import kr.or.ddit.board.vo.ReplyVO;
@@ -89,7 +90,7 @@ public class BoardDaoImpl implements IBoardDao {
 	}
 
 	@Override
-	public MemberVO getwriterDetail(Map<String,Object> parameter) {
+	public MemberVO getwriterDetail(Map<String, Object> parameter) {
 
 		SqlSession session = MyBatisUtil.getSqlSession(true);
 
@@ -126,7 +127,7 @@ public class BoardDaoImpl implements IBoardDao {
 	}
 
 	@Override
-	public MemberVO getReplyWriterDetail(Map<String,Object> parameter) {
+	public MemberVO getReplyWriterDetail(Map<String, Object> parameter) {
 		SqlSession session = MyBatisUtil.getSqlSession(true);
 
 		MemberVO ReplyWriterDetail = null;
@@ -143,20 +144,20 @@ public class BoardDaoImpl implements IBoardDao {
 
 	@Override
 	public int deleteBoard(int boardNo) {
-        SqlSession session = null;
-		
+		SqlSession session = null;
+
 		int cnt = 0;
 		try {
 			session = MyBatisUtil.getSqlSession();
-			
+
 			cnt = session.update("board.deleteBoard", boardNo);
-			
-			if(cnt > 0) {
+
+			if (cnt > 0) {
 				session.commit();
 			}
 		} catch (PersistenceException ex) {
 			ex.printStackTrace();
-		}finally {
+		} finally {
 			session.close();
 		}
 		return cnt;
@@ -164,44 +165,44 @@ public class BoardDaoImpl implements IBoardDao {
 
 	@Override
 	public int insertBoard(BoardVO boardVO) {
-		
+
 		SqlSession session = null;
-		int status = 0;		
-		
+		int status = 0;
+
 		try {
 			session = MyBatisUtil.getSqlSession();
 			status = session.insert("board.insertBoard", boardVO);
-			
-			if(status > 0) {	// 성공
+
+			if (status > 0) { // 성공
 				session.commit();
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(session != null) {
+		} finally {
+			if (session != null) {
 				session.close();
 			}
 		}
-		
+
 		return status;
 	}
-  
+
 	@Override
 	public int insertReply(ReplyVO replyVO) {
-		
-    SqlSession session = null;
+
+		SqlSession session = null;
 		int status = 0;
 		try {
 			session = MyBatisUtil.getSqlSession();
-			
+
 			status = session.insert("board.insertReply", replyVO);
-			
-			if(status > 0) {
+
+			if (status > 0) {
 				session.commit();
 			}
 		} catch (PersistenceException ex) {
 			ex.printStackTrace();
-		}finally {
+		} finally {
 			session.close();
 		}
 		return status;
@@ -209,20 +210,20 @@ public class BoardDaoImpl implements IBoardDao {
 
 	@Override
 	public int updateHit(int boardNo) {
-		
+
 		SqlSession session = null;
 		int hit = 0;
 		try {
 			session = MyBatisUtil.getSqlSession();
-			
+
 			hit = session.update("board.updateHit", boardNo);
-			
-			if(hit > 0) {
+
+			if (hit > 0) {
 				session.commit();
 			}
 		} catch (PersistenceException ex) {
 			ex.printStackTrace();
-		}finally {
+		} finally {
 			session.close();
 		}
 		return hit;
@@ -230,7 +231,7 @@ public class BoardDaoImpl implements IBoardDao {
 
 	@Override
 	public UsersVO getUsersDetail(int usersNo) {
-		
+
 		SqlSession session = MyBatisUtil.getSqlSession(true);
 
 		UsersVO UsersDetail = null;
@@ -247,7 +248,7 @@ public class BoardDaoImpl implements IBoardDao {
 
 	@Override
 	public MemberVO getMemberDetail(int usersNo) {
-		
+
 		SqlSession session = MyBatisUtil.getSqlSession(true);
 
 		MemberVO MemberDetail = null;
@@ -278,83 +279,83 @@ public class BoardDaoImpl implements IBoardDao {
 			session.close();
 		}
 		return boardList;
-  }
-  
+	}
+
 	@Override
 	public int updateBoard(Map<String, Object> parameter) {
-		
+
 		SqlSession session = null;
-		int status = 0;		
-		
+		int status = 0;
+
 		try {
 			session = MyBatisUtil.getSqlSession();
 			status = session.update("board.updateBoard", parameter);
-			
-			if(status > 0) {	// 성공
+
+			if (status > 0) { // 성공
 				session.commit();
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(session != null) {
+		} finally {
+			if (session != null) {
 				session.close();
 			}
 		}
-		
+
 		return status;
 	}
 
 	@Override
 	public int updateReply(Map<String, Object> parameter) {
-		
+
 		SqlSession session = null;
-		int status = 0;		
-		
+		int status = 0;
+
 		try {
 			session = MyBatisUtil.getSqlSession();
 			status = session.update("board.updateReply", parameter);
-			
-			if(status > 0) {	// 성공
+
+			if (status > 0) { // 성공
 				session.commit();
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(session != null) {
+		} finally {
+			if (session != null) {
 				session.close();
 			}
 		}
-		
+
 		return status;
 	}
 
 	@Override
 	public int deleteReply(int replyNo) {
-		
+
 		SqlSession session = null;
-		int status = 0;		
-		
+		int status = 0;
+
 		try {
 			session = MyBatisUtil.getSqlSession();
 			status = session.update("board.deleteReply", replyNo);
-			
-			if(status > 0) {	// 성공
+
+			if (status > 0) { // 성공
 				session.commit();
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(session != null) {
+		} finally {
+			if (session != null) {
 				session.close();
 			}
 		}
-		
+
 		return status;
 	}
 
 	@Override
 	public List<BoardVO> searchAllBoardList(Map<String, Object> parameter) {
-		
+
 		List<BoardVO> boardList = new ArrayList<BoardVO>();
 
 		SqlSession session = null;
@@ -368,13 +369,13 @@ public class BoardDaoImpl implements IBoardDao {
 		} finally {
 			session.close();
 		}
-		
+
 		return boardList;
 	}
 
 	@Override
 	public List<BoardVO> searchSelectBoardList(Map<String, Object> parameter) {
-		
+
 		List<BoardVO> boardList = new ArrayList<BoardVO>();
 
 		SqlSession session = null;
@@ -388,62 +389,62 @@ public class BoardDaoImpl implements IBoardDao {
 		} finally {
 			session.close();
 		}
-		
+
 		return boardList;
 	}
 
 	@Override
 	public int reportBoard(int boardNo) {
-		
+
 		SqlSession session = null;
-		int status = 0;		
-		
+		int status = 0;
+
 		try {
 			session = MyBatisUtil.getSqlSession();
 			status = session.update("board.reportBoard", boardNo);
-			
-			if(status > 0) {	// 성공
+
+			if (status > 0) { // 성공
 				session.commit();
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(session != null) {
+		} finally {
+			if (session != null) {
 				session.close();
 			}
 		}
-		
+
 		return status;
 	}
 
 	@Override
-	public int insertHomework(Map<String,Object> parameter) {
-		
+	public int insertHomework(Map<String, Object> parameter) {
+
 		SqlSession session = null;
-		int status = 0;		
-		
+		int status = 0;
+
 		try {
-			
+
 			session = MyBatisUtil.getSqlSession();
 			status = session.insert("board.insertHomework", parameter);
-			
-			if(status > 0) {	// 성공
+
+			if (status > 0) { // 성공
 				session.commit();
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(session != null) {
+		} finally {
+			if (session != null) {
 				session.close();
 			}
 		}
-		
+
 		return status;
 	}
 
 	@Override
 	public List<HomeworkVO> getHwList(int levelChk) {
-		
+
 		List<HomeworkVO> hwList = new ArrayList<HomeworkVO>();
 
 		SqlSession session = null;
@@ -451,7 +452,7 @@ public class BoardDaoImpl implements IBoardDao {
 		try {
 			session = MyBatisUtil.getSqlSession(true);
 
-			hwList = session.selectList("board.getHwList",levelChk);
+			hwList = session.selectList("board.getHwList", levelChk);
 
 		} catch (PersistenceException ex) {
 			ex.printStackTrace();
@@ -463,7 +464,7 @@ public class BoardDaoImpl implements IBoardDao {
 
 	@Override
 	public HomeworkVO getHwDetail(int hwNo) {
-		
+
 		SqlSession session = MyBatisUtil.getSqlSession(true);
 
 		HomeworkVO hwDetail = null;
@@ -480,7 +481,7 @@ public class BoardDaoImpl implements IBoardDao {
 
 	@Override
 	public MemberVO getHwWriterDetail(Map<String, Object> parameter) {
-		
+
 		SqlSession session = MyBatisUtil.getSqlSession(true);
 
 		MemberVO writerDetail = null;
@@ -496,40 +497,16 @@ public class BoardDaoImpl implements IBoardDao {
 	}
 
 	@Override
-	public int saveFileDetail(FileDetailVO fileDetail) {
-		SqlSession session = null;
-		int status = 0;		
-		
-		try {
-			session = MyBatisUtil.getSqlSession();
-			session.insert("board.saveFile", fileDetail);
-			status = session.insert("board.saveFileDetail", fileDetail);
-			
-			if(status > 0) {	// 성공
-				session.commit();
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			if(session != null) {
-				session.close();
-			}
-		}
-		
-		return status;
-	}
-
-	@Override
 	public List<FileDetailVO> getFileList(int classNo) {
-		
+
 		List<FileDetailVO> fileList = new ArrayList<FileDetailVO>();
 
 		SqlSession session = null;
 
 		try {
 			session = MyBatisUtil.getSqlSession(true);
-            
-			fileList = session.selectList("board.getFileList",classNo);
+
+			fileList = session.selectList("board.getFileList", classNo);
 
 		} catch (PersistenceException ex) {
 			ex.printStackTrace();
@@ -538,45 +515,32 @@ public class BoardDaoImpl implements IBoardDao {
 		}
 		return fileList;
 	}
-    /*
-    
-	@Override
-	public int insertFileDetail(FileDetailVO fileDetail) {
-		
-		SqlSession session = null;
-		int status = 0;		
-		
-		try {
-			session = MyBatisUtil.getSqlSession();
-			session.insert("board.saveFile", fileDetail);
-			status = session.insert("board.saveFileDetail", fileDetail);
-			
-			if(status > 0) {	// 성공
-				session.commit();
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			if(session != null) {
-				session.close();
-			}
-		}
-		
-		return status;
-	}
-	*/
+	/*
+	 * 
+	 * @Override public int insertFileDetail(FileDetailVO fileDetail) {
+	 * 
+	 * SqlSession session = null; int status = 0;
+	 * 
+	 * try { session = MyBatisUtil.getSqlSession(); session.insert("board.saveFile",
+	 * fileDetail); status = session.insert("board.saveFileDetail", fileDetail);
+	 * 
+	 * if(status > 0) { // 성공 session.commit(); } }catch(Exception e) {
+	 * e.printStackTrace(); }finally { if(session != null) { session.close(); } }
+	 * 
+	 * return status; }
+	 */
 
 	@Override
 	public FileDetailVO getFileDetail(int fileNo) {
-		
+
 		FileDetailVO fileDetail = null;
 
 		SqlSession session = null;
 
 		try {
 			session = MyBatisUtil.getSqlSession(true);
-            
-			fileDetail = session.selectOne("board.getFileDetail",fileNo);
+
+			fileDetail = session.selectOne("board.getFileDetail", fileNo);
 
 		} catch (PersistenceException ex) {
 			ex.printStackTrace();
@@ -588,7 +552,7 @@ public class BoardDaoImpl implements IBoardDao {
 
 	@Override
 	public List<BoardVO> searchClassBoardList(Map<String, Object> parameter) {
-		
+
 		List<BoardVO> boardList = new ArrayList<BoardVO>();
 
 		SqlSession session = null;
@@ -602,69 +566,69 @@ public class BoardDaoImpl implements IBoardDao {
 		} finally {
 			session.close();
 		}
-		
+
 		return boardList;
 	}
 
 	@Override
 	public int insertFileShare(FileShareVO fileShare) {
 		SqlSession session = null;
-		int status2 = 0;		
-		
+		int status2 = 0;
+
 		try {
 			session = MyBatisUtil.getSqlSession();
 			status2 = session.insert("board.insertFileShare", fileShare);
-			
-			if(status2 > 0) {	// 성공
+
+			if (status2 > 0) { // 성공
 				session.commit();
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(session != null) {
+		} finally {
+			if (session != null) {
 				session.close();
 			}
 		}
-		
+
 		return status2;
 	}
 
 	@Override
 	public int insertBoardFile(FileDetailVO fileDetail) {
-		
+
 		SqlSession session = null;
-		int status = 0;		
-		
+		int status = 0;
+
 		try {
 			session = MyBatisUtil.getSqlSession();
 			session.insert("board.saveFile", fileDetail);
 			status = session.insert("board.saveFileDetail", fileDetail);
-			
-			if(status > 0) {	// 성공
+
+			if (status > 0) { // 성공
 				session.commit();
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(session != null) {
+		} finally {
+			if (session != null) {
 				session.close();
 			}
 		}
-		
+
 		return status;
 	}
 
 	@Override
 	public FileDetailVO getFile(int boardNo) {
-		
+
 		FileDetailVO file = null;
 
 		SqlSession session = null;
 
 		try {
 			session = MyBatisUtil.getSqlSession(true);
-            
-			file = session.selectOne("board.getFile",boardNo);
+
+			file = session.selectOne("board.getFile", boardNo);
 
 		} catch (PersistenceException ex) {
 			ex.printStackTrace();
@@ -676,14 +640,14 @@ public class BoardDaoImpl implements IBoardDao {
 
 	@Override
 	public MemberVO getHwTeacher(int hwNo) {
-		
+
 		MemberVO mem = null;
 		SqlSession session = null;
 
 		try {
 			session = MyBatisUtil.getSqlSession(true);
-            
-			mem = session.selectOne("board.getHwTeacher",hwNo);
+
+			mem = session.selectOne("board.getHwTeacher", hwNo);
 
 		} catch (PersistenceException ex) {
 			ex.printStackTrace();
@@ -695,39 +659,39 @@ public class BoardDaoImpl implements IBoardDao {
 
 	@Override
 	public int studentSubmitHw(HwSubmitVO hwSubmit) {
-		
+
 		SqlSession session = null;
-		int status = 0;		
-		
+		int status = 0;
+
 		try {
-			
+
 			session = MyBatisUtil.getSqlSession();
 			status = session.insert("board.studentSubmitHw", hwSubmit);
-			
-			if(status > 0) {	// 성공
+
+			if (status > 0) { // 성공
 				session.commit();
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(session != null) {
+		} finally {
+			if (session != null) {
 				session.close();
 			}
 		}
-		
+
 		return status;
 	}
 
 	@Override
 	public List<FileDetailVO> mySubmit(Map<String, Object> parameter2) {
-		
+
 		List<FileDetailVO> submit = null;
 		SqlSession session = null;
 
 		try {
 			session = MyBatisUtil.getSqlSession(true);
-            
-			submit = session.selectList("board.mySubmit",parameter2);
+
+			submit = session.selectList("board.mySubmit", parameter2);
 
 		} catch (PersistenceException ex) {
 			ex.printStackTrace();
@@ -739,21 +703,21 @@ public class BoardDaoImpl implements IBoardDao {
 
 	@Override
 	public int insertStory(StoryVO storyVO) {
-		
+
 		SqlSession session = null;
-		int status = 0;		
-		
+		int status = 0;
+
 		try {
 			session = MyBatisUtil.getSqlSession();
 			status = session.insert("board.insertStory", storyVO);
-			
-			if(status > 0) {// 성공
+
+			if (status > 0) {// 성공
 				session.commit();
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(session != null) {
+		} finally {
+			if (session != null) {
 				session.close();
 			}
 		}
@@ -762,14 +726,14 @@ public class BoardDaoImpl implements IBoardDao {
 
 	@Override
 	public List<StoryVO> getStoryList(int usersNo) {
-		
+
 		List<StoryVO> storyVo = null;
 		SqlSession session = null;
 
 		try {
 			session = MyBatisUtil.getSqlSession(true);
-            
-			storyVo = session.selectList("board.getStoryList",usersNo);
+
+			storyVo = session.selectList("board.getStoryList", usersNo);
 
 		} catch (PersistenceException ex) {
 			ex.printStackTrace();
@@ -781,13 +745,13 @@ public class BoardDaoImpl implements IBoardDao {
 
 	@Override
 	public String getStoryTime(int storyNo) {
-		
+
 		String time = null;
 		SqlSession session = null;
 
 		try {
 			session = MyBatisUtil.getSqlSession(true);
-            time = session.selectOne("board.getStoryTime",storyNo);
+			time = session.selectOne("board.getStoryTime", storyNo);
 
 		} catch (PersistenceException ex) {
 			ex.printStackTrace();
@@ -797,47 +761,47 @@ public class BoardDaoImpl implements IBoardDao {
 		return time;
 	}
 
-    @Override
-   public StoryVO getStoryOne(int storyNo) {
-      
-      StoryVO storyOne = null;
-      SqlSession session = null;
+	@Override
+	public StoryVO getStoryOne(int storyNo) {
 
-      try {
-         session = MyBatisUtil.getSqlSession(true);
-            
-         storyOne = session.selectOne("board.getStoryOne",storyNo);
+		StoryVO storyOne = null;
+		SqlSession session = null;
 
-      } catch (PersistenceException ex) {
-         ex.printStackTrace();
-      } finally {
-         session.close();
-      }
-      return storyOne;
-   }
-  
-    @Override
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+
+			storyOne = session.selectOne("board.getStoryOne", storyNo);
+
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return storyOne;
+	}
+
+	@Override
 	public MemberVO writerDetail(int boardNo) {
-		SqlSession session = null;		// 디비와 연결하기 위한 생산품
-		MemberVO memberVO = null;	// 전체 목록 데이터를 받을 변수 
-		
+		SqlSession session = null; // 디비와 연결하기 위한 생산품
+		MemberVO memberVO = null; // 전체 목록 데이터를 받을 변수
+
 		try {
 			session = MyBatisUtil.getSqlSession(true);
 			memberVO = session.selectOne("board.writerDetail", boardNo);
-		
+
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(session != null) { 
+		} finally {
+			if (session != null) {
 				session.close();
 			}
 		}
 		return memberVO;
 	}
-  
-  @Override
+
+	@Override
 	public List<BoardVO> selectClassBoardList(int levelChk) {
-		
+
 		List<BoardVO> boardList = new ArrayList<BoardVO>();
 
 		SqlSession session = null;
@@ -852,6 +816,27 @@ public class BoardDaoImpl implements IBoardDao {
 			session.close();
 		}
 		return boardList;
+	}
+
+	@Override
+	public int deleteStory(int storyNo) {
+
+		SqlSession session = null;
+		int cnt = 0;
+		try {
+			session = MyBatisUtil.getSqlSession();
+
+			cnt = session.update("board.deleteStory", storyNo);
+
+			if (cnt > 0) {
+				session.commit();
+			}
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return cnt;
 	}
 
      @Override
@@ -914,7 +899,112 @@ public class BoardDaoImpl implements IBoardDao {
 		} finally {
 			session.close();
 		}
-		return boardList;
+    return boardList;
+	}
+
+	@Override
+	public List<FileDetailVO> getHwFileList(int hwNo) {
+		List<FileDetailVO> hwFileList = null;
+		SqlSession session = null;
+
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+
+			hwFileList = session.selectList("board.getHwFileList", hwNo);
+
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return hwFileList;
+	}
+
+	@Override
+	public MemberVO getHwSubmitMem(int fileNo) {
+		SqlSession session = null;
+		MemberVO mem = null;
+
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			mem = session.selectOne("board.getHwSubmitMem", fileNo);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return mem;
+	}
+
+	@Override
+	public int insertFiles() {
+		SqlSession session = null;
+		int status = 0;
+
+		try {
+			session = MyBatisUtil.getSqlSession();
+			status = session.insert("board.insertFiles");
+
+			if (status > 0) { // 성공
+				session.commit();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+
+		return status;
+	}
+
+	@Override
+	public List<FilesVO> getFiles() {
+
+		List<FilesVO> hwFileList = null;
+		SqlSession session = null;
+
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+
+			hwFileList = session.selectList("board.getFiles");
+
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return hwFileList;
+	}
+
+	@Override
+	public int saveFileDetail(FileDetailVO fileDetail) {
+		SqlSession session = null;
+		int status = 0;
+
+		try {
+			session = MyBatisUtil.getSqlSession();
+			session.insert("board.saveFiles", fileDetail);
+			status = session.insert("board.saveFileDetail", fileDetail);
+
+			if (status > 0) { // 성공
+				session.commit();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+
+		return status;
 	}
   
 }

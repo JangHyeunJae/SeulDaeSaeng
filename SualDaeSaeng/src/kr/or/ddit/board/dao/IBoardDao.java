@@ -1,5 +1,6 @@
 package kr.or.ddit.board.dao;
 
+import java.nio.file.Files;
 import java.time.LocalTime;
 import java.util.Collection;
 import java.util.List;
@@ -10,6 +11,7 @@ import javax.servlet.http.Part;
 import kr.or.ddit.board.vo.BoardVO;
 import kr.or.ddit.board.vo.FileDetailVO;
 import kr.or.ddit.board.vo.FileShareVO;
+import kr.or.ddit.board.vo.FilesVO;
 import kr.or.ddit.board.vo.HomeworkVO;
 import kr.or.ddit.board.vo.HwSubmitVO;
 import kr.or.ddit.board.vo.ReplyVO;
@@ -87,7 +89,6 @@ public interface IBoardDao {
 
 	public List<FileDetailVO> mySubmit(Map<String, Object> parameter2);
 
-
 	public List<BoardVO> selectClassBoardList(int levelChk);
 
 	public int insertStory(StoryVO storyVO);
@@ -103,6 +104,14 @@ public interface IBoardDao {
 	public int deleteStory(int storyNo);
 
 	public List<StoryVO> allStoryList();
+
+	public List<FileDetailVO> getHwFileList(int hwNo);
+
+	public MemberVO getHwSubmitMem(int fileNo);
+
+	public int insertFiles();
+
+	public List<FilesVO> getFiles();
 
   public List<BoardVO> getMemberBoardReply(int usersNo);
 

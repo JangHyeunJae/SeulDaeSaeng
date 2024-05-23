@@ -2,6 +2,17 @@
 <!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="restaurant">
 
+<resultMap type="kr.or.ddit.board.vo.FileDetailVO" id="fileMap"> <!-- 1 -->
+<result column="file_no" property="fileNo"/>
+<result column="file_savepath" property="fileSavepath"/>
+<result column="file_ogname" property="fileOgname"/>
+<result column="file_savednm" property="fileSavednm"/>
+<result column="file_size" property="fileSize"/>
+<result column="file_ext" property="fileExt"/>
+<result column="file_dt" property="fileDt"/>
+<result column="file_level" property="fileLevel"/>
+</resultMap>
+
 	<select id="restaurantList" parameterType="hashMap" resultType="restVO">
 		<!-- 식당 카테고리별 리스트 -->
 		SELECT *

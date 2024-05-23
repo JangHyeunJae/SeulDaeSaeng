@@ -395,15 +395,15 @@
 	    where story_no=#{storyNo}
 </select>
 
-<select id="getMemberBoardReply" parameterType="int" resultType="list">
+<select id="getMemberBoardReply" parameterType="int" resultType="java.lang.Integer">
 	select DISTINCT(BOARD_NO) as BOARD_NO from REPLY 
-    where USERS_NO = #{usersNo}
+    where USERS_NO = #{usersNo} and REPLY_YN = 'Y'
     order by BOARD_NO desc
 </select>
 
 <select id="getMemberBoardOne" parameterType="int" resultMap="boardMap">
-	select * from BOARD_NO 
-	where BOARD_NO = #{boardNo}
+	select * from BOARD 
+	where BOARD_NO = #{boardNo} AND BOARD_YN = 'Y'
 </select>
 
 <update id="deleteStory" parameterType="int">

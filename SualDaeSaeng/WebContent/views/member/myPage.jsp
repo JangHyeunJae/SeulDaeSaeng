@@ -267,7 +267,7 @@
                       <small class="days"><%=boardVo.getBoardAt() %></small>
                     </a>
                   <%
-                  			if(memBoardList.size() == i) break;
+                  			if(memBoardList.size() == (i+1)) break;
                   		}
                   %>
                   </div>
@@ -316,7 +316,7 @@
                       <small class="days"><%=boardReplyVo.getBoardAt() %></small>
                     </a>
                   <%
-                  			if(memBoardList.size() == i) break;
+                  			if(memberBoardReplyList.size() == (i+1)) break;
                   		}
                   %>
                   </div>

@@ -972,6 +972,29 @@ public class BoardDaoImpl implements IBoardDao {
 	}
 
 	@Override
+	public int deleteHomework(int hwNo) {
+		SqlSession session = null;
+		int status = 0;
+
+		try {
+			session = MyBatisUtil.getSqlSession();
+			status = session.update("board.deleteHomework", hwNo);
+
+			if (status > 0) { // 성공
+				session.commit();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+
+		return status;
+	}
+  
+  @Override
 	   public int deleteStory(int storyNo) {
 
 	      SqlSession session = null;
@@ -991,5 +1014,4 @@ public class BoardDaoImpl implements IBoardDao {
 	      }
 	      return cnt;
 	   }
-  
 }

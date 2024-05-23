@@ -305,5 +305,10 @@ public List<FilesVO> getFiles() {
 	public List<BoardVO> getMemberBoardReply(int usersNo) {
 		return boardDao.getMemberBoardReply(usersNo);
 	}
+
+	@Override
+	public int deleteHomework(int hwNo) {
+		return boardDao.deleteHomework(hwNo);
+	}
   
 }

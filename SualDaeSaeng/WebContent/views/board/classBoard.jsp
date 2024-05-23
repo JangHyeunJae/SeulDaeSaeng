@@ -16,6 +16,9 @@
 
 <%@include file="/header.jsp" %>
 <%
+	String msg = session.getAttribute("msg") == null ? "" : (String) session.getAttribute("msg");
+	session.removeAttribute("msg");	
+
    IBoardService service = BoardServiceImpl.getInstance();
    MemberVO memDetail = (MemberVO)session.getAttribute("memDetail");
   
@@ -211,6 +214,11 @@
       </section>
     </main>
     <script>
+		window.onload = function() {
+			var msg = '<%= msg %>';
+			if(msg != null && msg != '') alert(msg);
+		
+		};
 		function chatWinOpen() {
 			window.open("/openChat.do", "_blank",
 					"width=530,height=800");

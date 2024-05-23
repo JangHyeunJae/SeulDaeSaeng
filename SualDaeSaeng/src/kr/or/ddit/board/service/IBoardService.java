@@ -113,4 +113,6 @@ public interface IBoardService {
 
   public List<BoardVO> getMemberBoardReply(int usersNo);
 
+  public int deleteHomework(int hwNo);
+
 }

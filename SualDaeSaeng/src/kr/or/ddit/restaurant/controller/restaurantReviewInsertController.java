@@ -49,7 +49,9 @@ public class restaurantReviewInsertController extends HttpServlet {
 		Part filePart = req.getPart("file");
 		
 		if(filePart != null && filePart.getSize() != 0) {
-			service.insertFile(filePart);
+			
+			String fileString = req.getParameter("fileString");
+			service.insertFile(filePart,fileString);
 			List<FileDetailVO> fileList = service.getFileList();
 			req.setAttribute("fileList", fileList);
 			ReviewVO.setFileNo(fileList.get(0).getFileNo());

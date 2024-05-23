@@ -91,9 +91,9 @@ public class RestaurantServiceImpl implements IRestaurantService {
 	}
 	
 	@Override
-	public int insertFile(Part filePart) {
+	public int insertFile(Part filePart, String fileString) {
         
-		String uploadPath = "d:/D_Other/" + UPLOAD_DIR;
+		String uploadPath = fileString + UPLOAD_DIR;
         
         File uploadDir = new File(uploadPath);
         if(!uploadDir.exists()) {

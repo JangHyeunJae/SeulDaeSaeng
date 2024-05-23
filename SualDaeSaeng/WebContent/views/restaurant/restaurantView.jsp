@@ -295,7 +295,7 @@
           %>
           <div class="d-flex justify-content-between align-items-center py-3 mb-3 food-list new-review">
             <p class="mb-0 d-flex align-items-center gap-3">
-              <img src="/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+              <!-- <img src="/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt=""> -->
               <span> <%=memDetail.getMemNick() %>님 아직 리뷰를 작성하지 않으셨군요! 당신의 리뷰를 기다리고 있습니다. <br> ※홍보 및 비방 등 부적절한 평가는 평점 산정에서 제외 될 수 있습니다. </span>
             </p>
             <a href="<%=request.getContextPath() %>/restaurant/reviewWrite.do?no=<%=restDetails.getRestBizno() %>" class="btn btn-outline-warning">리뷰쓰기</a>
@@ -311,7 +311,7 @@
 				for (int i = 0; i < restReviewList.size(); i++) {
 				  		RestaurantVO restVo = restReviewList.get(i);
 		          	%>
-		            <div class="col-lg-4">
+		            <div class="col-xxl-4 col-lg-6">
 		              <div class="food-list ">
 		                <h6 class="mb-3 d-flex justify-content-between align-items-center">
 		                  <span>

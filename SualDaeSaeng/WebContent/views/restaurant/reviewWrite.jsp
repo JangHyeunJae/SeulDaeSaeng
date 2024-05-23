@@ -3,6 +3,7 @@
 <%@include file="/header.jsp" %>
 <%
 	String restBizno = request.getParameter("no");
+	String fileString = request.getRealPath("/")+"img/";
 %>
 
 <main data-aos="fade" data-aos-delay="700">
@@ -71,6 +72,7 @@
 			                </div>
 			                
 				          	<input type="hidden" id="restBizno" name="restBizno" value=<%=restBizno %>>
+				          	<input type="hidden" id="fileString" name="fileString" value=<%=fileString %>>
 	                         <div class="text-center mt-5 mb-5">
 	                            <button type="button" id="submitBtn" name="submitBtn" >작성하기</button>
 	                         </div>

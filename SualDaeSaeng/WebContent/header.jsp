@@ -140,8 +140,8 @@ String isAdminOk = (String) session.getAttribute("isAdminOk");
                         <a class="dropdown-item" href="<%=request.getContextPath() %>/member/join.do">회원가입</a>
                    </li>
                    <li>
-                    <a class="dropdown-item" href="<%=request.getContextPath() %>/login.do">로그인</a>
-               </li>
+                   		<a class="dropdown-item" href="<%=request.getContextPath() %>/login.do">로그인</a>
+              	   </li>
 
 
             <% 
@@ -166,21 +166,7 @@ String isAdminOk = (String) session.getAttribute("isAdminOk");
             <% 
                }
             %>
-               
 
-
-            <% 
-               }else{
-            %>
-                   <li>
-                        <a class="dropdown-item" href="<%=request.getContextPath() %>/member/myPageHome.do">마이페이지</a>
-                   </li>
-               <li>
-                  <a class="dropdown-item" href="<%=request.getContextPath() %>/logout.do">로그아웃</a>
-               </li>
-            <% 
-               }
-            %>
                 <!-- <li><a class="dropdown-item" href="logout.html">로그아웃</a></li><li><a class="dropdown-item" href="myPage.html"><span>정윤지</span>페이지</a></li>-->
               </ul>
             </div>

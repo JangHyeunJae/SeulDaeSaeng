@@ -16,6 +16,9 @@
 <%
     IBoardService service = BoardServiceImpl.getInstance();
 
+	String msg = session.getAttribute("msg") == null ? "" : (String) session.getAttribute("msg");
+	session.removeAttribute("msg");
+
     List<BoardVO> noticeBoardList = (List<BoardVO>)request.getAttribute("noticeBoardList");
     List<BoardVO> classBoardList = (List<BoardVO>)request.getAttribute("classBoardList");
     List<FileDetailVO> fileList = (List<FileDetailVO>)request.getAttribute("fileList");
@@ -221,4 +224,11 @@
     </div>
   </section>
 </main>
+<script>
+	window.onload = function() {
+		var msg = '<%= msg %>';
+		if(msg != null && msg != '') alert(msg);
+	
+	};
+</script>
 <%@include file="/footer.jsp" %>

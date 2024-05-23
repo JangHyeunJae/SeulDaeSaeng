@@ -27,6 +27,7 @@ public class TeacherClassBoardController extends HttpServlet{
 		 IBoardService boardService = BoardServiceImpl.getInstance();
 		 HttpSession session = req.getSession();
 		 MemberVO memDetail = (MemberVO)session.getAttribute("memDetail");
+		 int usersNo = (int)session.getAttribute("usersNo");
 		 
 		 int levelChk = Integer.parseInt(req.getParameter("levelChk"));
          List<BoardVO> noticeBoardList = boardService.getClassNoticeList(levelChk);
@@ -36,7 +37,7 @@ public class TeacherClassBoardController extends HttpServlet{
 		 req.setAttribute("classBoardList", classBoardList);
 		 req.setAttribute("fileList", fileList);
 		 req.setAttribute("levelChk", levelChk);
-		 req.setAttribute("usersNo", memDetail.getUsersNo());
+		 req.setAttribute("usersNo", usersNo);
 		 req.setAttribute("memDetail", memDetail);
 		 
 		 req.getRequestDispatcher("/views/board/classTeacherBoard.jsp").forward(req, resp);

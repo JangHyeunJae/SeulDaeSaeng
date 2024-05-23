@@ -45,7 +45,19 @@ public class DeleteBoardController extends HttpServlet{
 				 }
 			 }
 		 }else {
-			 req.getRequestDispatcher("/views/board/view.jsp").forward(req, resp);
+			 String msg = "삭제 실패했습니다.";
+			 req.getSession().setAttribute("msg", msg);
+			 if(levelChk == 0) resp.sendRedirect(req.getContextPath() + "/allBoard.do");
+			 else if(levelChk == 1) resp.sendRedirect(req.getContextPath() + "/freeBoard.do");
+			 else if(levelChk == 2) resp.sendRedirect(req.getContextPath() + "/studyBoard.do");
+			 else if(levelChk == 3) resp.sendRedirect(req.getContextPath() + "/noticeBoard.do");
+			 else if(levelChk > 300) {
+				 if(classBoardChk == 1) {
+					 resp.sendRedirect(req.getContextPath() + "/eachClassNotice.do?levelChk=" + levelChk);
+				 } else if(classBoardChk == 2) {
+					 resp.sendRedirect(req.getContextPath() + "/eachClassBoard.do?levelChk=" + levelChk);
+				 }
+			 }
 		 }
 	}
 	

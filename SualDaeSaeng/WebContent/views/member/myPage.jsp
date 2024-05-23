@@ -203,7 +203,7 @@
                     </div>
                   </div>
                   <!-- End Service Item -->
-                  <div class="col-md-4 col-12 d-flex">
+<!--                   <div class="col-md-4 col-12 d-flex">
                     <div class="service-item position-relative w-100">
                       <i class="bi bi-heart-fill"></i>
                       <h4>
@@ -211,9 +211,9 @@
                       </h4>
                       <p>내가 찜한 식당 리스트를 관리하고 추천한 맛집리스트를 올리거나 삭제할 수 있습니다. </p>
                     </div>
-                  </div>
+                  </div> -->
                   <!-- End Service Item -->
-                  <div class="col-md-4 col-12 d-flex">
+<!--                   <div class="col-md-4 col-12 d-flex">
                     <div class="service-item position-relative w-100">
                       <i class="bi bi-calendar-date"></i>
                       <h4>
@@ -221,7 +221,7 @@
                       </h4>
                       <p> 학급시간표를 확인하고 내 스케줄을 관리해 보세요. </p>
                     </div>
-                  </div>
+                  </div> -->
                   <!-- End Service Item -->
                 </div>
               </div>

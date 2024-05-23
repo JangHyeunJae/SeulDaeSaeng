@@ -466,4 +466,10 @@
 		where story_no = #{storyNo}
 </update>
 
+<select id="getUserRole" parameterType="int" resultType="int">
+	select users_role
+	from users
+	where users_no=#{usersNo}
+</select>
+
 </mapper>

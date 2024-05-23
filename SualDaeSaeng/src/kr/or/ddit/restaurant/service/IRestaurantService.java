@@ -23,4 +23,5 @@ public interface IRestaurantService {
 	public List<FileDetailVO> getFileList();
 	public int insertFile(Part filePart);
 	public int insertReview(ReviewVO reviewVO);
+	public int deleteReview(int reviewNo);
 }

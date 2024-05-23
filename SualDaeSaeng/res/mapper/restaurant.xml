@@ -7,29 +7,11 @@
 		SELECT *
 		FROM (
 		    SELECT 
-		        ADDR_NO addrNo, 
-		        REST_BIZNO restBizno, 
-		        NAME name, MCLS mcls, 
-		        MCLS_NAME mclsName, 
-		        SCLS scls, 
-		        SCLS_NAME sclsName, 
-		        ADDR_BASIC addrBasic, 
-		        LIKE_COUNT likeCount,
-		        AVG_REVIEW_STAR avgReviewStar,
-		        DISTANCE,
+		        ADDR_NO addrNo, REST_BIZNO restBizno, NAME name, MCLS mcls, MCLS_NAME mclsName, SCLS scls, SCLS_NAME sclsName, ADDR_BASIC addrBasic, LIKE_COUNT likeCount, AVG_REVIEW_STAR avgReviewStar, DISTANCE,
 		        ROWNUM AS rnum
 		    FROM (
 		        SELECT 
-			        ADDR_NO,
-			        REST_BIZNO,
-			        NAME,
-			        MCLS,
-			        MCLS_NAME,
-			        SCLS,
-			        SCLS_NAME,
-			        ADDR_BASIC,
-			        LIKE_COUNT,
-			        DISTANCE,
+			        ADDR_NO, REST_BIZNO, NAME, MCLS, MCLS_NAME, SCLS, SCLS_NAME, ADDR_BASIC, LIKE_COUNT, DISTANCE,
                		COALESCE(AVG(REVIEW_STAR), -1) AS AVG_REVIEW_STAR
 		        FROM RESTVIEW
 		        WHERE 1 = 1
@@ -62,8 +44,7 @@
 					ORDER BY NAME DESC
 				</if>
 		    )
-		)
-		WHERE rnum BETWEEN #{firstpost} AND #{postperpage}
+		) WHERE rnum BETWEEN #{firstpost} AND #{postperpage}
 	</select>
 	
 	<select id="restaurantTypeTotal" parameterType="hashMap" resultType="int">
@@ -182,7 +163,6 @@
 	        values(#{fileNo}, #{fileSavepath}, #{fileOgname},#{fileOgname}, #{fileSize}, #{fileExt}, sysdate, #{fileLevel})
 	</insert>
 	
-
 	<insert id="insertReview" parameterType="reviewVO" useGeneratedKeys="true">
 		<selectKey keyProperty="reviewNo" resultType="int" order="BEFORE">
 			select seq_board.nextval from dual
@@ -193,4 +173,9 @@
 			#{reviewNo}, #{usersNo}, #{restBizno}, #{reviewStar}, #{reviewText}, 'Y', #{fileNo}, SYSDATE
 		)
 	</insert>
+	
+	<update id="deleteReview" parameterType="int">
+	        update REVIEW set REVIEW_YN = 'N' where REVIEW_NO =#{reviewNo}
+	</update>
+	
 </mapper>

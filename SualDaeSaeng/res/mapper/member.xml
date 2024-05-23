@@ -49,6 +49,13 @@
 		<result property="addrLat" column="ADDR_LAT"/>
 		<result property="addrLevel" column="ADDR_LEVEL"/>
 	</resultMap>
+   
+   <resultMap type="restLikeVO" id="likeRestMap">
+		<result property="restBizno" column="REST_BIZNO"/>
+		<result property="userNo" column="USER_NO"/>
+		<result property="likeYn" column="LIKE_YN"/>
+	</resultMap>
+	
 
 	<select id="memberIdChk" parameterType="String" resultType="int">
 		select count(*) as cnt from users where USERS_ID = #{usersId} 
@@ -99,7 +106,11 @@
 		select * from ADDRESS where ADDR_NO = #{addrNo}
 	</select>
 	
-	   <update id="addrModify" parameterType="addrVO">
+	<select id="selectLikeRest" parameterType="int" resultMap="likeRestMap">
+		select * from likes WHERE USERS_NO = #{usersNo}
+	</select>
+	
+	<update id="addrModify" parameterType="addrVO">
       update ADDRESS set ADDR_POST = #{addrPost}, ADDR_BASIC = #{addrBasic}, ADDR_DETAIL = #{addrDetail}
        where ADDR_NO = #{addrNo}
    </update>

@@ -266,4 +266,25 @@ public class RestaurantDAOImpl implements IRestaurantDAO{
 		return status;
 	}
 
+	@Override
+	public int deleteReview(int reviewNo) {
+
+        SqlSession session = null;
+		int cnt = 0;
+		try {
+			session = MyBatisUtil.getSqlSession();
+			
+			cnt = session.update("restaurant.deleteReview", reviewNo);
+			
+			if(cnt > 0) {
+				session.commit();
+			}
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return cnt;
+	}
+
 }

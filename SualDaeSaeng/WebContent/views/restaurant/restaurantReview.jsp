@@ -9,6 +9,8 @@
 	String order = (String) request.getAttribute("order");
 
 	List<RestaurantVO> restReviewList = (List<RestaurantVO>) request.getAttribute("restReviewList");
+	MemberVO memDetail = (MemberVO) session.getAttribute("memDetail") != null ? (MemberVO) session.getAttribute("memDetail") : new MemberVO();
+	UsersVO usersDetail = (UsersVO) session.getAttribute("usersDetail") != null ? (UsersVO) session.getAttribute("usersDetail") : new UsersVO();
 %>
 
     <main data-aos="fade" data-aos-delay="700">
@@ -37,40 +39,61 @@
               <h2 class="pb-2"><%=restDetails.getName()%></h2>
               <div class="d-flex justify-content-between align-items-center">
                 <p class="stars fs-4">
-                <%
+                 <%
                 String score = (int) restDetails.getAvgReviewStar()!=-1 ? ""+ (int) restDetails.getAvgReviewStar() : "리뷰없음";
-                if(score.equals("10")){%>
+                if(score.equals("10")){
                 	score = "5";
+                %>
                 	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i>
-                <%}else if(score.equals("9")){%> 
+                <%
+                }else if(score.equals("9")){
                 	score = "4.5";
+                %> 
                 	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i>
-                <%}else if(score.equals("8")){%> 
+                <%
+                }else if(score.equals("8")){
                 	score = "4";
+                %> 
                 	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star"></i>
-                <%}else if(score.equals("7")){%> 
+                <%
+                }else if(score.equals("7")){
                 	score = "3.5";
+                %> 
                 	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i> <i class="bi bi-star"></i>
-                <%}else if(score.equals("6")){%> 
+                <%
+                }else if(score.equals("6")){
                 	score = "3";
+                %> 
                 	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
-                <%}else if(score.equals("5")){%> 
+                <%
+                }else if(score.equals("5")){
                 	score = "2.5";
+                %> 
                 	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
-                <%}else if(score.equals("4")){%> 
+                <%
+                }else if(score.equals("4")){
                 	score = "2";
+                %> 
                 	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
-                <%}else if(score.equals("3")){%> 
+                <%
+                }else if(score.equals("3")){
                 	score = "1.5";
+                %> 
                 	<i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
-                <%}else if(score.equals("2")){%> 
+                <%
+                }else if(score.equals("2")){
                 	score = "1";
+                %> 
                 	<i class="bi bi-star-fill"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
-                <%}else if(score.equals("1")){%> 
+                <%
+                }else if(score.equals("1")){
                 	score = "0.5";
+                %> 
                 	<i class="bi bi-star-half"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
-                <%}else if(score.equals("0")){%>
+                <%
+                }else if(score.equals("0")){
                 	score = "0";
+                %>
                 	<i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
                 <%}else{%> <%} %> 
                   <b>(<%=score %>) <span>(<%=restDetails.getTotalReview()%>명의 평가)</span>
@@ -132,15 +155,24 @@
 				</ul>
 	          </div>
 	          <hr class="my-0 pb-4">
-	          <% if(id!=null && !id.isEmpty()){ %>
-	          <div class="d-flex justify-content-between align-items-center py-3 mb-3 food-list new-review">
-	            <p class="mb-0 d-flex align-items-center gap-3">
-	              <img src="/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-	              <span> 00님 아직 리뷰를 작성하지 않으셨군요! 당신의 리뷰를 기다리고 있습니다. <br> ※홍보 및 비방 등 부적절한 평가는 평점 산정에서 제외 될 수 있습니다. </span>
-	            </p>
-	            <button type="button" class="btn btn-outline-warning">리뷰쓰기</button>
-	          </div>
-	          <% } %>
+	           <% 
+					int noReview = 0;
+					for(int i = 0; i < restReviewList.size(); i++){
+						RestaurantVO restVo = restReviewList.get(i);
+						if( restVo.getUsersNo() == usersDetail.getUsersNo()){
+							noReview = 1;
+						}
+					}
+		          if(id!=null && !id.isEmpty() && noReview==0){ 
+		          %>
+		          <div class="d-flex justify-content-between align-items-center py-3 mb-3 food-list new-review">
+		            <p class="mb-0 d-flex align-items-center gap-3">
+		              <img src="/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+		              <span> <%=memDetail.getMemNick() %>님 아직 리뷰를 작성하지 않으셨군요! 당신의 리뷰를 기다리고 있습니다. <br> ※홍보 및 비방 등 부적절한 평가는 평점 산정에서 제외 될 수 있습니다. </span>
+		            </p>
+		            <a href="<%=request.getContextPath() %>/restaurant/reviewWrite.do?no=<%=restDetails.getRestBizno() %>" class="btn btn-outline-warning">리뷰쓰기</a>
+		          </div>
+		          <% } %>
 	          <div class="row gy-4 gx-4">
 	          
 	            <%if(restReviewList == null || restReviewList.size() == 0){ %>

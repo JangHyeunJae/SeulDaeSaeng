@@ -135,5 +135,10 @@ public class RestaurantServiceImpl implements IRestaurantService {
 	public int insertReview(ReviewVO reviewVO) {
 		return dao.insertReview(reviewVO);
 	}
+
+	@Override
+	public int deleteReview(int reviewNo) {
+		return dao.deleteReview(reviewNo);
+	}
 	
 }

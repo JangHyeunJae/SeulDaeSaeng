@@ -45,10 +45,8 @@
 	
 	Document imageDocument = builder.parse(new ByteArrayInputStream(responseImg.getBytes()));
 	Element imageRootElement = imageDocument.getDocumentElement();
-	
-
-	MemberVO memDetail = (MemberVO) session.getAttribute("memDetail");
-	UsersVO usersDetail = (UsersVO) session.getAttribute("usersDetail");
+	MemberVO memDetail = (MemberVO) session.getAttribute("memDetail") != null ? (MemberVO) session.getAttribute("memDetail") : new MemberVO();
+	UsersVO usersDetail = (UsersVO) session.getAttribute("usersDetail") != null ? (UsersVO) session.getAttribute("usersDetail") : new UsersVO();
 
 %>
 
@@ -289,7 +287,7 @@
 			int noReview = 0;
 			for(int i = 0; i < restReviewList.size(); i++){
 				RestaurantVO restVo = restReviewList.get(i);
-				if(restVo.getUsersNo() == usersDetail.getUsersNo()){
+				if( restVo.getUsersNo() == usersDetail.getUsersNo()){
 					noReview = 1;
 				}
 			}
@@ -307,7 +305,7 @@
           	<%	
           	if(restReviewList == null || restReviewList.size() == 0){ %>
 				<div class="col-xl-12 col-lg-12 col-md-12 col-12">
-					<p class="card-text ">식당이 존재하지 않습니다.</p>
+					<p class="card-text ">리뷰가 존재하지 않습니다.</p>
 				</div>
 			<% } else {
 				for (int i = 0; i < restReviewList.size(); i++) {
@@ -368,8 +366,8 @@
 			                  <span><%=restVo.getNickName() %>님 좋아요</span> 전체보기 
 			                </a>
 			                <% if(restVo.getUsersNo() == usersDetail.getUsersNo()){ %>
-			                <a type="button" class="btn btn-danger btn-sm">
-			                  삭제 
+			                <a href="<%=request.getContextPath() %>/restaurant/reviewDelete.do?no=<%=restDetails.getRestBizno() %>&reviewNo=<%=restVo.getReviewNo() %>" class="btn btn-danger btn-sm">
+			                  	삭제 
 			                </a>
 			                <% } %>
 		                </div>

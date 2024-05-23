@@ -325,5 +325,10 @@ public class BoardServiceImpl implements IBoardService{
 	public int updateStory(int storyNo) {
 		return boardDao.updateStory(storyNo);
 	}
+
+	@Override
+	public int getUserRole(int usersNo) {
+		return boardDao.getUserRole(usersNo);
+	}
   
 }

@@ -124,4 +124,6 @@ public interface IBoardDao {
 
 	public int editHomework(Map<String, Object> parameter);
 
+	public int getUserRole(int usersNo);
+
 }

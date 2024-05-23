@@ -61,28 +61,6 @@ public class EachClassNoticeController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doGet(req, resp);
-//		int classBoardChk = 1;
-//		int levelChk = Integer.parseInt(req.getParameter("levelChk"));
-//		
-//		String searchOption = req.getParameter("searchOption");
-//		String searchText = req.getParameter("searchText");
-//
-//		Map<String, Object> parameter = new HashMap<>();
-//		parameter.put("searchText", searchText);
-//		parameter.put("searchOption", searchOption);
-//		parameter.put("level", levelChk);
-//		parameter.put("boardDiv", "notice");
-//		
-//		List<BoardVO> boardList = boardService.searchClassBoardList(parameter);
-//		
-//		if (searchOption != null && searchOption != "") {
-//			req.setAttribute("searchOption", searchOption);
-//		}
-//
-//		req.setAttribute("classBoardChk", classBoardChk);
-//		req.setAttribute("boardList", boardList);
-//		req.setAttribute("levelChk", levelChk);
-//
-//		req.getRequestDispatcher("/views/board/eachClassBoard.jsp").forward(req, resp);
+
 	}
 }

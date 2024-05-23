@@ -117,4 +117,6 @@ public interface IBoardDao {
 
     public int deleteHomework(int hwNo);
 
+	public int editHomework(Map<String, Object> parameter);
+
 }

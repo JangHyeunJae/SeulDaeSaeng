@@ -448,6 +448,12 @@
 	where hw_no = #{hwNo}
 </update>
 
+<update id="editHomework" parameterType="Map">
+	update homework
+	set hw_title=#{hwTitle}, hw_con=#{hwCon}, hw_start=#{hwStart}, hw_end=#{hwEnd}
+	where hw_no=#{hwNo}
+</update>
+
 <!-- <select id="getFiles" resultMap="filesMap">
         select * from files order by file_no desc
 </select> -->

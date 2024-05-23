@@ -75,7 +75,7 @@
               	<%
               		}else if(levelChk!=0 && classBoardChk!=0){
               	%>
-                <a href="/<%=board %>.do?levelChk=<%=levelChk %>"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
+                <a href="/<%=board %>.do?levelChk=<%=levelChk %>&classBoardChk=<%=classBoardChk %>"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
                 <%
               		}else{
                 %>

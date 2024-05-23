@@ -58,25 +58,6 @@ public class AllBoardListController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doGet(req, resp);
-//		int level = 0;
-//
-//		String searchOption = req.getParameter("searchOption");
-//		String searchText = req.getParameter("searchText");
-//
-//		Map<String, Object> parameter = new HashMap<>();
-//		parameter.put("searchText", searchText);
-//		parameter.put("searchOption", searchOption);
-//		
-//		List<BoardVO> boardList = boardService.searchAllBoardList(parameter);
-//		
-//		if (searchOption != null && searchOption != "") {
-//			req.setAttribute("searchOption", searchOption);
-//		}
-//
-//		req.setAttribute("levelChk", level);
-//		req.setAttribute("boardList", boardList);
-//		
-////		resp.sendRedirect("/views/board/allBoard.jsp?searchText=" + searchText);
-//		resp.sendRedirect("/allBoard.do?searchText=" + searchText);
+
 	}
 }

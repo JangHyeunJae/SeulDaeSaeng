@@ -165,7 +165,8 @@
                 for(int i=0 ; i<length ; i++){
                 	BoardVO bv = noticeBoardList.get(i);
                %>
-                <a href="#" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
+                <a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>
+					&idx=<%=i %>&levelChk=<%=bv.getBoardLevel() %>&classBoardChk=1" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
                   <h6 class="mb-2 text-truncate">
                     <small class="attach">
                       <i class="bi bi-paperclip"></i>
@@ -204,7 +205,8 @@
                 for(int i=0 ; i<length ; i++){
                 	BoardVO bv = classBoardList.get(i);
                %>
-                <a href="#" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
+                <a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>
+					&idx=<%=i %>&levelChk=<%=bv.getBoardLevel() %>&classBoardChk=2" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
                   <h6 class="mb-2 text-truncate">
                     <small class="attach">
                       <i class="bi bi-paperclip"></i>

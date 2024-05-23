@@ -1600,7 +1600,7 @@ font-family: var(--font-secondary);
   padding: 10px 35px;
   color: var(--color-white);
   transition: 0.4s;
-  border-radius: 8px;
+  border-radius: 8px; 
 }
 
 .contact button:is([type=submit],[type=button]):hover {

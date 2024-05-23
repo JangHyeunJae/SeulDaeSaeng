@@ -2,6 +2,7 @@ package kr.or.ddit.board.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -26,6 +27,7 @@ import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.board.vo.BoardVO;
 import kr.or.ddit.board.vo.FileDetailVO;
 import kr.or.ddit.board.vo.FileShareVO;
+import kr.or.ddit.board.vo.FilesVO;
 import kr.or.ddit.board.vo.HwSubmitVO;
 import kr.or.ddit.member.vo.MemberVO;
 
@@ -47,6 +49,7 @@ public class UploadFileController extends HttpServlet {
     	
 		req.setCharacterEncoding("UTF-8");
     	HttpSession session = req.getSession();
+        
 		int usersRole = (int)session.getAttribute("usersRole");
         MemberVO memDetail = (MemberVO)session.getAttribute("memDetail");
         int levelChk = Integer.parseInt(req.getParameter("levelChk"));
@@ -54,7 +57,6 @@ public class UploadFileController extends HttpServlet {
     	if(usersRole==2) {
            hwNo = Integer.parseInt(req.getParameter("hwNo"));
     	}
-        
         
 		Collection<Part> parts = req.getParts();
 		
@@ -66,6 +68,10 @@ public class UploadFileController extends HttpServlet {
         }
 
         for(Part part : parts) {
+        	
+			/*
+			 * int status3 = service.insertFiles(); List<FilesVO> list = service.getFiles();
+			 */
         	
         	String fileName = part.getSubmittedFileName();
 
@@ -118,6 +124,7 @@ public class UploadFileController extends HttpServlet {
 			}
 
         }
+        
         if(usersRole==1) {
             resp.sendRedirect(req.getContextPath() +"/classTeacherBoard.do?levelChk=" + levelChk);
         }else if(usersRole==2) {

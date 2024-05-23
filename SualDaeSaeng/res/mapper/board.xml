@@ -89,6 +89,11 @@
 <result column="users_no" property="usersNo"/>
 </resultMap>
 
+<resultMap type="kr.or.ddit.board.vo.FilesVO" id="filesMap"> <!-- 1 -->
+<result column="file_no" property="fileNo"/>
+<result column="file_yn" property="fileYn"/>
+</resultMap>
+
 <select id="allBoardList" resultMap="boardMap">
 		select *
         from board
@@ -284,19 +289,6 @@
         AND HOMEWORK.USERS_NO = #{usersNo} AND HOMEWORK.HW_NO = #{hwNo}
 </select>
 
-<insert id="saveFile" parameterType="kr.or.ddit.board.vo.FileDetailVO" useGeneratedKeys="true">
-	<selectKey keyProperty="fileNo" resultType="int" order="BEFORE">
-		select seq_file.nextval from dual
-	</selectKey>
-	    insert into files(file_no,file_yn)
-        values(#{fileNo},'Y')
-</insert>
-
-<insert id="saveFileDetail" parameterType="kr.or.ddit.board.vo.FileDetailVO" useGeneratedKeys="true">
-        insert into file_detail(file_no, file_savepath, file_ogname, file_savednm, file_size, file_ext, file_dt, file_level)
-        values(#{fileNo}, #{fileSavepath}, #{fileOgname},#{fileOgname}, #{fileSize}, #{fileExt}, sysdate, #{fileLevel})
-</insert>
-
 <select id="getFileList" parameterType="int" resultMap="fileMap">
 		select *
         from file_detail
@@ -392,15 +384,26 @@
 </select>
 
 <select id="getStoryTime" parameterType="int" resultType="String">
-select to_char(story_at, 'yyyy-MM-dd HH24:MI:SS')
-from story
-where story_no = #{storyNo}
+       select to_char(story_at, 'yyyy-MM-dd HH24:MI:SS')
+       from story
+       where story_no = #{storyNo}
 </select>
 
 <select id="getStoryOne" parameterType="int" resultMap="storyMap">
 	    select *
 	    from story
 	    where story_no=#{storyNo}
+</select>
+
+<select id="getMemberBoardReply" parameterType="int" resultType="list">
+	select DISTINCT(BOARD_NO) as BOARD_NO from REPLY 
+    where USERS_NO = #{usersNo}
+    order by BOARD_NO desc
+</select>
+
+<select id="getMemberBoardOne" parameterType="int" resultMap="boardMap">
+	select * from BOARD_NO 
+	where BOARD_NO = #{boardNo}
 </select>
 
 <update id="deleteStory" parameterType="int">
@@ -413,4 +416,35 @@ where story_no = #{storyNo}
         where story_yn = 'Y'
         order by story_no desc
 </select>
+
+<select id="getHwFileList" parameterType="int" resultMap="fileMap">
+       select c.*
+       from homework a,hw_submit b, file_detail c
+       where b.hw_no = a.hw_no and a.hw_no = #{hwNo} and c.file_no = b.file_no
+</select>
+
+<select id="getHwSubmitMem" parameterType="int" resultMap="memberMap">
+       select a.*
+       from member a, hw_submit b, file_detail c
+       where b.file_no = #{fileNo} and c.file_no = b.file_no and b.users_no = a.users_no
+</select>
+
+<insert id="saveFiles" useGeneratedKeys="true">
+	<selectKey keyProperty="fileNo" resultType="int" order="BEFORE">
+		select seq_file.nextval from dual
+	</selectKey>
+	    insert into files(file_no,file_yn)
+        values(#{fileNo},'Y')
+</insert>
+
+<insert id="saveFileDetail" parameterType="kr.or.ddit.board.vo.FileDetailVO"  useGeneratedKeys="true">
+        insert into file_detail(file_no, file_savepath, file_ogname, file_savednm, file_size, file_ext, file_dt, file_level)
+        values(#{fileNo}, #{fileSavepath}, #{fileOgname},#{fileOgname}, #{fileSize}, #{fileExt}, sysdate, #{fileLevel})
+</insert>
+
+
+<!-- <select id="getFiles" resultMap="filesMap">
+        select * from files order by file_no desc
+</select> -->
+
 </mapper>

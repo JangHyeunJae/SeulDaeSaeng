@@ -54,17 +54,17 @@ public class ContactAllList extends HttpServlet {
 //			    resp.getWriter().write("메일이 성공적으로 전송되었습니다.");
 				SqlSession session = MyBatisUtil.getSqlSession();
 				
-//				  try {
-//			            // 매퍼를 호출하여 쿼리 실행
-//			            int qNO = Integer.parseInt(req.getParameter("qNO"));
-//			            session.update("contactup", qNO);
-//			            session.commit(); // 커밋
-//			           
-//			        } finally {
-//			        	session.close(); // 세션 닫기
-//			        }
+				  try {
+			            // 매퍼를 호출하여 쿼리 실행
+			            int qNO = Integer.parseInt(req.getParameter("qNO"));
+			            session.update("contactup", qNO);
+			            session.commit(); // 커밋
+			            resp.sendRedirect(req.getContextPath() + "/views/contactList.do");
+			        } finally {
+			        	session.close(); // 세션 닫기
+			        }
 
-			    resp.sendRedirect(req.getContextPath() + "/views/contactList.do");
+//			    resp.sendRedirect(req.getContextPath() + "/views/contactList.do");
 			    
 	}
 	

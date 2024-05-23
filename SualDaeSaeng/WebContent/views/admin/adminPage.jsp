@@ -121,7 +121,7 @@
        
   <%
       if(repList != null && !repList.isEmpty()) {	
-    	  for(int i = 0; i<5 ; i++) {
+    	  for(int i = 0; i<4 ; i++) {
          	 BoardVO board = repList.get(i);	
   %>              
                 <a href="<%=request.getContextPath() %>/views/reportDetail.do?boardNo=<%=board.getBoardNo()%>" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
@@ -165,7 +165,7 @@
     
          	if(conList != null && !conList.isEmpty()) {	
 //                 for(ContactVO contact : conList) {
-                for(int i = 0; i<5 ; i++) {
+                for(int i = 0; i<4 ; i++) {
                 	 ContactVO contact = conList.get(i);	              
 	%>
 			

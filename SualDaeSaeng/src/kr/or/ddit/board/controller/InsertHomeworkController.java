@@ -36,7 +36,7 @@ public class InsertHomeworkController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
-		MemberVO memDetail = (MemberVO) session.getAttribute("memDetail");
+		int usersNo = (int) session.getAttribute("usersNo");
 		
 		int levelChk = Integer.parseInt(req.getParameter("levelChk"));
 		String title = req.getParameter("title");
@@ -50,7 +50,7 @@ public class InsertHomeworkController extends HttpServlet{
 	    parameter.put("hwStart",startDate);
 	    parameter.put("hwEnd",endDate);
 	    parameter.put("hwClass",levelChk);
-	    parameter.put("usersNo",memDetail.getUsersNo());
+	    parameter.put("usersNo",usersNo);
 
 		int status = service.insertHomework(parameter);
 		List<HomeworkVO> hw = service.getHwList(levelChk);

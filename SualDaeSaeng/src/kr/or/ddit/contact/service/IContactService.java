@@ -14,4 +14,5 @@ public interface IContactService {
 
 	public ContactVO detailList(int qNO);
 
+
 }

@@ -1,3 +1,4 @@
+<%@page import="java.time.LocalDate"%>
 <%@page import="kr.or.ddit.board.vo.HomeworkVO"%>
 <%@page import="com.itextpdf.text.log.SysoCounter"%>
 <%@page import="java.util.HashMap"%>
@@ -54,7 +55,7 @@
                 </small>
               </p>
               <h3><%=hw.getHwTitle() %></h3>
-              <small>숙제기한 : <%=hw.getHwStart() %> ~ <%=hw.getHwStart() %></small><br>
+              <small>숙제기한 : <%=hw.getHwStart() %> ~ <%=hw.getHwEnd() %></small><br>
               <small>작성자 : <%=wd.getMemNick() %></small>
             </div>
           </div>
@@ -65,15 +66,27 @@
          <div class="container pt-5 pb-5" data-aos="fade-up">
             <div style="word-wrap: break-word;"><%=hw.getHwCon() %></div>
          <%
-         if(usersRole==2){
+         if(usersRole==2){ 
+        	 LocalDate now = LocalDate.now();
+             LocalDate finalDt = hw.getHwEnd();
+             if(now.isAfter(finalDt)){
+        %>
+            <br>
+            <script>
+                alert('과제 제출기간이 지났습니다');
+            </script>
+            	 
+        <%     }else{  %>
+             <br>
+             <form class="file-drop" method="post" action="/file/upload.do?levelChk=<%=levelChk %>&hwNo=<%=hw.getHwNo() %>" enctype="multipart/form-data">
+               <input type="file" name="upload" id="upload-file" multiple>
+               <!-- 아래 label 내용 변경하지 마세요. js와 연동 -->
+               <label for="upload-file">파일을 드레그하거나 클릭해서 등록</label>
+               <button type="submit" ><i class="bi bi-arrow-bar-up"></i></button>
+             </form>
+         <%   	 
+             }
          %>
-         <br>
-         <form class="file-drop" method="post" action="/file/upload.do?levelChk=<%=levelChk %>&hwNo=<%=hw.getHwNo() %>" enctype="multipart/form-data">
-              <input type="file" name="upload" id="upload-file" multiple>
-              <!-- 아래 label 내용 변경하지 마세요. js와 연동 -->
-              <label for="upload-file">파일을 드레그하거나 클릭해서 등록</label>
-              <button type="submit" ><i class="bi bi-arrow-bar-up"></i></button>
-         </form>
          <%
          if(mySubmit!=null){
          %>
@@ -128,7 +141,7 @@
           		if(wd.getUsersNo() == usersNo){
           	
           	%>
-          	<a href="<%=request.getContextPath()%>/homework/edit.do" type="button" class="btn btn-secondary">수정하기</a>
+          	<a href="<%=request.getContextPath()%>/homework/edit.do?levelChk=<%=levelChk %>&hwNo=<%=hw.getHwNo() %>" type="button" class="btn btn-secondary">수정하기</a>
           	<a href="<%=request.getContextPath()%>/homework/delete.do?levelChk=<%=levelChk %>&hwNo=<%=hw.getHwNo() %>" onclick="return confirm('삭제하시겠습니까?');" type="button" class="btn btn-secondary">삭제하기</a>
           	<%
           		}
@@ -138,9 +151,13 @@
           %>
           <a href="<%=request.getContextPath()%>/classBoard.do?levelChk=<%=levelChk %>" type="button" class="btn btn-secondary">메인으로</a>
           <%
-          if(mySubmit!=null){
+          if(mySubmit!=null && mySubmit.size()!=0){
            %>
           <a href="#" type="button" class="btn btn-secondary" style="background-color:orange; border-color:orange;">제출완료</a>
+          <%
+          }else{
+          %>
+          <a href="#" type="button" class="btn btn-secondary" style="background-color:red; border-color:red;">미제출</a>
           <%
           }
           }
@@ -156,5 +173,6 @@
 		if(msg != null && msg != '') alert(msg);
 	
 	};
+	
 </script>
 <%@include file="/footer.jsp" %>

@@ -12,8 +12,17 @@ public class MemberReqVO {
 	 private String memClass; 
 	 private Date memRegdt; 
 	 private int addrNo;
+	 private int reportNo;
 	 
 	 
+	public int getReportNo() {
+		return reportNo;
+	}
+
+	public void setReportNo(int reportNo) {
+		this.reportNo = reportNo;
+	}
+
 	public MemberReqVO() {
 	}
 	

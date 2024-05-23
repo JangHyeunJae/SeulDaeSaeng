@@ -27,10 +27,10 @@ public class AdminServiceImpl implements IAdminService {
 	
 	
 	
-	@Override
-	public int AdminAccept(int usersNo) {
-		return dao.AdminAccept(usersNo);
-	}
+//	@Override
+//	public int AdminAccept(int usersNo) {
+//		return dao.AdminAccept(usersNo);
+//	}
 	
 	
 	@Override
@@ -42,6 +42,10 @@ public class AdminServiceImpl implements IAdminService {
 	@Override
 	public MemberReqVO selectmember(String parameter) {
 		return dao.selectmember(parameter);
+	}
+	@Override
+	public int adminMemberYN(int usersNoParam) {
+		return dao.adminMemberYN(usersNoParam);
 	}
 	
 //	@Override

@@ -32,7 +32,7 @@ public class MailUtil {
 	            //편지보낸시간
 	            msg.setSentDate(new Date());
 	            InternetAddress from = new InternetAddress();
-	            from = new InternetAddress("esh1231@naver.com"); //발신자 아이디
+	            from = new InternetAddress("keho0o@naver.com"); //발신자 아이디
 	            // 이메일 발신자
 	            msg.setFrom(from);
 	            // 이메일 수신자
@@ -62,8 +62,10 @@ public class MailUtil {
 	    PasswordAuthentication pa;
 	    public MyAuthentication(){
 	         
-	        String id = "esh1231@naver.com";  //네이버 이메일 아이디
-	        String pw = "sky4780!";        //네이버 비밀번호
+//	        String id = "esh1231@naver.com";  //네이버 이메일 아이디
+//	        String pw = "sky4780!";        //네이버 비밀번호
+	        String id = "keho0o@naver.com";  //네이버 이메일 아이디
+	        String pw = "keho0o11#";        //네이버 비밀번호
 	 
 	        // ID와 비밀번호를 입력한다.
 	        pa = new PasswordAuthentication(id, pw);

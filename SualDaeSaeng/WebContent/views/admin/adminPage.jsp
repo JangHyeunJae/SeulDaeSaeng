@@ -21,10 +21,11 @@
 	
 	List<BoardVO> repList = (List<BoardVO>)request.getAttribute("reportList");
 	
+	List<MemberReqVO> reportmem = (List<MemberReqVO>)request.getAttribute("reportmember");
+	
 	 MemberReqVO memreqVO = (MemberReqVO) request.getAttribute("memreqVO"); 
 
   	
-//    	int usersNo = memreqVO.getUsersNo();  
 %>
 
 <!-- Modal -->
@@ -37,8 +38,9 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
- 		<form action="/views/adminaccept.do" method="post" id="userForm">
-<%-- 	        <input type ='hidden' name = 'usersNo' value = '<%=memreqVO.getUsersNo() %>' /> --%>
+ 		<form action="
+ 		/views/adminaccept.do" method="post" id="userForm">
+<%-- 	        <input type ="hidden" name = "usersNo" value = "<%=memreqVO.getUsersNo() %>" /> --%>
 	        <p>이름: <span id="memName"></span></p>
 	        <p>닉네임: <span id="memNick"></span></p>
 	        <p>생년월일: <span id="memBirth"></span></p>
@@ -46,10 +48,11 @@
 	        <p>전화번호: <span id="memTel"></span></p>
 	        <p>분반: <span id="memClass"></span></p>
 	        <p>등록일시: <span id="memRegdt"></span></p>
-	        <p>주소 번호: <span id="addrNo"></span></p>
+	        <p>주소 : <span id="addrNo"></span></p>
 		    <div class="modal-footer">
 		    	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>	       
-		    	<button type="submit" class="btn btn-primary" id="accept" name="accept">수락</button>
+		    	<button type="button" class="btn btn-primary" id="accept" onclick="location.href='/admin/memberYN.do?usersNo='">수락</button>
+		    	<!-- <a href="/admin/memberYN.do?usersNo=" class="btn btn-primary" id="accept">수락</a> -->
 		    </div>
  		</form>   
         </div>
@@ -59,10 +62,13 @@
 
 
 
+
 <main data-aos="fade" data-aos-delay="700">
+
   <section id="calssBoard" class="gallery-single ">
     <div class="container-xl">
       <div class="col-lg-12">
+      
         <div class="portfolio-description homework">
           <div class="section-header">
             <h2>Request</h2>
@@ -115,11 +121,14 @@
        
   <%
       if(repList != null && !repList.isEmpty()) {	
-    	  for(int i = 0; i<4 ; i++) {
+    	  for(int i = 0; i<5 ; i++) {
          	 BoardVO board = repList.get(i);	
   %>              
                 <a href="<%=request.getContextPath() %>/views/reportDetail.do?boardNo=<%=board.getBoardNo()%>" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
                   <h6 class="mb-2 text-truncate">
+                  	  <small class="badge bg-light">
+                    	<%= "Y".equals(board.getBoardYn().trim()) ? "미확인" : "확인" %>
+                    </small>
                     <small class="badge bg-light"><%=board.getBoardNo() %></small>
                     <small class="attach">
                       <i class="bi bi-paperclip"></i>
@@ -156,7 +165,7 @@
     
          	if(conList != null && !conList.isEmpty()) {	
 //                 for(ContactVO contact : conList) {
-                for(int i = 0; i<4 ; i++) {
+                for(int i = 0; i<5 ; i++) {
                 	 ContactVO contact = conList.get(i);	              
 	%>
 			
@@ -183,6 +192,8 @@
               </div>
             </div>
           </div>
+          
+          
           <div class="portfolio-description">
             <div class="section-header">
               <h2>Request</h2>
@@ -192,91 +203,39 @@
             </div>
             <div class="portfolio-description d-flex gap-5 ">
               <div class="list-group col">
+                          
+    <%
+     	if(reportmem != null && !reportmem.isEmpty()) {	
+               	 for(MemberReqVO member : reportmem) {
+// 				  for(int i = 0; i<5 ; i++) {
+// 					  MemberReqVO member = reportmem.get(i);
+				  
+    %>
                 <a href="#" class="list-group-item py-2 d-flex justify-content-between align-items-center">
                   <span>
                     <i class="bi bi-person-fill px-2"></i> 
-                    <b>닉네임(ID)</b>
-                    <small>2024-02-01 (304호)</small>
+                    <b><%=member.getMemName() %>(<%=member.getMemNick()%>)</b>
+                    <small>(<%=member.getMemClass() %>)</small>
                   </span>
-                  <span class="text-danger"><small>신고횟수</small> <b>10</b></span>
-                </a>
-                <a href="#" class="list-group-item py-2 d-flex justify-content-between align-items-center">
-                  <span>
-                    <i class="bi bi-person-fill px-2"></i> 
-                    <b>닉네임(ID)</b>
-                    <small>2024-02-01 (304호)</small>
-                  </span>
-                  <span class="text-danger"><small>신고횟수</small> <b>10</b></span>
-                </a>
-                <a href="#" class="list-group-item py-2 d-flex justify-content-between align-items-center">
-                  <span>
-                    <i class="bi bi-person-fill px-2"></i> 
-                    <b>닉네임(ID)</b>
-                    <small>2024-02-01 (304호)</small>
-                  </span>
-                  <span class="text-danger"><small>신고횟수</small> <b>10</b></span>
-                </a>
-                <a href="#" class="list-group-item py-2 d-flex justify-content-between align-items-center">
-                  <span>
-                    <i class="bi bi-person-fill px-2"></i> 
-                    <b>닉네임(ID)</b>
-                    <small>2024-02-01 (304호)</small>
-                  </span>
-                  <span class="text-danger"><small>신고횟수</small> <b>10</b></span>
-                </a>
-                <a href="#" class="list-group-item py-2 d-flex justify-content-between align-items-center">
-                  <span>
-                    <i class="bi bi-person-fill px-2"></i> 
-                    <b>닉네임(ID)</b>
-                    <small>2024-02-01 (304호)</small>
-                  </span>
-                  <span class="text-danger"><small>신고횟수</small> <b>10</b></span>
-                </a>
-              </div>
-              <div class="list-group col">
-                <a href="#" class="list-group-item py-2 d-flex justify-content-between align-items-center">
-                  <span>
-                    <i class="bi bi-person-fill px-2"></i> 
-                    <b>닉네임(ID)</b>
-                    <small>2024-02-01 (304호)</small>
-                  </span>
-                  <span class="text-danger"><small>신고횟수</small> <b>10</b></span>
-                </a>
-                <a href="#" class="list-group-item py-2 d-flex justify-content-between align-items-center">
-                  <span>
-                    <i class="bi bi-person-fill px-2"></i> 
-                    <b>닉네임(ID)</b>
-                    <small>2024-02-01 (304호)</small>
-                  </span>
-                  <span class="text-danger"><small>신고횟수</small> <b>10</b></span>
-                </a>
-                <a href="#" class="list-group-item py-2 d-flex justify-content-between align-items-center">
-                  <span>
-                    <i class="bi bi-person-fill px-2"></i> 
-                    <b>닉네임(ID)</b>
-                    <small>2024-02-01 (304호)</small>
-                  </span>
-                  <span class="text-danger"><small>신고횟수</small> <b>10</b></span>
-                </a>
-                <a href="#" class="list-group-item py-2 d-flex justify-content-between align-items-center">
-                  <span>
-                    <i class="bi bi-person-fill px-2"></i> 
-                    <b>닉네임(ID)</b>
-                    <small>2024-02-01 (304호)</small>
-                  </span>
-                  <span class="text-danger"><small>신고횟수</small> <b>10</b></span>
-                </a>
-                <a href="#" class="list-group-item py-2 d-flex justify-content-between align-items-center">
-                  <span>
-                    <i class="bi bi-person-fill px-2"></i> 
-                    <b>닉네임(ID)</b>
-                    <small>2024-02-01 (304호)</small>
-                  </span>
-                  <span class="text-danger"><small>신고횟수</small> <b>10</b></span>
-                </a>
+                  <span class="text-danger"><small>신고횟수</small> <b><%=member.getReportNo() %></b></span>
+                </a> 
+  	<%
+//   		  if(reportmem.size()-1 == i) break;
+  	
+     		}
+      	} 
+
+     	else{
+  	%>       
+  		<div>신고내역이 없습니다.</div>   
+  <%
+     	}
+  %>     
               </div>
             </div>
           </div>
+          
+          
       </div>
     </div>
   </section>
@@ -292,21 +251,21 @@
 
 	
  document.addEventListener('DOMContentLoaded', function() {
-	 $(".modal-footer #accept").click(function(){
-        $.ajax({
-            type: 'POST',
-            url: '/views/adminaccept.do',
-            data: { usersNo: '${usersNo}'},
-            success: function (response) {
-                console.log(response);
-                $('.modal').modal('hide');
-                location.reload(true);
-            },
-            error: function () {
-                console.error('Error');
-            }
-        });
-    });
+// 	 $(".modal-footer #accept").click(function(){
+//         $.ajax({
+//             type: 'POST',
+//             url: '/views/adminaccept.do',
+//             data: { usersNo: {usersNo},
+//             success: function (response) {
+//                 console.log(response);
+//                 $('.modal').modal('hide');
+//                 location.reload(true);
+//             },
+//             error: function () {
+//                 console.error('Error');
+//             }
+//         });
+//     });
 
     
     	/* var userNo = $(this).data("userNo");   */
@@ -318,16 +277,18 @@
     		event.preventDefault();
     		
     		var usersNo = $(this).data("selectno");
-    		
+//    		var targetHref = $(accept).attr('href');
+    		var usersNo = 0;
     		 $.ajax({
  	            type: 'post',
  	            url: '/views/adminPage.do',
   	            data: { usersNo: usersNo}, 
  	            success: function (data) {
  	            	
+ 	            	
 
-  	          /*       console.log(JSON.parse(data)); // list 정보 들어옴
- 	                let rst = JSON.parse(data)[0]; //index로 접근  */
+//   	                console.log(JSON.parse(data)); // list 정보 들어옴
+// 	                let rst = JSON.parse(data)[0]; //index로 접근 
  	                
 //   	            	var memreqVO = data;
   	                $('#usersNo').text(data.usersNo);
@@ -340,7 +301,9 @@
   	                $('#memClass').text(data.memClass);
   	                $('#memRegdt').text(data.memRegdt);
   	                $('#addrNo').text(data.addrNo);
+  	                usersNo = data.usersNo;
   	                
+//    		 		targetHref.after(usersNo);
  	            },
  	            error: function () {
  	                console.error('Error');

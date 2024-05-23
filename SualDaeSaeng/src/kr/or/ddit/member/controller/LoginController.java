@@ -42,21 +42,28 @@ public class LoginController extends HttpServlet {
 
 		boolean isSuccess = loginService.loginCheck(memberVO, isMemberLogin);
 
+		
 		if (isSuccess) {
 			System.out.println("로그인성공");
-			MemberVO memDetail = loginService.getMemDetail(usersId);
 			UsersVO usersDetail = loginService.getUsersDetail(usersId);
+			req.getSession().setAttribute("usersId", usersId);
+			req.getSession().setAttribute("usersPass", usersPass);
+			req.getSession().setAttribute("usersDetail", usersDetail);
+			req.getSession().setAttribute("usersRole", usersDetail.getUsersRole());
+			req.getSession().setAttribute("usersNo", usersDetail.getUsersNo());
+			if(usersDetail.getUsersRole() == 3) {
+				resp.sendRedirect(req.getContextPath() + "/views/adminPage.do");
+//				req.getRequestDispatcher(req.getContextPath() + "/views/adminPage.do").forward(req, resp);
+			}
+			else {
+				MemberVO memDetail = loginService.getMemDetail(usersId);
+				req.getSession().setAttribute("memDetail", memDetail);
+				
+				List<restLikeVO> restLikeList = loginService.getLikeRest(memDetail.getUsersNo());
+				
+				resp.sendRedirect(req.getContextPath() + "/main.do");
+			}
 
-			 req.getSession().setAttribute("usersId", usersId);
-			 req.getSession().setAttribute("memDetail", memDetail);
-			 req.getSession().setAttribute("usersPass", usersPass);
-			 req.getSession().setAttribute("usersDetail", usersDetail);
-			 req.getSession().setAttribute("usersRole", usersDetail.getUsersRole());
-			 req.getSession().setAttribute("usersNo", usersDetail.getUsersNo());
-			 
-			List<restLikeVO> restLikeList = loginService.getLikeRest(memDetail.getUsersNo());
-			
-			resp.sendRedirect(req.getContextPath() + "/main.do");
 
 		} else {
 			JsonObject jsonObject = new JsonObject();

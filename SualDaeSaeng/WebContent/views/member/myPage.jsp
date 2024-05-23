@@ -38,7 +38,7 @@
             <div class="col-lg-3">
               <div class="portfolio-info sticky-top">
                 <h3 class="d-flex align-items-center">
-                  <img src="img/testimonials/testimonials-2.jpg" class="testimonial-img me-2" alt="">
+                  <img src="img/testimonials/testimonials-2.jpg" class="testimonial-img me-2" alt="" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                   <p>
                     <span><%if(memberVo.getMemNick() != null){ %>
                     <%=memberVo.getMemNick() %>(<%=memberVo.getMemName() %>)
@@ -165,6 +165,8 @@
                          String timeRemaining;
                          if (duration.isNegative() || duration.isZero()) {
                                timeRemaining = "만료됨";
+                               int status = service.updateStory(story.getStoryNo());
+                              
                          } else {
                                long hours = duration.toHours();
                                long minutes = duration.toMinutes() % 60;
@@ -176,11 +178,12 @@
                                 } else {
                                     timeRemaining = "곧";
                                 }
+                                timeRemaining += "후에 지워짐";
                          }
                 %>
                   <a href="<%=request.getContextPath() %>/story/detail.do?storyNo=<%=story.getStoryNo() %>" class="list-group-item py-2 d-flex justify-content-between align-items-center" >
                     <span><i class="bi bi-clock-history px-2"></i> <%=story.getStoryCon() %> </span>
-                    <small><%=timeRemaining  %>후에 지워짐</small>
+                    <small><%=timeRemaining  %></small>
                   </a>
                 <%
                   }

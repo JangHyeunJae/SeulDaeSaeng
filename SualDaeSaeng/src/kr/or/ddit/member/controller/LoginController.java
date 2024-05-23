@@ -1,6 +1,7 @@
 package kr.or.ddit.member.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +16,7 @@ import kr.or.ddit.member.service.IMemberService;
 import kr.or.ddit.member.service.MemberServiceImpl;
 import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.member.vo.UsersVO;
+import kr.or.ddit.restaurant.vo.restLikeVO;
 
 @WebServlet("/login.do")
 public class LoginController extends HttpServlet {
@@ -45,6 +47,9 @@ public class LoginController extends HttpServlet {
 			MemberVO memDetail = loginService.getMemDetail(usersId);
 			UsersVO usersDetail = loginService.getUsersDetail(usersId);
 
+			List<restLikeVO> restLikeList = loginService.getLikeRest(memDetail.getUsersNo());
+			
+/*
 			HttpSession session = null;
 			session.setAttribute("usersId", usersId);
 			session.setAttribute("memDetail", memDetail);
@@ -52,21 +57,15 @@ public class LoginController extends HttpServlet {
       session.setAttribute("usersDetail", usersDetail);
       session.setAttribute("usersRole", usersDetail.getUsersRole());
 			session.setAttribute("usersNo", usersDetail.getUsersNo());
-			/*
-			 * req.getSession().setAttribute("usersId", usersId);
-			 * req.getSession().setAttribute("memDetail", memDetail);
-			 * req.getSession().setAttribute("usersPass", usersPass);
-			 * req.getSession().setAttribute("usersRole", usersDetail.getUsersRole());
-			 */
-
-     /*
+*/
 			req.getSession().setAttribute("usersId", usersId);
 			req.getSession().setAttribute("memDetail", memDetail);
 			req.getSession().setAttribute("usersPass", usersPass); 
 			req.getSession().setAttribute("usersDetail", usersDetail);
 			req.getSession().setAttribute("usersRole", usersDetail.getUsersRole());
+			req.getSession().setAttribute("restLikeList", restLikeList);
 			req.getSession().setAttribute("usersNo", usersDetail.getUsersNo());
-      */
+
 			resp.sendRedirect(req.getContextPath() + "/main.do");
 
 		} else {

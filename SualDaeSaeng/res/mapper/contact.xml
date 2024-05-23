@@ -47,6 +47,12 @@
 	from question
 	where Q_NO = #{qNO}
 </select>
+
+<update id="contactup"   parameterType="String">
+	UPDATE QUESTION SET Q_NO = 'Y' 
+		WHERE Q_NO = #{qNO}
+
+</update>
 <resultMap type="kr.or.ddit.contact.vo.ContactVO" id="contactMap">
      <result property="qNO" column="Q_NO"/>
      <result property="qTitle" column="Q_TITLE"/>

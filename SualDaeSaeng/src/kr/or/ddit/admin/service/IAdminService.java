@@ -15,6 +15,8 @@ public interface IAdminService {
 
 	public MemberReqVO selectmember(String parameter);
 
+	public int adminMemberYN(int usersNoParam);
+
 //	public List<ContactVO> selectContactList();
 
 }

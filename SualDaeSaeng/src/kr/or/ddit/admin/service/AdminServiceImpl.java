@@ -43,6 +43,10 @@ public class AdminServiceImpl implements IAdminService {
 	public MemberReqVO selectmember(String parameter) {
 		return dao.selectmember(parameter);
 	}
+	@Override
+	public int adminMemberYN(int usersNoParam) {
+		return dao.adminMemberYN(usersNoParam);
+	}
 	
 //	@Override
 //	public List<ContactVO> selectContactList() {

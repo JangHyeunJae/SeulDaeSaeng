@@ -38,7 +38,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
- 		<form action="/views/adminaccept.do" method="post" id="userForm">
+ 		<form action="
+ 		/views/adminaccept.do" method="post" id="userForm">
 <%-- 	        <input type ="hidden" name = "usersNo" value = "<%=memreqVO.getUsersNo() %>" /> --%>
 	        <p>이름: <span id="memName"></span></p>
 	        <p>닉네임: <span id="memNick"></span></p>
@@ -50,7 +51,8 @@
 	        <p>주소 : <span id="addrNo"></span></p>
 		    <div class="modal-footer">
 		    	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>	       
-		    	<button type="submit" class="btn btn-primary" id="accept">수락</button>
+		    	<button type="button" class="btn btn-primary" id="accept" onclick="location.href='/admin/memberYN.do?usersNo='">수락</button>
+		    	<!-- <a href="/admin/memberYN.do?usersNo=" class="btn btn-primary" id="accept">수락</a> -->
 		    </div>
  		</form>   
         </div>
@@ -275,16 +277,18 @@
     		event.preventDefault();
     		
     		var usersNo = $(this).data("selectno");
-    		
+//    		var targetHref = $(accept).attr('href');
+    		var usersNo = 0;
     		 $.ajax({
  	            type: 'post',
  	            url: '/views/adminPage.do',
   	            data: { usersNo: usersNo}, 
  	            success: function (data) {
  	            	
+ 	            	
 
-  	          /*       console.log(JSON.parse(data)); // list 정보 들어옴
- 	                let rst = JSON.parse(data)[0]; //index로 접근  */
+//   	                console.log(JSON.parse(data)); // list 정보 들어옴
+// 	                let rst = JSON.parse(data)[0]; //index로 접근 
  	                
 //   	            	var memreqVO = data;
   	                $('#usersNo').text(data.usersNo);
@@ -297,7 +301,9 @@
   	                $('#memClass').text(data.memClass);
   	                $('#memRegdt').text(data.memRegdt);
   	                $('#addrNo').text(data.addrNo);
+  	                usersNo = data.usersNo;
   	                
+//    		 		targetHref.after(usersNo);
  	            },
  	            error: function () {
  	                console.error('Error');

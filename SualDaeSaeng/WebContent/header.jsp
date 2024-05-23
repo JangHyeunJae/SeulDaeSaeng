@@ -9,6 +9,7 @@
 
 String uri = request.getRequestURI();
 String id = (String) session.getAttribute("usersId");
+int usersRole = (int) session.getAttribute("usersRole");
 
 %>
 
@@ -144,7 +145,17 @@ String id = (String) session.getAttribute("usersId");
 					}else{
 				%>
                 	<li>
+                		<%
+                			if(usersRole == 3){
+                		%>
+                  		<a class="dropdown-item" href="<%=request.getContextPath() %>/views/adminPage.do">관리자 페이지</a>
+                		<%		
+                			}else{
+                		%>
                   		<a class="dropdown-item" href="<%=request.getContextPath() %>/member/myPageHome.do">마이페이지</a>
+                		<%	
+                			}
+                		%>
                 	</li>
 					<li>
 						<a class="dropdown-item" href="<%=request.getContextPath() %>/logout.do">로그아웃</a>

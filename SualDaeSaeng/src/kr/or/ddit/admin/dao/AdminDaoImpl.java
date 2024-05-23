@@ -109,6 +109,27 @@ public class AdminDaoImpl implements IAdmindao {
 
 
 	}
+	@Override
+	public int adminMemberYN(int usersNoParam) {
+		
+	    SqlSession session = MyBatisUtil.getSqlSession();
+	    int cnt = 0;
+	    
+	    try {
+	        cnt = session.update("adminAccept", usersNoParam);
+	        
+	        if(cnt == 1) {
+	        	session.commit(); // 커밋
+	        }
+	        
+	    }catch (Exception e) {
+	    	e.printStackTrace();
+	    }finally {
+	        session.close(); // 세션 닫기
+	    }
+	    
+		return cnt;
+	}
 	
 
 

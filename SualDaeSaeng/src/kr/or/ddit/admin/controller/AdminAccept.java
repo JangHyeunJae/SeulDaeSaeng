@@ -37,25 +37,26 @@ public class AdminAccept extends HttpServlet {
 		
 
 	    // 사용자로부터 입력된 사용자 번호를 가져옴
-	    String usersNoParam = req.getParameter("usersNo");
-		
+	    int usersNoParam = Integer.parseInt(req.getParameter("usersNo"));
+		int cnt = 0;
 	
-	    if (usersNoParam != null && !usersNoParam.isEmpty()) { // null 또는 빈 문자열인지 검사
+	    if (usersNoParam > 0) { // null 또는 빈 문자열인지 검사
 	        try {
-	            int usersNo = Integer.parseInt(usersNoParam); // 숫자로 변환
 	            SqlSession session = MyBatisUtil.getSqlSession();
 	            try {
 	            	  // 매퍼를 호출하여 쿼리 실행
-	                MemberReqVO adminAccept = session.selectOne("adminAccept", usersNo);
-	                if (adminAccept != null) {
+	            	cnt = session.update("adminAccept", usersNoParam);
+	                if (cnt == 1) {
 	                    // 회원 정보를 세션에 저장하거나 필요한 작업을 수행
 	                    session.commit(); // 커밋
-	                    resp.sendRedirect(req.getContextPath() + "/adminPage.do");
+	                    resp.sendRedirect(req.getContextPath() + "/views/adminPage.do");
 	                } else {
 	                    // 선택한 회원이 없는 경우에 대한 처리
 	                    resp.sendRedirect(req.getContextPath() + "/errorPage.jsp");
 	                }
-	            } finally {
+	            }catch (Exception e) {
+	            	e.printStackTrace();
+	            }finally {
 	                session.close(); // 세션 닫기
 	            }
 	        } catch (NumberFormatException e) {
@@ -64,7 +65,7 @@ public class AdminAccept extends HttpServlet {
 	        }
 	    
 	    }
-
+        req.getRequestDispatcher("/views/admin/adminPage.jsp").forward(req, resp);
 
 	    
 	}

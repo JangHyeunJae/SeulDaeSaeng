@@ -10,7 +10,7 @@
   	List<BoardVO> repallList = (List<BoardVO>)request.getAttribute("repallList");
   %>
   
-<main data-aos="fade" data-aos-delay="1500">
+<main data-aos="fade" data-aos-delay="700">
 	<div class="portfolio-description">
 		<section id="calssBoard" class="gallery-single ">
 			<div class="container-xl">

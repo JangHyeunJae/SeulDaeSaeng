@@ -89,6 +89,11 @@
 <result column="users_no" property="usersNo"/>
 </resultMap>
 
+<resultMap type="kr.or.ddit.board.vo.FilesVO" id="filesMap"> <!-- 1 -->
+<result column="file_no" property="fileNo"/>
+<result column="file_yn" property="fileYn"/>
+</resultMap>
+
 <select id="allBoardList" resultMap="boardMap">
 		select *
         from board
@@ -103,7 +108,7 @@
 		where b.users_no = m.users_no
 		and b.board_yn = 'Y'
 		and b.board_level &lt; 300
-	    <if test='searchOption != "title" and searchOption != "content" and searchOption != "nickname" '>
+	    <if test='searchOption == "all"'>
 	      and (
 	        b.board_title like '%' || #{searchText} || '%'
 	        or b.board_con like '%' || #{searchText} || '%'
@@ -128,10 +133,10 @@
 		where b.users_no = m.users_no
 		and b.board_yn = 'Y'
 		and board_level = #{boardLevel}
-	    <if test='searchOption == null or searchOption.equals("null") or searchOption.equals("")'>
+	    <if test='searchOption == "all"'>
 	      and (
 	        b.board_title like '%' || #{searchText} || '%'
-	        or b.board_con like '%' || #{searchText} || '%'
+	        or b.board_con like '%' || #{searchText} || '%' 
 	        or m.mem_nick like '%' || #{searchText} || '%'
 	      )
 	    </if>
@@ -142,7 +147,7 @@
 	      and b.board_con like '%' || #{searchText} || '%'
 	    </if>
 	    <if test='searchOption == "nickname"'>
-	      and m.mem_nick like '%' || #{searchText} || '%'
+	      and m.mem_nick like '%' || #{searchText} || '%' 
 	    </if>
 		order by case when b.board_level = 3 then 0 else 1 end, b.board_no desc
 </select>
@@ -268,7 +273,7 @@
 <select id="getHwList" parameterType="int" resultMap="hwMap">
 		select *
         from homework
-        where hw_class=#{hwClass}
+        where hw_class=#{hwClass} and hw_yn='Y'
         order by hw_no desc
 </select>
 
@@ -283,19 +288,6 @@
         WHERE MEMBER.USERS_NO = HOMEWORK.USERS_NO
         AND HOMEWORK.USERS_NO = #{usersNo} AND HOMEWORK.HW_NO = #{hwNo}
 </select>
-
-<insert id="saveFile" parameterType="kr.or.ddit.board.vo.FileDetailVO" useGeneratedKeys="true">
-	<selectKey keyProperty="fileNo" resultType="int" order="BEFORE">
-		select seq_file.nextval from dual
-	</selectKey>
-	    insert into files(file_no,file_yn)
-        values(#{fileNo},'Y')
-</insert>
-
-<insert id="saveFileDetail" parameterType="kr.or.ddit.board.vo.FileDetailVO" useGeneratedKeys="true">
-        insert into file_detail(file_no, file_savepath, file_ogname, file_savednm, file_size, file_ext, file_dt, file_level)
-        values(#{fileNo}, #{fileSavepath}, #{fileOgname},#{fileOgname}, #{fileSize}, #{fileExt}, sysdate, #{fileLevel})
-</insert>
 
 <select id="getFileList" parameterType="int" resultMap="fileMap">
 		select *
@@ -319,7 +311,7 @@
 		<if test='boardDiv.equals("notice")'>
         and u.users_role = 1
 		</if>
-	    <if test='searchOption == null or searchOption.equals("null") or searchOption.equals("")'>
+	    <if test='searchOption == "all"'>
 	      and (
 	        b.board_title like '%' || #{searchText} || '%'
 	        or b.board_con like '%' || #{searchText} || '%'
@@ -335,7 +327,7 @@
 	    <if test='searchOption == "nickname"'>
 	      and m.mem_nick like '%' || #{searchText} || '%'
 	    </if>
-		order by b.board_no desc
+		order by case when u.users_role = 1 then 0 else 1 end, b.board_no desc
 </select>
 
 <insert id="insertFileShare" parameterType="kr.or.ddit.board.vo.FileShareVO" useGeneratedKeys="true">
@@ -392,9 +384,9 @@
 </select>
 
 <select id="getStoryTime" parameterType="int" resultType="String">
-select to_char(story_at, 'yyyy-MM-dd HH24:MI:SS')
-from story
-where story_no = #{storyNo}
+       select to_char(story_at, 'yyyy-MM-dd HH24:MI:SS')
+       from story
+       where story_no = #{storyNo}
 </select>
 
 <select id="getStoryOne" parameterType="int" resultMap="storyMap">
@@ -402,5 +394,68 @@ where story_no = #{storyNo}
 	    from story
 	    where story_no=#{storyNo}
 </select>
+
+<select id="getMemberBoardReply" parameterType="int" resultType="java.lang.Integer">
+	select DISTINCT(BOARD_NO) as BOARD_NO from REPLY 
+    where USERS_NO = #{usersNo} and REPLY_YN = 'Y'
+    order by BOARD_NO desc
+</select>
+
+<select id="getMemberBoardOne" parameterType="int" resultMap="boardMap">
+	select * from BOARD 
+	where BOARD_NO = #{boardNo} AND BOARD_YN = 'Y'
+</select>
+
+<update id="deleteStory" parameterType="int">
+        update story set story_yn = 'N' where story_no =#{storyNo}
+</update>
+
+<select id="allStoryList" resultMap="storyMap">
+		select *
+        from story
+        where story_yn = 'Y'
+        order by story_no desc
+</select>
+
+<select id="getHwFileList" parameterType="int" resultMap="fileMap">
+       select c.*
+       from homework a,hw_submit b, file_detail c
+       where b.hw_no = a.hw_no and a.hw_no = #{hwNo} and c.file_no = b.file_no
+</select>
+
+<select id="getHwSubmitMem" parameterType="int" resultMap="memberMap">
+       select a.*
+       from member a, hw_submit b, file_detail c
+       where b.file_no = #{fileNo} and c.file_no = b.file_no and b.users_no = a.users_no
+</select>
+
+<insert id="saveFiles" useGeneratedKeys="true">
+	<selectKey keyProperty="fileNo" resultType="int" order="BEFORE">
+		select seq_file.nextval from dual
+	</selectKey>
+	    insert into files(file_no,file_yn)
+        values(#{fileNo},'Y')
+</insert>
+
+<insert id="saveFileDetail" parameterType="kr.or.ddit.board.vo.FileDetailVO"  useGeneratedKeys="true">
+        insert into file_detail(file_no, file_savepath, file_ogname, file_savednm, file_size, file_ext, file_dt, file_level)
+        values(#{fileNo}, #{fileSavepath}, #{fileOgname},#{fileOgname}, #{fileSize}, #{fileExt}, sysdate, #{fileLevel})
+</insert>
+
+<select id="myBoardList" parameterType="int" resultMap="boardMap">
+	select * from BOARD
+	where USERS_NO = #{usersNo} AND BOARD_YN = 'Y'
+	order by BOARD_NO desc
+</select>
+
+<update id="deleteHomework" parameterType="int">
+	update homework
+	set hw_yn = 'N'
+	where hw_no = #{hwNo}
+</update>
+
+<!-- <select id="getFiles" resultMap="filesMap">
+        select * from files order by file_no desc
+</select> -->
 
 </mapper>

@@ -8,6 +8,7 @@ import kr.or.ddit.board.vo.BoardVO;
 import kr.or.ddit.member.vo.AddressVO;
 import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.member.vo.UsersVO;
+import kr.or.ddit.restaurant.vo.restLikeVO;
 
 
 public interface IMemberService {
@@ -60,7 +61,11 @@ public interface IMemberService {
 
 	public String checking(String memName);
 
+	public MemberVO selectScore(String usersId);
 
-	
+	public MemberVO selectOne(String usersId);
+
+	public List<restLikeVO> getLikeRest(int addrNo);
+
 }
 

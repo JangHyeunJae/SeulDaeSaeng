@@ -10,7 +10,7 @@
 
 	ContactVO contactVO =(ContactVO) request.getAttribute("contactVO");
 %>
- <main class="pb-5" data-aos="fade" data-aos-delay="1500">
+ <main class="pb-5" data-aos="fade" data-aos-delay="700">
       <!-- ======= End Page Header ======= -->
       <div class="page-header d-flex align-items-center">
         <div class="container position-relative">

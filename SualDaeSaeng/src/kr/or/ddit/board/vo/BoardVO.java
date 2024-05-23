@@ -14,7 +14,14 @@ public class BoardVO {
 	private int boardHit;
 	private int fileNo;
 	private int usersNo;
+	private String boardLevelKr; // 장현재 추가 => 보드분류를 한글로 변경해서 담기위해 추가
 	
+	public String getBoardLevelKr() {
+		return boardLevelKr;
+	}
+	public void setBoardLevelKr(String boardLevelKr) {
+		this.boardLevelKr = boardLevelKr;
+	}
 	public int getUsersNo() {
 		return usersNo;
 	}
@@ -69,4 +76,12 @@ public class BoardVO {
 	public void setFileNo(int fileNo) {
 		this.fileNo = fileNo;
 	}
+	@Override
+	public String toString() {
+		return "BoardVO [boardNo=" + boardNo + ", boardLevel=" + boardLevel + ", boardTitle=" + boardTitle
+				+ ", boardCon=" + boardCon + ", boardAt=" + boardAt + ", boardYn=" + boardYn + ", boardHit=" + boardHit
+				+ ", fileNo=" + fileNo + ", usersNo=" + usersNo + ", boardLevelKr=" + boardLevelKr + "]";
+	}
+	
+	
 }

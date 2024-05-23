@@ -16,6 +16,9 @@
 
 <%@include file="/header.jsp" %>
 <%
+	String msg = session.getAttribute("msg") == null ? "" : (String) session.getAttribute("msg");
+	session.removeAttribute("msg");	
+
    IBoardService service = BoardServiceImpl.getInstance();
    MemberVO memDetail = (MemberVO)session.getAttribute("memDetail");
   
@@ -24,13 +27,13 @@
    List<FileDetailVO> fileList = service.getFileList(levelChk);
    List<HomeworkVO> hwList = service.getHwList(levelChk);
    List<BoardVO> noticeList = service.getClassNoticeList(levelChk);
-   List<BoardVO> boardList = service.selectBoardList(levelChk);
+   List<BoardVO> boardList = service.selectClassBoardList(levelChk);
   
    LocalDate today = LocalDate.now();
    long daysDiff = ChronoUnit.DAYS.between(today,memDetail.getMemRegdt().plusDays(190));
 %>
-    <!--<main data-aos="fade" data-aos-delay="1500" >-->
-    <main>
+    <main data-aos="fade" data-aos-delay="700" >
+    <!-- <main> -->
       <section id="calssBoard" class="gallery-single ">
         <div class="container-xl">
           <div class="row justify-content-between gy-4">
@@ -153,7 +156,8 @@
 		               BoardVO bv = noticeList.get(i);
                 	
                %>
-                    <a href="#" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
+                    <a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>
+					&idx=<%=i %>&levelChk=<%=bv.getBoardLevel() %>&classBoardChk=1" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
                       <h6 class="mb-2 text-truncate">
                         <small class="attach">
                           <i class="bi bi-paperclip"></i>
@@ -188,7 +192,8 @@
                 for(int i=0 ; i<length ; i++){
                 	BoardVO bv = boardList.get(i);
                %>
-                    <a href="#" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
+                    <a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>
+					&idx=<%=i %>&levelChk=<%=bv.getBoardLevel() %>&classBoardChk=2" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
                       <h6 class="mb-2 text-truncate">
                         <small class="attach">
                           <i class="bi bi-paperclip"></i>
@@ -209,6 +214,11 @@
       </section>
     </main>
     <script>
+		window.onload = function() {
+			var msg = '<%= msg %>';
+			if(msg != null && msg != '') alert(msg);
+		
+		};
 		function chatWinOpen() {
 			window.open("/openChat.do", "_blank",
 					"width=530,height=800");

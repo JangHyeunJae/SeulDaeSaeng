@@ -15,15 +15,28 @@ import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
-@ServerEndpoint("/ChatingServer/{classId}")
+@ServerEndpoint("/ChatingServer/{classId}/{chatId}")
 public class ChatServer {
 
     private static Map<String, Set<Session>> roomSessions = new HashMap<>();
 
     @OnOpen
-    public void onOpen(Session session, @PathParam("classId") String classId) {
+    public void onOpen(Session session, @PathParam("classId") String classId, @PathParam("chatId") String chatId) {
         roomSessions.computeIfAbsent(classId, k -> Collections.synchronizedSet(new HashSet<>())).add(session);
+        session.getUserProperties().put("chatId", chatId);
         System.out.println("웹소켓 연결: " + session.getId() + " in room " + classId);
+        
+     // 새로운 사용자가 입장했음을 알리기 위한 메시지 전송
+        String joinMessage = chatId + "님이 입장했습니다.";
+        synchronized (roomSessions.get(classId)) {
+            for (Session client : roomSessions.get(classId)) {
+                try {
+                    client.getBasicRemote().sendText("SYSTEM|" + joinMessage);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     @OnMessage
@@ -43,6 +56,17 @@ public class ChatServer {
     public void onClose(Session session, @PathParam("classId") String classId) {
         Set<Session> sessions = roomSessions.get(classId);
         sessions.remove(session);
+        String chatId = (String) session.getUserProperties().get("chatId");
+        String leaveMessage = chatId + "님이 퇴장했습니다.";
+        synchronized (roomSessions.get(classId)) {
+            for (Session client : roomSessions.get(classId)) {
+                try {
+                    client.getBasicRemote().sendText("SYSTEM|" + leaveMessage);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         System.out.println("웹소켓 종료: " + session.getId() + " in room " + classId);
         if (sessions.isEmpty()) {
             roomSessions.remove(classId);

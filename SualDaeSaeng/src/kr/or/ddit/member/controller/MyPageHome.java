@@ -1,6 +1,7 @@
 package kr.or.ddit.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -8,8 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import kr.or.ddit.board.service.BoardServiceImpl;
+import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.board.vo.BoardVO;
 import kr.or.ddit.member.service.IMemberService;
 import kr.or.ddit.member.service.MemberServiceImpl;
@@ -24,6 +26,7 @@ public class MyPageHome extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
 	IMemberService service = MemberServiceImpl.getInstance();
+	IBoardService boardService = BoardServiceImpl.getInstance();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -35,11 +38,20 @@ public class MyPageHome extends HttpServlet{
 		MemberVO memberVo = (MemberVO)req.getAttribute("memberVo");
 		
 		List<BoardVO> memBoardList = service.memberBoardList(usersVo.getUsersNo());
+		MemberUtil.boardLevelKr(memBoardList);
 		req.setAttribute("memBoardList", memBoardList);
 		
-		if(usersVo != null && memberVo != null && addrVo != null ) {
+		
+		List<BoardVO> memberBoardReplyList = boardService.getMemberBoardReply((int)req.getSession().getAttribute("usersNo"));
+		if(memberBoardReplyList != null) {
+			MemberUtil.boardLevelKr(memberBoardReplyList);
+			req.setAttribute("memberBoardReplyList", memberBoardReplyList);
+		}
+		
+		
+		if(usersVo != null && addrVo != null & memberVo != null) {
 			req.getRequestDispatcher("/views/member/myPage.jsp").forward(req, resp);
-		}else resp.sendRedirect("/views/index.jsp");
+		}else resp.sendRedirect("/main.do");
 		
 	}
 	

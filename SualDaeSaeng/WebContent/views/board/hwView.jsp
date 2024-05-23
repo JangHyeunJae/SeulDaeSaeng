@@ -16,16 +16,21 @@
 <%
     IBoardService boardService = BoardServiceImpl.getInstance();
     
+	String msg = session.getAttribute("msg") == null ? "" : (String) session.getAttribute("msg");
+	session.removeAttribute("msg");
+
+	int usersNo = (int)session.getAttribute("usersNo");
     MemberVO wd = (MemberVO)request.getAttribute("writerDetail");
     HomeworkVO hw = (HomeworkVO)request.getAttribute("hwDetail");
     int levelChk = (int)request.getAttribute("levelChk");
 	int usersRole = (int)session.getAttribute("usersRole");
 	List<FileDetailVO> mySubmit = (List<FileDetailVO>)request.getAttribute("mySubmit");
+	List<FileDetailVO> fileList = boardService.getHwFileList(hw.getHwNo());
     
     int classNo = hw.getHwClass();
 %>
 
- <main>
+ <main data-aos="fade" data-aos-delay="700">
       <div class="page-header sub d-flex align-items-center">
         <div class="container position-relative">
           <div class="row d-flex justify-content-center">
@@ -71,7 +76,7 @@
          </form>
          <%
          if(mySubmit!=null){
-          %>
+         %>
                      <div class="list-group">
              <%
               for(int i=0 ; i<mySubmit.size() ; i++){
@@ -90,17 +95,44 @@
          }
          %>
          <%
+         }else if(usersRole==1){
+            if(fileList != null && fileList.size()!=0){
+        	 for(FileDetailVO file : fileList){
+        		 MemberVO mem = boardService.getHwSubmitMem(file.getFileNo());
+         %>
+   
+         <div class="container" data-aos="fade-up" style="border-top:none;">
+          <a href="<%=request.getContextPath() %>/file/download.do?fileNo=<%=file.getFileNo() %>" download 
+          class="attached-file d-flex justify-content-between align-items-center" style="margin-bottom: 10px;">
+            <span><i class="bi bi-download px-2"></i><%=file.getFileOgname() %> </span>
+            <span>제출자 : <%=mem.getMemName() %></span>
+          </a>
+         </div>
+         
+         <%
+           }
+          }else{
+          %>
+          <p> 업로드된 숙제 제출이 없습니다. <P>
+         <% 
+          }
          }
          %>
-         </div>
          <div class="btn-box container d-flex align-items-center justify-content-center pb-5 pt-5 gap-2">
           <%
           //세션에서 꺼내와야함. + 위에 댓글입력창 닉네임 또한 함께 수정 + 댓글 수정 삭제 보이는 부분도users에서 역할role로 비교해야함!!!!!1
           if(usersRole==1){
           %>
           <a href="<%=request.getContextPath()%>/classTeacherBoard.do?levelChk=<%=levelChk %>" type="button" class="btn btn-secondary">메인으로</a>
-          <a href="<%=request.getContextPath()%>/board/edit.do" type="button" class="btn btn-secondary">수정하기</a>
-          <a href="<%=request.getContextPath()%>/board/delete.do" type="button" class="btn btn-secondary">삭제하기</a>
+          	<%
+          		if(wd.getUsersNo() == usersNo){
+          	
+          	%>
+          	<a href="<%=request.getContextPath()%>/homework/edit.do" type="button" class="btn btn-secondary">수정하기</a>
+          	<a href="<%=request.getContextPath()%>/homework/delete.do?levelChk=<%=levelChk %>&hwNo=<%=hw.getHwNo() %>" onclick="return confirm('삭제하시겠습니까?');" type="button" class="btn btn-secondary">삭제하기</a>
+          	<%
+          		}
+          	%>
           <%
           }else if(usersRole==2){
           %>
@@ -118,5 +150,11 @@
         <!-- END MENU -->
       </section>
     </main>
-
+<script>
+	window.onload = function() {
+		var msg = '<%= msg %>';
+		if(msg != null && msg != '') alert(msg);
+	
+	};
+</script>
 <%@include file="/footer.jsp" %>

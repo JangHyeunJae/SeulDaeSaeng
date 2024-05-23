@@ -24,7 +24,7 @@
 	
 %>
 
- <main>
+ <main data-aos="fade" data-aos-delay="700">
       <!-- ======= End Page Header ======= -->
       <div class="page-header sub d-flex align-items-center">
         <div class="container position-relative">
@@ -53,11 +53,11 @@
             <span><%=file.getFileSize() %></span>
           </a>
         <!-- END 파일  -->
-          
+        
         <div class="btn-box container d-flex align-items-center justify-content-center pb-5 pt-5 gap-2">
            <a href="<%=request.getContextPath()%>/member/myPageHome.do"  type="button" class="btn btn-secondary"> 목록으로 </a>
            <a href="#" type="button" class="btn btn-secondary">수정하기</a>
-           <a href="#" onclick="return confirm('삭제하시겠습니까?');" type="button" class="btn btn-secondary">삭제하기</a>
+           <a href="<%=request.getContextPath()%>/story/delete.do?storyNo=<%=storyOne.getStoryNo() %>" onclick="return confirm('삭제하시겠습니까?');" type="button" class="btn btn-secondary">삭제하기</a>
         </div>
       </section>
     </main>

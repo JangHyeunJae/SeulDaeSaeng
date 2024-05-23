@@ -8,6 +8,7 @@ import kr.or.ddit.board.vo.BoardVO;
 import kr.or.ddit.member.vo.AddressVO;
 import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.member.vo.UsersVO;
+import kr.or.ddit.restaurant.vo.restLikeVO;
 
 public interface IMemberDao {
 
@@ -48,6 +49,8 @@ public interface IMemberDao {
 	public String checkFindPw(MemberVO memberVO);
 
 	public String checking(String memName);
+
+	public List<restLikeVO> selectLikeRest(int addrNo);
 
 }
 

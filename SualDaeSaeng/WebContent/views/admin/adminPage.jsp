@@ -61,7 +61,8 @@
 
 
 
-<main data-aos="fade" data-aos-delay="1500">
+<main data-aos="fade" data-aos-delay="700">
+
   <section id="calssBoard" class="gallery-single ">
     <div class="container-xl">
       <div class="col-lg-12">

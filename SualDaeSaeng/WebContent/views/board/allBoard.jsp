@@ -52,7 +52,7 @@
     int endIndex = Math.min(startIndex + itemsPerPage, totalItems);
    
 %>
-<main>
+<main data-aos="fade" data-aos-delay="700">
    <!-- ======= End Page Header ======= -->
    <div class="page-header d-flex align-items-center">
       <div class="container position-relative">
@@ -81,7 +81,7 @@
                 </p>
             <div class="input-group input-group-sm col-4">
                <%
-                  if(option == null){
+                  if(option.equals("all")){
                %>
                <button class="btn dropdown-toggle" type="button"
                   data-bs-toggle="dropdown" aria-expanded="false">전체</button>
@@ -96,7 +96,7 @@
                <button class="btn dropdown-toggle" type="button"
                   data-bs-toggle="dropdown" aria-expanded="false" value="title">제목</button>
                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do">전체</a></li>
+                  <li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=all">전체</a></li>
                   <li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=content">내용</a></li>
                   <li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=nickname">닉네임</a></li>
                </ul>
@@ -106,7 +106,7 @@
                <button class="btn dropdown-toggle" type="button"
                   data-bs-toggle="dropdown" aria-expanded="false" value="content">내용</button>
                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do">전체</a></li>
+                  <li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=all">전체</a></li>
                   <li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=title">제목</a></li>
                   <li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=nickname">닉네임</a></li>
                </ul>
@@ -116,24 +116,16 @@
                <button class="btn dropdown-toggle" type="button"
                   data-bs-toggle="dropdown" aria-expanded="false" value="nickname">닉네임</button>
                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do">전체</a></li>
+                  <li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=all">전체</a></li>
                   <li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=title">제목</a></li>
                   <li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?searchOption=content">내용</a></li>
                </ul>
                <%
                   }
                %>
-               <%
-                  if(option == null){
-               %>
-                  <form action="<%=request.getContextPath()%>/<%=board %>.do" method="get" role="form" id="searchForm">
-               <%
-                  }else{
-               %>
+               
                   <form action="<%=request.getContextPath()%>/<%=board %>.do?searchOption=<%=option %>" method="get" role="form" id="searchForm">
-               <%
-                  }
-               %>
+
                <%
                	  if(searchTxt != null){
                %>
@@ -147,6 +139,7 @@
                 <%
                	  }
                 %>
+                <input type="hidden" id="searchOption" name="searchOption" value="<%=option %>">
                </form>
             </div>
          </div>
@@ -168,8 +161,8 @@
                            
                            // html 제거
                            String ogText = bv.getBoardCon();
-                      String regex = "<[^>]*>";
-                      String pureText = ogText.replaceAll(regex, "");
+                      	   String regex = "<[^>]*>";
+                      	   String pureText = ogText.replaceAll(regex, "");
                            
                 %>
                 
@@ -208,11 +201,11 @@
                 <%
                	  if(searchTxt != null){
                 %>
-                    <a class="page-link" href="<%= request.getContextPath() + "?page=" + (currentPage - 1) %>&searchText=<%=searchTxt %>">&laquo;</a>
+                    <a class="page-link" href="<%= request.getContextPath() + "?page=" + (currentPage - 1) %>&searchText=<%=searchTxt %>&searchOption=<%=option %>">&laquo;</a>
                 <%
                	  }else{
                 %>
-                    <a class="page-link" href="<%= request.getContextPath() + "?page=" + (currentPage - 1) %>">&laquo;</a>
+                    <a class="page-link" href="<%= request.getContextPath() + "?page=" + (currentPage - 1) %>&searchOption=<%=option %>">&laquo;</a>
                 <%
                	  }
                 %>
@@ -224,11 +217,11 @@
                 <%
                	  if(searchTxt != null){
                 %>
-                    <a class="page-link" href="<%= request.getContextPath() + "?page=" + i %>&searchText=<%=searchTxt %>"><%= i %></a>
+                    <a class="page-link" href="<%= request.getContextPath() + "?page=" + i %>&searchText=<%=searchTxt %>&searchOption=<%=option %>"><%= i %></a>
                 <%
                	  }else{
                 %>
-                	<a class="page-link" href="<%= request.getContextPath() + "?page=" + i %>"><%= i %></a>
+                	<a class="page-link" href="<%= request.getContextPath() + "?page=" + i %>&searchOption=<%=option %>"><%= i %></a>
                 <%
                	  }
                 %>
@@ -240,11 +233,11 @@
                 <%
                	  if(searchTxt != null){
                 %>
-                    <a class="page-link" href="<%= request.getContextPath() + "?page=" + (currentPage + 1) %>&searchText=<%=searchTxt %>">&raquo;</a>
+                    <a class="page-link" href="<%= request.getContextPath() + "?page=" + (currentPage + 1) %>&searchText=<%=searchTxt %>&searchOption=<%=option %>">&raquo;</a>
                 <%
                	  }else{
                 %>
-                	<a class="page-link" href="<%= request.getContextPath() + "?page=" + (currentPage + 1) %>">&raquo;</a>
+                	<a class="page-link" href="<%= request.getContextPath() + "?page=" + (currentPage + 1) %>&searchOption=<%=option %>">&raquo;</a>
                 <%
                	  }
                 %>

@@ -42,19 +42,21 @@
     	searchTxt = (String)request.getAttribute("searchText");
     }
 %>
-<main>
+
+<main data-aos="fade" data-aos-delay="700">
 	<!-- ======= End Page Header ======= -->
 	<div class="page-header d-flex align-items-center">
 		<div class="container position-relative">
 			<div class="row d-flex justify-content-center">
+              <p class="mb-5 d-flex justify-content-between">
 			 <%
               if(usersRole==1){
               %>
-              	<a href="<%=request.getContextPath() %>/classTeacherBoard.do?levelChk=<%=levelChk %>"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
+              	<a href="<%=request.getContextPath() %>/classTeacherBoard.do?levelChk=<%=levelChk %>" class="backbtn"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
               <%
               }else{
               %>
-              <a href="<%=request.getContextPath() %>/classBoard.do?levelChk=<%=levelChk %>"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
+              <a href="<%=request.getContextPath() %>/classBoard.do?levelChk=<%=levelChk %>" class="backbtn"><i class="bi bi-chevron-left"></i> 뒤로가기 </a>
               <%
               }
               %>
@@ -66,8 +68,9 @@
 					</p>
 				</div>
 			</div>
-		</div>
-	</div>	
+		</div>	
+	</div>
+
 	<!-- End Page Header -->
 	<section class="board mb-5">
 		<div class="container" data-aos="fade-up">
@@ -77,7 +80,7 @@
                 </p>
 				<div class="input-group input-group-sm col-4">
 					<%
-						if(option == null){
+						if(option.equals("all")){
 					%>
 					<button class="btn dropdown-toggle" type="button"
 						data-bs-toggle="dropdown" aria-expanded="false">전체</button>
@@ -92,7 +95,7 @@
 					<button class="btn dropdown-toggle" type="button"
 						data-bs-toggle="dropdown" aria-expanded="false" value="title">제목</button>
 					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>">전체</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=all">전체</a></li>
 						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=content">내용</a></li>
 						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=nickname">닉네임</a></li>
 					</ul>
@@ -102,7 +105,7 @@
 					<button class="btn dropdown-toggle" type="button"
 						data-bs-toggle="dropdown" aria-expanded="false" value="content">내용</button>
 					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>">전체</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=all">전체</a></li>
 						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=title">제목</a></li>
 						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=nickname">닉네임</a></li>
 					</ul>
@@ -112,24 +115,16 @@
 					<button class="btn dropdown-toggle" type="button"
 						data-bs-toggle="dropdown" aria-expanded="false" value="nickname">닉네임</button>
 					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>">전체</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=all">전체</a></li>
 						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=title">제목</a></li>
 						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=content">내용</a></li>
 					</ul>
 					<%
 						}
 					%>
-					<%
-						if(option == null){
-					%>
-						<form action="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>" method="get" role="form" id="searchForm">
-					<%
-						}else{
-					%>
+
 						<form action="<%=request.getContextPath()%>/<%=board %>.do?levelChk=<%=levelChk %>&searchOption=<%=option %>" method="get" role="form" id="searchForm">
-					<%
-						}
-					%>
+
 					<%
                	  		if(searchTxt != null){
                		%>
@@ -143,6 +138,8 @@
                		<%
                	  		}
                 	%>
+					<input type="hidden" id="levelChk" name="levelChk" value="<%=levelChk %>">
+                	<input type="hidden" id="searchOption" name="searchOption" value="<%=option %>">
 					</form>
 				</div>
 			</div>
@@ -185,19 +182,49 @@
                <ul class="pagination">
             <% if (currentPage > 1) { %>
                 <li class="page-item">
-                    <a class="page-link" href="<%= request.getContextPath() + "?levelChk=" + levelChk + "&page=" + (currentPage - 1) %>">&laquo;</a>
+                <%
+               	  if(searchTxt != null){
+                %>
+                    <a class="page-link" href="<%= request.getContextPath() + "?levelChk=" + levelChk + "&page=" + (currentPage - 1) %>&searchText=<%=searchTxt %>&searchOption=<%=option %>">&laquo;</a>
+                <%
+               	  }else{
+                %>
+                    <a class="page-link" href="<%= request.getContextPath() + "?levelChk=" + levelChk + "&page=" + (currentPage - 1) %>&searchOption=<%=option %>">&laquo;</a>
+                <%
+               	  }
+                %>
                 </li>
             <% } %>
             
             <% for (int i = 1; i <= totalPages; i++) { %>
                 <li class="page-item <%= (i == currentPage) ? "active" : "" %>">
-                    <a class="page-link" href="<%= request.getContextPath() +  "?levelChk=" + levelChk + "&page=" + i %>"><%= i %></a>
+                <%
+               	  if(searchTxt != null){
+                %>
+                    <a class="page-link" href="<%= request.getContextPath() +  "?levelChk=" + levelChk + "&page=" + i %>&searchText=<%=searchTxt %>&searchOption=<%=option %>"><%= i %></a>
+                <%
+               	  }else{
+                %>
+                    <a class="page-link" href="<%= request.getContextPath() +  "?levelChk=" + levelChk + "&page=" + i %>&searchOption=<%=option %>"><%= i %></a>
+                <%
+               	  }
+                %>
                 </li>
             <% } %>
 
             <% if (currentPage < totalPages) { %>
                 <li class="page-item">
-                    <a class="page-link" href="<%= request.getContextPath() +  "?levelChk=" + levelChk + "&page=" + (currentPage + 1) %>">&raquo;</a>
+                <%
+               	  if(searchTxt != null){
+                %>
+                    <a class="page-link" href="<%= request.getContextPath() +  "?levelChk=" + levelChk + "&page=" + (currentPage + 1) %>&searchText=<%=searchTxt %>&searchOption=<%=option %>">&raquo;</a>
+                <%
+               	  }else{
+                %>
+                    <a class="page-link" href="<%= request.getContextPath() +  "?levelChk=" + levelChk + "&page=" + (currentPage + 1) %>&searchOption=<%=option %>">&raquo;</a>
+                <%
+               	  }
+                %>
                 </li>
             <% } %>
         </ul>
@@ -224,11 +251,14 @@
 	 };
 
     var buttons = document.querySelectorAll('.cta-btn');
-
+	
     // 페이지 로드될 때 현재 URL을 확인하여 해당 버튼의 스타일을 변경
-    var currentUrl = window.location.href;
-    buttons.forEach(function (button) {
-        if (currentUrl.includes(button.getAttribute('href'))) {
+    var currentUrl = window.location.pathname;
+    
+ 	buttons.forEach(function (button) {
+ 		var buttonUrl = new URL(button.getAttribute('href'), window.location.origin).pathname;
+ 		
+ 		if (currentUrl === buttonUrl) {
             button.classList.remove('gray');
             button.classList.add('orange');
         } else {

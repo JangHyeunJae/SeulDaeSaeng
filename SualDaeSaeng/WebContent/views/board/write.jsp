@@ -5,15 +5,15 @@
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>		
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>      
 
 <%
-	int usersRole = (int)session.getAttribute("usersRole");
+   int usersRole = (int)session.getAttribute("usersRole");
     int levelChk = (int)request.getAttribute("levelChk");
     int classBoardChk = 0;
-	if(request.getAttribute("classBoardChk")!=null){
-	   classBoardChk = (int)request.getAttribute("classBoardChk");
-	}
+   if(request.getAttribute("classBoardChk")!=null){
+      classBoardChk = (int)request.getAttribute("classBoardChk");
+   }
     int idx = 0;
 
     String boardName = null;
@@ -28,19 +28,19 @@
         boardName = "공지사항";
         board = "noticeBoard";
     } else if(levelChk > 300){
-    	boardName = String.valueOf(levelChk) + "호";
-	    if(classBoardChk==1){
-	  		board = "eachClassNotice";
-	    }else if(classBoardChk==2){
-	  		board = "eachClassBoard";
-	    }
+       boardName = String.valueOf(levelChk) + "호";
+       if(classBoardChk==1){
+           board = "eachClassNotice";
+       }else if(classBoardChk==2){
+           board = "eachClassBoard";
+       }
     } else if(levelChk == 0){
         boardName = "전체게시판";
         board = "allBoard";
     }
 %>
 
-<main>
+<main data-aos="fade" data-aos-delay="700">
     <div class="page-header sub d-flex align-items-center">
         <div class="container position-relative">
             <div class="row d-flex justify-content-center">
@@ -60,7 +60,7 @@
                         <div class="contact">
                          <div class="container pb-3">
                         <% 
-                        if(levelChk == 0){	
+                        if(levelChk == 0){   
                         %>
                         <div class="form-group d-flex align-items-center">
                             <input type="radio" class="btn-check" name="level" id="freeBoard" value="1" autocomplete="off" checked>
@@ -69,12 +69,12 @@
                             <input type="radio" class="btn-check" name="level" id="studyBoard" value="2" autocomplete="off">
                             <label class="btn btn-outline-warning" for="studyBoard">공부게시판</label>
                             <%
-                            	if(usersRole==1){
+                               if(usersRole==1){
                             %>
                             <input type="radio" class="btn-check" name="level" id="noticeBoard" value="3" autocomplete="off">
                             <label class="btn btn-outline-warning" for="noticeBoard">공지사항</label>
                             <%
-                            	}
+                               }
                             %>
                         </div>
                         <% 
@@ -92,17 +92,17 @@
                         <textarea class="form-control summernote" rows="5" id="content" name="content"></textarea>
                         <input type="hidden" id="levelChk" name="levelChk" value="<%=levelChk %>">
                         <%
-                        	if(classBoardChk != 0){
+                           if(classBoardChk != 0){
                         %>
                         <input type="hidden" id="classBoardChk" name="classBoardChk" value="<%=classBoardChk %>">
                         <%
-                        	}
+                           }
                         %>
                         <input type="hidden" id="idx" name="idx" value="<%=idx %>">
                         
-		                <div class="form-group mt-2 d-flex gap-2 align-items-center">
-		                  <input class="form-control form-control-lg " type="file" name="file" id="file" />
-		                </div>
+                      <div class="form-group mt-2 d-flex gap-2 align-items-center">
+                        <input class="form-control form-control-lg " type="file" name="file" id="file" />
+                      </div>
                         
                          <div class="text-center mt-5 mb-5">
                             <button type="submit" id="submitBtn" name="submitBtn" style="background-color:orange;">작성하기</button>
@@ -137,7 +137,8 @@ $(function(){
     });
 });
 
-$(".summernote").summernote({
+$(".summernote").summernote({ 
+	
     height: 503,
     lang: "ko-KR",
     placeholder: '내용을 입력해주세요',

@@ -52,7 +52,7 @@
     int endIndex = Math.min(startIndex + itemsPerPage, totalItems);
    
 %>
-<main>
+<main data-aos="fade" data-aos-delay="700">
    <!-- ======= End Page Header ======= -->
    <div class="page-header d-flex align-items-center">
       <div class="container position-relative">

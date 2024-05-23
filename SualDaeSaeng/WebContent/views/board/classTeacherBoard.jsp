@@ -29,7 +29,7 @@
     long daysDiff = ChronoUnit.DAYS.between(today,memDetail.getMemRegdt().plusDays(190));
     
 %>
-<main>
+<main data-aos="fade" data-aos-delay="700">
   <section id="calssBoard" class="gallery-single ">
     <div class="container-xl">
       <div class="row justify-content-between gy-4">

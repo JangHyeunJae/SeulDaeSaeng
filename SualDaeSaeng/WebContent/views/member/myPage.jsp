@@ -27,10 +27,11 @@
 	List<StoryVO> storyVo = service.getStoryList(memDetail.getUsersNo());
 	List<BoardVO> memBoardList = request.getAttribute("memBoardList") == null 
 								? new ArrayList() : (List<BoardVO>)request.getAttribute("memBoardList");
-	
+	List<BoardVO> memberBoardReplyList = request.getAttribute("memberBoardReplyList") == null
+								? new ArrayList() : (List<BoardVO>)request.getAttribute("memberBoardReplyList");
 %>
 
- <main class="myPage" data-aos="fade" data-aos-delay="1500">
+ <main class="myPage" data-aos="fade" data-aos-delay="700">
       <section id="myPage" class="gallery-single ">
         <div class="container-xl">
           <div class="row justify-content-between gy-4">
@@ -57,7 +58,7 @@
                     <strong>주소 </strong>
                     <span>
                     <%if(addrVo.getAddrBasic() != null){ %>
-                    <%=addrVo.getAddrBasic() %>
+                    	<%=addrVo.getAddrBasic() %>
                     <%
                    		 }else{
                     %>
@@ -71,7 +72,7 @@
                     <strong>전화번호</strong>
                     <span>
                     <%if(memberVo.getMemTel() != null){ %>
-                    <%=memberVo.getMemTel() %>
+                    	<%=memberVo.getMemTel() %>
                     <%
                    		 }else{
                     %>
@@ -85,7 +86,7 @@
                     <strong>이메일</strong>
                     <span>
                     <%if(memberVo.getMemEmail() != null){ %>
-                    <%=memberVo.getMemEmail() %>
+                    	<%=memberVo.getMemEmail() %>
                     <%
                    		 }else{
                     %>
@@ -99,7 +100,7 @@
                     <strong>생일</strong>
                     <span>
                     <%if(memberVo.getMemBirth() != null){ %>
-                    <%=memberVo.getMemBirth() %>
+                    	<%=memberVo.getMemBirth() %>
                     <%
                    		 }else{
                     %>
@@ -113,7 +114,7 @@
                     <strong>반</strong>
                     <span>
                     <%if(memberVo.getMemClass() != null){ %>
-                    <%=memberVo.getMemClass() %>
+                    	<%=memberVo.getMemClass() %>
                     <%
                    		 }else{
                     %>
@@ -275,26 +276,26 @@
                   <div class="section-header">
                     <h2>board</h2>
                     <p class="d-flex justify-content-between align-items-center"> 
-                     	 내가 댓슬 쓴 게시글 
+                     	 내가 댓글 쓴 게시글 
                       <button type="button" class="btn btn-outline-warning btn-sm">더보기</button>
                     </p>
                   </div>
                   <div class="list-group">
                   <%	
                   		for(int i=0; i<4; i++){
-                  			if(memBoardList.size() == 0){
+                  			if(memberBoardReplyList.size() == 0){
                   	%>
                   	<p>작성한 글이 없습니다.</p>
                   <%			
                   				break;
                   			}
-                  			BoardVO boardVo = memBoardList.get(i);
+                  			BoardVO boardReplyVo = memberBoardReplyList.get(i);
                   	%>			
                     <a href="#" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">
                       <h6 class="mb-2 text-truncate">
-                        <small class="badge bg-light"><%=boardVo.getBoardLevelKr() %></small>
+                        <small class="badge bg-light"><%=boardReplyVo.getBoardLevelKr() %></small>
                         <%
-                        	if(boardVo.getFileNo() > 0){
+                        	if(boardReplyVo.getFileNo() > 0){
                         %>
                         <small class="attach">
                           <i class="bi bi-paperclip"></i>
@@ -307,12 +308,12 @@
                         </small>
 						<%
                         	}
-	                        String Title = boardVo.getBoardTitle();
+	                        String Title = boardReplyVo.getBoardTitle();
 	                        if(Title.length() > 10) Title = Title.substring(0, 11) + "...";
 						%>                        		
                         <%=Title %>
                       </h6>
-                      <small class="days"><%=boardVo.getBoardAt() %></small>
+                      <small class="days"><%=boardReplyVo.getBoardAt() %></small>
                     </a>
                   <%
                   			if(memBoardList.size() == i) break;

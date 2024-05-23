@@ -967,7 +967,7 @@ public class BoardDaoImpl implements IBoardDao {
 				session.close();
 			}
 		}
-
+		
 		return status;
 	}
 
@@ -1015,8 +1015,8 @@ public class BoardDaoImpl implements IBoardDao {
 	      return cnt;
 	   }
 
-@Override
-public int updateStory(int storyNo) {
+  @Override
+  public int updateStory(int storyNo) {
 	SqlSession session = null;
 	int status = 0;
 	try {

@@ -839,27 +839,6 @@ public class BoardDaoImpl implements IBoardDao {
 		return cnt;
 	}
 
-     @Override
-   public int deleteStory(int storyNo) {
-
-      SqlSession session = null;
-      int cnt = 0;
-      try {
-         session = MyBatisUtil.getSqlSession();
-
-         cnt = session.update("board.deleteStory", storyNo);
-
-         if (cnt > 0) {
-            session.commit();
-         }
-      } catch (PersistenceException ex) {
-         ex.printStackTrace();
-      } finally {
-         session.close();
-      }
-      return cnt;
-   }
-
    @Override
    public List<StoryVO> allStoryList() {
 

@@ -51,7 +51,7 @@
 	        <p>주소 : <span id="addrNo"></span></p>
 		    <div class="modal-footer">
 		    	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>	       
-		    	<button type="button" class="btn btn-primary" id="accept" onclick="location.href='/admin/memberYN.do?usersNo='">수락</button>
+		    	<button type="button" class="btn btn-primary" id="accept" name="accept" >수락</button>
 		    	<!-- <a href="/admin/memberYN.do?usersNo=" class="btn btn-primary" id="accept">수락</a> -->
 		    </div>
  		</form>   
@@ -277,16 +277,14 @@
     		event.preventDefault();
     		
     		var usersNo = $(this).data("selectno");
+    		var selectUsersNo;
 //    		var targetHref = $(accept).attr('href');
-    		var usersNo = 0;
     		 $.ajax({
  	            type: 'post',
  	            url: '/views/adminPage.do',
   	            data: { usersNo: usersNo}, 
  	            success: function (data) {
  	            	
- 	            	
-
 //   	                console.log(JSON.parse(data)); // list 정보 들어옴
 // 	                let rst = JSON.parse(data)[0]; //index로 접근 
  	                
@@ -301,7 +299,7 @@
   	                $('#memClass').text(data.memClass);
   	                $('#memRegdt').text(data.memRegdt);
   	                $('#addrNo').text(data.addrNo);
-  	                usersNo = data.usersNo;
+  	             	selectUsersNo = data.usersNo;
   	                
 //    		 		targetHref.after(usersNo);
  	            },
@@ -309,6 +307,11 @@
  	                console.error('Error');
  	            }
  	        });
+    		 
+    		 document.getElementById("accept").onclick = function () {
+	    		 document.location.href = "/admin/memberYN.do?usersNo=" + selectUsersNo;
+    		    };
+    		 
     	});
     
 });	

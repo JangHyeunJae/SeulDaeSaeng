@@ -52,6 +52,7 @@ public class LoginController extends HttpServlet {
 			req.getSession().setAttribute("usersRole", usersDetail.getUsersRole());
 			req.getSession().setAttribute("usersNo", usersDetail.getUsersNo());
 			if(usersDetail.getUsersRole() == 3) {
+				req.getSession().setAttribute("isAdminOk", "OK");
 				resp.sendRedirect(req.getContextPath() + "/views/adminPage.do");
 //				req.getRequestDispatcher(req.getContextPath() + "/views/adminPage.do").forward(req, resp);
 			}

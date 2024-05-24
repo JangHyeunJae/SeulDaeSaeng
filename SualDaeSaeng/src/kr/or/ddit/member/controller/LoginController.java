@@ -60,8 +60,6 @@ public class LoginController extends HttpServlet {
 			else {
 				MemberVO memDetail = loginService.getMemDetail(usersId);
 				req.getSession().setAttribute("memDetail", memDetail);
-				
-				resp.sendRedirect(req.getContextPath() + "/main.do");
 			}
 
 			 req.getSession().setAttribute("usersId", usersId);

@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import kr.or.ddit.board.dao.BoardDaoImpl;
 import kr.or.ddit.board.dao.IBoardDao;
 import kr.or.ddit.board.vo.FileDetailVO;
+import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.member.vo.UsersVO;
 import kr.or.ddit.restaurant.vo.RestaurantVO;
 import kr.or.ddit.restaurant.vo.ReviewVO;
@@ -289,7 +290,48 @@ public class RestaurantDAOImpl implements IRestaurantDAO{
 		return cnt;
 	}
 
+
 	@Override
+	public List<MemberVO> getLikeMemList() {
+		
+		List<MemberVO> likeMemList = new ArrayList<MemberVO>();
+
+		SqlSession session = null;
+
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+            
+			likeMemList = session.selectList("restaurant.getLikeMemList");
+
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return likeMemList;
+	}
+  
+  	@Override
+	public List<RestaurantVO> getMyLikeList(int usersNo) {
+		
+		List<RestaurantVO> myLikeList = new ArrayList<RestaurantVO>();
+
+		SqlSession session = null;
+
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+            
+			myLikeList = session.selectList("restaurant.getMyLikeList",usersNo);
+
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return myLikeList;
+	}
+
+
 	public List<RestaurantVO> getReviewsByUserId(String usersId) {
         SqlSession session = null;
 		List<RestaurantVO> resList = null;
@@ -379,7 +421,6 @@ public class RestaurantDAOImpl implements IRestaurantDAO{
 		} finally {
 			session.close();
 		}
-		return restReviewList;
+    		return restReviewList;
 	}
-  
 }

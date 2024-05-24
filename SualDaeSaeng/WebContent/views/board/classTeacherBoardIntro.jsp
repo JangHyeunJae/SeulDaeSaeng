@@ -17,7 +17,7 @@
       <section id="teacherIntro" class="container pt-0 pb-0">
         <div class="row gy-4 justify-content-center">
         <%
-        for(int i = 304 ; i < 308 ; i++){
+        for(int i = 301 ; i < 306 ; i++){
         %>
           <a href="<%=request.getContextPath()%>/classTeacherBoard.do?levelChk=<%=i %>" class="col-xl-3 col-lg-4 col-md-6 mt-0 p-3">
             <p class="mb-0 p-4 text-center" id="class-no">

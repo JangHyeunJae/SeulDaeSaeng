@@ -37,7 +37,7 @@ String isAdminOk = (String) session.getAttribute("isAdminOk");
     <link href="/vendor/aos/aos.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="/css/main.css" rel="stylesheet">
+     <link href="/css/main.css" rel="stylesheet">
     
     <% if(request.getRequestURI().contains("index")){ %>
          <link href="/css/index.css" rel="stylesheet">
@@ -144,7 +144,6 @@ String isAdminOk = (String) session.getAttribute("isAdminOk");
                    		<a class="dropdown-item" href="<%=request.getContextPath() %>/login.do">로그인</a>
               	   </li>
 
-
             <% 
                }else{
             %>
@@ -167,7 +166,6 @@ String isAdminOk = (String) session.getAttribute("isAdminOk");
             <% 
                }
             %>
-
                 <!-- <li><a class="dropdown-item" href="logout.html">로그아웃</a></li><li><a class="dropdown-item" href="myPage.html"><span>정윤지</span>페이지</a></li>-->
               </ul>
             </div>

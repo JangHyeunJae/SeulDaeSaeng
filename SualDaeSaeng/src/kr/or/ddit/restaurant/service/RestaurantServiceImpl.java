@@ -13,6 +13,7 @@ import org.apache.logging.log4j.core.net.DatagramOutputStream;
 
 import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.vo.FileDetailVO;
+import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.member.vo.UsersVO;
 import kr.or.ddit.restaurant.dao.IRestaurantDAO;
 import kr.or.ddit.restaurant.dao.RestaurantDAOImpl;
@@ -149,6 +150,16 @@ public class RestaurantServiceImpl implements IRestaurantService {
 	}
 
 	@Override
+	public List<MemberVO> getLikeMemList() {
+		return dao.getLikeMemList();
+	}
+
+	@Override
+	public List<RestaurantVO> getMyLikeList(int usersNo) {
+		return dao.getMyLikeList(usersNo);
+  }
+
+ @Override
 	public List<RestaurantVO> getReviewsByUserId(String usersId) {
 		return dao.getReviewsByUserId(usersId);
   }

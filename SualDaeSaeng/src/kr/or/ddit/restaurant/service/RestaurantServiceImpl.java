@@ -95,8 +95,8 @@ public class RestaurantServiceImpl implements IRestaurantService {
 	public int insertFile(Part filePart) {
         
 //		String uploadPath = "d:/D_Other/" + UPLOAD_DIR;
-//		String uploadPath = "D:/A_TeachingMaterial/999_project/SeulDaeSaeng/SualDaeSaeng/WebContent/img/upload_files";
-		String uploadPath = "C:/Users/jyj96/git/SeulDaeSaeng/SeulDaeSaeng/SualDaeSaeng/WebContent/img/upload_files";
+		String uploadPath = "D:/A_TeachingMaterial/999_project/SeulDaeSaeng/SualDaeSaeng/WebContent/img/upload_files";
+//		String uploadPath = "C:/Users/jyj96/git/SeulDaeSaeng/SeulDaeSaeng/SualDaeSaeng/WebContent/img/upload_files";
         
         File uploadDir = new File(uploadPath);
         if(!uploadDir.exists()) {

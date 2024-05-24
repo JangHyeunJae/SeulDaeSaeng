@@ -28,7 +28,7 @@
 
     <div id="preloader">
       <div class="line"></div>
-    </div> 
+    </div>
     
     <!-- Vendor JS Files -->
 

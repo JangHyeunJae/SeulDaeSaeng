@@ -433,6 +433,5 @@ public class MemberDaoImpl implements IMemberDao {
       return usersDetail;
    }
 
-
 }
 

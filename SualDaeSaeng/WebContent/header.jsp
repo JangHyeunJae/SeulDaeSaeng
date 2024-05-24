@@ -166,6 +166,8 @@ String isAdminOk = (String) session.getAttribute("isAdminOk");
             <% 
                }
             %>
+
+
                 <!-- <li><a class="dropdown-item" href="logout.html">로그아웃</a></li><li><a class="dropdown-item" href="myPage.html"><span>정윤지</span>페이지</a></li>-->
               </ul>
             </div>

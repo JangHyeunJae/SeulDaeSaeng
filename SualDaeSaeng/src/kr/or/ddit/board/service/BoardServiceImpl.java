@@ -182,7 +182,7 @@ public class BoardServiceImpl implements IBoardService{
 
 	@Override
 	public int insertBoardFile(Part filePart, int levelChk) {
-        
+
 		String uploadPath = "d:/D_Other/" + UPLOAD_DIR;
         
         File uploadDir = new File(uploadPath);
@@ -211,14 +211,16 @@ public class BoardServiceImpl implements IBoardService{
         	//확장명 추출
         	String fileExtension = orignFileName.lastIndexOf(".") < 0 ? 
         				"" : orignFileName.substring(orignFileName.lastIndexOf(".") + 1);
-        		
+        	
         	fileDetail.setFileLevel(levelChk);
         	fileDetail.setFileExt(fileExtension);
         	fileDetail.setFileOgname(orignFileName);
         	fileDetail.setFileSavednm(fileSavednm);
         	fileDetail.setFileSavepath(fileSavepath);
         	fileDetail.setFileSize(fileSize);
-        return boardDao.insertBoardFile(fileDetail);
+        	
+
+            return boardDao.insertBoardFile(fileDetail);
      }
 
 	@Override

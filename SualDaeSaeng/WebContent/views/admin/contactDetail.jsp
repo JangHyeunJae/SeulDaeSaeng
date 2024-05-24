@@ -1,3 +1,5 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="org.apache.logging.log4j.core.impl.MementoMessage"%>
 <%@page import="kr.or.ddit.contact.vo.ContactVO"%>
 <%@page import="java.util.List"%>
@@ -5,7 +7,10 @@
     pageEncoding="UTF-8"%>
 
 <%@include file="/header.jsp" %>
-
+ <%
+ 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");   
+      		String formatDate = sdf.format(new Date());
+ %>
 <%
 
 	ContactVO contactVO =(ContactVO) request.getAttribute("contactVO");
@@ -29,7 +34,7 @@
             <div class="col-lg-9">
                 <div class="row">
                   <div class="col-md-6 form-group">
-                    <p><%=contactVO.getqAt() %></p>
+                    <p><%=sdf.format(contactVO.getqAt()) %></p>
                   </div>
                   <div class="col-md-6 form-group mt-3 mt-md-0">
                     <p><%=contactVO.getqEmail() %></p>

@@ -15,7 +15,7 @@
     <!-- End Header -->
     <main data-aos="fade" data-aos-delay="700" class="aos-init aos-animate">
       <section id="teacherIntro" class="container pt-0 pb-0">
-        <div class="row gy-4 justify-content-center">
+        <div class="row gy-4">
         <%
         for(int i = 301 ; i < 306 ; i++){
         %>

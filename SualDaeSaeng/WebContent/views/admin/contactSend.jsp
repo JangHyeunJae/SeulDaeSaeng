@@ -23,6 +23,7 @@
 		                        <div class="form-group">
 		                            <input type="text" class="form-control" name="memEmail" id="memEmail" placeholder="이메일"  value="<%=contactVO.getqEmail() %>" readonly="readonly">
 		                            <input type="text" class="form-control" name="title" id="title" placeholder="제목" >
+		                             <input type="hidden" name="qNO" value="<%= contactVO.getqNO() %>">
 		                        </div>
 		                        <textarea class="form-control" rows="5" id="body" name="body"></textarea>
 		                        <div class="text-center mt-5 mb-5">

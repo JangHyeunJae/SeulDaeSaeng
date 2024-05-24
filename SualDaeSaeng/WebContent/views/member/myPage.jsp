@@ -38,7 +38,7 @@
             <div class="col-lg-3">
               <div class="portfolio-info sticky-top">
                 <h3 class="d-flex align-items-center">
-                  <img src="img/testimonials/testimonials-2.jpg" class="testimonial-img me-2" alt="" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
+                  <img src="img/testimonials/testimonials-2.jpg" class="testimonial-img me-2" alt="" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                   <p>
                     <span><%if(memberVo.getMemNick() != null){ %>
                     <%=memberVo.getMemNick() %>(<%=memberVo.getMemName() %>)
@@ -197,13 +197,13 @@
                     <div class="service-item position-relative w-100">
                       <i class="bi bi-card-list"></i>
                       <h4>
-                        <a href="/myReview.do" class="stretched-link">내가 쓴 리뷰</a>
+                        <a href="/member/myReview.do" class="stretched-link">내가 쓴 리뷰</a>
                       </h4>
                       <p>식당에 내가 남긴 리뷰를 확인하고 삭제할 수 있습니다. </p>
                     </div>
                   </div>
                   <!-- End Service Item -->
-                  <div class="col-md-4 col-12 d-flex">
+<!--                   <div class="col-md-4 col-12 d-flex">
                     <div class="service-item position-relative w-100">
                       <i class="bi bi-heart-fill"></i>
                       <h4>
@@ -211,9 +211,9 @@
                       </h4>
                       <p>내가 찜한 식당 리스트를 관리하고 추천한 맛집리스트를 올리거나 삭제할 수 있습니다. </p>
                     </div>
-                  </div>
+                  </div> -->
                   <!-- End Service Item -->
-                  <div class="col-md-4 col-12 d-flex">
+<!--                   <div class="col-md-4 col-12 d-flex">
                     <div class="service-item position-relative w-100">
                       <i class="bi bi-calendar-date"></i>
                       <h4>
@@ -221,7 +221,7 @@
                       </h4>
                       <p> 학급시간표를 확인하고 내 스케줄을 관리해 보세요. </p>
                     </div>
-                  </div>
+                  </div> -->
                   <!-- End Service Item -->
                 </div>
               </div>
@@ -280,7 +280,7 @@
                     <h2>board</h2>
                     <p class="d-flex justify-content-between align-items-center"> 
                      	 내가 댓글 쓴 게시글 
-                      <button type="button" class="btn btn-outline-warning btn-sm">더보기</button>
+                      <button type="button" class="btn btn-outline-warning btn-sm" onclick="location.href='/member/myComment.do'">더보기</button>
                     </p>
                   </div>
                   <div class="list-group">

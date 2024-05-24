@@ -114,6 +114,7 @@ var webSocket = new WebSocket("ws://192.168.34.118:8888/ChatingServer/" + classI
 	
 			webSocket.send(chatId + '|' + chatMessage.value); // 서버로 전송 
 			chatMessage.value = ""; //메시지 입력창 내용 지우기 
+			chatWindow.scrollTop = chatWindow.scrollHeight;
 	    }
 	}
 
@@ -130,7 +131,7 @@ var webSocket = new WebSocket("ws://192.168.34.118:8888/ChatingServer/" + classI
 
 	// 웹소켓 서버에 연결되었을 때 실행
 	webSocket.onopen = function(event) {
-		chatWindow.innerHTML += "<div style='text-align: center;'>채팅방에 입장하였습니다.</div>";
+		chatWindow.innerHTML += "<div style='text-align: center;'>채팅방에 연결되었습니다.</div>";
 	};
 
 	// 웹소켓이 닫혔을 때 실행
@@ -174,6 +175,7 @@ var webSocket = new WebSocket("ws://192.168.34.118:8888/ChatingServer/" + classI
 			}
 		}
 	    }
+		chatWindow.scrollTop = chatWindow.scrollHeight;
 	};
 </script>
 </body>

@@ -48,8 +48,8 @@
 	where Q_NO = #{qNO}
 </select>
 
-<update id="contactup"   parameterType="String">
-	UPDATE QUESTION SET Q_NO = 'Y' 
+<update id="contactup"   parameterType="int">
+	UPDATE QUESTION SET Q_YN = 'Y' 
 		WHERE Q_NO = #{qNO}
 
 </update>

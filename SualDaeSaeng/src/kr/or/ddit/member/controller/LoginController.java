@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionEvent;
 
 import com.google.gson.JsonObject;
 
@@ -52,18 +53,25 @@ public class LoginController extends HttpServlet {
 			req.getSession().setAttribute("usersRole", usersDetail.getUsersRole());
 			req.getSession().setAttribute("usersNo", usersDetail.getUsersNo());
 			if(usersDetail.getUsersRole() == 3) {
+				req.getSession().setAttribute("isAdminOk", "OK");
 				resp.sendRedirect(req.getContextPath() + "/views/adminPage.do");
 //				req.getRequestDispatcher(req.getContextPath() + "/views/adminPage.do").forward(req, resp);
 			}
 			else {
 				MemberVO memDetail = loginService.getMemDetail(usersId);
 				req.getSession().setAttribute("memDetail", memDetail);
-				
-				List<restLikeVO> restLikeList = loginService.getLikeRest(memDetail.getUsersNo());
-				
-				resp.sendRedirect(req.getContextPath() + "/main.do");
 			}
 
+			 req.getSession().setAttribute("usersId", usersId);
+			 req.getSession().setAttribute("usersPass", usersPass);
+			 req.getSession().setAttribute("usersDetail", usersDetail);
+			 req.getSession().setAttribute("usersRole", usersDetail.getUsersRole());
+			 req.getSession().setAttribute("usersNo", usersDetail.getUsersNo());
+
+			 HttpSession session = req.getSession();
+			 session.setMaxInactiveInterval(0);
+			
+			resp.sendRedirect(req.getContextPath() + "/main.do");
 
 		} else {
 			JsonObject jsonObject = new JsonObject();

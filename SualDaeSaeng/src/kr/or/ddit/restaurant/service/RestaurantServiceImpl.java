@@ -14,10 +14,12 @@ import org.apache.logging.log4j.core.net.DatagramOutputStream;
 import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.vo.FileDetailVO;
 import kr.or.ddit.member.vo.MemberVO;
+import kr.or.ddit.member.vo.UsersVO;
 import kr.or.ddit.restaurant.dao.IRestaurantDAO;
 import kr.or.ddit.restaurant.dao.RestaurantDAOImpl;
 import kr.or.ddit.restaurant.vo.RestaurantVO;
 import kr.or.ddit.restaurant.vo.ReviewVO;
+import kr.or.ddit.restaurant.vo.restLikeVO;
 
 public class RestaurantServiceImpl implements IRestaurantService {
 	
@@ -95,7 +97,8 @@ public class RestaurantServiceImpl implements IRestaurantService {
 	public int insertFile(Part filePart) {
         
 //		String uploadPath = "d:/D_Other/" + UPLOAD_DIR;
-		String uploadPath = "D:/A_TeachingMaterial/999_project/SeulDaeSaeng/SualDaeSaeng/WebContent/img/upload_files";
+//		String uploadPath = "D:/A_TeachingMaterial/999_project/SeulDaeSaeng/SualDaeSaeng/WebContent/img/upload_files";
+		String uploadPath = "C:/Users/jyj96/git/SeulDaeSaeng/SeulDaeSaeng/SualDaeSaeng/WebContent/img/upload_files";
         
         File uploadDir = new File(uploadPath);
         if(!uploadDir.exists()) {
@@ -154,6 +157,31 @@ public class RestaurantServiceImpl implements IRestaurantService {
 	@Override
 	public List<RestaurantVO> getMyLikeList(int usersNo) {
 		return dao.getMyLikeList(usersNo);
+  }
+
+ @Override
+	public List<RestaurantVO> getReviewsByUserId(String usersId) {
+		return dao.getReviewsByUserId(usersId);
+  }
+  
+  @Override
+	public int insertMyLike(Map<String, Object> likeInfo) {
+		return dao.insertMyLike(likeInfo);		
+	}
+
+	@Override
+	public int updateMyLike(Map<String, Object> likeInfo) {
+		return dao.updateMyLike(likeInfo);				
+	}
+
+	@Override
+	public List<restLikeVO> restLikeList(String restBizno) {
+		return dao.restLikeList(restBizno);				
+	}
+
+	@Override
+	public List<RestaurantVO> restReviewList() {
+		return dao.restReviewList();		
 	}
 	
 }

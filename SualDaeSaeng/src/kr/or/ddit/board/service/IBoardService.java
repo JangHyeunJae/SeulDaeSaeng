@@ -120,5 +120,9 @@ public interface IBoardService {
   public int updateStory(int storyNo);
 
   public int editHomework(Map<String, Object> parameter);
+  
+  public int getUserRole(int usersNo);
+
+public List<BoardVO> myCommentList(int usersNo);
 
 }

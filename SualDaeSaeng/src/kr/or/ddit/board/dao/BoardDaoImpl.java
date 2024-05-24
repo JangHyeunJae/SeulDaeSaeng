@@ -1056,23 +1056,43 @@ public class BoardDaoImpl implements IBoardDao {
 		return status;
 	}
 
-  @Override
-  public int updateStory(int storyNo) {
-	SqlSession session = null;
-	int status = 0;
-	try {
-		session = MyBatisUtil.getSqlSession();
 
-		status = session.update("board.updateStory", storyNo);
-
-		if (status > 0) {
-			session.commit();
+	@Override
+	public int updateStory(int storyNo) {
+		SqlSession session = null;
+		int status = 0;
+		try {
+			session = MyBatisUtil.getSqlSession();
+	
+			status = session.update("board.updateStory", storyNo);
+	
+			if (status > 0) {
+				session.commit();
+			}
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
 		}
-	} catch (PersistenceException ex) {
-		ex.printStackTrace();
-	} finally {
-		session.close();
+		return status;
 	}
-	return status;
-}
+	
+	@Override
+	public int getUserRole(int usersNo) {
+		int userRole = 0;
+
+		SqlSession session = null;
+
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+
+			userRole = session.selectOne("board.getUserRole", usersNo);
+
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return userRole;
+	}
 }

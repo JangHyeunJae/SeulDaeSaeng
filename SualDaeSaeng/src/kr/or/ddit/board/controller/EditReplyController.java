@@ -47,13 +47,19 @@ public class EditReplyController extends HttpServlet{
 			String msg = "정상적으로 수정되었습니다.";
 			req.getSession().setAttribute("msg", msg);
 			if(classBoardChk != 0) {
-				resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk
-						+ "&classBoardChk=" + classBoardChk);
+				resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk + "&classBoardChk=" + classBoardChk);
 			}else {
 				resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk);
 			}
 		}else {				// 실패
-			req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
+			String msg = "삭제 실패했습니다.";
+			req.getSession().setAttribute("msg", msg);
+			if(classBoardChk != 0) {
+				req.getRequestDispatcher("/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk
+						+ "&classBoardChk=" + classBoardChk).forward(req, resp);
+			}else {
+				req.getRequestDispatcher("/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk).forward(req, resp);
+			}
 		}
 	}
 }

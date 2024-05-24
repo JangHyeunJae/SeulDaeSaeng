@@ -64,8 +64,5 @@ public interface IMemberService {
 	public MemberVO selectScore(String usersId);
 
 	public MemberVO selectOne(String usersId);
-
-	public List<restLikeVO> getLikeRest(int addrNo);
-
 }
 

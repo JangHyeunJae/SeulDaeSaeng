@@ -11,8 +11,10 @@ import kr.or.ddit.board.dao.BoardDaoImpl;
 import kr.or.ddit.board.dao.IBoardDao;
 import kr.or.ddit.board.vo.FileDetailVO;
 import kr.or.ddit.member.vo.MemberVO;
+import kr.or.ddit.member.vo.UsersVO;
 import kr.or.ddit.restaurant.vo.RestaurantVO;
 import kr.or.ddit.restaurant.vo.ReviewVO;
+import kr.or.ddit.restaurant.vo.restLikeVO;
 import kr.or.ddit.util.MyBatisUtil;
 
 public class RestaurantDAOImpl implements IRestaurantDAO{
@@ -288,6 +290,7 @@ public class RestaurantDAOImpl implements IRestaurantDAO{
 		return cnt;
 	}
 
+
 	@Override
 	public List<MemberVO> getLikeMemList() {
 		
@@ -307,8 +310,8 @@ public class RestaurantDAOImpl implements IRestaurantDAO{
 		}
 		return likeMemList;
 	}
-
-	@Override
+  
+  	@Override
 	public List<RestaurantVO> getMyLikeList(int usersNo) {
 		
 		List<RestaurantVO> myLikeList = new ArrayList<RestaurantVO>();
@@ -328,4 +331,96 @@ public class RestaurantDAOImpl implements IRestaurantDAO{
 		return myLikeList;
 	}
 
+
+	public List<RestaurantVO> getReviewsByUserId(String usersId) {
+        SqlSession session = null;
+		List<RestaurantVO> resList = null;
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			
+			resList = session.selectList("restaurant.userReviews", usersId);
+			
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return resList;
+	}
+  
+  @Override
+	public int insertMyLike(Map<String, Object> likeInfo ) {
+		SqlSession session = null;
+		int status = 0;		
+		
+		try {
+			session = MyBatisUtil.getSqlSession();
+			status = session.insert("restaurant.insertMyLike", likeInfo);
+			
+			if(status > 0) {	// 성공
+				session.commit();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		
+		return status;
+	}
+
+	@Override
+	public int updateMyLike(Map<String, Object> likeInfo) {
+		SqlSession session = null;
+		int status = 0;		
+		
+		try {
+			session = MyBatisUtil.getSqlSession();
+			status = session.insert("restaurant.updateMyLike", likeInfo);
+			
+			if(status > 0) {	// 성공
+				session.commit();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		
+		return status;
+	}
+
+	@Override
+	public List<restLikeVO> restLikeList(String restBizno) {
+		List<restLikeVO> restLikeList = new ArrayList<restLikeVO>();
+		SqlSession session = null;
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			restLikeList = session.selectList("restaurant.selectLikeRest",restBizno);
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return restLikeList;
+	}
+
+	@Override
+	public List<RestaurantVO> restReviewList() {
+		List<RestaurantVO> restReviewList = new ArrayList<RestaurantVO>();
+		SqlSession session = null;
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			restReviewList = session.selectList("restaurant.mainRestReview");
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+    		return restReviewList;
+	}
 }

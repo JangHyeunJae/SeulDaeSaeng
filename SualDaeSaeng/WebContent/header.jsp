@@ -9,9 +9,9 @@
 
 String uri = request.getRequestURI();
 String id = (String) session.getAttribute("usersId");
-MemberVO memInfo = (MemberVO) session.getAttribute("memDetail") != null ? (MemberVO) session.getAttribute("memDetail") : new MemberVO();
+/* MemberVO memInfo = (MemberVO) session.getAttribute("memDetail") != null ? (MemberVO) session.getAttribute("memDetail") : new MemberVO();
 String memNick = memInfo.getMemNick();
-int usersRole = (int) session.getAttribute("usersRole");
+int usersRole = (int) session.getAttribute("usersRole"); */
 
 %>
 
@@ -38,7 +38,7 @@ int usersRole = (int) session.getAttribute("usersRole");
     <link href="/vendor/aos/aos.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="/css/main.css" rel="stylesheet">
+     <link href="/css/main.css" rel="stylesheet">
     
     <% if(request.getRequestURI().contains("index")){ %>
       	<link href="/css/index.css" rel="stylesheet">
@@ -144,29 +144,17 @@ int usersRole = (int) session.getAttribute("usersRole");
 					</li>
 
 				<% 
-					}else{
-				%>
-                	<li>
-                		<%
-                			if(usersRole == 3){
-                		%>
-                  		<a class="dropdown-item" href="<%=request.getContextPath() %>/views/adminPage.do">관리자 페이지</a>
-                		<%		
-                			}else{
-                		%>
-                  		<a class="dropdown-item" href="<%=request.getContextPath() %>/member/myPageHome.do">마이페이지</a>
-                		<%	
-                			}
-                		%>
-                	</li>
-					<li>
-						<a class="dropdown-item" href="<%=request.getContextPath() %>/logout.do">로그아웃</a>
-					</li>
-				<% 
-					}
-				%>
-               
-
+               }else{
+            %>
+                   <li>
+                        <a class="dropdown-item" href="<%=request.getContextPath() %>/member/myPageHome.do">마이페이지</a>
+                   </li>
+               <li>
+                  <a class="dropdown-item" href="<%=request.getContextPath() %>/logout.do">로그아웃</a>
+               </li>
+            <% 
+               }
+            %>
                 <!-- <li><a class="dropdown-item" href="logout.html">로그아웃</a></li><li><a class="dropdown-item" href="myPage.html"><span>정윤지</span>페이지</a></li>-->
               </ul>
             </div>

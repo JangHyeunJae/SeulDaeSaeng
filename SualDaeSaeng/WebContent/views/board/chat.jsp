@@ -70,7 +70,7 @@
 <script>
 var classId = "<%=classId%>";
 var chatId = "<%=chatId%>";
-var webSocket = new WebSocket("ws://localhost:8888/ChatingServer/" + classId + "/" + chatId);
+var webSocket = new WebSocket("ws://192.168.34.118:8888/ChatingServer/" + classId + "/" + chatId);
 	var chatWindow, chatMessage, chatId;
 	
 	// 채팅창이 열리면 대화창, 메시지 입력창, 아이디 표시란으로 사용할 DOM 객체 저장

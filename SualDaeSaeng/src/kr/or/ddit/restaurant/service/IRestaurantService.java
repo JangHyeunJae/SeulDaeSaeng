@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.Part;
 
 import kr.or.ddit.board.vo.FileDetailVO;
+import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.restaurant.vo.RestaurantVO;
 import kr.or.ddit.restaurant.vo.ReviewVO;
 
@@ -24,4 +25,9 @@ public interface IRestaurantService {
 	public int insertFile(Part filePart);
 	public int insertReview(ReviewVO reviewVO);
 	public int deleteReview(int reviewNo);
+	
+	
+	//도연
+	public List<MemberVO> getLikeMemList();
+	public List<RestaurantVO> getMyLikeList(int usersNo);
 }

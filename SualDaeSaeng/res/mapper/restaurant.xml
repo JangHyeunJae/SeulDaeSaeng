@@ -13,6 +13,27 @@
 <result column="file_level" property="fileLevel"/>
 </resultMap>
 
+<resultMap type="kr.or.ddit.member.vo.MemberVO" id="memberMap"> <!-- 1 -->
+<result column="users_no" property="usersNo"/>
+<result column="mem_name" property="memName"/>
+<result column="mem_nick" property="memNick"/>
+<result column="mem_birth" property="memBirth"/>
+<result column="mem_email" property="memEmail"/>
+<result column="mem_tel" property="memTel"/>
+<result column="mem_class" property="memClass"/>
+<result column="mem_regdt" property="memRegdt"/>
+<result column="addr_no" property="addrNo"/>
+</resultMap>
+
+<!-- <resultMap type="kr.or.ddit.restaurant.vo.RestsVO" id="restsMap"> 1
+<result column="rest_bizno" property="restBizno"/>
+<result column="rest_name" property="restName"/>
+<result column="mcls_id" property="mclsId"/>
+<result column="scls_id" property="sclsId"/>
+<result column="addr_no" property="addrNo"/>
+<result column="distance" property="distance"/>
+</resultMap> -->
+
 	<select id="restaurantList" parameterType="hashMap" resultType="restVO">
 		<!-- 식당 카테고리별 리스트 -->
 		SELECT *
@@ -180,4 +201,37 @@
 	        update REVIEW set REVIEW_YN = 'N' where REVIEW_NO =#{reviewNo}
 	</update>
 	
+	<select id="getLikeMemList" resultMap="memberMap">
+	    SELECT b.*
+        FROM member b
+		JOIN (
+		    SELECT DISTINCT a.users_no
+		    FROM likes a
+		) a ON a.users_no = b.users_no
+		ORDER BY b.users_no DESC
+	</select>
+	
+	<select id="getMyLikeList" parameterType="int" resultType="restVO">
+	
+    select 
+    b.rest_bizno restBizno, 
+    b.rest_name Name, 
+    a.mcls_name mclsName, 
+    d.addr_basic addrBasic, 
+    COALESCE(avg(e.review_star), 0) as avgReviewStar,
+    count(*) as likeCount
+from 
+    restaurant b
+    join restmcls a on a.mcls_id = b.mcls_id 
+    join address d on b.addr_no = d.addr_no
+    join likes c on c.rest_bizno = b.rest_bizno and c.users_no = #{usersNo}
+    left join review e on c.rest_bizno = e.rest_bizno
+group by 
+    b.rest_bizno, 
+    b.rest_name, 
+    a.mcls_name, 
+    d.addr_basic,
+    c.rest_bizno
+	
+	</select>
 </mapper>

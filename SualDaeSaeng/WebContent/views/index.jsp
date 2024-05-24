@@ -23,10 +23,10 @@
 <% 
 	IBoardService boardService = BoardServiceImpl.getInstance();
 
-	List<RestaurantVO> restLikeList = (List<RestaurantVO>) request.getAttribute("restLikeList"); 
+	List<RestaurantVO> restLikeList = (List<RestaurantVO>) request.getAttribute("restLikeList");
 	List<BoardVO> boardList = (List<BoardVO>)boardService.allBoardList();
 	List<BoardVO> noticeList = (List<BoardVO>)boardService.selectBoardList(3);
-  List<StoryVO> storyList = (List<StoryVO>)request.getAttribute("storyList"); 
+    List<StoryVO> storyList = (List<StoryVO>)request.getAttribute("storyList");
 %>
 
     <main data-aos="fade" data-aos-delay="700">
@@ -286,7 +286,7 @@
               <p class="d-flex justify-content-between align-items-center">
                 <b>TOP3 <span>미식인의 추천맛집</span>
                 </b>
-                <button type="button" class="btn btn-outline-warning btn-sm">더보기</button>
+                <button type="button" class="btn btn-outline-warning btn-sm" onclick="location.href='<%=request.getContextPath()%>/gourmet/list.do'">더보기</button>
               </p>
             </li>
             <li class="food-list">

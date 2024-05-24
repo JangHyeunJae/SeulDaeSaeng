@@ -6,9 +6,11 @@
           <li>
             <a href="privacy.jsp">개인정보 처리방침</a>
           </li>
+          <!-- 
           <li>
             <a href="siteMap.jsp">사이트맵</a>
           </li>
+           -->
           <li>
             <a href="<%=request.getContextPath()%>/contact.do">오류제보</a>
           </li>

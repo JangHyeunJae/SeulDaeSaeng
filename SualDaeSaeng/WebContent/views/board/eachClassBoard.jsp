@@ -154,6 +154,11 @@
 						int idx = ((currentPage-1)*5);
 						for (int i = startIndex; i < endIndex; i++) {
 							BoardVO bv = boardList.get(i);
+							
+							// html 제거
+	                        String ogText = bv.getBoardCon();
+	                      	String regex = "<[^>]*>";
+	                      	String pureText = ogText.replaceAll(regex, "");
 				%>
 					<a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>
 					&idx=<%=idx %>&levelChk=<%=bv.getBoardLevel() %>&classBoardChk=<%=classBoardChk %>" class="list-group-item">
@@ -164,7 +169,7 @@
 							</h5>
 							<small class="badge bg-light"><%= levelChk %>호 게시판</small>
 						</div>
-						<p class="mb-2 text-truncate"><%= bv.getBoardCon() %></p>
+						<p class="mb-2 text-truncate">pureText</p>
 						<div class="d-flex w-100 justify-content-between align-items-center">
 							<small class="days"><%= bv.getBoardAt() %></small>
 							<small class="look"><i class="bi bi-eye"></i> <%= bv.getBoardHit() %></small>

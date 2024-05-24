@@ -18,6 +18,7 @@ import kr.or.ddit.member.service.MemberServiceImpl;
 import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.member.vo.UsersVO;
 import kr.or.ddit.restaurant.vo.restLikeVO;
+import kr.or.ddit.util.MemberUtil;
 
 @WebServlet("/login.do")
 public class LoginController extends HttpServlet {
@@ -46,12 +47,17 @@ public class LoginController extends HttpServlet {
 		
 		if (isSuccess) {
 			System.out.println("로그인성공");
+			HttpSession session = req.getSession();
+			session.setMaxInactiveInterval(0);
+			
 			UsersVO usersDetail = loginService.getUsersDetail(usersId);
-			req.getSession().setAttribute("usersId", usersId);
-			req.getSession().setAttribute("usersPass", usersPass);
-			req.getSession().setAttribute("usersDetail", usersDetail);
-			req.getSession().setAttribute("usersRole", usersDetail.getUsersRole());
-			req.getSession().setAttribute("usersNo", usersDetail.getUsersNo());
+			session.setAttribute("usersId", usersId);
+			session.setAttribute("usersPass", usersPass);
+			session.setAttribute("usersDetail", usersDetail);
+			session.setAttribute("usersRole", usersDetail.getUsersRole());
+			session.setAttribute("usersNo", usersDetail.getUsersNo());
+			
+			
 			if(usersDetail.getUsersRole() == 3) {
 				req.getSession().setAttribute("isAdminOk", "OK");
 				resp.sendRedirect(req.getContextPath() + "/views/adminPage.do");
@@ -60,23 +66,12 @@ public class LoginController extends HttpServlet {
 			else {
 				MemberVO memDetail = loginService.getMemDetail(usersId);
 				req.getSession().setAttribute("memDetail", memDetail);
+				resp.sendRedirect(req.getContextPath() + "/main.do");
 			}
-
-			 req.getSession().setAttribute("usersId", usersId);
-			 req.getSession().setAttribute("usersPass", usersPass);
-			 req.getSession().setAttribute("usersDetail", usersDetail);
-			 req.getSession().setAttribute("usersRole", usersDetail.getUsersRole());
-			 req.getSession().setAttribute("usersNo", usersDetail.getUsersNo());
-
-			 HttpSession session = req.getSession();
-			 session.setMaxInactiveInterval(0);
-			
-			resp.sendRedirect(req.getContextPath() + "/main.do");
-
 		} else {
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("isSuccess", "fail");
-			resp.sendRedirect("/login.do");
+			MemberUtil.memberMessage(req, resp, "아이디 또는 비밀번호가 올바르지 않습니다.", "/login.do");
 		}
 	}
 }

@@ -118,5 +118,9 @@ public class MemberServiceImpl implements IMemberService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public int getBoardMember(int boardNo) {
+		return memberDao.getBoardMember(boardNo);
+	}
 }
 

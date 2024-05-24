@@ -406,7 +406,7 @@
 		                <% } %>
 		                <hr>
 		                <div class="d-flex justify-content-between">
-			                <a type="button" class="btn btn-secondary btn-sm">
+			                <a href="<%=request.getContextPath()%>/gourmet/view.do?usersNo=<%=restVo.getUsersNo() %>&memNick=<%=restVo.getNickName()%>" class="btn btn-secondary btn-sm">
 			                  <span><%=restVo.getNickName() %>님 좋아요</span> 전체보기 
 			                </a>
 			                <% if(restVo.getUsersNo() == usersDetail.getUsersNo()){ %>

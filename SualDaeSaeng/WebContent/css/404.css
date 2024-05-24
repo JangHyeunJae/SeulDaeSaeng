@@ -1,4 +1,13 @@
 @charset "UTF-8";
+
+main{
+    min-height: 100vh;
+	margin-top: 200px;
+}
+#header .navbar, #footer,
+#header .d-flex.align-items-center{
+	display: none;
+}
 body { 
   background-color: #007aff; 
   color: #fff;

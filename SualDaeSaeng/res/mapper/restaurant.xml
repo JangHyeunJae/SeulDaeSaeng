@@ -289,10 +289,25 @@
 	</select>
 	
 	<select id="getMyLikeList" parameterType="int" resultType="restVO">
-	    SELECT rest_bizno restBizno, name name, mcls_name mclsName, addr_basic addrBasic, COALESCE(avg(review_star), 0) as avgReviewStar, like_count likeCount
-        from  restview
-        WHERE users_no = #{usersNo}
-        group by rest_bizno, name, mcls_name, mcls, addr_basic, rest_bizno, like_count
+	        select 
+    b.rest_bizno restBizno, 
+    b.rest_name Name, 
+    a.mcls_name mclsName, 
+    d.addr_basic addrBasic, 
+    COALESCE(avg(e.review_star), 0) as avgReviewStar,
+    COUNT(*) as likeCount
+from 
+    restaurant b
+    join restmcls a on a.mcls_id = b.mcls_id 
+    join address d on b.addr_no = d.addr_no
+    join likes c on c.rest_bizno = b.rest_bizno and c.users_no = #{usersNo}
+    left join review e on c.rest_bizno = e.rest_bizno
+group by 
+    b.rest_bizno, 
+    b.rest_name, 
+    a.mcls_name, 
+    d.addr_basic,
+    c.rest_bizno
 	</select>
 
 	<update id="updateMyLike" parameterType="restLikeVO">

@@ -21,6 +21,7 @@ public class MemberJoin extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
 	IMemberService service = MemberServiceImpl.getInstance();
+	
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

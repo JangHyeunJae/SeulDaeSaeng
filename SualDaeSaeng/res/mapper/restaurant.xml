@@ -52,7 +52,7 @@
 <result property="reviewNo" column="REVIEW_NO"/>
 <result property="usersNo" column="USERS_NO"/>
 <result property="nickName" column="NICK_NAME"/>
-<result property="bizno" column="BIZNO"/>
+<result property="bizNo" column="BIZNO"/>
 <result property="reviewStar" column="REVIEW_STAR"/>
 <result property="reviewText" column="REVIEW_TEXT"/>
 <result property="reviewYn" column="REVIEW_YN"/>
@@ -322,7 +322,7 @@ group by
 		UPDATE LIKES SET LIKE_YN = #{myLike} WHERE REST_BIZNO = #{restBizno} AND USERS_NO = #{userNo}
 	</update>
 	
-	<select id="userReviews" parameterType="string" resultMap="restaurantMap">
+	<select id="userReviews" parameterType="int" resultMap="restaurantMap">
 		select * from RESTVIEW
    		 where USERS_NO = #{usersNo}
 	</select>

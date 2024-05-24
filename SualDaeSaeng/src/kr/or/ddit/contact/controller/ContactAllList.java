@@ -42,6 +42,7 @@ public class ContactAllList extends HttpServlet {
 		String title = req.getParameter("title");  // 제목
 		String body = req.getParameter("body");   // 내용
 		String memEmail = req.getParameter("memEmail");  // 주소
+		int qNO = Integer.parseInt(req.getParameter("qNO"));  // 질문 번호
 	
 		MemberVO memberVO = new MemberVO();
 		memberVO.setMemEmail(memEmail);
@@ -51,18 +52,21 @@ public class ContactAllList extends HttpServlet {
 		
 		resp.setContentType("text/html;charset=UTF-8");
 		resp.setCharacterEncoding("UTF-8");
-//	    resp.getWriter().write("메일이 성공적으로 전송되었습니다.");
+
 		SqlSession session = MyBatisUtil.getSqlSession();
 		
-//		  try {
-//	            // 매퍼를 호출하여 쿼리 실행
-//	            int qNO = Integer.parseInt(req.getParameter("qNO"));
-//	            session.update("contactup", qNO);
-//	            session.commit(); // 커밋
-//	           
-//	        } finally {
-//	        	session.close(); // 세션 닫기
-//	        }
+	        try {
+	            int rowsUpdated = session.update("contactup", qNO);
+	            if (rowsUpdated > 0) {
+	                session.commit();
+	            } else {
+	                session.rollback();
+	            }
+	        } finally {
+	            session.close();
+	        }
+		
+
 
 	    resp.sendRedirect(req.getContextPath() + "/views/contactList.do");
 			    

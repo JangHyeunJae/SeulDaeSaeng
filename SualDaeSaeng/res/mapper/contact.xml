@@ -22,7 +22,6 @@
 
 
 
-
 <select id="selectContactList" resultMap="contactMap">
 	select 
 		Q_NO,
@@ -32,14 +31,22 @@
 		USERS_NO,
 		Q_EMAIL,
 		Q_YN
-		from question where Q_YN ='N'
+		from question where Q_YN ='N' 
 
 </select>
+
 
 <select id="selectallList" resultMap="contactMap">
 	select * from question
+	    ORDER BY 
+        CASE 
+            WHEN Q_YN = 'N' THEN 1 
+            ELSE 2 
+        END, 
+        Q_AT DESC
 
 </select>
+
 
 <select id="detailList" parameterType="int" resultMap="contactMap">
 	select
@@ -53,6 +60,8 @@
 		WHERE Q_NO = #{qNO}
 
 </update>
+
+
 <resultMap type="kr.or.ddit.contact.vo.ContactVO" id="contactMap">
      <result property="qNO" column="Q_NO"/>
      <result property="qTitle" column="Q_TITLE"/>

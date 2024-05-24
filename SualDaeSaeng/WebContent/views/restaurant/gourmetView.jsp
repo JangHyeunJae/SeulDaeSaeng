@@ -5,7 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/header.jsp" %>
 <%
-
+    IRestaurantService service = RestaurantServiceImpl.getInstance();
     int usersNo = (int)request.getAttribute("usersNo");
     String memNick = (String)request.getAttribute("memNick");
 
@@ -26,26 +26,27 @@
              <li class="food-list mb-4">
               <ul class="d-flex justify-content-between flex-wrap">
               <%
-
-              for(int k=0 ; k<8 ; k++){
+              List<RestaurantVO> myLikeList = service.getMyLikeList(usersNo);
+              for(int k=0 ; k<myLikeList.size() ; k++){
+            	  RestaurantVO myLike = myLikeList.get(k);
               %>
                 <li class="card col-lg-3 col-md-12">
                   <a href="http://">
-                    <p class="card-like">
+                    <p class="card-like text-light">
                       <i class="bi bi-heart-fill"></i>
-                      <span>25</span>
+                      <span><%=myLike.getLikeCount() %></span>
                     </p>
                     <div class="img-fluid">
                       <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                     </div>
                     <div class="card-body">
-                      <small class="badge bg-body-secondary mb-1">mcls입니다.</small>
+                      <small class="badge bg-body-secondary mb-1"><%=myLike.getMclsName() %></small>
                       <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title text-truncate">식당이름입니다.</h5>
+                        <h5 class="card-title text-truncate"><%=myLike.getName() %></h5>
                         <span>
-                          <i class="bi bi-star-fill"></i> 별점 </span>
+                          <i class="bi bi-star-fill"></i> <%=myLike.getAvgReviewStar() %> </span>
                       </div>
-                      <p class="card-text ">주소입니다.</p>
+                      <p class="card-text "><%=myLike.getAddrBasic() %></p>
                     </div>
                   </a>
                 </li>

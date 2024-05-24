@@ -45,7 +45,7 @@
 	
 <!-- 	<select id="selectmember2" resultType="kr.or.ddit.admin.vo.memberReqVO"> -->
 <!-- 		select * from member -->
-<!-- 		where USERS_NO = #{usersNo} -->
+<!-- 		where USERS_NO = #{usersNo} --> 
 	
 <!-- 	</select> -->
 	

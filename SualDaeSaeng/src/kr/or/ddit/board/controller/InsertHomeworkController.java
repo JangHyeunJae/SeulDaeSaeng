@@ -59,7 +59,9 @@ public class InsertHomeworkController extends HttpServlet{
 		if(status > 0) { 	// 성공
 			resp.sendRedirect("/homework/detail.do?hwNo=" + recentHw.getHwNo() +"&levelChk=" + levelChk);
 		}else {				// 실패
-			req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
+			String msg = "작성 실패했습니다.";
+			req.getSession().setAttribute("msg", msg);
+			req.getRequestDispatcher("/classTeacherBoard.do?levelChk=" + levelChk).forward(req, resp);
 		}
 	}
 }

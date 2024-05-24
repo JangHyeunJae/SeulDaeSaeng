@@ -71,7 +71,14 @@ public class EditBoardController extends HttpServlet{
 				resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk);
 			}
 		}else {				// 실패
-			req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
+			String msg = "수정 실패했습니다.";
+			req.getSession().setAttribute("msg", msg);
+			if(classBoardChk != 0) {
+				resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk
+						+ "&classBoardChk=" + classBoardChk);
+			}else {
+				resp.sendRedirect(req.getContextPath() + "/board/detail.do?boardNo=" + boardNo + "&idx=" + idx + "&levelChk=" + levelChk);
+			}
 		}
 	}
 }

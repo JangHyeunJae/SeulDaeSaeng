@@ -31,7 +31,7 @@ public class TeacherClassBoardController extends HttpServlet{
 		 
 		 int levelChk = Integer.parseInt(req.getParameter("levelChk"));
          List<BoardVO> noticeBoardList = boardService.getClassNoticeList(levelChk);
-         List<BoardVO> classBoardList = boardService.selectBoardList(levelChk);
+         List<BoardVO> classBoardList = boardService.selectClassBoardList(levelChk);
 		 List<FileDetailVO> fileList = boardService.getFileList(levelChk);
 		 req.setAttribute("noticeBoardList", noticeBoardList);
 		 req.setAttribute("classBoardList", classBoardList);

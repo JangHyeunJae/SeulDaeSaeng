@@ -199,11 +199,15 @@
                <%
 				}else{
 					int length = classBoardList.size();
-					if(classBoardList.size()>=4){
-						length = 4;
-					}
-                for(int i=0 ; i<length ; i++){
-                	BoardVO bv = classBoardList.get(i);
+					int cnt = 0;
+					for(int i=0 ; i<length ; i++){
+						if(cnt == 4) break;
+	               		BoardVO bv = classBoardList.get(i);
+	               		int userRole = service.getUserRole(bv.getUsersNo());
+	               		if(userRole == 1){ // 공지사항 제외하고 노출
+	               			continue;
+	               		}
+	               		cnt++;
                %>
                 <a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>
 					&idx=<%=i %>&levelChk=<%=bv.getBoardLevel() %>&classBoardChk=2" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">

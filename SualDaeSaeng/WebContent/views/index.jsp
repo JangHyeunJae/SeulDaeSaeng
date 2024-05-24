@@ -1,3 +1,5 @@
+<%@page import="kr.or.ddit.restaurant.service.IRestaurantService"%>
+<%@page import="kr.or.ddit.restaurant.service.RestaurantServiceImpl"%>
 <%@page import="kr.or.ddit.restaurant.vo.ReviewVO"%>
 <%@page import="javax.imageio.ImageIO"%>
 <%@page import="java.awt.Image"%>
@@ -23,6 +25,7 @@
 
 <% 
 	IBoardService boardService = BoardServiceImpl.getInstance();
+    IRestaurantService Restservice = RestaurantServiceImpl.getInstance();
 
 	List<RestaurantVO> restLikeList = (List<RestaurantVO>) request.getAttribute("restLikeList");
 	List<BoardVO> boardList = (List<BoardVO>)boardService.allBoardList();
@@ -292,219 +295,58 @@
                 <button type="button" class="btn btn-outline-warning btn-sm" onclick="location.href='<%=request.getContextPath()%>/gourmet/list.do'">더보기</button>
               </p>
             </li>
+            <%
+    		List<MemberVO> likeMemList = Restservice.getLikeMemList();
+            for(int i=0;i<3;i++){
+            	
+            %>
             <li class="food-list">
               <h6 class="mb-3 d-flex justify-content-between align-items-center">
                 <span>
                   <i class="bi bi-person-circle"></i>
-                  <!-- <img src="img/testimonials/testimonials-2.jpg" class="testimonial-img" alt=""> --> 고객 아이디 </span>
-                <button type="button" class="btn btn-secondary btn-sm">
-                  <span>00님 맛집 </span>리스트 더보기 </button>
+                  <!-- <img src="img/testimonials/testimonials-2.jpg" class="testimonial-img" alt=""> --> <%=likeMemList.get(i).getMemNick() %> </span>
+                <button type="button" class="btn btn-secondary btn-sm" 
+                onclick="location.href='<%=request.getContextPath()%>/gourmet/view.do?usersNo=<%=likeMemList.get(i).getUsersNo() %>&memNick=<%=likeMemList.get(i).getMemNick()%>'">
+                  <span><%=likeMemList.get(i).getMemNick() %>님 맛집 </span>리스트 더보기 </button>
               </h6>
               <ul class="d-flex justify-content-between">
+              <%
+              List<RestaurantVO> myLikeList = Restservice.getMyLikeList(likeMemList.get(i).getUsersNo());
+              int size= 3;
+              if(myLikeList.size()<3){
+            	  size = myLikeList.size();
+              }
+              for(int k=0;k<size;k++){
+            	  RestaurantVO myLike = myLikeList.get(k);
+              %>
                 <li class="card">
                   <a href="http://">
                     <p class="card-like">
                       <i class="bi bi-heart-fill"></i>
-                      <span>25</span>
+                      <span><%=myLike.getLikeCount() %></span>
                     </p>
                     <div class="img-fluid">
                       <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                     </div>
                     <div class="card-body">
-                      <small class="badge bg-body-secondary mb-1">한식</small>
+                      <small class="badge bg-body-secondary mb-1"><%=myLike.getMclsName() %></small>
                       <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
+                        <h5 class="card-title text-truncate"><%=myLike.getName() %></h5>
                         <span>
-                          <i class="bi bi-star-fill"></i> 4.5 </span>
+                          <i class="bi bi-star-fill"></i> <%=myLike.getAvgReviewStar() %> </span>
                       </div>
-                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
+                      <p class="card-text "><%=myLike.getAddrBasic() %></p>
                     </div>
                   </a>
                 </li>
-                <li class="card dis-none-550">
-                  <a href="http://">
-                    <p class="card-like">
-                      <i class="bi bi-heart-fill"></i>
-                      <span>25</span>
-                    </p>
-                    <div class="img-fluid">
-                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
-                    </div>
-                    <div class="card-body">
-                      <small class="badge bg-body-secondary mb-1">한식</small>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                        <span>
-                          <i class="bi bi-star-fill"></i> 4.5 </span>
-                      </div>
-                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                    </div>
-                  </a>
-                </li>
-                <li class="card dis-none-750">
-                  <a href="http://">
-                    <p class="card-like">
-                      <i class="bi bi-heart-fill"></i>
-                      <span>25</span>
-                    </p>
-                    <div class="img-fluid">
-                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
-                    </div>
-                    <div class="card-body">
-                      <small class="badge bg-body-secondary mb-1">한식</small>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                        <span>
-                          <i class="bi bi-star-fill"></i> 4.5 </span>
-                      </div>
-                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                    </div>
-                  </a>
-                </li>
+                <%
+              }
+                %>
               </ul>
             </li>
-            <li class="food-list">
-              <h6 class="mb-3 d-flex justify-content-between align-items-center">
-                <span>
-                  <i class="bi bi-person-circle"></i>
-                  <!-- <img src="img/testimonials/testimonials-2.jpg" class="testimonial-img" alt=""> --> 고객 아이디 </span>
-                <button type="button" class="btn btn-secondary btn-sm">
-                  <span>00님 맛집 </span>리스트 더보기 </button>
-              </h6>
-              <ul class="d-flex justify-content-between">
-                <li class="card">
-                  <a href="http://">
-                    <p class="card-like">
-                      <i class="bi bi-heart-fill"></i>
-                      <span>25</span>
-                    </p>
-                    <div class="img-fluid">
-                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
-                    </div>
-                    <div class="card-body">
-                      <small class="badge bg-body-secondary mb-1">한식</small>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                        <span>
-                          <i class="bi bi-star-fill"></i> 4.5 </span>
-                      </div>
-                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                    </div>
-                  </a>
-                </li>
-                <li class="card dis-none-550">
-                  <a href="http://">
-                    <p class="card-like">
-                      <i class="bi bi-heart-fill"></i>
-                      <span>25</span>
-                    </p>
-                    <div class="img-fluid">
-                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
-                    </div>
-                    <div class="card-body">
-                      <small class="badge bg-body-secondary mb-1">한식</small>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                        <span>
-                          <i class="bi bi-star-fill"></i> 4.5 </span>
-                      </div>
-                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                    </div>
-                  </a>
-                </li>
-                <li class="card dis-none-750">
-                  <a href="http://">
-                    <p class="card-like">
-                      <i class="bi bi-heart-fill"></i>
-                      <span>25</span>
-                    </p>
-                    <div class="img-fluid">
-                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
-                    </div>
-                    <div class="card-body">
-                      <small class="badge bg-body-secondary mb-1">한식</small>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                        <span>
-                          <i class="bi bi-star-fill"></i> 4.5 </span>
-                      </div>
-                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                    </div>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="food-list">
-              <h6 class="mb-3 d-flex justify-content-between align-items-center">
-                <span>
-                  <i class="bi bi-person-circle"></i>
-                  <!-- <img src="img/testimonials/testimonials-2.jpg" class="testimonial-img" alt=""> --> 고객 아이디 </span>
-                <button type="button" class="btn btn-secondary btn-sm">
-                  <span>00님 맛집 </span>리스트 더보기 </button>
-              </h6>
-              <ul class="d-flex justify-content-between">
-                <li class="card">
-                  <a href="http://">
-                    <p class="card-like">
-                      <i class="bi bi-heart-fill"></i>
-                      <span>25</span>
-                    </p>
-                    <div class="img-fluid">
-                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
-                    </div>
-                    <div class="card-body">
-                      <small class="badge bg-body-secondary mb-1">한식</small>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                        <span>
-                          <i class="bi bi-star-fill"></i> 4.5 </span>
-                      </div>
-                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                    </div>
-                  </a>
-                </li>
-                <li class="card dis-none-550">
-                  <a href="http://">
-                    <p class="card-like">
-                      <i class="bi bi-heart-fill"></i>
-                      <span>25</span>
-                    </p>
-                    <div class="img-fluid">
-                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
-                    </div>
-                    <div class="card-body">
-                      <small class="badge bg-body-secondary mb-1">한식</small>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                        <span>
-                          <i class="bi bi-star-fill"></i> 4.5 </span>
-                      </div>
-                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                    </div>
-                  </a>
-                </li>
-                <li class="card dis-none-750">
-                  <a href="http://">
-                    <p class="card-like">
-                      <i class="bi bi-heart-fill"></i>
-                      <span>25</span>
-                    </p>
-                    <div class="img-fluid">
-                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
-                    </div>
-                    <div class="card-body">
-                      <small class="badge bg-body-secondary mb-1">한식</small>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title text-truncate">식당이름입니다~</h5>
-                        <span>
-                          <i class="bi bi-star-fill"></i> 4.5 </span>
-                      </div>
-                      <p class="card-text ">식당주소를 작성하고 있습니다. 집에 보내주세요.</p>
-                    </div>
-                  </a>
-                </li>
-              </ul>
-            </li>
+            <%
+            }
+            %>
           </ul>
           <ul class="food-like">
             <div class="section-header">

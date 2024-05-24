@@ -47,12 +47,17 @@ public class LoginController extends HttpServlet {
 		
 		if (isSuccess) {
 			System.out.println("로그인성공");
+			HttpSession session = req.getSession();
+			session.setMaxInactiveInterval(0);
+			
 			UsersVO usersDetail = loginService.getUsersDetail(usersId);
-			req.getSession().setAttribute("usersId", usersId);
-			req.getSession().setAttribute("usersPass", usersPass);
-			req.getSession().setAttribute("usersDetail", usersDetail);
-			req.getSession().setAttribute("usersRole", usersDetail.getUsersRole());
-			req.getSession().setAttribute("usersNo", usersDetail.getUsersNo());
+			session.setAttribute("usersId", usersId);
+			session.setAttribute("usersPass", usersPass);
+			session.setAttribute("usersDetail", usersDetail);
+			session.setAttribute("usersRole", usersDetail.getUsersRole());
+			session.setAttribute("usersNo", usersDetail.getUsersNo());
+			
+			
 			if(usersDetail.getUsersRole() == 3) {
 				req.getSession().setAttribute("isAdminOk", "OK");
 				resp.sendRedirect(req.getContextPath() + "/views/adminPage.do");
@@ -61,19 +66,8 @@ public class LoginController extends HttpServlet {
 			else {
 				MemberVO memDetail = loginService.getMemDetail(usersId);
 				req.getSession().setAttribute("memDetail", memDetail);
+				resp.sendRedirect(req.getContextPath() + "/main.do");
 			}
-
-			 req.getSession().setAttribute("usersId", usersId);
-			 req.getSession().setAttribute("usersPass", usersPass);
-			 req.getSession().setAttribute("usersDetail", usersDetail);
-			 req.getSession().setAttribute("usersRole", usersDetail.getUsersRole());
-			 req.getSession().setAttribute("usersNo", usersDetail.getUsersNo());
-
-			 HttpSession session = req.getSession();
-			 session.setMaxInactiveInterval(0);
-			
-			resp.sendRedirect(req.getContextPath() + "/main.do");
-
 		} else {
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("isSuccess", "fail");

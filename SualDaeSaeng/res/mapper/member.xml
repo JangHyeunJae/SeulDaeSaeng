@@ -143,4 +143,5 @@
 	<select id="checking" parameterType="String" resultType="String">
 	    select member.mem_Name from member where mem_name=#{memName}
 	</select>
+	
 </mapper>

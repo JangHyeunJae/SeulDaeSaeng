@@ -14,20 +14,31 @@ import org.apache.ibatis.session.SqlSession;
 import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.board.vo.BoardVO;
+import kr.or.ddit.member.service.IMemberService;
+import kr.or.ddit.member.service.MemberServiceImpl;
+import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.util.MyBatisUtil;
 
 @WebServlet("/board/report.do")
 public class ReportBoardController extends HttpServlet {
 
+	IBoardService boardService = BoardServiceImpl.getInstance();
+	IMemberService memberService = MemberServiceImpl.getInstance();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		IBoardService boardService = BoardServiceImpl.getInstance();
 
 		int boardNo = Integer.parseInt(req.getParameter("boardNo"));
 		int levelChk = Integer.parseInt(req.getParameter("levelChk"));
 		int idx = Integer.parseInt(req.getParameter("idx"));
 		int classBoardChk = 0;
+		
+		
+		int cnt = memberService.getBoardMember(boardNo); 
+		if(cnt > 0) System.out.println("신고 횟수 증가 성공"); 
+		else System.out.println("신고 횟수 증가 실패");
+		 
+		
 		if(req.getParameter("classBoardChk")!=null) {
 			classBoardChk = Integer.parseInt(req.getParameter("classBoardChk"));
 		}

@@ -168,7 +168,7 @@
 <select id="selectClassBoardList" parameterType="int" resultMap="boardMap">
 		select *
 	  	from board a, users b
-	  	where board_level =304 and board_yn = 'Y'
+	  	where board_level =#{levelChk} and board_yn = 'Y'
         and a.users_no = b.users_no
 	  	order by case when b.users_role = 1 then 0 else 1 end, a.board_no desc
 </select>

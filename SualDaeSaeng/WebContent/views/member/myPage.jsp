@@ -280,7 +280,7 @@
                     <h2>board</h2>
                     <p class="d-flex justify-content-between align-items-center"> 
                      	 내가 댓글 쓴 게시글 
-                      <button type="button" class="btn btn-outline-warning btn-sm">더보기</button>
+                      <button type="button" class="btn btn-outline-warning btn-sm" onclick="location.href='/member/myComment.do'">더보기</button>
                     </p>
                   </div>
                   <div class="list-group">

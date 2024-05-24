@@ -61,7 +61,7 @@
                       <div class="d-flex justify-content-between align-items-center">
                         <h5 class="card-title text-truncate"><%=myLike.getName() %></h5>
                         <span>
-                          <i class="bi bi-star-fill"></i> <%=myLike.getAvgReviewStar() %> </span>
+                          <i class="bi bi-star-fill"></i> <%=myLike.getAvgReviewStar()/2 %> </span>
                       </div>
                       <p class="card-text "><%=myLike.getAddrBasic() %></p>
                     </div>

@@ -13,6 +13,12 @@
   select
  	* from board 
  		where trim(REPORT_YN) ='Y'
+ 	    ORDER BY 
+        CASE 
+            WHEN BOARD_YN = 'Y' THEN 1 
+            ELSE 2 
+        END, 
+        BOARD_AT DESC
 <!--  		and BOARD_YN ='Y' -->
  </select>
   

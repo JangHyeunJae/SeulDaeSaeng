@@ -48,8 +48,8 @@ public class InsertBoardController extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		BoardVO boardVO = new BoardVO();
 		HttpSession session = req.getSession();
-		MemberVO memDetail = (MemberVO) session.getAttribute("memDetail");
-
+		int usersNo = (int) session.getAttribute("usersNo");
+		
 		int levelChk = Integer.parseInt(req.getParameter("levelChk"));
 		int classBoardChk = 0;
 		if(req.getParameter("classBoardChk")!=null) {
@@ -71,7 +71,7 @@ public class InsertBoardController extends HttpServlet {
 		
 		boardVO.setBoardTitle(title);
 		boardVO.setBoardCon(content);
-		boardVO.setUsersNo(memDetail.getUsersNo());
+		boardVO.setUsersNo(usersNo);
 		boardVO.setBoardLevel(level);
 
 		int status = service.insertBoard(boardVO);
@@ -84,7 +84,19 @@ public class InsertBoardController extends HttpServlet {
 						+ "&levelChk=" + levelChk);
 			}
 		} else { // 실패
-			req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
+			String msg = "작성 실패했습니다.";
+			 req.getSession().setAttribute("msg", msg);
+			 if(levelChk == 0) resp.sendRedirect(req.getContextPath() + "/allBoard.do");
+			 else if(levelChk == 1) resp.sendRedirect(req.getContextPath() + "/freeBoard.do");
+			 else if(levelChk == 2) resp.sendRedirect(req.getContextPath() + "/studyBoard.do");
+			 else if(levelChk == 3) resp.sendRedirect(req.getContextPath() + "/noticeBoard.do");
+			 else if(levelChk > 300) {
+				 if(classBoardChk == 1) {
+					 resp.sendRedirect(req.getContextPath() + "/eachClassNotice.do?levelChk=" + levelChk);
+				 } else if(classBoardChk == 2) {
+					 resp.sendRedirect(req.getContextPath() + "/eachClassBoard.do?levelChk=" + levelChk);
+				 }
+			 }
 		}
 	}
 }

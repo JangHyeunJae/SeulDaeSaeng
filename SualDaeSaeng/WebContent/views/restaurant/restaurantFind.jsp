@@ -1,6 +1,7 @@
 <%@page import="java.util.List"%>
 <%@page import="java.io.File" %>
 <%@page import="kr.or.ddit.restaurant.vo.RestaurantVO"%>
+<%@page import="kr.or.ddit.restaurant.vo.restLikeVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@include file="/header.jsp"%>
@@ -9,6 +10,7 @@
 	String query = request.getQueryString();
 	
 	List<RestaurantVO> restList = (List<RestaurantVO>) request.getAttribute("restList");
+
 		
 	int totalpost = (int) request.getAttribute("totalpost");
 	int totalpage = (int) request.getAttribute("totalpage");
@@ -38,7 +40,7 @@
 	List<RestaurantVO> menuList = !mclsId.equals("") && !mclsId.equals("all") ? 
             (List<RestaurantVO>) request.getAttribute("sclsList") : 
             (List<RestaurantVO>) request.getAttribute("mclsList");
-	
+
 
 %>
 
@@ -107,12 +109,11 @@
 	<!-- End Page Header -->
 	<section id="restaurantFind" class="board mb-5">
 		<div class="container" data-aos="fade-up">
-			<div
-				class="row mb-3 d-flex justify-content-between align-items-center">
+			<div class="row mb-3 d-flex justify-content-between align-items-center">
 				<p class="col-md-3 col-12 mb-0 pe-2">
 					총 <b><%=totalpost%></b>개 <span class="px-2">|</span> <b><%=nowPage%></b> / <b><%=totalpage %></b> page
 				</p>
-				<div class=" col-md-4 col-12 text-end flex-wrap">
+				<div class=" col-md-4 col-12 text-end flex-wrap d-flex justify-content-end">
 					<button class="btn filter" type="button" data-bs-toggle="dropdown"
 						aria-expanded="false">
 						<i class="bi bi-funnel-fill"></i> 
@@ -172,11 +173,11 @@
 
 							  	// 파일 존재 여부 확인
 							  	if (file.exists()) { %>
-							  		<img src="<%=fileUrl%>.jpg" class="card-img-top" alt="<%=restVo.getName()%> 이미지">
+							  		<img src="<%=fileUrl%>.jpg" class="card-img-top" alt="<%=restVo.getName()%> 이미지" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
 							    <% } else if (file2.exists()) { %>
-							  		<img src="<%=fileUrl%>.png" class="card-img-top" alt="<%=restVo.getName()%> 이미지">
+							  		<img src="<%=fileUrl%>.png" class="card-img-top" alt="<%=restVo.getName()%> 이미지" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
 							    <% }else { %>
-							  		<img src="/img/no-image.jpg" class="card-img-top" alt="<%=restVo.getName()%> 이미지">
+							  		<img src="/img/no-image.jpg" class="card-img-top" alt="<%=restVo.getName()%> 이미지" >
 							    <% } %>
 							</div>
 							<div class="card-body">

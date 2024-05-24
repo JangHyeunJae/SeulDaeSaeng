@@ -57,7 +57,7 @@
                   </li>
                   <li class="pb-0">
                     <a onclick="chatWinOpen();" class="btn-visit align-self-start">
-                      <span>304</span>호 채팅입장 </a>
+                      <span><%=memDetail.getMemClass() %></span>호 채팅입장 </a>
                   </li>
                 </ul>
               </div>
@@ -178,6 +178,7 @@
                     <button type="button" class="btn btn-outline-warning btn-sm" onclick="location.href='<%=request.getContextPath()%>/eachClassBoard.do?levelChk=<%=levelChk %>'">더보기</button>
                     </p>
                   </div>
+                  
                   <div class="list-group">
                  <%
 				if (boardList == null || boardList.isEmpty()) {
@@ -186,11 +187,15 @@
                <%
 				}else{
 					int length = boardList.size();
-					if(boardList.size()>=4){
-						length = 4;
-					}
-                for(int i=0 ; i<length ; i++){
-                	BoardVO bv = boardList.get(i);
+					int cnt = 0;
+	                for(int i=0 ; i<length ; i++){
+	                	if(cnt == 4) break;
+	               		BoardVO bv = boardList.get(i);
+	               		int userRole = service.getUserRole(bv.getUsersNo());
+	               		if(userRole == 1){ // 공지사항 제외하고 노출
+	               			continue;
+	               		}
+	               		cnt++;
                %>
                     <a href="<%=request.getContextPath()%>/board/detail.do?boardNo=<%=bv.getBoardNo() %>
 					&idx=<%=i %>&levelChk=<%=bv.getBoardLevel() %>&classBoardChk=2" class="list-group-item d-flex w-100 justify-content-between align-items-center py-3">

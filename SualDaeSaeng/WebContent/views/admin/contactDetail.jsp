@@ -1,3 +1,4 @@
+<%@page import="org.apache.logging.log4j.core.impl.MementoMessage"%>
 <%@page import="kr.or.ddit.contact.vo.ContactVO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,6 +7,7 @@
 <%@include file="/header.jsp" %>
 
 <%
+
 	ContactVO contactVO =(ContactVO) request.getAttribute("contactVO");
 %>
  <main class="pb-5" data-aos="fade" data-aos-delay="700">
@@ -41,7 +43,10 @@
                 </div>
               
                 <div class="text-center">
-                  <button type="button" id="submitBtn" >답변 전송</button>
+        
+
+                  <a href="<%=request.getContextPath() %>/views/contactSend.do?qNO=<%=contactVO.getqNO()%>" id="submitBtn">답변 전송</a>
+
                 </div>
           
             </div>

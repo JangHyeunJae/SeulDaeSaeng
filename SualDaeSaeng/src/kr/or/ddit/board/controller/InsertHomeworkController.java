@@ -36,7 +36,7 @@ public class InsertHomeworkController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
-		MemberVO memDetail = (MemberVO) session.getAttribute("memDetail");
+		int usersNo = (int) session.getAttribute("usersNo");
 		
 		int levelChk = Integer.parseInt(req.getParameter("levelChk"));
 		String title = req.getParameter("title");
@@ -50,7 +50,7 @@ public class InsertHomeworkController extends HttpServlet{
 	    parameter.put("hwStart",startDate);
 	    parameter.put("hwEnd",endDate);
 	    parameter.put("hwClass",levelChk);
-	    parameter.put("usersNo",memDetail.getUsersNo());
+	    parameter.put("usersNo",usersNo);
 
 		int status = service.insertHomework(parameter);
 		List<HomeworkVO> hw = service.getHwList(levelChk);
@@ -59,7 +59,9 @@ public class InsertHomeworkController extends HttpServlet{
 		if(status > 0) { 	// 성공
 			resp.sendRedirect("/homework/detail.do?hwNo=" + recentHw.getHwNo() +"&levelChk=" + levelChk);
 		}else {				// 실패
-			req.getRequestDispatcher("/views/board/write.jsp").forward(req, resp);
+			String msg = "작성 실패했습니다.";
+			req.getSession().setAttribute("msg", msg);
+			req.getRequestDispatcher("/classTeacherBoard.do?levelChk=" + levelChk).forward(req, resp);
 		}
 	}
 }

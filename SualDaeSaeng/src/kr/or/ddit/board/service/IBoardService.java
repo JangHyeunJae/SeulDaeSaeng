@@ -116,6 +116,12 @@ public interface IBoardService {
   public List<BoardVO> myBoardList(int usersNo);
 
   public int deleteHomework(int hwNo);
+  
+  public int updateStory(int storyNo);
+
+  public int editHomework(Map<String, Object> parameter);
+  
+  public int getUserRole(int usersNo);
 
 public List<BoardVO> myCommentList(int usersNo);
 

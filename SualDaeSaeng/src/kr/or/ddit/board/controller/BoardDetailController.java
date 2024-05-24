@@ -30,7 +30,7 @@ public class BoardDetailController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		 
 		 int boardNo = Integer.parseInt(req.getParameter("boardNo"));
-		 String classBoardChk = null;
+		 int classBoardChk = 0;
 		 BoardVO boardDetail = boardService.getBoardDetail(boardNo);
 		 int hit = boardService.updateHit(boardNo);
 		 int boardLevel = boardDetail.getBoardLevel();
@@ -59,12 +59,15 @@ public class BoardDetailController extends HttpServlet{
 		 req.setAttribute("editReply", editReply);
 		 
 		 if(req.getParameter("classBoardChk") != null) {
-			 req.setAttribute("classBoardChk", Integer.parseInt(req.getParameter("classBoardChk")));
+			 classBoardChk = Integer.parseInt(req.getParameter("classBoardChk"));
+			 req.setAttribute("classBoardChk", classBoardChk);
 		 }
 		 
 		 List<BoardVO> boardList = null;
 		 if(levelChk == 0) boardList = boardService.allBoardList();
-		 else boardList = boardService.selectBoardList(boardLevel);
+		 else if(levelChk < 300) boardList = boardService.selectBoardList(boardLevel);
+		 else if(classBoardChk == 1) boardList = boardService.getClassNoticeList(levelChk);
+		 else if(classBoardChk == 2) boardList = boardService.selectClassBoardList(levelChk);
 		 
 		 FileDetailVO file = boardService.getFile(boardNo); 
 		 if(file != null && file.getFileSize() > 0) {

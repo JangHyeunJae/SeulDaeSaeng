@@ -13,6 +13,38 @@
 <result column="file_level" property="fileLevel"/>
 </resultMap>
 
+<resultMap type="kr.or.ddit.restaurant.vo.RestaurantVO" id="restaurantMap">
+<result property="addrNo" column="ADDR_NO"/>
+<result property="restBizno" column="REST_BIZNO"/>
+<result property="name" column="NAME"/>
+<result property="distance" column="DISTANCE"/>
+<result property="mcls" column="MCLS"/>
+<result property="scls" column="SCLS"/>
+<result property="mclsName" column="MCLS_NAME"/>
+<result property="sclsName" column="SCLS_NAME"/>
+<result property="addrPost" column="ADDR_POST"/>
+<result property="addrBasic" column="ADDR_BASIC"/>
+<result property="addrDetail" column="ADDR_DETAIL"/>
+<result property="lon" column="LON"/>
+<result property="lat" column="LAT"/>
+<result property="reviewNo" column="REVIEW_NO"/>
+<result property="usersNo" column="USERS_NO"/>
+<result property="nickName" column="NICK_NAME"/>
+<result property="bizno" column="BIZNO"/>
+<result property="reviewStar" column="REVIEW_STAR"/>
+<result property="reviewText" column="REVIEW_TEXT"/>
+<result property="reviewYn" column="REVIEW_YN"/>
+<result property="reviewDate" column="REVIEW_DATE"/>
+<result property="fileNo" column="FILE_NO"/>
+<result property="fileSavepath" column="FILE_SAVEPATH"/>
+<result property="fileOgname" column="FILE_OGNAME"/>
+<result property="fileSavednm" column="FILE_SAVEDNM"/>
+<result property="fileSize" column="FILE_SIZE"/>
+<result property="fileExt" column="FILE_EXT"/>
+<result property="fileDt" column="FILE_DT"/>
+<result property="likeCount" column="LIKE_COUNT"/>
+</resultMap>
+
 	<select id="restaurantList" parameterType="hashMap" resultType="restVO">
 		<!-- 식당 카테고리별 리스트 -->
 		SELECT *
@@ -232,5 +264,10 @@
 	<update id="updateMyLike" parameterType="restLikeVO">
 		UPDATE LIKES SET LIKE_YN = #{myLike} WHERE REST_BIZNO = #{restBizno} AND USERS_NO = #{userNo}
 	</update>
+	
+	<select id="userReviews" parameterType="string" resultMap="restaurantMap">
+		select * from RESTVIEW
+   		 where USERS_NO = #{usersNo}
+	</select>
 	
 </mapper>

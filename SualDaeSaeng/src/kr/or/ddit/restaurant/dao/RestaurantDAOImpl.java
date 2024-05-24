@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import kr.or.ddit.board.dao.BoardDaoImpl;
 import kr.or.ddit.board.dao.IBoardDao;
 import kr.or.ddit.board.vo.FileDetailVO;
+import kr.or.ddit.member.vo.UsersVO;
 import kr.or.ddit.restaurant.vo.RestaurantVO;
 import kr.or.ddit.restaurant.vo.ReviewVO;
 import kr.or.ddit.restaurant.vo.restLikeVO;
@@ -289,6 +290,23 @@ public class RestaurantDAOImpl implements IRestaurantDAO{
 	}
 
 	@Override
+	public List<RestaurantVO> getReviewsByUserId(String usersId) {
+        SqlSession session = null;
+		List<RestaurantVO> resList = null;
+		try {
+			session = MyBatisUtil.getSqlSession(true);
+			
+			resList = session.selectList("restaurant.userReviews", usersId);
+			
+		} catch (PersistenceException ex) {
+			ex.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return resList;
+	}
+  
+  @Override
 	public int insertMyLike(Map<String, Object> likeInfo ) {
 		SqlSession session = null;
 		int status = 0;		
@@ -363,4 +381,5 @@ public class RestaurantDAOImpl implements IRestaurantDAO{
 		}
 		return restReviewList;
 	}
+  
 }

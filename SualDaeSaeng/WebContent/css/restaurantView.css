@@ -27,3 +27,16 @@
 [class$=api-load-alpha-banner] {
   display: none;
 }
+#likeBtn,
+#likeBtn + a span{
+	display: none;
+}
+#likeBtn + a .true{
+	display: block;	
+}
+#likeBtn:checked + a .false{
+	display: block;
+}
+#likeBtn:checked + a .true{
+	display: none;
+}

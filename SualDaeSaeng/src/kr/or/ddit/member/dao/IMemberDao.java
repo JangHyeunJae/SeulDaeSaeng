@@ -50,7 +50,5 @@ public interface IMemberDao {
 
 	public String checking(String memName);
 
-	public List<restLikeVO> selectLikeRest(int addrNo);
-
 }
 

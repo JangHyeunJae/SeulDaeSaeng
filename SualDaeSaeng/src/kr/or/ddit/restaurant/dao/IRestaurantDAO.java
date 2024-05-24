@@ -6,6 +6,7 @@ import java.util.Map;
 import kr.or.ddit.board.vo.FileDetailVO;
 import kr.or.ddit.restaurant.vo.RestaurantVO;
 import kr.or.ddit.restaurant.vo.ReviewVO;
+import kr.or.ddit.restaurant.vo.restLikeVO;
 
 public interface IRestaurantDAO {
 	public List<RestaurantVO> selectRestaurantType(Map<String, Object> cls);
@@ -22,4 +23,8 @@ public interface IRestaurantDAO {
 	public int insertFile(FileDetailVO fileDetail);
 	public int insertReview(ReviewVO reviewVO);
 	public int deleteReview(int reviewNo);
+	public int insertMyLike(Map<String, Object> likeInfo);
+	public int updateMyLike(Map<String, Object> likeInfo);
+	public List<restLikeVO> restLikeList(String restBizno);
+	public List<RestaurantVO> restReviewList();
 }

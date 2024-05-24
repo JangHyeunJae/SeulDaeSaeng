@@ -19,7 +19,7 @@
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-lg-6">
-              <form action="<%=request.getContextPath() %>/member/join.do" method="post" role="form" class="php-email-form needs-validation" novalidate>
+              <form action="<%=request.getContextPath() %>/member/join.do" method="post" role="form" class="php-email-form needs-validation"  enctype="multipart/form-data" novalidate>
                  <div class="form-group d-flex align-items-center">
                   <span>저는 </span>
                   <input type="radio" class="btn-check" name="classify" id="teacher" value="1" autocomplete="off">
@@ -89,9 +89,9 @@
                   <div class="invalid-feedback"></div>
                 </div> -->
                 <div class="form-group mt-2 d-flex gap-2 align-items-center">
-  				  <label for="checkImg" class="form-label mb-0 pe-2">HRD 캡쳐</label>
-                  <input class="form-control form-control-lg " type="file" name="checkImg" id="checkImg" />
-                </div>
+                     <label for="checkImg" class="form-label mb-0 pe-2">HRD 캡쳐</label>
+                     <input class="form-control form-control-lg " type="file" name="file" id="file" />
+               </div>
                 <div class="text-center mt-5">
                   <button class="submit" type="button">회원가입</button>
                 </div>

@@ -315,5 +315,10 @@ public class BoardServiceImpl implements IBoardService{
 	public int deleteHomework(int hwNo) {
 		return boardDao.deleteHomework(hwNo);
 	}
+
+	@Override
+	public List<BoardVO> myCommentList(int usersNo) {
+		return boardDao.myBoardList(usersNo);
+	}
   
 }

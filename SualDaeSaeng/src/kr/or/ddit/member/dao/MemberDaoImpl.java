@@ -450,6 +450,6 @@ public List<restLikeVO> selectLikeRest(int addrNo) {
      }
      return restLikeList;
 }
-  
+
 }
 

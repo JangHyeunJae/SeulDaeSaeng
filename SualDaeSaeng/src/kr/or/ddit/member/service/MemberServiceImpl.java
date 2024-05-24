@@ -120,7 +120,8 @@ public class MemberServiceImpl implements IMemberService{
 	}
 	@Override
 	public List<restLikeVO> getLikeRest(int addrNo) {
-		return memberDao.selectLikeRest(addrNo);
+		return null;
 	}
+
 }
 

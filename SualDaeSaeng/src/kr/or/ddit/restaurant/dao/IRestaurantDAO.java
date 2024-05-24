@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.or.ddit.board.vo.FileDetailVO;
+import kr.or.ddit.member.vo.UsersVO;
 import kr.or.ddit.restaurant.vo.RestaurantVO;
 import kr.or.ddit.restaurant.vo.ReviewVO;
 
@@ -22,4 +23,5 @@ public interface IRestaurantDAO {
 	public int insertFile(FileDetailVO fileDetail);
 	public int insertReview(ReviewVO reviewVO);
 	public int deleteReview(int reviewNo);
+	public List<RestaurantVO> getReviewsByUserId(String usersId);
 }

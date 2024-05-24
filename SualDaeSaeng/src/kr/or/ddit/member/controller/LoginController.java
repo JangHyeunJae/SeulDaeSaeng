@@ -18,6 +18,7 @@ import kr.or.ddit.member.service.MemberServiceImpl;
 import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.member.vo.UsersVO;
 import kr.or.ddit.restaurant.vo.restLikeVO;
+import kr.or.ddit.util.MemberUtil;
 
 @WebServlet("/login.do")
 public class LoginController extends HttpServlet {
@@ -70,7 +71,7 @@ public class LoginController extends HttpServlet {
 		} else {
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("isSuccess", "fail");
-			resp.sendRedirect("/login.do");
+			MemberUtil.memberMessage(req, resp, "아이디 또는 비밀번호가 올바르지 않습니다.", "/login.do");
 		}
 	}
 }

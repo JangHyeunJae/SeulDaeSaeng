@@ -52,7 +52,7 @@
 <result property="reviewNo" column="REVIEW_NO"/>
 <result property="usersNo" column="USERS_NO"/>
 <result property="nickName" column="NICK_NAME"/>
-<result property="bizno" column="BIZNO"/>
+<result property="bizNo" column="BIZNO"/>
 <result property="reviewStar" column="REVIEW_STAR"/>
 <result property="reviewText" column="REVIEW_TEXT"/>
 <result property="reviewYn" column="REVIEW_YN"/>
@@ -182,31 +182,25 @@
 	</select>
 	
 	<select id="mainRestReview" resultType="restVO">
-	  	SELECT REVIEW_NO reviewNo, 
-		       USERS_NO usersNo, 
-		       REST_BIZNO restBizno,
-		       NICK_NAME nickName, 
-		       REVIEW_STAR reviewStar, 
-		       REVIEW_TEXT reviewText, 
-		       FILE_NO fileNo, 
-		       FILE_SAVEPATH fileSavepath, 
-		       REVIEW_DATE reviewDate 
+		SELECT *
 		FROM (
-		    SELECT REVIEW_NO, 
-		           USERS_NO, 
-		           REST_BIZNO,
-		           NICK_NAME, 
-		           REVIEW_STAR, 
-		           REVIEW_TEXT, 
-		           FILE_NO, 
-		           FILE_SAVEPATH, 
-		           REVIEW_DATE, 
-		           ROWNUM AS RNUM
-		    FROM RESTVIEW
-		    WHERE REVIEW_NO IS NOT NULL
-		    ORDER BY REVIEW_DATE DESC
+		    SELECT
+		        R.REVIEW_NO AS reviewNo,
+		        R.USERS_NO AS usersNo,
+		        R.REST_BIZNO AS restBizno,
+		        M.MEM_NICK AS nickName,
+		        R.REVIEW_STAR AS reviewStar,
+		        R.REVIEW_TEXT AS reviewText,
+		        R.FILE_NO AS fileNo,
+		        R.REVIEW_DATE AS reviewDate
+		    FROM
+		        REVIEW R
+		        JOIN USERS U ON R.USERS_NO = U.USERS_NO
+		        JOIN MEMBER M ON U.USERS_NO = M.USERS_NO
+		    ORDER BY
+		        R.REVIEW_DATE DESC
 		)
-		WHERE RNUM <![CDATA[<=]]> 5
+		WHERE ROWNUM <![CDATA[<=]]> 5
 	</select>
 	
 	<select id="selectRestReviewAll" parameterType="hashMap" resultType="restVO">
@@ -295,14 +289,13 @@
 	</select>
 	
 	<select id="getMyLikeList" parameterType="int" resultType="restVO">
-	
-    select 
+	        select 
     b.rest_bizno restBizno, 
     b.rest_name Name, 
     a.mcls_name mclsName, 
     d.addr_basic addrBasic, 
     COALESCE(avg(e.review_star), 0) as avgReviewStar,
-    count(*) as likeCount
+    COUNT(*) as likeCount
 from 
     restaurant b
     join restmcls a on a.mcls_id = b.mcls_id 
@@ -315,14 +308,13 @@ group by
     a.mcls_name, 
     d.addr_basic,
     c.rest_bizno
-	
 	</select>
 
 	<update id="updateMyLike" parameterType="restLikeVO">
 		UPDATE LIKES SET LIKE_YN = #{myLike} WHERE REST_BIZNO = #{restBizno} AND USERS_NO = #{userNo}
 	</update>
 	
-	<select id="userReviews" parameterType="string" resultMap="restaurantMap">
+	<select id="userReviews" parameterType="int" resultMap="restaurantMap">
 		select * from RESTVIEW
    		 where USERS_NO = #{usersNo}
 	</select>

@@ -433,6 +433,7 @@ public class MemberDaoImpl implements IMemberDao {
       return usersDetail;
    }
 
+
 	@Override
 	public int getBoardMember(int boardNo) {
 	    SqlSession session = null;
@@ -461,6 +462,7 @@ public class MemberDaoImpl implements IMemberDao {
 
 
   
+
 
 }
 

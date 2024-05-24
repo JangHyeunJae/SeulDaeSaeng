@@ -222,11 +222,16 @@
 			                  <small class="day"><%=restVo.getReviewDate() %></small>
 			                </h6>
 			                <p> <%=restVo.getReviewText() %> </p>
+			                
+			                <%
+			                if( restVo.getFileNo() > 0 ){
+			                %>
 			                <div class="d-flex justify-content-between overflow-x-scroll">
 			                  <div class="col p-1">
 			                    <img src="<%=restVo.getFileSavepath() %>" class="img-fluid" alt="<%=restVo.getNickName() %>의 <%=restDetails.getName()%> 대한 리뷰" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
 			                  </div>
 			                </div>
+			                <% } %>
 			                <hr>
 			                <!-- 
 			                <button type="button" class="btn btn-secondary btn-sm">

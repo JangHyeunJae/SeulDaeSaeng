@@ -332,13 +332,13 @@ public class RestaurantDAOImpl implements IRestaurantDAO{
 	}
 
 
-	public List<RestaurantVO> getReviewsByUserId(String usersId) {
+	public List<RestaurantVO> getReviewsByUserId(int usersNo) {
         SqlSession session = null;
 		List<RestaurantVO> resList = null;
 		try {
 			session = MyBatisUtil.getSqlSession(true);
 			
-			resList = session.selectList("restaurant.userReviews", usersId);
+			resList = session.selectList("restaurant.userReviews", usersNo);
 			
 		} catch (PersistenceException ex) {
 			ex.printStackTrace();

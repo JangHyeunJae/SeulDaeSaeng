@@ -2,25 +2,34 @@ package kr.or.ddit.member.controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
+import kr.or.ddit.board.service.BoardServiceImpl;
+import kr.or.ddit.board.service.IBoardService;
+import kr.or.ddit.board.vo.FileDetailVO;
 import kr.or.ddit.member.service.IMemberService;
 import kr.or.ddit.member.service.MemberServiceImpl;
 import kr.or.ddit.member.vo.AddressVO;
 import kr.or.ddit.member.vo.MemberVO;
 import kr.or.ddit.member.vo.UsersVO;
 
+@MultipartConfig
 @WebServlet("/member/join.do")
 public class MemberJoin extends HttpServlet{
 	
 	private static final long serialVersionUID = 1L;
 	
 	IMemberService service = MemberServiceImpl.getInstance();
+	IBoardService boardService = BoardServiceImpl.getInstance();
+	
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,6 +39,7 @@ public class MemberJoin extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		req.setCharacterEncoding("UTF-8");
 		// users 데이터 넣기
 		int usersRole = Integer.parseInt(req.getParameter("classify")); 
 		String usersId = req.getParameter("id");
@@ -75,7 +85,17 @@ public class MemberJoin extends HttpServlet{
 		memberVo.setMemClass(memClass);
 		System.out.println(memberVo.toString());
 		int memberCnt = service.memberJoin(memberVo);
+		
+		///////////////////////////////////////////////////
+		Part filePart = req.getPart("file");
+		int levelChk = 5555;
+		if(filePart != null && filePart.getSize() != 0) {
+			 int fileStatus = boardService.insertBoardFile(filePart,levelChk);
+			 List<FileDetailVO> fileList = boardService.getFileList(levelChk);
+			 req.setAttribute("fileList", fileList);
+		}
 	
+		/////////////////////////////////////////////////
 		
 		if(usersCnt == 1 && addrCnt == 1 && memberCnt == 1) {
 			System.out.println("join insert 모두 정상 응답");

@@ -98,11 +98,14 @@ $(function(){
     	var reviewStar = $(".form-check-input[type=radio]:checked").val();
     	
         var review = $("#review").val();
-        var file = $("#file").val();        
+        var file = $("#file").val();   
+        
+        var errors = false;
         
         if(reviewStar == null || reviewStar == 0 || reviewStar == ""){
         	$(".starBox").addClass("is-invalid");
         	$(".starBox").removeClass("is-valid");
+	        errors = true;
         } 
         /*
         if(file == null || file == ""){
@@ -116,11 +119,17 @@ $(function(){
         if(review == null || review == ""){
             $("#review").addClass("is-invalid");
             $("#review").removeClass("is-valid");
+	        errors = true;
         }else {
         	$("#review").addClass("is-valid");
         	$("#review").removeClass("is-invalid");
-        	insertForm.submit();
 		}
+		
+		if (!errors) {
+        	insertForm.submit();
+	    } else {
+	    	alert("입력값을 확인해주세요!");
+	    }
     });
 });
 </script>

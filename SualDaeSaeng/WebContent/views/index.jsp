@@ -290,7 +290,7 @@
             <li class="section-header">
               <h2>restaurant</h2>
               <p class="d-flex justify-content-between align-items-center">
-                <b><span>슬대생의 추천맛집</span></b>
+                <b>슬대생<span>의 추천맛집</span></b>
                 <button type="button" class="btn btn-outline-warning btn-sm" onclick="location.href='<%=request.getContextPath()%>/gourmet/list.do'">더보기</button>
               </p>
             </li>

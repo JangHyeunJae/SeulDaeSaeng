@@ -123,4 +123,6 @@ public interface IBoardService {
   
   public int getUserRole(int usersNo);
 
+public List<BoardVO> myCommentList(int usersNo);
+
 }

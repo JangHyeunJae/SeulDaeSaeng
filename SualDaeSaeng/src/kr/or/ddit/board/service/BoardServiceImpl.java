@@ -317,6 +317,11 @@ public class BoardServiceImpl implements IBoardService{
 	}
 
 	@Override
+	public List<BoardVO> myCommentList(int usersNo) {
+		return boardDao.myBoardList(usersNo);
+  }
+  
+  @Override
 	public int editHomework(Map<String, Object> parameter) {
 		return boardDao.editHomework(parameter);
   }

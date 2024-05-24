@@ -9,24 +9,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.or.ddit.member.service.IMemberService;
-import kr.or.ddit.member.service.MemberServiceImpl;
 import kr.or.ddit.member.vo.UsersVO;
+import kr.or.ddit.restaurant.service.IRestaurantService;
+import kr.or.ddit.restaurant.service.RestaurantServiceImpl;
+import kr.or.ddit.restaurant.vo.RestaurantVO;
+import kr.or.ddit.util.MemberUtil;
 
-@WebServlet("/myReview.do")
+@WebServlet("/member/myReview.do")
 public class MyReview extends HttpServlet {
 	
-    @Override
+	private static final long serialVersionUID = 1L;
+	IRestaurantService service = RestaurantServiceImpl.getInstance();
+
+	@Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        IMemberService service = MemberServiceImpl.getInstance();
         String usersId = (String) req.getSession().getAttribute("usersId");
 
         if (usersId != null) {
-            List<UsersVO> myReview = service.getReviewsByUserId(usersId);
+            List<RestaurantVO> myReview = service.getReviewsByUserId(usersId);
             req.setAttribute("myReview", myReview);
-            req.getRequestDispatcher("/views/member/myReview.jsp").forward(req, resp);
+            System.out.println(myReview.toString());
+//            req.getRequestDispatcher("/views/member/myReview.jsp").forward(req, resp);
         } else {
-            resp.sendRedirect("/main.do");
+            MemberUtil.memberMessage(req, resp, "잘못된 접근입니다.", "/main.do");
         }
     }
 

@@ -167,7 +167,7 @@
 		          %>
 		          <div class="d-flex justify-content-between align-items-center py-3 mb-3 food-list new-review">
 		            <p class="mb-0 d-flex align-items-center gap-3">
-		              <img src="/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
+		              <img src="/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
 		              <span> <%=memDetail.getMemNick() %>님 아직 리뷰를 작성하지 않으셨군요! 당신의 리뷰를 기다리고 있습니다. <br> ※홍보 및 비방 등 부적절한 평가는 평점 산정에서 제외 될 수 있습니다. </span>
 		            </p>
 		            <a href="<%=request.getContextPath() %>/restaurant/reviewWrite.do?no=<%=restDetails.getRestBizno() %>" class="btn btn-outline-warning">리뷰쓰기</a>
@@ -177,17 +177,16 @@
 	          
 	            <%if(restReviewList == null || restReviewList.size() == 0){ %>
 					<div class="col-xl-12 col-lg-12 col-md-12 col-12">
-						<p class="card-text ">식당이 존재하지 않습니다.</p>
+						<p class="card-text ">리뷰가 존재하지 않습니다.</p>
 					</div>
 				<% } else {
 					for (int i = 0; i < restReviewList.size(); i++) {
 					  		RestaurantVO restVo = restReviewList.get(i);
 			          	%>
-			            <div class="col-lg-6">
+			            <div class="col-xxl-4 col-lg-6">
 			              <div class="food-list ">
 			                <h6 class="mb-3 d-flex justify-content-between align-items-center">
 			                  <span>
-			                    <img src="/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
 			                    <div class="d-flex flex-column ps-2 gap-2">
 			                      <small><%=restVo.getNickName() %></small>
 			                      <small class="stars mb-0 d-flex gap-2">
@@ -224,14 +223,8 @@
 			                </h6>
 			                <p> <%=restVo.getReviewText() %> </p>
 			                <div class="d-flex justify-content-between overflow-x-scroll">
-			                  <div class="col-lg-4 col-md-6 col-12 p-1">
-			                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
-			                  </div>
-			                  <div class="col-lg-4 col-md-6 col-12 p-1">
-			                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
-			                  </div>
-			                  <div class="col-lg-4 col-md-6 col-12 p-1">
-			                    <img src="/img/gallery/gallery-1.jpg" class="img-fluid" alt="" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
+			                  <div class="col p-1">
+			                    <img src="<%=restVo.getFileSavepath() %>" class="img-fluid" alt="<%=restVo.getNickName() %>의 <%=restDetails.getName()%> 대한 리뷰" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
 			                  </div>
 			                </div>
 			                <hr>

@@ -37,22 +37,23 @@ String isAdminOk = (String) session.getAttribute("isAdminOk");
     <link href="/vendor/aos/aos.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="/css/main.css" rel="stylesheet">
+     <link href="/css/main.css" rel="stylesheet">
     
     <% if(request.getRequestURI().contains("index")){ %>
          <link href="/css/index.css" rel="stylesheet">
     <% }else if(request.getRequestURI().contains("timetable")){ %>
-         <link href="/css/timetable.css" rel="stylesheet">
-    <% }else if(request.getRequestURI().contains("write") || request.getRequestURI().contains("edit") || request.getRequestURI().contains("Write") || request.getRequestURI().contains("Edit")){ %>
-       <link rel="stylesheet" href="/css/bootform2.css">  
+      	<link href="/css/timetable.css" rel="stylesheet">
+    <% } else if(request.getRequestURI().contains("reviewWrite")){ %>
+		<link href="/css/reviewWrite.css" rel="stylesheet">
+	<% }else if(request.getRequestURI().contains("write") || request.getRequestURI().contains("edit") || request.getRequestURI().contains("Write") || request.getRequestURI().contains("Edit")){ %>
+    	<link rel="stylesheet" href="/css/bootform2.css">  
     <% } else if(request.getRequestURI().contains("restaurantUpDate")){%>
        <link href="/css/restaurantUpDate.css" rel="stylesheet">
-      <% } else if(request.getRequestURI().contains("restaurantView")){ %>
-         <link href="/css/restaurantView.css" rel="stylesheet">
-      <% } else if(request.getRequestURI().contains("reviewWrite")){ %>
-      <link href="/css/reviewWrite.css" rel="stylesheet">
-   <% } %>
-      
+   	<% } else if(request.getRequestURI().contains("restaurantView")){ %>
+   		<link href="/css/restaurantView.css" rel="stylesheet">
+   	<% } else if(request.getRequestURI().contains("404")){ %>
+   		<link href="/css/404.css" rel="stylesheet">
+   	<% } %>
   </head>
   <body>
     <!-- ======= Header ======= -->
@@ -140,9 +141,8 @@ String isAdminOk = (String) session.getAttribute("isAdminOk");
                         <a class="dropdown-item" href="<%=request.getContextPath() %>/member/join.do">회원가입</a>
                    </li>
                    <li>
-                    <a class="dropdown-item" href="<%=request.getContextPath() %>/login.do">로그인</a>
-               </li>
-
+                   		<a class="dropdown-item" href="<%=request.getContextPath() %>/login.do">로그인</a>
+              	   </li>
 
             <% 
                }else{
@@ -166,7 +166,7 @@ String isAdminOk = (String) session.getAttribute("isAdminOk");
             <% 
                }
             %>
-               
+
 
                 <!-- <li><a class="dropdown-item" href="logout.html">로그아웃</a></li><li><a class="dropdown-item" href="myPage.html"><span>정윤지</span>페이지</a></li>-->
               </ul>

@@ -1,5 +1,7 @@
+<%@page import="java.io.Console"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="kr.or.ddit.restaurant.vo.RestaurantVO"%>
+<%@page import="kr.or.ddit.restaurant.vo.restLikeVO"%>
 <%@ page import="javax.xml.parsers.*" %>
 <%@ page import="java.io.ByteArrayInputStream" %>
 <%@ page import="org.w3c.dom.*" %>
@@ -11,6 +13,37 @@
 <%
 	RestaurantVO restDetails = (RestaurantVO) request.getAttribute("restDetails");
 	List<RestaurantVO> restReviewList = (List<RestaurantVO>) request.getAttribute("restReviewList");
+	
+	MemberVO memDetail = (MemberVO) session.getAttribute("memDetail") != null ? (MemberVO) session.getAttribute("memDetail") : new MemberVO();
+  	UsersVO usersDetail = (UsersVO) session.getAttribute("usersDetail") != null ? (UsersVO) session.getAttribute("usersDetail") : new UsersVO();
+  	
+  	List<restLikeVO> restLikeList = (List<restLikeVO>) request.getAttribute("restLikeList")!= null ? (List<restLikeVO>) request.getAttribute("restLikeList") : new ArrayList<restLikeVO>();
+	String insertYN = "insert";
+  	String myLike = "";
+	String myLikeBtn = "outline-";
+	
+
+	System.out.println(restLikeList.size());
+	System.out.println(usersDetail.getUsersNo());
+	
+  	for (int i = 0; i < restLikeList.size(); i++) {
+  		restLikeVO likeVo = (restLikeVO) restLikeList.get(i);
+  		int likeUserNo = (int) likeVo.getUserNo();
+  		
+  		System.out.println(likeUserNo);
+  		
+  		if(likeUserNo == usersDetail.getUsersNo()){
+  	  		System.out.println(likeUserNo);
+  	  		System.out.println(usersDetail.getUsersNo());
+  			insertYN = "update";
+  			if(likeVo.getLikeYn().equals("Y")){
+  	  	  		System.out.println(0000);
+  	  	  		
+  				myLike="checked";
+  				myLikeBtn="";
+  			}
+  		}
+  	}
 
 	String responseBlog = (String) request.getAttribute("responseBlog");
 	String responseImg = (String) request.getAttribute("responseImg");
@@ -33,20 +66,33 @@
 	String restPhoneNum = request.getAttribute("restPhoneNum")!=null ? (String) request.getAttribute("restPhoneNum") : "";
 	String restAddInfo = request.getAttribute("restAddInfo")!=null ? (String) request.getAttribute("restAddInfo") : "";	
 	
-	// DocumentBuilderFactory 객체 생성
 	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-	
-	// builder 변수 선언
-	DocumentBuilder builder = factory.newDocumentBuilder();
-	
-	//XML 파싱
-	Document blogDocument = builder.parse(new ByteArrayInputStream(responseBlog.getBytes()));
-	Element blogRootElement = blogDocument.getDocumentElement();
-	
-	Document imageDocument = builder.parse(new ByteArrayInputStream(responseImg.getBytes()));
-	Element imageRootElement = imageDocument.getDocumentElement();
-	MemberVO memDetail = (MemberVO) session.getAttribute("memDetail") != null ? (MemberVO) session.getAttribute("memDetail") : new MemberVO();
-	UsersVO usersDetail = (UsersVO) session.getAttribute("usersDetail") != null ? (UsersVO) session.getAttribute("usersDetail") : new UsersVO();
+	DocumentBuilder builder = null;
+	try {
+        builder = factory.newDocumentBuilder();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    Document blogDocument = null;
+    Document imageDocument = null;
+    if (responseBlog != null && responseImg != null) {
+        try {
+            blogDocument = builder.parse(new ByteArrayInputStream(responseBlog.getBytes()));
+            imageDocument = builder.parse(new ByteArrayInputStream(responseImg.getBytes()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    Element blogRootElement = null;
+    Element imageRootElement = null;
+    if (blogDocument != null) {
+        blogRootElement = blogDocument.getDocumentElement();
+    }
+    if (imageDocument != null) {
+        imageRootElement = imageDocument.getDocumentElement();
+    }
 
 %>
 
@@ -137,14 +183,12 @@
                   <span style="color: var(--bs-red)">
                     <i class="bi bi-heart-fill"></i> <%=restDetails.getLikeCount() %>명 좋아하는 중 
                   </span>
-                  <% if(id!=null && !id.isEmpty()){ %>                	  
-                  <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off">
-                  <label class="btn btn-danger d-flex align-items-center gap-2" for="btn-check">
-                    <span>
-                      <i class="bi bi-heart-fill"></i> 좋아요 </span>
-                    <span>
-                      <i class="bi bi-heart"></i> 취소 </span>
-                  </label>
+                  <% if(id!=null && !id.isEmpty() && usersDetail != null && usersDetail.getUsersNo()!=0){ %>                	  
+                  <input type="checkbox" id="likeBtn" <%=myLike%>>
+                  <a href="<%=request.getContextPath() %>/restaurant/like.do?bizNo=<%=restDetails.getRestBizno()%>&userNo=<%=usersDetail.getUsersNo()%>&insertYN=<%=insertYN%>&myLike=<%=myLike %>" class="btn btn-<%=myLikeBtn%>danger d-flex align-items-center gap-2" for="btn-check">
+                    <span class="true"> <i class="bi bi-heart-fill"></i> 좋아요 </span>
+                    <span class="false"> <i class="bi bi-heart"></i> 취소 </span>
+                  </a>
                   <% } %>
                 </p>
               </div>
@@ -356,7 +400,7 @@
 		                %>
 		                <div class="d-flex justify-content-between overflow-x-scroll">
 		                  <div class="col p-1">
-		                    <img src="<%=restVo.getFileSavepath() %>" class="img-fluid" alt="<%=restVo.getNickName() %>의 <%=restDetails.getName()%> 대한 리뷰" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
+		                    <img src="<%=restVo.getFileSavepath() %>" class="img-fluid" alt="<%=restVo.getNickName() %>의 <%=restDetails.getName()%> 대한 리뷰" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
 		                  </div>
 		                </div>
 		                <% } %>
@@ -431,7 +475,7 @@
 	               %>
 	               <div class="h-m-180 overflow-hidden" title="<%=title%>">
 	                  <a href="<%=link%>" target="_blank" class="w-100 h-100 d-flex" >
-                  		<img src="<%=link%>" class="card-img" alt="<%=title%>" onError="this.src='<%=thumbnail%>';" />                  		
+                  		<img src="<%=link%>" class="card-img" alt="<%=title%>" onError="this.onerror=null; this.src='<%=thumbnail%>';" />                  		
 	                 </a>
 	               </div>
 	             </div>

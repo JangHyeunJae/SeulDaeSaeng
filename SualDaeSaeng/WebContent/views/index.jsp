@@ -1,3 +1,4 @@
+<%@page import="kr.or.ddit.restaurant.vo.ReviewVO"%>
 <%@page import="javax.imageio.ImageIO"%>
 <%@page import="java.awt.Image"%>
 <%@page import="java.nio.charset.StandardCharsets"%>
@@ -23,10 +24,12 @@
 <% 
 	IBoardService boardService = BoardServiceImpl.getInstance();
 
-	List<RestaurantVO> restLikeList = (List<RestaurantVO>) request.getAttribute("restLikeList"); 
+	List<RestaurantVO> restLikeList = (List<RestaurantVO>) request.getAttribute("restLikeList");
 	List<BoardVO> boardList = (List<BoardVO>)boardService.allBoardList();
 	List<BoardVO> noticeList = (List<BoardVO>)boardService.selectBoardList(3);
   	List<StoryVO> storyList = (List<StoryVO>)request.getAttribute("storyList"); 
+  	List<RestaurantVO> restReviewList = (List<RestaurantVO>) request.getAttribute("restReviewList");
+
 %>
 
     <main data-aos="fade" data-aos-delay="700">
@@ -62,7 +65,7 @@
 				  		RestaurantVO restVo = menuList.get(i);
                %>
                 <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls=<%=restVo.getMcls() %>&scls=<%=restVo.getScls()%>" class="swiper-slide">
-                  <img src="/img/icon/<%=restVo.getScls()%>.png" alt="<%=restVo.getSclsName()%> 이미지" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
+                  <img src="/img/icon/<%=restVo.getScls()%>.png" alt="<%=restVo.getSclsName()%> 이미지" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                   <p><%=restVo.getSclsName()%></p>
                 </a>
                 <% } %>
@@ -94,7 +97,7 @@
             	  FileDetailVO img = boardService.getFileDetail(story.getFileNo());
               %>
                 <div class="swiper-slide">
-                  <img src="<%= request.getContextPath() %>/file/download.do?fileNo=<%=img.getFileNo() %>" class="img-fluid" alt="" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
+                  <img src="<%= request.getContextPath() %>/file/download.do?fileNo=<%=img.getFileNo() %>" class="img-fluid" alt="" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                   <p><%=story.getStoryCon() %></p>
                 </div>
               <%
@@ -286,7 +289,7 @@
               <p class="d-flex justify-content-between align-items-center">
                 <b>TOP3 <span>미식인의 추천맛집</span>
                 </b>
-                <button type="button" class="btn btn-outline-warning btn-sm">더보기</button>
+                <button type="button" class="btn btn-outline-warning btn-sm" onclick="location.href='<%=request.getContextPath()%>/gourmet/list.do'">더보기</button>
               </p>
             </li>
             <li class="food-list">
@@ -305,7 +308,7 @@
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -325,7 +328,7 @@
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -345,7 +348,7 @@
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -376,7 +379,7 @@
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -396,7 +399,7 @@
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -416,7 +419,7 @@
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -447,7 +450,7 @@
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -467,7 +470,7 @@
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -487,7 +490,7 @@
                       <span>25</span>
                     </p>
                     <div class="img-fluid">
-                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
+                      <img src="/img/gallery/gallery-1.jpg" class="card-img-top" alt="맛집이미지" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
                     </div>
                     <div class="card-body">
                       <small class="badge bg-body-secondary mb-1">한식</small>
@@ -549,101 +552,59 @@
         <div class="container">
           <div class="section-header">
             <h2>restaurant</h2>
-            <p class="d-flex justify-content-between align-items-center"> 최신 리뷰 <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls=all&order=likeUp" class="btn btn-outline-warning btn-sm">별점높은 식당보기</a>
+            <p class="d-flex justify-content-between align-items-center"> 최신 리뷰 <a href="<%=request.getContextPath() %>/restaurant/find.do?mcls=all&order=starUp" class="btn btn-outline-warning btn-sm">별점높은 식당보기</a>
             </p>
           </div>
           <div class="slides-3 swiper">
             <div class="swiper-wrapper">
+            
+              <% if(restReviewList==null || restReviewList.isEmpty() || restReviewList.size() ==0 ){ %>
               <div class="swiper-slide">
                 <div class="testimonial-item">
-                  <div class="stars">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-half"></i>
-                  </div>
-                  <p> Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam,</p>
-                  <div class="profile mt-auto mb-3">
-                    <h4>2024-05-03</h4>
-                    <h3>고객아이디</h3>
-                  </div>
-                  <a class="cta-btn" href="contact.html">식당 자세히 보기</a>
-                </div>
-              </div>
-              <!-- End testimonial item -->
-              <div class="swiper-slide">
-                <div class="testimonial-item">
-                  <div class="stars">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-half"></i>
-                  </div>
-                  <p> Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam,</p>
-                  <div class="profile mt-auto mb-3">
-                    <h4>2024-05-03</h4>
-                    <h3>고객아이디</h3>
-                  </div>
-                  <a class="cta-btn" href="contact.html">식당 자세히 보기</a>
-                </div>
-              </div>
-              <!-- End testimonial item -->
-              <div class="swiper-slide">
-                <div class="testimonial-item">
-                  <div class="stars">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-half"></i>
-                  </div>
-                  <p> Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam,</p>
-                  <div class="profile mt-auto mb-3">
-                    <h4>2024-05-03</h4>
-                    <h3>고객아이디</h3>
-                  </div>
-                  <a class="cta-btn" href="contact.html">식당 자세히 보기</a>
-                </div>
-              </div>
-              <!-- End testimonial item -->
-              <div class="swiper-slide">
-                <div class="testimonial-item">
-                  <div class="stars">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-half"></i>
-                  </div>
-                  <p> Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam,</p>
-                  <div class="profile mt-auto mb-3">
-                    <h4>2024-05-03</h4>
-                    <h3>고객아이디</h3>
-                  </div>
-                  <a class="cta-btn" href="contact.html">식당 자세히 보기</a>
-                </div>
-              </div>
-              <!-- End testimonial item -->
-              <div class="swiper-slide">
-                <div class="testimonial-item">
-                  <div class="stars">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-half"></i>
-                  </div>
-                  <p> Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam,</p>
-                  <div class="profile mt-auto mb-3">
-                    <h4>2024-05-03</h4>
-                    <h3>고객아이디</h3>
-                  </div>
-                  <a class="cta-btn" href="contact.html">식당 자세히 보기</a>
-                </div>
-              </div>
-              <!-- End testimonial item -->
+            	  <h3>리뷰가 존재하지 않습니다.</h3>
+           	  	</div>
+          	  </div>
+              <% } else { 
+            	  for(int i=0; i < restReviewList.size(); i++) {
+            		  RestaurantVO reviewVo = restReviewList.get(i);
+					%>
+		              <div class="swiper-slide">
+		                <div class="testimonial-item">
+		                  <div class="stars">
+		                    <%if(reviewVo.getReviewStar() == 10 ){%>
+			                	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i>
+			                <%}else if(reviewVo.getReviewStar() == 9){%> 
+			                	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i>
+			                <%}else if(reviewVo.getReviewStar() == 8){%> 
+			                	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star"></i>
+			                <%}else if(reviewVo.getReviewStar() == 7){%> 
+			                	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i> <i class="bi bi-star"></i>
+			                <%}else if(reviewVo.getReviewStar() == 6){%> 
+			                	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
+			                <%}else if(reviewVo.getReviewStar() == 5){%> 
+			                	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
+			                <%}else if(reviewVo.getReviewStar() == 4){%> 
+			                	<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
+			                <%}else if(reviewVo.getReviewStar() == 3){%> 
+			                	<i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
+			                <%}else if(reviewVo.getReviewStar() == 2){%> 
+			                	<i class="bi bi-star-fill"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
+			                <%}else if(reviewVo.getReviewStar() == 1){%> 
+			                	<i class="bi bi-star-half"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
+			                <%}else if(reviewVo.getReviewStar() == 0){%>
+			                	<i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
+			                <%}else{%> <%} %>
+		                  </div>
+		                  <p> <%=reviewVo.getReviewText() %></p>
+		                  <div class="profile mt-auto mb-3">
+		                    <h4><%=reviewVo.getReviewDate() %></h4>
+		                    <h3><%=reviewVo.getNickName() %></h3>
+		                  </div>
+		                  <a class="cta-btn" href="<%=request.getContextPath() %>/restaurant/view.do?no=<%=reviewVo.getRestBizno() %>">식당 자세히 보기</a>
+		                </div>
+		              </div>
+	              <% }
+	            } %>
             </div>
             <div class="swiper-pagination"></div>
           </div>

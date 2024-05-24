@@ -9,6 +9,7 @@ import kr.or.ddit.board.vo.FileDetailVO;
 import kr.or.ddit.member.vo.UsersVO;
 import kr.or.ddit.restaurant.vo.RestaurantVO;
 import kr.or.ddit.restaurant.vo.ReviewVO;
+import kr.or.ddit.restaurant.vo.restLikeVO;
 
 public interface IRestaurantService {
 	public List<RestaurantVO> selectRestaurantType(Map<String, Object> cls);
@@ -25,5 +26,10 @@ public interface IRestaurantService {
 	public int insertFile(Part filePart);
 	public int insertReview(ReviewVO reviewVO);
 	public int deleteReview(int reviewNo);
-	public List<RestaurantVO> getReviewsByUserId(String usersId);
+	public int insertMyLike(Map<String, Object> likeInfo);
+	public int updateMyLike(Map<String, Object> likeInfo);
+	public List<restLikeVO> restLikeList(String restBizno);
+	public List<RestaurantVO> restReviewList();
+  public List<RestaurantVO> getReviewsByUserId(String usersId);
+
 }

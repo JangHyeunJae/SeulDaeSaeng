@@ -160,8 +160,8 @@ public class RestaurantServiceImpl implements IRestaurantService {
   }
 
  @Override
-	public List<RestaurantVO> getReviewsByUserId(String usersId) {
-		return dao.getReviewsByUserId(usersId);
+	public List<RestaurantVO> getReviewsByUserId(int usersNo) {
+		return dao.getReviewsByUserId(usersNo);
   }
   
   @Override

@@ -35,5 +35,5 @@ public interface IRestaurantService {
 	public int updateMyLike(Map<String, Object> likeInfo);
 	public List<restLikeVO> restLikeList(String restBizno);
 	public List<RestaurantVO> restReviewList();
-  public List<RestaurantVO> getReviewsByUserId(String usersId);
+  public List<RestaurantVO> getReviewsByUserId(int usersNo);
 }

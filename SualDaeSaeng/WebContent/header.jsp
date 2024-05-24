@@ -119,7 +119,7 @@ String isAdminOk = (String) session.getAttribute("isAdminOk");
             </ul>
          </li>
             <li>
-              <a href="/views/foodLikeList.jsp">미식인의 추천맛집</a>
+              <a href="<%=request.getContextPath()%>/gourmet/list.do">슬대생의 추천맛집</a>
             </li>
           </ul>
         </nav>

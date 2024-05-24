@@ -190,7 +190,8 @@
 									<h5 class="card-title text-truncate">
 									<%=restVo.getName()%>
 									</h5>
-									<span> <i class="bi bi-star-fill"></i> 
+									<span> 
+									<i class="bi bi-star-fill"></i> 
 									<% if(restVo.getAvgReviewStar() == -1){%>
 										없음
 									<% } else{%>

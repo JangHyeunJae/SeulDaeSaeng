@@ -52,9 +52,6 @@ public class restaurantLikeController extends HttpServlet {
 		}
 		
 		if(status > 0) { 	// 성공
-			String msg = "정상적으로 수정되었습니다.";
-			
-			request.getSession().setAttribute("msg", msg);
 			response.sendRedirect(request.getContextPath()+"/restaurant/view.do?no=" + bizNo);
 
 		}else {				// 실패

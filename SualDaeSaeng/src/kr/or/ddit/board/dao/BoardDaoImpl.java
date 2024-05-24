@@ -601,12 +601,13 @@ public class BoardDaoImpl implements IBoardDao {
 
 		try {
 			session = MyBatisUtil.getSqlSession();
-			session.insert("board.saveFile", fileDetail);
+			session.insert("board.saveFiles", fileDetail);
 			status = session.insert("board.saveFileDetail", fileDetail);
 
 			if (status > 0) { // 성공
 				session.commit();
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -614,7 +615,7 @@ public class BoardDaoImpl implements IBoardDao {
 				session.close();
 			}
 		}
-
+		
 		return status;
 	}
 

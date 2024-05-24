@@ -61,13 +61,10 @@ public class LoginController extends HttpServlet {
 				MemberVO memDetail = loginService.getMemDetail(usersId);
 				req.getSession().setAttribute("memDetail", memDetail);
 				
-				List<restLikeVO> restLikeList = loginService.getLikeRest(memDetail.getUsersNo());
-				
 				resp.sendRedirect(req.getContextPath() + "/main.do");
 			}
 
 			 req.getSession().setAttribute("usersId", usersId);
-			 req.getSession().setAttribute("memDetail", memDetail);
 			 req.getSession().setAttribute("usersPass", usersPass);
 			 req.getSession().setAttribute("usersDetail", usersDetail);
 			 req.getSession().setAttribute("usersRole", usersDetail.getUsersRole());

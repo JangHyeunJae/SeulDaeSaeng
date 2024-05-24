@@ -38,8 +38,7 @@
             <div class="col-lg-3">
               <div class="portfolio-info sticky-top">
                 <h3 class="d-flex align-items-center">
-                  <img src="img/testimonials/testimonials-2.jpg" class="testimonial-img me-2" alt="" onError="this.onerror=null; this.src='https://i.imgur.com/BFfnYMT.jpeg';" >
-                  <p>
+                	<p>
                     <span><%if(memberVo.getMemNick() != null){ %>
                     <%=memberVo.getMemNick() %>(<%=memberVo.getMemName() %>)
                     <%
@@ -193,7 +192,7 @@
               </div>
               <div class="services mb-5">
                 <div class="row gy-4">
-                  <div class="col-md-4 col-12 d-flex">
+                  <div class="col-md-12 col-12 d-flex">
                     <div class="service-item position-relative w-100">
                       <i class="bi bi-card-list"></i>
                       <h4>
@@ -213,15 +212,17 @@
                     </div>
                   </div> -->
                   <!-- End Service Item -->
-<!--                   <div class="col-md-4 col-12 d-flex">
+                  <!--
+				<div class="col-md-6 col-12 d-flex">
                     <div class="service-item position-relative w-100">
                       <i class="bi bi-calendar-date"></i>
                       <h4>
-                        <a href="" class="stretched-link">시간표 스케줄러</a>
+                        <a href="" class="stretched-link">스케줄러</a>
                       </h4>
-                      <p> 학급시간표를 확인하고 내 스케줄을 관리해 보세요. </p>
+                      <p>내 스케줄을 관리해 보세요. </p>
                     </div>
-                  </div> -->
+                  </div> 
+                  -->
                   <!-- End Service Item -->
                 </div>
               </div>

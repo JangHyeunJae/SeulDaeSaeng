@@ -210,16 +210,17 @@
 // 				  for(int i = 0; i<5 ; i++) {
 // 					  MemberReqVO member = reportmem.get(i);
 				  
-    %>
+    %>   		
                 <a href="#" class="list-group-item py-2 d-flex justify-content-between align-items-center">
                   <span>
                     <i class="bi bi-person-fill px-2"></i> 
                     <b><%=member.getMemName() %>(<%=member.getMemNick()%>)</b>
                     <small>(<%=member.getMemClass() %>)</small>
-                  </span>
+                  </span>             
                   <span class="text-danger"><small>신고횟수</small> <b><%=member.getReportNo() %></b></span>
                 </a> 
-  	<%
+  		
+  	<%		
 //   		  if(reportmem.size()-1 == i) break;
   	
      		}

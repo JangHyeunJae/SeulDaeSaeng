@@ -50,5 +50,7 @@ public interface IMemberDao {
 
 	public String checking(String memName);
 
+	public int getBoardMember(int boardNo);
+
 }
 

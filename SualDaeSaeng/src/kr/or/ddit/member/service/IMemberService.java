@@ -64,5 +64,7 @@ public interface IMemberService {
 	public MemberVO selectScore(String usersId);
 
 	public MemberVO selectOne(String usersId);
+
+	public int getBoardMember(int boardNo);
 }
 

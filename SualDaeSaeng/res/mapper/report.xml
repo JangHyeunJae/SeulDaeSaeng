@@ -34,6 +34,7 @@
     		INNER JOIN board b ON m.USERS_NO = b.USERS_NO
     			WHERE b.REPORT_YN = 'Y'
     			GROUP BY  m.USERS_NO, m.MEM_NAME, m.MEM_NICK, m.MEM_CLASS, m.REPORT_NO
+    	ORDER BY REPORT_NO DESC
  </select>
  
  <update id="reportNo" parameterType="int">
@@ -59,6 +60,8 @@
       <result property="memClass" column="MEM_CLASS"/>
       <result property="memRegdt" column="MEM_REGDT"/>
       <result property="addrNo" column="ADDR_NO"/>
+      <result property="reportNo" column="REPORT_NO"/>
+      
   </resultMap>
    
    
